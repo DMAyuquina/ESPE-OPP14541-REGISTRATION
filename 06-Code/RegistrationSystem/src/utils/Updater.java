@@ -28,7 +28,7 @@ public class Updater {
                 FileManager.FileSave(student.toString(), fileName);
             }
         } else {
-            System.out.println("Student with DNI " + updatedStudent.getDni() + " not found.");
+            System.out.println("Estudiante con Cédula " + updatedStudent.getDni() + " No Encontrado.");
         }
     }
 }

@@ -19,7 +19,7 @@ public class Searcher {
             }
         }
         
-        System.out.println("Student with DNI " + dni + " not found.");
+        System.out.println("Estudiante con Cédula: " + dni + " No Encontrado.");
         return null;
     }
 }
