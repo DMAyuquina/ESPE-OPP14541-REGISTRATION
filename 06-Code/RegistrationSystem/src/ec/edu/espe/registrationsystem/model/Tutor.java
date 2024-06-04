@@ -1,14 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ec.edu.espe.registrationsystem.model;
 
 import java.util.ArrayList;
 
 /**
  *
- * @author Enzo Armijos , Logic Legion DCCO-ESPE
+ * @author Logic Legion DCCO-ESPE
  */
 public class Tutor {
     private String dni;

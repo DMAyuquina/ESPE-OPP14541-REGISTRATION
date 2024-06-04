@@ -1,4 +1,4 @@
-package ec.edu.espe.registrationsystem.controller;
+package ec.edu.espe.registrationsystem.view;
 
 import ec.edu.espe.registrationsystem.model.Student;
 import utils.Reader;
