@@ -135,6 +135,12 @@ public class RegistrationSystem {
     private static void deleteStudent(Scanner scanner, String fileName) {
         System.out.print("\nIntroduzca la Cédula del Estudiante a Eliminar: ");
         String dni = scanner.next();
+        Student student = Searcher.findStudentByDNI(fileName, dni);
+        if (student != null) {
+            System.out.println("Se elimino al Estudiante: " + student);
+        } else {
+            System.out.println("Estudiante con Cédula " + dni + " No Encontrado.");
+        }
         Eraser.deleteStudent(fileName, dni);
     }
 
