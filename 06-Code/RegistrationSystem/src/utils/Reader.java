@@ -1,4 +1,4 @@
-    package utils;
+package utils;
 
 import ec.edu.espe.registrationsystem.model.Student;
 import java.io.BufferedReader;

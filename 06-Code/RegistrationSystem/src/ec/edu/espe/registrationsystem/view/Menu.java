@@ -1,13 +1,11 @@
 package ec.edu.espe.registrationsystem.view;
 
 import ec.edu.espe.registrationsystem.model.Student;
-import utils.Reader;
-import utils.FileManager;
-import java.util.List;
+
 import java.util.Scanner;
-import utils.Eraser;
+
 import utils.Searcher;
-import utils.Updater;
+
 import java.nio.charset.StandardCharsets;
 
 /**
