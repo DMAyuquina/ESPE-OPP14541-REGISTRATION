@@ -12,21 +12,28 @@ public class Student {
     private String careerCode;
     private String email;
     private String phone;
+    private String typeOfRegistration;
+    private String grade;
+    private String lastChance;
     
-    public Student(String dni, String name, String lastName, String careerCode, String email, String phone) {
+    
+    public Student(String dni, String name, String lastName, String careerCode, String email, String phone, String typeOfRegistration, String grade, String lastChance) {
         this.dni = dni;
         this.name = name;
         this.lastName = lastName;
         this.careerCode = careerCode;
         this.email = email;
         this.phone = phone;
+        this.typeOfRegistration = typeOfRegistration;
+        this.grade = grade;
+        this.lastChance = lastChance;
+        
     }
 
     @Override
     public String toString() {
-        return dni + "," + name + "," + lastName + "," + careerCode + "," + email + "," + phone;
-}
-
+        return dni + "," + name + "," + lastName + "," + careerCode + "," + email + "," + phone + "," + typeOfRegistration + "," + grade + "," + lastChance;
+    }
 
     public String getDni() {
         return dni;
@@ -50,6 +57,18 @@ public class Student {
 
     public String getPhone() {
         return phone;
+    }
+
+    public String getTypeOfRegistration() {
+        return typeOfRegistration;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public String getLastChance() {
+        return lastChance;
     }
 
     public void setDni(String dni) {
@@ -76,8 +95,18 @@ public class Student {
         this.phone = phone;
     }
 
+    public void setTypeOfRegistration(String typeOfRegistration) {
+        this.typeOfRegistration = typeOfRegistration;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public void setLastChance(String lastChance) {
+        this.lastChance = lastChance;
+    }
     
-            
-            
     
 }
+    
