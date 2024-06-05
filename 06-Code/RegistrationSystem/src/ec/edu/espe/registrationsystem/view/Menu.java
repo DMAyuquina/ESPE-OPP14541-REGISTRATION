@@ -1,8 +1,6 @@
 import ec.edu.espe.registrationsystem.model.Student;
 import utils.Reader;
 import utils.FileManager;
-import java.util.List;
-import java.util.Scanner;
 import utils.Eraser;
 import utils.Searcher;
 import utils.Updater;
@@ -203,8 +201,20 @@ public class Menu {
             System.out.print("Celular [" + existingStudent.getPhone() + "]: ");
             String phone = scanner.next();
             scanner.nextLine();
+            
+            System.out.print("Tipo de matricula [" + existingStudent.getTypeOfRegistration()+ "]: ");
+            String typeOfRegistration = scanner.next();
+            scanner.nextLine();
+            
+            System.out.print("Calificacion [" + existingStudent.getGrade() + "]: ");
+            String grade = scanner.next();
+            scanner.nextLine();
+            
+            System.out.print("Supletorio [" + existingStudent.getLastName() + "]: ");
+            String lastChance = scanner.next();
+            scanner.nextLine();
 
-            Student student = new Student(dni, name, lastName, careerCode, email, phone, typeOfRegistration, grade, lastChance);
+            Student updatedStudent = new Student(dni, name, lastName, careerCode, email, phone, typeOfRegistration, grade, lastChance);
             Updater.updateStudent(fileName, updatedStudent);
         } else {
             System.out.println("Estudiante con Cédula: " + dni + " no encontrado.");
