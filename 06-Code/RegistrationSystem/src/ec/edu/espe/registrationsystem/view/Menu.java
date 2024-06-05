@@ -15,8 +15,6 @@ public class Menu {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8.name());
 
-        System.out.print("\nIntroduzca el nombre del archivo: ");
-        fileName = scanner.next();
         boolean exit = false;
 
         while (!exit) {
@@ -84,7 +82,10 @@ public class Menu {
     }
 
     private static void manageAdminStaff(Scanner scanner) {
+        System.out.print("\nIntroduzca la Carrera: ");
+        fileName = scanner.next();
         boolean exit = false;
+        
 
         while (!exit) {
             System.out.println("\nEscoja una operación:");
@@ -93,7 +94,9 @@ public class Menu {
             System.out.println("3. Modificar Estudiantes");
             System.out.println("4. Eliminar Estudiante");
             System.out.println("5. Encontrar Estudiantes por Cédula");
-            System.out.println("6. Salir");
+            System.out.println("6. Añadir Curso");
+            System.out.println("7. Crear Cuenta de Profesor");
+            System.out.println("8. Salir");
 
             System.out.print("\nIntroduzca su selección: ");
             int operation = scanner.nextInt();
@@ -116,6 +119,12 @@ public class Menu {
                     findStudent(scanner, fileName);
                     break;
                 case 6:
+                    addCourse(scanner, fileName);
+                    break;  
+                case 7:
+                    addTutorAccount (scanner, fileName);
+                    break;    
+                case 8:
                     exit = true;
                     break;
                 default:
