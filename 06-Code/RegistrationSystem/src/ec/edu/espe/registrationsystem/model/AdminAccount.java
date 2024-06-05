@@ -7,6 +7,7 @@ package ec.edu.espe.registrationsystem.model;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 import utils.FileManager;
 
 /**
@@ -65,6 +66,23 @@ public class AdminAccount {
     }
     
     //Methods
+    
+    public void createTutorAccounts() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("¿Cuántas cuentas de tutor desea crear? ");
+        int numberOfTutors = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline
+
+        for (int i = 0; i < numberOfTutors; i++) {
+            System.out.println("Ingrese los datos para el tutor " + (i + 1));
+            System.out.print("Nombre de usuario: ");
+            String tutorUser = scanner.nextLine();
+            System.out.print("Contraseña: ");
+            String tutorPassword = scanner.nextLine();
+            createTutorAccount(tutorUser, tutorPassword);
+        }
+    }
+    
     public void createTutorAccount(String tutorUser, String tutorPassword) {
         TutorAccount tutor = new TutorAccount(tutorUser, tutorPassword, new StudentGrade[0]);
         String data = tutor.getTutorUser() + "," + tutor.getTutorPasword();
