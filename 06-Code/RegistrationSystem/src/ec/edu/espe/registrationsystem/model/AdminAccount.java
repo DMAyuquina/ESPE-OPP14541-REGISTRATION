@@ -4,6 +4,11 @@
  */
 package ec.edu.espe.registrationsystem.model;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import utils.FileManager;
+
 /**
  *
  * @author Danny Ayuquina, LogicLegion, DCCO-ESPE
@@ -25,7 +30,8 @@ public class AdminAccount {
     public String toString() {
         return "AdminAccount{" + "adminUser=" + adminUser + ", adminPassword=" + adminPassword + ", student=" + student + ", tutor=" + tutor + '}';
     }
-
+    
+    
     public String getAdminUser() {
         return adminUser;
     }
@@ -59,9 +65,28 @@ public class AdminAccount {
     }
     
     //Methods
-    public void createTutorAccount(){
-        
+    public void createTutorAccount(String tutorUser, String tutorPassword) {
+        TutorAccount tutor = new TutorAccount(tutorUser, tutorPassword, new StudentGrade[0]);
+        String data = tutor.getTutorUser() + "," + tutor.getTutorPasword();
+        FileManager.FileSave(data, "tutors");
     }
+    
+    
+    public boolean validateTutorLogin(String tutorUser, String tutorPassword) {
+        String line;
+        try (BufferedReader reader = new BufferedReader(new FileReader("tutors.csv"))) {
+            while ((line = reader.readLine()) != null) {
+                String[] credentials = line.split(",");
+                if (credentials[0].equals(tutorUser) && credentials[1].equals(tutorPassword)) {
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public void addStudentsToACourse(){
     
     }
