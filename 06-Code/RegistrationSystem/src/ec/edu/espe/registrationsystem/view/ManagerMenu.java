@@ -11,13 +11,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Scanner;
 
-public class Menu {
+public class ManagerMenu {
 
-    public static void main(String[] args) {
+    public static void callMainMenu() {
 
         String fileName = "";
         Scanner scanner = new Scanner(System.in);
-        
 
         boolean exit = false;
 
@@ -28,7 +27,7 @@ public class Menu {
             System.out.println("2. Personal administrativo");
             System.out.println("3. Profesores");
             System.out.println("4. Salir");
-            
+
             System.out.print("\nIntroduzca su selección: ");
             int userType = scanner.nextInt();
             scanner.nextLine();
@@ -44,18 +43,49 @@ public class Menu {
                     fileName = scanner.next();
                     manageAdminStaff(scanner, fileName);
                 }
-                case 3 -> manageProfessors(scanner);
-                case 4 -> exit = true;
-                default -> System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
+                case 3 -> {
+                    System.out.print("\nIntroduzca el Curso: ");
+                    fileName = scanner.next();
+                    manageProfessors(scanner, fileName);
+                }
+                case 4 ->
+                    exit = true;
+                default ->
+                    System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
             }
         }
     }
 
-        private static void manageProfessors(Scanner scanner) {
-        // Implementar gestión de profesores aquí
-        System.out.println("Funcionalidad para Profesores no implementada.");
+    private static void manageProfessors(Scanner scanner, String fileName) {
+        boolean exit = false;
+
+        while (!exit) {
+            System.out.println("\nSistema para Profesores:");
+            System.out.println("1. Encontrar Estudiantes");
+            System.out.println("2. Modificar Estudiantes");
+            System.out.println("3. Volver al menú principal");
+
+            System.out.print("\nIntroduzca su selección: ");
+
+            int operation = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (operation) {
+                case 1 ->
+                    findStudent(scanner, fileName);
+
+                case 2 ->
+                    updateStudent(scanner, fileName);
+
+                case 3 ->
+                    exit = true;
+                default ->
+                    System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
+            }
+
+        }
     }
-        
+
     private static void manageStudents(Scanner scanner, String fileName) {
         boolean exit = false;
 
@@ -69,11 +99,15 @@ public class Menu {
             scanner.nextLine();
 
             switch (operation) {
-                case 1 -> findStudent(scanner, fileName);
-                case 2 -> exit = true;
-                default -> System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
+                case 1 ->
+                    findStudent(scanner, fileName);
+                case 2 ->
+                    exit = true;
+                default ->
+                    System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
             }
-            if (!exit) {
+
+            if (exit) {
                 pause(scanner);
             }
         }
@@ -95,15 +129,23 @@ public class Menu {
             scanner.nextLine();
 
             switch (operation) {
-                case 1 -> addStudents(scanner, fileName);
-                case 2 -> readStudents(fileName);
-                case 3 -> updateStudent(scanner, fileName);
-                case 4 -> deleteStudent(scanner, fileName);
-                case 5 -> findStudent(scanner, fileName);
-                case 7 -> exit = true;
-                case 6 -> exit = true;
+                case 1 ->
+                    addStudents(scanner, fileName);
+                case 2 ->
+                    readStudents(scanner, fileName);
+                case 3 ->
+                    updateStudent(scanner, fileName);
+                case 4 ->
+                    deleteStudent(scanner, fileName);
+                case 5 ->
+                    findStudent(scanner, fileName);
+                case 7 ->
+                    exit = true;
+                case 6 ->
+                    exit = true;
 
-                default -> System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
+                default ->
+                    System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
             }
         }
     }
@@ -146,14 +188,16 @@ public class Menu {
             Student student = new Student(dni, name, lastName, careerCode, email, phone, typeOfRegistration, grade, lastChance);
             FileManager.FileSave(student.toString(), fileName);
         }
+        pause(scanner);
     }
 
-    private static void readStudents(String fileName) {
+    private static void readStudents(Scanner scanner, String fileName) {
         List<Student> students = Reader.readStudents(fileName);
         System.out.println("\nLista de Estudiantes:");
         for (Student student : students) {
             System.out.println(student);
         }
+        pause(scanner);
     }
 
     private static void updateStudent(Scanner scanner, String fileName) {
@@ -165,11 +209,11 @@ public class Menu {
         if (existingStudent != null) {
             System.out.println("\nEditar la Información del Estudiante");
 
-            System.out.print("Nombres [" + existingStudent.getName() + "]: ");
+            System.out.print("Nombre [" + existingStudent.getName() + "]: ");
             String name = scanner.next();
             scanner.nextLine();
 
-            System.out.print("Apellidos [" + existingStudent.getLastName() + "]: ");
+            System.out.print("Apellido [" + existingStudent.getLastName() + "]: ");
             String lastName = scanner.next();
             scanner.nextLine();
 
@@ -202,6 +246,7 @@ public class Menu {
         } else {
             System.out.println("Estudiante con Cédula: " + dni + " no encontrado.");
         }
+        pause(scanner);
     }
 
     private static void deleteStudent(Scanner scanner, String fileName) {
@@ -209,6 +254,7 @@ public class Menu {
         String dni = scanner.next();
         scanner.nextLine();
         Eraser.deleteStudent(fileName, dni);
+        pause(scanner);
     }
 
     private static void findStudent(Scanner scanner, String fileName) {
@@ -222,9 +268,8 @@ public class Menu {
         } else {
             System.out.println("Estudiante con Cédula " + dni + " No Encontrado.");
         }
+        pause(scanner);
     }
-
-
 
     private static void pause(Scanner scanner) {
         System.out.print("\nPulse Enter para continuar...");
