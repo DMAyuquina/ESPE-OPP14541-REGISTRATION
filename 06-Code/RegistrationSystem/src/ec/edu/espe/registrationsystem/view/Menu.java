@@ -6,17 +6,19 @@ import utils.FileManager;
 import utils.Eraser;
 import utils.Searcher;
 import utils.Updater;
+
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
 
-    private static String fileName;
-
     public static void main(String[] args) {
+
+        String fileName = "";
+        Scanner scanner = new Scanner(System.in);
         
-        
+
         boolean exit = false;
 
         while (!exit) {
@@ -26,31 +28,42 @@ public class Menu {
             System.out.println("2. Personal administrativo");
             System.out.println("3. Profesores");
             System.out.println("4. Salir");
-            Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8.name());
+            
             System.out.print("\nIntroduzca su selección: ");
             int userType = scanner.nextInt();
             scanner.nextLine();
 
             switch (userType) {
-                case 1 -> manageStudents(scanner);
-                case 2 -> manageAdminStaff(scanner);
-//                /*case 3 -> manageProfessors(scanner);*/
+                case 1 -> {
+                    System.out.print("\nIntroduzca el Curso: ");
+                    fileName = scanner.next();
+                    manageStudents(scanner, fileName);
+                }
+                case 2 -> {
+                    System.out.print("\nIntroduzca el Curso: ");
+                    fileName = scanner.next();
+                    manageAdminStaff(scanner, fileName);
+                }
+                case 3 -> manageProfessors(scanner);
                 case 4 -> exit = true;
                 default -> System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
             }
         }
-
-        
     }
 
-    private static void manageStudents(Scanner scanner) {
+        private static void manageProfessors(Scanner scanner) {
+        // Implementar gestión de profesores aquí
+        System.out.println("Funcionalidad para Profesores no implementada.");
+    }
+        
+    private static void manageStudents(Scanner scanner, String fileName) {
         boolean exit = false;
 
         while (!exit) {
             System.out.println("\nSistema para Estudiantes:");
             System.out.println("1. Encontrar Estudiantes");
             System.out.println("2. Volver al menú principal");
-            
+
             System.out.print("\nIntroduzca su selección: ");
             int operation = scanner.nextInt();
             scanner.nextLine();
@@ -60,18 +73,13 @@ public class Menu {
                 case 2 -> exit = true;
                 default -> System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
             }
-
             if (!exit) {
                 pause(scanner);
             }
         }
     }
 
-    private static void manageAdminStaff(Scanner scanner) {
-        System.out.print("\nIntroduzca el Curso: ");
-        fileName = scanner.next();
-        
-        
+    private static void manageAdminStaff(Scanner scanner, String fileName) {
         boolean exit = false;
         while (!exit) {
             System.out.println("\nEscoja una operación:");
@@ -80,8 +88,7 @@ public class Menu {
             System.out.println("3. Modificar Estudiantes");
             System.out.println("4. Eliminar Estudiante");
             System.out.println("5. Encontrar Estudiantes por Cédula");
-            System.out.println("6. Añadir Tutor");
-            System.out.println("7. Salir");
+            System.out.println("6. Salir");
 
             System.out.print("\nIntroduzca su selección: ");
             int operation = scanner.nextInt();
@@ -93,8 +100,7 @@ public class Menu {
                 case 3 -> updateStudent(scanner, fileName);
                 case 4 -> deleteStudent(scanner, fileName);
                 case 5 -> findStudent(scanner, fileName);
-                case 6 -> findStudent(scanner, fileName);
-                case 7 -> exit = true;
+                case 6 -> exit = true;
                 default -> System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
             }
         }
@@ -104,7 +110,7 @@ public class Menu {
         System.out.print("\nCuántos estudiantes quiere agregar?: ");
         int studentNumber = scanner.nextInt();
         scanner.nextLine();
-        
+
         for (int aux = 0; aux < studentNumber; aux++) {
             System.out.println("\nInformación del Estudiante Nuevo");
 
@@ -125,13 +131,13 @@ public class Menu {
 
             System.out.print("Celular: ");
             String phone = scanner.next();
-            
+
             System.out.print("Tipo de Matricula: ");
             String typeOfRegistration = scanner.next();
-            
-            System.out.print("Calificacion: ");
+
+            System.out.print("Calificación: ");
             String grade = scanner.next();
-            
+
             System.out.print("Supletorio: ");
             String lastChance = scanner.next();
 
@@ -176,16 +182,16 @@ public class Menu {
             System.out.print("Celular [" + existingStudent.getPhone() + "]: ");
             String phone = scanner.next();
             scanner.nextLine();
-            
-            System.out.print("Tipo de matricula [" + existingStudent.getTypeOfRegistration()+ "]: ");
+
+            System.out.print("Tipo de Matricula [" + existingStudent.getTypeOfRegistration() + "]: ");
             String typeOfRegistration = scanner.next();
             scanner.nextLine();
-            
-            System.out.print("Calificacion [" + existingStudent.getGrade() + "]: ");
+
+            System.out.print("Calificación [" + existingStudent.getGrade() + "]: ");
             String grade = scanner.next();
             scanner.nextLine();
-            
-            System.out.print("Supletorio [" + existingStudent.getLastName() + "]: ");
+
+            System.out.print("Supletorio [" + existingStudent.getLastChance() + "]: ");
             String lastChance = scanner.next();
             scanner.nextLine();
 
@@ -215,16 +221,10 @@ public class Menu {
         }
     }
 
-    
 
-//    private static void manageProfessors(Scanner scanner) {
-//        // Implementar gestión de profesores aquí
-//        System.out.println("Funcionalidad para Profesores no implementada.");
-//    }
 
     private static void pause(Scanner scanner) {
         System.out.print("\nPulse Enter para continuar...");
         scanner.nextLine();
     }
 }
-
