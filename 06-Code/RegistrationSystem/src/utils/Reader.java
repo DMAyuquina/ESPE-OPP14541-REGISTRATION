@@ -28,7 +28,10 @@ public class Reader {
                     values[2],  // lastName
                     values[3],  // careerCode
                     values[4],  // email
-                    values[5]   // phone
+                    values[5],   // phone
+                    values[6],
+                    values[7],
+                    values[8]
                 );
                 students.add(student);
             }
