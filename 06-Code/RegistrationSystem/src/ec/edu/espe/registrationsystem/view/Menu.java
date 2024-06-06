@@ -1,3 +1,5 @@
+package ec.edu.espe.registrationsystem.view;
+
 import ec.edu.espe.registrationsystem.model.Student;
 import utils.Reader;
 import utils.FileManager;
@@ -14,7 +16,7 @@ public class Menu {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8.name());
-
+        
         boolean exit = false;
 
         while (!exit) {
@@ -30,21 +32,11 @@ public class Menu {
             scanner.nextLine();
 
             switch (userType) {
-                case 1:
-                    manageStudents(scanner);
-                    break;
-                case 2:
-                    manageAdminStaff(scanner);
-                    break;
-                case 3:
-                    manageProfessors(scanner);
-                    break;
-                case 4:
-                    exit = true;
-                    break;
-                default:
-                    System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
-                    break;
+                case 1 -> manageStudents(scanner);
+                case 2 -> manageAdminStaff(scanner);
+//                /*case 3 -> manageProfessors(scanner);*/
+                case 4 -> exit = true;
+                default -> System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
             }
         }
 
@@ -58,21 +50,15 @@ public class Menu {
             System.out.println("\nSistema para Estudiantes:");
             System.out.println("1. Encontrar Estudiantes");
             System.out.println("2. Volver al menú principal");
-
+            
             System.out.print("\nIntroduzca su selección: ");
             int operation = scanner.nextInt();
             scanner.nextLine();
 
             switch (operation) {
-                case 1:
-                    findStudent(scanner, fileName);
-                    break;
-                case 2:
-                    exit = true;
-                    break;
-                default:
-                    System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
-                    break;
+                case 1 -> findStudent(scanner, fileName);
+                case 2 -> exit = true;
+                default -> System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
             }
 
             if (!exit) {
@@ -82,11 +68,11 @@ public class Menu {
     }
 
     private static void manageAdminStaff(Scanner scanner) {
-        System.out.print("\nIntroduzca la Carrera: ");
+        System.out.print("\nIntroduzca el Curso: ");
         fileName = scanner.next();
-        boolean exit = false;
         
-
+        
+        boolean exit = false;
         while (!exit) {
             System.out.println("\nEscoja una operación:");
             System.out.println("1. Añadir Estudiante");
@@ -94,42 +80,22 @@ public class Menu {
             System.out.println("3. Modificar Estudiantes");
             System.out.println("4. Eliminar Estudiante");
             System.out.println("5. Encontrar Estudiantes por Cédula");
-            System.out.println("6. Añadir Curso");
-            System.out.println("7. Crear Cuenta de Profesor");
-            System.out.println("8. Salir");
+            System.out.println("6. Añadir Tutor");
+            System.out.println("7. Salir");
 
             System.out.print("\nIntroduzca su selección: ");
             int operation = scanner.nextInt();
             scanner.nextLine();
 
             switch (operation) {
-                case 1:
-                    addStudents(scanner, fileName);
-                    break;
-                case 2:
-                    readStudents(fileName);
-                    break;
-                case 3:
-                    updateStudent(scanner, fileName);
-                    break;
-                case 4:
-                    deleteStudent(scanner, fileName);
-                    break;
-                case 5:
-                    findStudent(scanner, fileName);
-                    break;
-                case 6:
-                    addCourse(scanner, fileName);
-                    break;  
-                case 7:
-                    addTutorAccount (scanner, fileName);
-                    break;    
-                case 8:
-                    exit = true;
-                    break;
-                default:
-                    System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
-                    break;
+                case 1 -> addStudents(scanner, fileName);
+                case 2 -> readStudents(fileName);
+                case 3 -> updateStudent(scanner, fileName);
+                case 4 -> deleteStudent(scanner, fileName);
+                case 5 -> findStudent(scanner, fileName);
+                case 6 -> findStudent(scanner, fileName);
+                case 7 -> exit = true;
+                default -> System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
             }
         }
     }
@@ -138,7 +104,7 @@ public class Menu {
         System.out.print("\nCuántos estudiantes quiere agregar?: ");
         int studentNumber = scanner.nextInt();
         scanner.nextLine();
-
+        
         for (int aux = 0; aux < studentNumber; aux++) {
             System.out.println("\nInformación del Estudiante Nuevo");
 
@@ -249,13 +215,16 @@ public class Menu {
         }
     }
 
+    
+
+//    private static void manageProfessors(Scanner scanner) {
+//        // Implementar gestión de profesores aquí
+//        System.out.println("Funcionalidad para Profesores no implementada.");
+//    }
+
     private static void pause(Scanner scanner) {
         System.out.print("\nPulse Enter para continuar...");
         scanner.nextLine();
     }
-
-    private static void manageProfessors(Scanner scanner) {
-        // Implementar gestión de profesores aquí
-        System.out.println("Funcionalidad para Profesores no implementada.");
-    }
 }
+

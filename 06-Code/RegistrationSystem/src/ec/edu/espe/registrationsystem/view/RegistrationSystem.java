@@ -1,6 +1,8 @@
 package ec.edu.espe.registrationsystem.view;
 
-import java.util.Scanner;
+import java.awt.Menu;
+
+
 
 /**
  *
@@ -8,7 +10,10 @@ import java.util.Scanner;
  */
 public class RegistrationSystem {
 public static void main(String[] args) {
-System.out.println("Sistema de Matriculas de Estidiantes Intituto Tecnologico Superior Bolivar V0.10");
-        
+System.out.println("Sistema de Matriculas de Estidiantes Intituto Tecnologico Superior Bolivar V0.11");
+       
+Menu objetoMenu;
+
+objetoMenu.
 }
 }
