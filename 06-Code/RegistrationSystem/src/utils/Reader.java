@@ -23,12 +23,12 @@ public class Reader {
             while ((line = reader.readLine()) != null) {
                 String[] values = line.split(",");
                 Student student = new Student(
-                    values[0],  // dni
-                    values[1],  // name
-                    values[2],  // lastName
-                    values[3],  // careerCode
-                    values[4],  // email
-                    values[5],   // phone
+                    values[0],  
+                    values[1],  
+                    values[2],  
+                    values[3],  
+                    values[4],  
+                    values[5],   
                     values[6],
                     values[7],
                     values[8]

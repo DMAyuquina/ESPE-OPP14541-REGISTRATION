@@ -1,5 +1,5 @@
-C�dula,Nombre,Apellido,Codigo de Carrera,Email,Celular
-1850598010,Christian,Acu�a,NRC,cmacuna@espe,09998025146
-1724122427,Abner,Arboleda,NRC,adarboleda@espe,0995317959
-1727487942,enzo,armijos,NRC,enzo@espe,0994740834
-1753093093,Danny,Ayuquina,NRC,dmayuquina@gmail.com,0987326319,Segunda,18,10
+C�dula,Nombre,Apellido,Codigo de Carrera,Email,Celular,Tipo de Matricula,Calificacion,Supletorio
+1850598010,Christian,Acu�a,NRC,cmacuna@espe,9998025146,,,
+1724122427,Abner,Arboleda,NRC,adarboleda@espe,995317959,,,
+1727487942,enzo,armijos,NRC,enzo@espe,994740834,,,
+1753093093,Danny,Ayuquina,NRC,dmayuquina@gmail.com,987326319,Segunda,18,10
