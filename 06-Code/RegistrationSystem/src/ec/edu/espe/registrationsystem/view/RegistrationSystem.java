@@ -14,6 +14,5 @@ System.out.println("Sistema de Matriculas de Estidiantes Intituto Tecnologico Su
        
 Menu objetoMenu;
 
-objetoMenu.
 }
 }

@@ -93,7 +93,6 @@ public class Menu {
                 case 3 -> updateStudent(scanner, fileName);
                 case 4 -> deleteStudent(scanner, fileName);
                 case 5 -> findStudent(scanner, fileName);
-                case 6 -> findStudent(scanner, fileName);
                 case 7 -> exit = true;
                 default -> System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
             }
@@ -208,6 +207,7 @@ public class Menu {
         String dni = scanner.next();
         scanner.nextLine();
         Student student = Searcher.findStudentByDNI(fileName, dni);
+        System.out.println(fileName);
         if (student != null) {
             System.out.println("Estudiante encontrado: " + student);
         } else {
