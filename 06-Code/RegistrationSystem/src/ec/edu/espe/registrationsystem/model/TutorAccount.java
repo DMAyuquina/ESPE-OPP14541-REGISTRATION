@@ -26,7 +26,6 @@ public class TutorAccount {
         this.studentGrade = new StudentGrade[studentGrade.length];
     }
 
-    //Methods
     public void viewCourse(){
 
     }
