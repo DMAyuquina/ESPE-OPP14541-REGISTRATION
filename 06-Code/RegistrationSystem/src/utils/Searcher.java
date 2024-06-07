@@ -21,8 +21,9 @@ public class Searcher {
                 
             }
         }
-        
-        System.out.println("Estudiante con Cédula: " + dni + " No Encontrado.");
+        System.out.println("------------------------------------------------------------");
+        System.out.println("Estudiante con cedula: " + dni + " no Encontrado.");
+        System.out.println("------------------------------------------------------------");
         return null;
     }
 }

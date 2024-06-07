@@ -21,37 +21,44 @@ public class ManagerMenu {
         boolean exit = false;
 
         while (!exit) {
+            System.out.println("============================================================");
+            System.out.println("        INSTITUTO TECNOLOGICO SUPERIOR BOLIVAR V0.12");
+            System.out.println("============================================================");
+            System.out.println("SISTEMA DE MATRICULAS DE ESTUDIANTES");
+            System.out.println("------------------------------------------------------------");
 
-            System.out.println("Seleccione quién está usando el sistema:");
+            System.out.println("Seleccione un usuario:");
+            System.out.println("------------------------------------------------------------");
             System.out.println("1. Estudiantes");
             System.out.println("2. Personal administrativo");
             System.out.println("3. Profesores");
             System.out.println("4. Salir");
+            System.out.println("------------------------------------------------------------");
 
-            System.out.print("\nIntroduzca su selección: ");
+            System.out.print(">>");
             int userType = scanner.nextInt();
             scanner.nextLine();
+            if (userType != 4) {
+                System.out.println("\n============================================================");
+                System.out.print("Introduzca el Curso: ");
+                fileName = scanner.next();
+                System.out.println("============================================================\n");
+            }
 
             switch (userType) {
                 case 1 -> {
-                    System.out.print("\nIntroduzca el Curso: ");
-                    fileName = scanner.next();
                     manageStudents(scanner, fileName);
                 }
                 case 2 -> {
-                    System.out.print("\nIntroduzca el Curso: ");
-                    fileName = scanner.next();
                     manageAdminStaff(scanner, fileName);
                 }
                 case 3 -> {
-                    System.out.print("\nIntroduzca el Curso: ");
-                    fileName = scanner.next();
                     manageProfessors(scanner, fileName);
                 }
                 case 4 ->
                     exit = true;
                 default ->
-                    System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
+                    System.out.println("Seleccion invalida. Por favor, intentelo de nuevo.");
             }
         }
     }
@@ -60,13 +67,15 @@ public class ManagerMenu {
         boolean exit = false;
 
         while (!exit) {
-            System.out.println("\nSistema para Profesores:");
+            System.out.println("============================================================");
+            System.out.println("Sistema para Profesores:");
+            System.out.println("============================================================");
             System.out.println("1. Encontrar Estudiantes");
             System.out.println("2. Modificar Estudiantes");
-            System.out.println("3. Volver al menú principal");
+            System.out.println("3. Volver al menu principal");
+            System.out.println("------------------------------------------------------------");
 
-            System.out.print("\nIntroduzca su selección: ");
-
+            System.out.print(">>");
             int operation = scanner.nextInt();
             scanner.nextLine();
 
@@ -80,7 +89,7 @@ public class ManagerMenu {
                 case 3 ->
                     exit = true;
                 default ->
-                    System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
+                    System.out.println("Seleccion invalida. Por favor, intentelo de nuevo.");
             }
 
         }
@@ -90,11 +99,14 @@ public class ManagerMenu {
         boolean exit = false;
 
         while (!exit) {
-            System.out.println("\nSistema para Estudiantes:");
+            System.out.println("============================================================");
+            System.out.println("Sistema para Estudiantes:");
+            System.out.println("============================================================");
             System.out.println("1. Encontrar Estudiantes");
-            System.out.println("2. Volver al menú principal");
+            System.out.println("2. Volver al menu principal");
+            System.out.println("------------------------------------------------------------");
 
-            System.out.print("\nIntroduzca su selección: ");
+            System.out.print(">>");
             int operation = scanner.nextInt();
             scanner.nextLine();
 
@@ -106,27 +118,26 @@ public class ManagerMenu {
                 default ->
                     System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
             }
-
-            if (exit) {
-                pause(scanner);
-            }
         }
     }
 
     private static void manageAdminStaff(Scanner scanner, String fileName) {
         boolean exit = false;
         while (!exit) {
-            System.out.println("\nEscoja una operación:");
-            System.out.println("1. Añadir Estudiante");
+            System.out.println("\n============================================================");
+            System.out.println("Escoja una operacion:");
+            System.out.println("============================================================");
+            System.out.println("1. Agregar Estudiante");
             System.out.println("2. Visualizar Estudiantes");
             System.out.println("3. Modificar Estudiantes");
             System.out.println("4. Eliminar Estudiante");
-            System.out.println("5. Encontrar Estudiantes por Cédula");
+            System.out.println("5. Encontrar Estudiantes por Cedula");
             System.out.println("6. Salir");
-
-            System.out.print("\nIntroduzca su selección: ");
+            System.out.println("------------------------------------------------------------");
+            System.out.print(">>");
             int operation = scanner.nextInt();
             scanner.nextLine();
+            System.out.println("------------------------------------------------------------");
 
             switch (operation) {
                 case 1 ->
@@ -145,45 +156,59 @@ public class ManagerMenu {
                     exit = true;
 
                 default ->
-                    System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
+                    System.out.println("Selección invalida. Por favor, intentelo de nuevo.");
             }
         }
     }
 
     private static void addStudents(Scanner scanner, String fileName) {
-        System.out.print("\nCuántos estudiantes quiere agregar?: ");
+        System.out.println("\n============================================================");
+        System.out.print("Cuantos estudiantes quiere agregar?: ");
         int studentNumber = scanner.nextInt();
         scanner.nextLine();
+        System.out.println("============================================================");
 
         for (int aux = 0; aux < studentNumber; aux++) {
-            System.out.println("\nInformación del Estudiante Nuevo");
+            System.out.println("Informacion del Estudiante Nuevo");
+            System.out.println("------------------------------------------------------------");
 
-            System.out.print("Cédula: ");
+            System.out.print("Cedula: ");
             String dni = scanner.next();
+            System.out.println("------------------------------------------------------------");
 
+            scanner.nextLine();
             System.out.print("Nombres: ");
-            String name = scanner.next();
+            String name = scanner.nextLine();
+            System.out.println("------------------------------------------------------------");
 
             System.out.print("Apellidos: ");
-            String lastName = scanner.next();
+            String lastName = scanner.nextLine();
+            System.out.println("------------------------------------------------------------");
 
-            System.out.print("Código de Carrera: ");
+            System.out.print("Codigo de Carrera: ");
             String careerCode = scanner.next();
+            System.out.println("------------------------------------------------------------");
 
             System.out.print("Email: ");
             String email = scanner.next();
+            System.out.println("------------------------------------------------------------");
 
             System.out.print("Celular: ");
             String phone = scanner.next();
+            System.out.println("------------------------------------------------------------");
 
             System.out.print("Tipo de Matricula: ");
             String typeOfRegistration = scanner.next();
+            System.out.println("------------------------------------------------------------");
 
-            System.out.print("Calificación: ");
+            System.out.print("Calificacion: ");
             String grade = scanner.next();
+            System.out.println("------------------------------------------------------------");
 
             System.out.print("Supletorio: ");
             String lastChance = scanner.next();
+            scanner.nextLine();
+            System.out.println("------------------------------------------------------------");
 
             Student student = new Student(dni, name, lastName, careerCode, email, phone, typeOfRegistration, grade, lastChance);
             FileManager.FileSave(student.toString(), fileName);
@@ -193,86 +218,106 @@ public class ManagerMenu {
 
     private static void readStudents(Scanner scanner, String fileName) {
         List<Student> students = Reader.readStudents(fileName);
-        System.out.println("\nLista de Estudiantes:");
+        System.out.println("\n===================================================================================");
+        System.out.println("Lista de Estudiantes:");
+        System.out.println("===================================================================================");
+        int i = 1;
         for (Student student : students) {
-            System.out.println(student);
+            if (i != 1) {
+                System.out.println("-------------------------------------------------------------------------------------");
+                System.out.println(student);
+            }
+            i++;
         }
+        System.out.println("-------------------------------------------------------------------------------------");
         pause(scanner);
     }
 
     private static void updateStudent(Scanner scanner, String fileName) {
-        System.out.print("\nIntroduzca la Cédula del Estudiante a Editar: ");
+        System.out.println("\n============================================================");
+        System.out.print("Introduzca la Cedula del Estudiante a Editar: ");
         String dni = scanner.next();
         scanner.nextLine();
+        System.out.println("============================================================");
         Student existingStudent = Searcher.findStudentByDNI(fileName, dni);
 
         if (existingStudent != null) {
-            System.out.println("\nEditar la Información del Estudiante");
-
+            System.out.println("Edicion la Informacion del Estudiante:");
+            System.out.println("------------------------------------------------------------");
+            
             System.out.print("Nombre [" + existingStudent.getName() + "]: ");
-            String name = scanner.next();
-            scanner.nextLine();
+            String name = scanner.nextLine();
+            System.out.println("------------------------------------------------------------");
 
             System.out.print("Apellido [" + existingStudent.getLastName() + "]: ");
-            String lastName = scanner.next();
-            scanner.nextLine();
+            String lastName = scanner.nextLine();
+            System.out.println("------------------------------------------------------------");
 
-            System.out.print("Código de Carrera [" + existingStudent.getCareerCode() + "]: ");
+            System.out.print("Codigo de Carrera [" + existingStudent.getCareerCode() + "]: ");
             String careerCode = scanner.next();
             scanner.nextLine();
+            System.out.println("------------------------------------------------------------");
 
             System.out.print("Email [" + existingStudent.getEmail() + "]: ");
             String email = scanner.next();
             scanner.nextLine();
+            System.out.println("------------------------------------------------------------");
 
             System.out.print("Celular [" + existingStudent.getPhone() + "]: ");
             String phone = scanner.next();
             scanner.nextLine();
+            System.out.println("------------------------------------------------------------");
 
             System.out.print("Tipo de Matricula [" + existingStudent.getTypeOfRegistration() + "]: ");
             String typeOfRegistration = scanner.next();
             scanner.nextLine();
+            System.out.println("------------------------------------------------------------");
 
-            System.out.print("Calificación [" + existingStudent.getGrade() + "]: ");
+            System.out.print("Calificacion [" + existingStudent.getGrade() + "]: ");
             String grade = scanner.next();
             scanner.nextLine();
+            System.out.println("------------------------------------------------------------");
 
             System.out.print("Supletorio [" + existingStudent.getLastChance() + "]: ");
             String lastChance = scanner.next();
             scanner.nextLine();
+            System.out.println("------------------------------------------------------------");
 
             Student updatedStudent = new Student(dni, name, lastName, careerCode, email, phone, typeOfRegistration, grade, lastChance);
             Updater.updateStudent(fileName, updatedStudent);
-        } else {
-            System.out.println("Estudiante con Cédula: " + dni + " no encontrado.");
-        }
+        } 
         pause(scanner);
     }
 
     private static void deleteStudent(Scanner scanner, String fileName) {
-        System.out.print("\nIntroduzca la Cédula del Estudiante a Eliminar: ");
+        System.out.println("============================================================");
+        System.out.print("Introduzca la Cedula del Estudiante a Eliminar: ");
         String dni = scanner.next();
+        System.out.println("============================================================");
+        Student student = Searcher.findStudentByDNI(fileName, dni);
         scanner.nextLine();
         Eraser.deleteStudent(fileName, dni);
         pause(scanner);
     }
 
     private static void findStudent(Scanner scanner, String fileName) {
-        System.out.print("\nIntroduzca la Cédula del Estudiante a Buscar: ");
+        System.out.println("============================================================");
+        System.out.print("Introduzca la cedula del Estudiante: ");
         String dni = scanner.next();
+        System.out.println("============================================================");
         scanner.nextLine();
+        System.out.println("Curso: " + fileName);
         Student student = Searcher.findStudentByDNI(fileName, dni);
-        System.out.println(fileName);
+        System.out.println("------------------------------------------------------------");
         if (student != null) {
-            System.out.println("Estudiante encontrado: " + student);
-        } else {
-            System.out.println("Estudiante con Cédula " + dni + " No Encontrado.");
+            System.out.println("Estudiante encontrado: \n" + student);
+            System.out.println("------------------------------------------------------------");
         }
         pause(scanner);
     }
 
     private static void pause(Scanner scanner) {
-        System.out.print("\nPulse Enter para continuar...");
+        System.out.print("Pulse Enter para continuar...\n");
         scanner.nextLine();
     }
 }
