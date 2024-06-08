@@ -1,6 +1,7 @@
 package ec.edu.espe.registrationsystem.model;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -76,5 +77,4 @@ public class Tutor {
         return "Tutor{" + "dni=" + dni + ", fullName=" + fullName + ", careers=" + careers + ", email=" + email + ", phone=" + phone + ", codeCourses=" + codeCourses + '}';
     }
 
-    
 }

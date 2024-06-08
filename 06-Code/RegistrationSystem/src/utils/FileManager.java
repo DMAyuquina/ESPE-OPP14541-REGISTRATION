@@ -1,6 +1,7 @@
 package utils;
 
 import ec.edu.espe.registrationsystem.model.Student;
+import ec.edu.espe.registrationsystem.model.Tutor;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -101,8 +102,16 @@ public class FileManager {
             String typeOfRegistration = scanner.next();
             System.out.println("------------------------------------------------------------");
 
+            String gratuity;
+
+            if (typeOfRegistration.equals("Primera")) {
+                gratuity = "Con Gratuidad";
+            } else {
+                gratuity = "Sin Gratuidad";
+            }
+
             System.out.print("Calificacion: ");
-            String grade = scanner.next();
+            String grade = calculateGrade();
             System.out.println("------------------------------------------------------------");
 
             System.out.print("Supletorio: ");
@@ -110,13 +119,13 @@ public class FileManager {
             scanner.nextLine();
             System.out.println("------------------------------------------------------------");
 
-            Student student = new Student(dni, name, lastName, careerCode, email, phone, typeOfRegistration, grade, lastChance);
+            Student student = new Student(dni, name, lastName, careerCode, email, phone, typeOfRegistration, grade, lastChance, gratuity);
             FileManager.FileSave(student.toString(), fileName);
         }
         pause(scanner);
     }
 
-    public  void readStudents(Scanner scanner, String fileName) {
+    public void readStudents(Scanner scanner, String fileName) {
         List<Student> students = Reader.readStudents(fileName);
         System.out.println("\n===================================================================================");
         System.out.println("Lista de Estudiantes:");
@@ -133,7 +142,7 @@ public class FileManager {
         pause(scanner);
     }
 
-    public  void updateStudent(Scanner scanner, String fileName) {
+    public void updateStudent(Scanner scanner, String fileName) {
         System.out.println("\n============================================================");
         System.out.print("Introduzca la Cedula del Estudiante a Editar: ");
         String dni = scanner.next();
@@ -145,11 +154,11 @@ public class FileManager {
             System.out.println("Edicion la Informacion del Estudiante:");
             System.out.println("------------------------------------------------------------");
 
-            System.out.print("Nombre [" + existingStudent.getName() + "]: ");
+            System.out.print("Nombres [" + existingStudent.getName() + "]: ");
             String name = scanner.nextLine();
             System.out.println("------------------------------------------------------------");
 
-            System.out.print("Apellido [" + existingStudent.getLastName() + "]: ");
+            System.out.print("Apellidos [" + existingStudent.getLastName() + "]: ");
             String lastName = scanner.nextLine();
             System.out.println("------------------------------------------------------------");
 
@@ -173,6 +182,14 @@ public class FileManager {
             scanner.nextLine();
             System.out.println("------------------------------------------------------------");
 
+            String gratuity;
+
+            if (typeOfRegistration.equals("Primera")) {
+                gratuity = "Con Gratuidad";
+            } else {
+                gratuity = "Sin Gratuidad";
+            }
+
             System.out.print("Calificacion [" + existingStudent.getGrade() + "]: ");
             String grade = scanner.next();
             scanner.nextLine();
@@ -183,7 +200,7 @@ public class FileManager {
             scanner.nextLine();
             System.out.println("------------------------------------------------------------");
 
-            Student updatedStudent = new Student(dni, name, lastName, careerCode, email, phone, typeOfRegistration, grade, lastChance);
+            Student updatedStudent = new Student(dni, name, lastName, careerCode, email, phone, typeOfRegistration, grade, lastChance, gratuity);
             Updater.updateStudent(fileName, updatedStudent);
         }
         pause(scanner);
@@ -200,7 +217,7 @@ public class FileManager {
         pause(scanner);
     }
 
-    public  void findStudent(Scanner scanner, String fileName) {
+    public void findStudent(Scanner scanner, String fileName) {
         System.out.println("============================================================");
         System.out.print("Introduzca la cedula del Estudiante: ");
         String dni = scanner.next();
@@ -214,6 +231,26 @@ public class FileManager {
             System.out.println("------------------------------------------------------------");
         }
         pause(scanner);
+    }
+
+    public String calculateGrade() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingrese notas del alumno:");
+        String stringFinalGrade;
+        System.out.print("Unidad 1: ");
+        float unitOne = scanner.nextFloat();
+
+        System.out.print("Unidad 2: ");
+        float unitTwo = scanner.nextFloat();
+
+        System.out.print("Unidad 3: ");
+        float unitThree = scanner.nextFloat();
+
+        float finalGrade = (unitOne + unitTwo + unitThree) / 3;
+
+        stringFinalGrade = String.valueOf(finalGrade);
+
+        return stringFinalGrade;
     }
 
     private static void pause(Scanner scanner) {

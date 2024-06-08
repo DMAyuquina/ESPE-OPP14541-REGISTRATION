@@ -1,5 +1,7 @@
 package ec.edu.espe.registrationsystem.model;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Logic Legion, DCCO-ESPE
@@ -15,9 +17,9 @@ public class Student {
     private String typeOfRegistration;
     private String grade;
     private String lastChance;
-    private boolean gratuity;
+    private String gratuity;
 
-    public Student(String dni, String name, String lastName, String careerCode, String email, String phone, String typeOfRegistration, String grade, String lastChance, boolean gratuity) {
+    public Student(String dni, String name, String lastName, String careerCode, String email, String phone, String typeOfRegistration, String grade, String lastChance, String gratuity) {
         this.dni = dni;
         this.name = name;
         this.lastName = lastName;
@@ -30,19 +32,9 @@ public class Student {
         this.gratuity = gratuity;
     }
 
-    public boolean isGratuity() {
-        return gratuity;
-    }
-
-    public void setGratuity(boolean gratuity) {
-        this.gratuity = gratuity;
-    }
-    
-
-
     @Override
     public String toString() {
-        return dni + "," + name + "," + lastName + "," + careerCode + "," + email + "," + phone + "," + typeOfRegistration + "," + grade + "," + lastChance;
+        return dni + "," + name + "," + lastName + "," + careerCode + "," + email + "," + phone + "," + typeOfRegistration + "," + grade + "," + lastChance + "," + gratuity;
     }
 
     public String getDni() {
@@ -116,7 +108,14 @@ public class Student {
     public void setLastChance(String lastChance) {
         this.lastChance = lastChance;
     }
+
+    public String getGratuity() {
+        return gratuity;
+    }
+
+    public void setGratuity(String gratuity) {
+        this.gratuity = gratuity;
+    }
     
-    
+
 }
-    
