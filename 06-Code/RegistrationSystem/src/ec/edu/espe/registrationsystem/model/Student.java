@@ -15,9 +15,9 @@ public class Student {
     private String typeOfRegistration;
     private String grade;
     private String lastChance;
-    
-    
-    public Student(String dni, String name, String lastName, String careerCode, String email, String phone, String typeOfRegistration, String grade, String lastChance) {
+    private boolean gratuity;
+
+    public Student(String dni, String name, String lastName, String careerCode, String email, String phone, String typeOfRegistration, String grade, String lastChance, boolean gratuity) {
         this.dni = dni;
         this.name = name;
         this.lastName = lastName;
@@ -27,8 +27,18 @@ public class Student {
         this.typeOfRegistration = typeOfRegistration;
         this.grade = grade;
         this.lastChance = lastChance;
-        
+        this.gratuity = gratuity;
     }
+
+    public boolean isGratuity() {
+        return gratuity;
+    }
+
+    public void setGratuity(boolean gratuity) {
+        this.gratuity = gratuity;
+    }
+    
+
 
     @Override
     public String toString() {

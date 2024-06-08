@@ -61,7 +61,7 @@ public class FileManager {
         return 0;
     }
 
-    public static void addStudents(Scanner scanner, String fileName) {
+    public void addStudents(Scanner scanner, String fileName) {
         System.out.println("\n============================================================");
         System.out.print("Cuantos estudiantes quiere agregar?: ");
         int studentNumber = scanner.nextInt();
@@ -116,7 +116,7 @@ public class FileManager {
         pause(scanner);
     }
 
-    public static void readStudents(Scanner scanner, String fileName) {
+    public  void readStudents(Scanner scanner, String fileName) {
         List<Student> students = Reader.readStudents(fileName);
         System.out.println("\n===================================================================================");
         System.out.println("Lista de Estudiantes:");
@@ -133,7 +133,7 @@ public class FileManager {
         pause(scanner);
     }
 
-    public static void updateStudent(Scanner scanner, String fileName) {
+    public  void updateStudent(Scanner scanner, String fileName) {
         System.out.println("\n============================================================");
         System.out.print("Introduzca la Cedula del Estudiante a Editar: ");
         String dni = scanner.next();
@@ -185,6 +185,33 @@ public class FileManager {
 
             Student updatedStudent = new Student(dni, name, lastName, careerCode, email, phone, typeOfRegistration, grade, lastChance);
             Updater.updateStudent(fileName, updatedStudent);
+        }
+        pause(scanner);
+    }
+
+    public void deleteStudent(Scanner scanner, String fileName) {
+        System.out.println("============================================================");
+        System.out.print("Introduzca la Cedula del Estudiante a Eliminar: ");
+        String dni = scanner.next();
+        System.out.println("============================================================");
+        Student student = Searcher.findStudentByDNI(fileName, dni);
+        scanner.nextLine();
+        Eraser.deleteStudent(fileName, dni);
+        pause(scanner);
+    }
+
+    public  void findStudent(Scanner scanner, String fileName) {
+        System.out.println("============================================================");
+        System.out.print("Introduzca la cedula del Estudiante: ");
+        String dni = scanner.next();
+        System.out.println("============================================================");
+        scanner.nextLine();
+        System.out.println("Curso: " + fileName);
+        Student student = Searcher.findStudentByDNI(fileName, dni);
+        System.out.println("------------------------------------------------------------");
+        if (student != null) {
+            System.out.println("Estudiante encontrado: \n" + student);
+            System.out.println("------------------------------------------------------------");
         }
         pause(scanner);
     }

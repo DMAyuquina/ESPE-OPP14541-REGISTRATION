@@ -1,14 +1,6 @@
 package ec.edu.espe.registrationsystem.view;
 
-import ec.edu.espe.registrationsystem.model.Student;
-import utils.Reader;
 import utils.FileManager;
-import utils.Eraser;
-import utils.Searcher;
-import utils.Updater;
-
-import java.nio.charset.StandardCharsets;
-import java.util.List;
 import java.util.Scanner;
 
 public class ManagerMenu {
@@ -82,7 +74,7 @@ public class ManagerMenu {
 
             switch (operation) {
                 case 1 ->
-                    findStudent(scanner, fileName);
+                    fileManager.findStudent(scanner, fileName);
 
                 case 2 ->
                     fileManager.updateStudent(scanner, fileName);
@@ -97,6 +89,8 @@ public class ManagerMenu {
     }
 
     private static void manageStudents(Scanner scanner, String fileName) {
+
+        FileManager fileManager = new FileManager();
         boolean exit = false;
 
         while (!exit) {
@@ -113,7 +107,7 @@ public class ManagerMenu {
 
             switch (operation) {
                 case 1 ->
-                    findStudent(scanner, fileName);
+                    fileManager.findStudent(scanner, fileName);
                 case 2 ->
                     exit = true;
                 default ->
@@ -150,9 +144,9 @@ public class ManagerMenu {
                 case 3 ->
                     fileManager.updateStudent(scanner, fileName);
                 case 4 ->
-                    deleteStudent(scanner, fileName);
+                    fileManager.deleteStudent(scanner, fileName);
                 case 5 ->
-                    findStudent(scanner, fileName);
+                    fileManager.findStudent(scanner, fileName);
                 case 7 ->
                     exit = true;
                 case 6 ->
@@ -164,35 +158,4 @@ public class ManagerMenu {
         }
     }
 
-    private static void deleteStudent(Scanner scanner, String fileName) {
-        System.out.println("============================================================");
-        System.out.print("Introduzca la Cedula del Estudiante a Eliminar: ");
-        String dni = scanner.next();
-        System.out.println("============================================================");
-        Student student = Searcher.findStudentByDNI(fileName, dni);
-        scanner.nextLine();
-        Eraser.deleteStudent(fileName, dni);
-        pause(scanner);
-    }
-
-    private static void findStudent(Scanner scanner, String fileName) {
-        System.out.println("============================================================");
-        System.out.print("Introduzca la cedula del Estudiante: ");
-        String dni = scanner.next();
-        System.out.println("============================================================");
-        scanner.nextLine();
-        System.out.println("Curso: " + fileName);
-        Student student = Searcher.findStudentByDNI(fileName, dni);
-        System.out.println("------------------------------------------------------------");
-        if (student != null) {
-            System.out.println("Estudiante encontrado: \n" + student);
-            System.out.println("------------------------------------------------------------");
-        }
-        pause(scanner);
-    }
-
-    private static void pause(Scanner scanner) {
-        System.out.print("Pulse Enter para continuar...\n");
-        scanner.nextLine();
-    }
 }
