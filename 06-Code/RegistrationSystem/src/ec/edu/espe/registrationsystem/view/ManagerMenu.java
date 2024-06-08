@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ManagerMenu {
-    
 
     public static void callMainMenu() {
 
@@ -65,6 +64,7 @@ public class ManagerMenu {
     }
 
     private static void manageProfessors(Scanner scanner, String fileName) {
+        FileManager fileManager = new FileManager();
         boolean exit = false;
 
         while (!exit) {
@@ -85,7 +85,7 @@ public class ManagerMenu {
                     findStudent(scanner, fileName);
 
                 case 2 ->
-                    updateStudent(scanner, fileName);
+                    fileManager.updateStudent(scanner, fileName);
 
                 case 3 ->
                     exit = true;
@@ -124,7 +124,7 @@ public class ManagerMenu {
 
     private static void manageAdminStaff(Scanner scanner, String fileName) {
         FileManager fileManager = new FileManager();
-        
+
         boolean exit = false;
         while (!exit) {
             System.out.println("\n============================================================");
@@ -146,9 +146,9 @@ public class ManagerMenu {
                 case 1 ->
                     fileManager.addStudents(scanner, fileName);
                 case 2 ->
-                    readStudents(scanner, fileName);
+                    fileManager.readStudents(scanner, fileName);
                 case 3 ->
-                    updateStudent(scanner, fileName);
+                    fileManager.updateStudent(scanner, fileName);
                 case 4 ->
                     deleteStudent(scanner, fileName);
                 case 5 ->
@@ -162,79 +162,6 @@ public class ManagerMenu {
                     System.out.println("Selección invalida. Por favor, intentelo de nuevo.");
             }
         }
-    }
-
-    private static void readStudents(Scanner scanner, String fileName) {
-        List<Student> students = Reader.readStudents(fileName);
-        System.out.println("\n===================================================================================");
-        System.out.println("Lista de Estudiantes:");
-        System.out.println("===================================================================================");
-        int i = 1;
-        for (Student student : students) {
-            if (i != 1) {
-                System.out.println("-------------------------------------------------------------------------------------");
-                System.out.println(student);
-            }
-            i++;
-        }
-        System.out.println("-------------------------------------------------------------------------------------");
-        pause(scanner);
-    }
-
-    private static void updateStudent(Scanner scanner, String fileName) {
-        System.out.println("\n============================================================");
-        System.out.print("Introduzca la Cedula del Estudiante a Editar: ");
-        String dni = scanner.next();
-        scanner.nextLine();
-        System.out.println("============================================================");
-        Student existingStudent = Searcher.findStudentByDNI(fileName, dni);
-
-        if (existingStudent != null) {
-            System.out.println("Edicion la Informacion del Estudiante:");
-            System.out.println("------------------------------------------------------------");
-            
-            System.out.print("Nombre [" + existingStudent.getName() + "]: ");
-            String name = scanner.nextLine();
-            System.out.println("------------------------------------------------------------");
-
-            System.out.print("Apellido [" + existingStudent.getLastName() + "]: ");
-            String lastName = scanner.nextLine();
-            System.out.println("------------------------------------------------------------");
-
-            System.out.print("Codigo de Carrera [" + existingStudent.getCareerCode() + "]: ");
-            String careerCode = scanner.next();
-            scanner.nextLine();
-            System.out.println("------------------------------------------------------------");
-
-            System.out.print("Email [" + existingStudent.getEmail() + "]: ");
-            String email = scanner.next();
-            scanner.nextLine();
-            System.out.println("------------------------------------------------------------");
-
-            System.out.print("Celular [" + existingStudent.getPhone() + "]: ");
-            String phone = scanner.next();
-            scanner.nextLine();
-            System.out.println("------------------------------------------------------------");
-
-            System.out.print("Tipo de Matricula [" + existingStudent.getTypeOfRegistration() + "]: ");
-            String typeOfRegistration = scanner.next();
-            scanner.nextLine();
-            System.out.println("------------------------------------------------------------");
-
-            System.out.print("Calificacion [" + existingStudent.getGrade() + "]: ");
-            String grade = scanner.next();
-            scanner.nextLine();
-            System.out.println("------------------------------------------------------------");
-
-            System.out.print("Supletorio [" + existingStudent.getLastChance() + "]: ");
-            String lastChance = scanner.next();
-            scanner.nextLine();
-            System.out.println("------------------------------------------------------------");
-
-            Student updatedStudent = new Student(dni, name, lastName, careerCode, email, phone, typeOfRegistration, grade, lastChance);
-            Updater.updateStudent(fileName, updatedStudent);
-        } 
-        pause(scanner);
     }
 
     private static void deleteStudent(Scanner scanner, String fileName) {
