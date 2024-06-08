@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ManagerMenu {
+    
 
     public static void callMainMenu() {
 
@@ -122,6 +123,8 @@ public class ManagerMenu {
     }
 
     private static void manageAdminStaff(Scanner scanner, String fileName) {
+        FileManager fileManager = new FileManager();
+        
         boolean exit = false;
         while (!exit) {
             System.out.println("\n============================================================");
@@ -141,7 +144,7 @@ public class ManagerMenu {
 
             switch (operation) {
                 case 1 ->
-                    addStudents(scanner, fileName);
+                    fileManager.addStudents(scanner, fileName);
                 case 2 ->
                     readStudents(scanner, fileName);
                 case 3 ->
@@ -159,61 +162,6 @@ public class ManagerMenu {
                     System.out.println("Selección invalida. Por favor, intentelo de nuevo.");
             }
         }
-    }
-
-    private static void addStudents(Scanner scanner, String fileName) {
-        System.out.println("\n============================================================");
-        System.out.print("Cuantos estudiantes quiere agregar?: ");
-        int studentNumber = scanner.nextInt();
-        scanner.nextLine();
-        System.out.println("============================================================");
-
-        for (int aux = 0; aux < studentNumber; aux++) {
-            System.out.println("Informacion del Estudiante Nuevo");
-            System.out.println("------------------------------------------------------------");
-
-            System.out.print("Cedula: ");
-            String dni = scanner.next();
-            System.out.println("------------------------------------------------------------");
-
-            scanner.nextLine();
-            System.out.print("Nombres: ");
-            String name = scanner.nextLine();
-            System.out.println("------------------------------------------------------------");
-
-            System.out.print("Apellidos: ");
-            String lastName = scanner.nextLine();
-            System.out.println("------------------------------------------------------------");
-
-            System.out.print("Codigo de Carrera: ");
-            String careerCode = scanner.next();
-            System.out.println("------------------------------------------------------------");
-
-            System.out.print("Email: ");
-            String email = scanner.next();
-            System.out.println("------------------------------------------------------------");
-
-            System.out.print("Celular: ");
-            String phone = scanner.next();
-            System.out.println("------------------------------------------------------------");
-
-            System.out.print("Tipo de Matricula: ");
-            String typeOfRegistration = scanner.next();
-            System.out.println("------------------------------------------------------------");
-
-            System.out.print("Calificacion: ");
-            String grade = scanner.next();
-            System.out.println("------------------------------------------------------------");
-
-            System.out.print("Supletorio: ");
-            String lastChance = scanner.next();
-            scanner.nextLine();
-            System.out.println("------------------------------------------------------------");
-
-            Student student = new Student(dni, name, lastName, careerCode, email, phone, typeOfRegistration, grade, lastChance);
-            FileManager.FileSave(student.toString(), fileName);
-        }
-        pause(scanner);
     }
 
     private static void readStudents(Scanner scanner, String fileName) {

@@ -1,16 +1,17 @@
 package utils;
 
+import ec.edu.espe.registrationsystem.model.Student;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  *
  * @author Logic Legion, DCCO-ESPE
  */
-    
 public class FileManager {
 
     public static void FileSave(String data, String fileName) {
@@ -57,5 +58,65 @@ public class FileManager {
             System.err.println("Error reading the file: " + e.getMessage());
         }
         return 0;
+    }
+
+    public static void addStudents(Scanner scanner, String fileName) {
+        System.out.println("\n============================================================");
+        System.out.print("Cuantos estudiantes quiere agregar?: ");
+        int studentNumber = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("============================================================");
+
+        for (int aux = 0; aux < studentNumber; aux++) {
+            System.out.println("Informacion del Estudiante Nuevo");
+            System.out.println("------------------------------------------------------------");
+
+            System.out.print("Cedula: ");
+            String dni = scanner.next();
+            System.out.println("------------------------------------------------------------");
+
+            scanner.nextLine();
+            System.out.print("Nombres: ");
+            String name = scanner.nextLine();
+            System.out.println("------------------------------------------------------------");
+
+            System.out.print("Apellidos: ");
+            String lastName = scanner.nextLine();
+            System.out.println("------------------------------------------------------------");
+
+            System.out.print("Codigo de Carrera: ");
+            String careerCode = scanner.next();
+            System.out.println("------------------------------------------------------------");
+
+            System.out.print("Email: ");
+            String email = scanner.next();
+            System.out.println("------------------------------------------------------------");
+
+            System.out.print("Celular: ");
+            String phone = scanner.next();
+            System.out.println("------------------------------------------------------------");
+
+            System.out.print("Tipo de Matricula: ");
+            String typeOfRegistration = scanner.next();
+            System.out.println("------------------------------------------------------------");
+
+            System.out.print("Calificacion: ");
+            String grade = scanner.next();
+            System.out.println("------------------------------------------------------------");
+
+            System.out.print("Supletorio: ");
+            String lastChance = scanner.next();
+            scanner.nextLine();
+            System.out.println("------------------------------------------------------------");
+
+            Student student = new Student(dni, name, lastName, careerCode, email, phone, typeOfRegistration, grade, lastChance);
+            FileManager.FileSave(student.toString(), fileName);
+        }
+        pause(scanner);
+    }
+    
+        private static void pause(Scanner scanner) {
+        System.out.print("Pulse Enter para continuar...\n");
+        scanner.nextLine();
     }
 }
