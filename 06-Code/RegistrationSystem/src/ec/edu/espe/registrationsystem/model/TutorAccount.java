@@ -2,7 +2,7 @@ package ec.edu.espe.registrationsystem.model;
 
 /**
  *
- * @author Abner Arboleda, Logic Legion, DCCO-ESPE
+ * @author Logic Legion, DCCO-ESPE
  */
 public class TutorAccount {
 

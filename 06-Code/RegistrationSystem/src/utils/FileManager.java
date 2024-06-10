@@ -154,11 +154,11 @@ public class FileManager {
             System.out.println("Edicion la Informacion del Estudiante:");
             System.out.println("------------------------------------------------------------");
 
-            System.out.print("Nombres [" + existingStudent.getName() + "]: ");
+            System.out.print("Nombre [" + existingStudent.getName() + "]: ");
             String name = scanner.nextLine();
             System.out.println("------------------------------------------------------------");
 
-            System.out.print("Apellidos [" + existingStudent.getLastName() + "]: ");
+            System.out.print("Apellido [" + existingStudent.getLastName() + "]: ");
             String lastName = scanner.nextLine();
             System.out.println("------------------------------------------------------------");
 
@@ -243,10 +243,7 @@ public class FileManager {
         System.out.print("Unidad 2: ");
         float unitTwo = scanner.nextFloat();
 
-        System.out.print("Unidad 3: ");
-        float unitThree = scanner.nextFloat();
-
-        float finalGrade = (unitOne + unitTwo + unitThree) / 3;
+        float finalGrade = (unitOne + unitTwo) / 2;
 
         stringFinalGrade = String.valueOf(finalGrade);
 
