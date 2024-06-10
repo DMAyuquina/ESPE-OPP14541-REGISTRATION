@@ -2,7 +2,7 @@ package ec.edu.espe.registrationsystem.model;
 
 /**
  *
- * @author Abner Arboleda, Logic Legion, DCCO-ESPE
+ * @author Logic Legion, DCCO-ESPE
  */
 public class TutorAccount {
 
@@ -26,7 +26,6 @@ public class TutorAccount {
         this.studentGrade = new StudentGrade[studentGrade.length];
     }
 
-    //Methods
     public void viewCourse(){
 
     }
