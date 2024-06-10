@@ -1,7 +1,7 @@
 package utils;
 
 import ec.edu.espe.registrationsystem.model.Student;
-import ec.edu.espe.registrationsystem.model.Tutor;
+import ec.edu.espe.registrationsystem.model.StudentReport;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -111,7 +111,8 @@ public class FileManager {
             }
 
             System.out.print("Calificacion: ");
-            String grade = calculateGrade();
+            StudentReport studentReport = new StudentReport(); 
+            String grade = studentReport.calculateGrade();
             System.out.println("------------------------------------------------------------");
 
             System.out.print("Supletorio: ");
@@ -191,10 +192,11 @@ public class FileManager {
             }
 
             System.out.print("Calificacion [" + existingStudent.getGrade() + "]: ");
-            String grade = scanner.next();
+            StudentReport studentReport = new StudentReport(); 
+            String grade = studentReport.calculateGrade();
             scanner.nextLine();
             System.out.println("------------------------------------------------------------");
-
+            
             System.out.print("Supletorio [" + existingStudent.getLastChance() + "]: ");
             String lastChance = scanner.next();
             scanner.nextLine();
@@ -233,22 +235,7 @@ public class FileManager {
         pause(scanner);
     }
 
-    public String calculateGrade() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese notas del alumno:");
-        String stringFinalGrade;
-        System.out.print("Unidad 1: ");
-        float unitOne = scanner.nextFloat();
-
-        System.out.print("Unidad 2: ");
-        float unitTwo = scanner.nextFloat();
-
-        float finalGrade = (unitOne + unitTwo) / 2;
-
-        stringFinalGrade = String.valueOf(finalGrade);
-
-        return stringFinalGrade;
-    }
+    
 
     private static void pause(Scanner scanner) {
         System.out.print("Pulse Enter para continuar...\n");
