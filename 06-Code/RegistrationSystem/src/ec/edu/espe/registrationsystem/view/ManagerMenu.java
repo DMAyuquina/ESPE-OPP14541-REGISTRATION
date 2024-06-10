@@ -64,7 +64,7 @@ public class ManagerMenu {
             System.out.println("Sistema para Profesores:");
             System.out.println("============================================================");
             System.out.println("1. Encontrar Estudiantes");
-            System.out.println("2. Modificar Estudiantes");
+            System.out.println("2. Modificar Nota Estudiantes");
             System.out.println("3. Volver al menu principal");
             System.out.println("------------------------------------------------------------");
 
@@ -77,7 +77,7 @@ public class ManagerMenu {
                     fileManager.findStudent(scanner, fileName);
 
                 case 2 ->
-                    fileManager.updateStudent(scanner, fileName);
+                    fileManager.updateStudent(scanner, fileName, false);
 
                 case 3 ->
                     exit = true;
@@ -142,7 +142,7 @@ public class ManagerMenu {
                 case 2 ->
                     fileManager.readStudents(scanner, fileName);
                 case 3 ->
-                    fileManager.updateStudent(scanner, fileName);
+                    fileManager.updateStudent(scanner, fileName, true);
                 case 4 ->
                     fileManager.deleteStudent(scanner, fileName);
                 case 5 ->

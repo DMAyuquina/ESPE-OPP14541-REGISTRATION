@@ -111,7 +111,7 @@ public class FileManager {
             }
 
             System.out.print("Calificacion: ");
-            StudentReport studentReport = new StudentReport(); 
+            StudentReport studentReport = new StudentReport();
             String grade = studentReport.calculateGrade();
             System.out.println("------------------------------------------------------------");
 
@@ -143,7 +143,7 @@ public class FileManager {
         pause(scanner);
     }
 
-    public void updateStudent(Scanner scanner, String fileName) {
+    public void updateStudent(Scanner scanner, String fileName, boolean adminOProfesor) {
         System.out.println("\n============================================================");
         System.out.print("Introduzca la Cedula del Estudiante a Editar: ");
         String dni = scanner.next();
@@ -151,7 +151,7 @@ public class FileManager {
         System.out.println("============================================================");
         Student existingStudent = Searcher.findStudentByDNI(fileName, dni);
 
-        if (existingStudent != null) {
+        if (existingStudent != null && adminOProfesor) {
             System.out.println("Edicion la Informacion del Estudiante:");
             System.out.println("------------------------------------------------------------");
 
@@ -192,11 +192,11 @@ public class FileManager {
             }
 
             System.out.print("Calificacion [" + existingStudent.getGrade() + "]: ");
-            StudentReport studentReport = new StudentReport(); 
+            StudentReport studentReport = new StudentReport();
             String grade = studentReport.calculateGrade();
             scanner.nextLine();
             System.out.println("------------------------------------------------------------");
-            
+
             System.out.print("Supletorio [" + existingStudent.getLastChance() + "]: ");
             String lastChance = scanner.next();
             scanner.nextLine();
@@ -204,6 +204,25 @@ public class FileManager {
 
             Student updatedStudent = new Student(dni, name, lastName, careerCode, email, phone, typeOfRegistration, grade, lastChance, gratuity);
             Updater.updateStudent(fileName, updatedStudent);
+        } else {
+            if (existingStudent != null && !adminOProfesor) {
+                
+                System.out.println("Estudiante ["+existingStudent.getName()+existingStudent.getLastName()+"]\nDni:"+existingStudent.getDni()+"]:");
+                System.out.println("------------------------------------------------------------");
+                System.out.print("Calificacion [" + existingStudent.getGrade() + "]: ");
+                StudentReport studentReport = new StudentReport();
+                String grade = studentReport.calculateGrade();
+                scanner.nextLine();
+                System.out.println("------------------------------------------------------------");
+                existingStudent.setGrade(grade);
+
+                System.out.print("Supletorio [" + existingStudent.getLastChance() + "]: ");
+                String lastChance = scanner.next();
+                scanner.nextLine();
+                System.out.println("------------------------------------------------------------");
+                existingStudent.setLastChance(lastChance);
+                Updater.updateStudent(fileName, existingStudent);
+            }
         }
         pause(scanner);
     }
@@ -234,8 +253,6 @@ public class FileManager {
         }
         pause(scanner);
     }
-
-    
 
     private static void pause(Scanner scanner) {
         System.out.print("Pulse Enter para continuar...\n");
