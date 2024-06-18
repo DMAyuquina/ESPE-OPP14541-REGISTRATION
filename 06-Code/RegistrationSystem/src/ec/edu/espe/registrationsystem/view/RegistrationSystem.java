@@ -1,6 +1,7 @@
 package ec.edu.espe.registrationsystem.view;
 
-import java.awt.Menu;
+import ec.edu.espe.registrationsystem.model.AdminAccount;
+import utils.FileManager;
 
 /**
  *
@@ -9,8 +10,16 @@ import java.awt.Menu;
 public class RegistrationSystem {
 
     public static void main(String[] args) {
+        
         System.out.println("--------Sistema de Matriculas de Estidiantes Intituto Tecnologico Superior Bolivar V0.13-------");
         ManagerMenu objetoMenu = new ManagerMenu();
         objetoMenu.callMainMenu();
+
     }
+
+    public class CedulaValidator {
+
+        
+    }
+
 }

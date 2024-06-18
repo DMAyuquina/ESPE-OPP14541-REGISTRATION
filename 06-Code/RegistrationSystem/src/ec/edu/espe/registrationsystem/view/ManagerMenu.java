@@ -1,12 +1,50 @@
 package ec.edu.espe.registrationsystem.view;
 
+import ec.edu.espe.registrationsystem.model.AdminAccount;
 import utils.FileManager;
 import java.util.Scanner;
 
 public class ManagerMenu {
 
+    public static boolean loginAccounts(String password, String account, Scanner scanner) {
+        int i = 0;
+        String passComprobation = "", userComprobation = "";
+        boolean comprobation = true;
+
+        while (i < 3 && comprobation) {
+            i++;
+            System.out.println("==============================================");
+            System.out.println("            INGRESO DE USUARIO");
+            System.out.println("==============================================");
+            System.out.print("Usuario: ");
+            userComprobation = scanner.nextLine();
+            System.out.print("Clave: ");
+            passComprobation = scanner.nextLine();
+            
+            if (account.equals("LogicLegion")) {
+                if (userComprobation.equals(userComprobation) && passComprobation.equals(password)) {
+                    System.out.println("Ingreso exitoso!\n");
+                    FileManager.pause(scanner);
+                    comprobation = false;
+                } else {
+                    System.out.println("Usuario o clave mal ingresada. Intente de nuevo\n");
+                    FileManager.pause(scanner);
+                }
+            } else {
+                AdminAccount admin = new AdminAccount();
+                comprobation = !admin.validateTutorLogin(userComprobation, passComprobation);
+                if(!comprobation){System.out.println("Ingreso Exitoso");}
+                else{System.out.println("Usuario o clave mal ingresada. Intente de nuevo\n");}
+            }
+
+        }
+        return comprobation;
+
+    }
+
     public static void callMainMenu() {
 
+        AdminAccount adminUser = new AdminAccount();
         String fileName = "";
         Scanner scanner = new Scanner(System.in);
 
@@ -30,21 +68,43 @@ public class ManagerMenu {
             System.out.print(">>");
             int userType = scanner.nextInt();
             scanner.nextLine();
-            if (userType != 4) {
-                System.out.println("\n============================================================");
-                System.out.print("Introduzca el Curso: ");
-                fileName = scanner.next();
-                System.out.println("============================================================\n");
-            }
 
             switch (userType) {
                 case 1 -> {
+                    System.out.println("\n============================================================");
+                    System.out.print("Introduzca el Curso: ");
+                    fileName = scanner.next();
+                    scanner.nextLine();
+                    System.out.println("============================================================\n");
                     manageStudents(scanner, fileName);
                 }
                 case 2 -> {
+                    exit = loginAccounts(adminUser.getAdminPassword(), adminUser.getAdminUser(), scanner);
+                    if (exit == true) {
+                        exit = false;
+                        break;
+                    }
+                    
+                    System.out.println("\n============================================================");
+                    System.out.print("Introduzca el Curso: ");
+                    fileName = scanner.next();
+                    scanner.nextLine();
+                    System.out.println("============================================================\n");
                     manageAdminStaff(scanner, fileName);
                 }
                 case 3 -> {
+
+                    exit = loginAccounts("", "", scanner);
+                    if (exit == true) {
+                        exit = false;
+                        break;
+                    }
+
+                    System.out.println("\n============================================================");
+                    System.out.print("Introduzca el Curso: ");
+                    fileName = scanner.next();
+                    scanner.nextLine();
+                    System.out.println("============================================================\n");
                     manageProfessors(scanner, fileName);
                 }
                 case 4 ->
@@ -117,9 +177,11 @@ public class ManagerMenu {
     }
 
     private static void manageAdminStaff(Scanner scanner, String fileName) {
-        FileManager fileManager = new FileManager();
+        AdminAccount adminUser = new AdminAccount();
 
         boolean exit = false;
+        FileManager fileManager = new FileManager();
+
         while (!exit) {
             System.out.println("\n============================================================");
             System.out.println("Escoja una operacion:");
