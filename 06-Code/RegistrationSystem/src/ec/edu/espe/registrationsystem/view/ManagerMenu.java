@@ -197,15 +197,15 @@ public class ManagerMenu {
 
             switch (operation) {
                 case 1 ->
-                    fileManager.addStudents(scanner, fileName);
+                    adminUser.addStudents();
                 case 2 ->
-                    fileManager.readStudents(scanner, fileName);
+                    adminUser.readStudents();
                 case 3 ->
-                    fileManager.updateStudent(scanner, fileName, true);
+                    adminUser.updateStudent();
                 case 4 ->
-                    fileManager.deleteStudent(scanner, fileName);
+                    adminUser.deleteStudent();
                 case 5 ->
-                    fileManager.findStudent(scanner, fileName);
+                    adminUser.findStudent();
                 case 7 ->
                     exit = true;
                 case 6 ->
