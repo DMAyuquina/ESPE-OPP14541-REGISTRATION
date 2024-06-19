@@ -1,6 +1,7 @@
 package ec.edu.espe.registrationsystem.view;
 
 import ec.edu.espe.registrationsystem.model.AdminAccount;
+import ec.edu.espe.registrationsystem.model.StudentAccount;
 import utils.FileManager;
 import java.util.Scanner;
 
@@ -71,12 +72,8 @@ public class ManagerMenu {
 
             switch (userType) {
                 case 1 -> {
-                    System.out.println("\n============================================================");
-                    System.out.print("Introduzca el Curso: ");
-                    fileName = scanner.next();
-                    scanner.nextLine();
-                    System.out.println("============================================================\n");
-                    manageStudents(scanner, fileName);
+                    StudentAccount studentAccount = new StudentAccount();
+                    studentAccount.viewReport();
                 }
                 case 2 -> {
                     exit = loginAccounts(adminUser.getAdminPassword(), adminUser.getAdminUser(), scanner);
@@ -148,7 +145,7 @@ public class ManagerMenu {
         }
     }
 
-    private static void manageStudents(Scanner scanner, String fileName) {
+    public void manageStudents(Scanner scanner, String fileName) {
 
         FileManager fileManager = new FileManager();
         boolean exit = false;
