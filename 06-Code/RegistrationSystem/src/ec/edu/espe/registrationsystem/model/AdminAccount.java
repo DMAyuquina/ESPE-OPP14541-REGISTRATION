@@ -10,10 +10,11 @@ import utils.FileManager;
  *
  * @author LogicLegion, DCCO-ESPE
  */
+
 public class AdminAccount {
 
-    private String adminUser = "LogicLegion";
-    private String adminPassword = "14541";
+    private final String adminUser = "LogicLegion";
+    private final String adminPassword = "14541";
     Scanner scanner = new Scanner(System.in);
     String fileName = "";
     FileManager fileManager = new FileManager();

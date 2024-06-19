@@ -4,6 +4,7 @@ package ec.edu.espe.registrationsystem.model;
  *
  * @author LogicLegion, DCCO-ESPE
  */
+
 public class StudentGrade {
     private float gradeUnit1;
     private float gradeUnit2;

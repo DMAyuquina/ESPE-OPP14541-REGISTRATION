@@ -5,6 +5,11 @@ import ec.edu.espe.registrationsystem.model.StudentAccount;
 import utils.FileManager;
 import java.util.Scanner;
 
+/**
+ *
+ * @author Logic Legion, DCCO-ESPE
+ */
+
 public class ManagerMenu {
 
     public static boolean loginAccounts(String password, String account, Scanner scanner) {
@@ -113,37 +118,43 @@ public class ManagerMenu {
     }
 
     private static void manageProfessors(Scanner scanner, String fileName) {
-        FileManager fileManager = new FileManager();
-        boolean exit = false;
+    FileManager fileManager = new FileManager();
+    boolean exit = false;
 
-        while (!exit) {
-            System.out.println("============================================================");
-            System.out.println("Sistema para Profesores:");
-            System.out.println("============================================================");
-            System.out.println("1. Encontrar Estudiantes");
-            System.out.println("2. Modificar Nota Estudiantes");
-            System.out.println("3. Volver al menu principal");
-            System.out.println("------------------------------------------------------------");
+    while (!exit) {
+        System.out.println("============================================================");
+        System.out.println("Sistema para Profesores:");
+        System.out.println("============================================================");
+        System.out.println("1. Encontrar Estudiantes");
+        System.out.println("2. Modificar Nota Estudiantes");
+        System.out.println("3. Cambiar de Curso");
+        System.out.println("4. Volver al menu principal");
+        System.out.println("------------------------------------------------------------");
+        System.out.print(">>");
+        int operation = scanner.nextInt();
+        scanner.nextLine(); // Consumir el salto de línea
 
-            System.out.print(">>");
-            int operation = scanner.nextInt();
-            scanner.nextLine();
-
-            switch (operation) {
-                case 1 ->
-                    fileManager.findStudent(scanner, fileName);
-
-                case 2 ->
-                    fileManager.updateStudent(scanner, fileName, false);
-
-                case 3 ->
-                    exit = true;
-                default ->
-                    System.out.println("Seleccion invalida. Por favor, intentelo de nuevo.");
-            }
-
+        switch (operation) {
+            case 1:
+                fileManager.findStudent(scanner, fileName);
+                break;
+            case 2:
+                fileManager.updateStudent(scanner, fileName, false);
+                break;
+            case 3:
+                System.out.print("Introduzca el Curso: ");
+                fileName = scanner.nextLine();
+                break;
+            case 4:
+                exit = true;
+                break;
+            default:
+                System.out.println("Selección invalida. Por favor, intentelo de nuevo.");
+                break;
         }
     }
+}
+
 
     public void manageStudents(Scanner scanner, String fileName) {
 
@@ -155,23 +166,28 @@ public class ManagerMenu {
             System.out.println("Sistema para Estudiantes:");
             System.out.println("============================================================");
             System.out.println("1. Encontrar Estudiantes");
-            System.out.println("2. Volver al menu principal");
+             System.out.println("2. Cambiar de Curso");
+            System.out.println("3. Volver");
             System.out.println("------------------------------------------------------------");
-
             System.out.print(">>");
+
             int operation = scanner.nextInt();
-            scanner.nextLine();
+            scanner.nextLine(); 
 
             switch (operation) {
-                case 1 ->
+                case 1 -> {
                     fileManager.findStudent(scanner, fileName);
-                case 2 ->
-                    exit = true;
-                default ->
-                    System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
+                }
+                case 2 -> {
+                    System.out.print("Introduzca el Curso: ");
+                    fileName = scanner.nextLine();
+                }
+                case 3 -> exit = true;
+                default -> System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
             }
         }
     }
+
 
     private static void manageAdminStaff(Scanner scanner, String fileName) {
         AdminAccount adminUser = new AdminAccount();
@@ -188,31 +204,40 @@ public class ManagerMenu {
             System.out.println("3. Modificar Estudiantes");
             System.out.println("4. Eliminar Estudiante");
             System.out.println("5. Encontrar Estudiantes por Cedula");
-            System.out.println("6. Salir");
+            System.out.println("6. Cambiar de Curso");
+            System.out.println("7. Salir");
             System.out.println("------------------------------------------------------------");
             System.out.print(">>");
+
             int operation = scanner.nextInt();
-            scanner.nextLine();
-            System.out.println("------------------------------------------------------------");
+            scanner.nextLine(); // Consumir el salto de línea después de nextInt()
 
             switch (operation) {
-                case 1 ->
+                case 1:
                     adminUser.addStudents();
-                case 2 ->
+                    break;
+                case 2:
                     adminUser.readStudents();
-                case 3 ->
+                    break;
+                case 3:
                     adminUser.updateStudent();
-                case 4 ->
+                    break;
+                case 4:
                     adminUser.deleteStudent();
-                case 5 ->
+                    break;
+                case 5:
                     adminUser.findStudent();
-                case 7 ->
+                    break;
+                case 6:
+                    System.out.print("Introduzca el Curso: ");
+                    fileName = scanner.nextLine();
+                    break;
+                case 7:
                     exit = true;
-                case 6 ->
-                    exit = true;
-
-                default ->
+                    break;
+                default:
                     System.out.println("Selección invalida. Por favor, intentelo de nuevo.");
+                    break;
             }
         }
     }

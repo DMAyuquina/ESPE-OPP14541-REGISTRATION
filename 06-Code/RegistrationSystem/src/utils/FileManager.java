@@ -14,6 +14,7 @@ import java.util.Scanner;
  *
  * @author Logic Legion, DCCO-ESPE
  */
+
 public class FileManager {
 
     public static void FileSave(String data, String fileName) {

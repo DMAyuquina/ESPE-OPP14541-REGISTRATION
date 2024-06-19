@@ -16,7 +16,6 @@ public class Searcher {
         for (Student student : students) {
             if (student.getDni().equals(dni)) {
                 
-                //System.out.println(student);
                 return student;
                 
             }
