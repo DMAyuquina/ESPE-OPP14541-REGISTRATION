@@ -16,7 +16,6 @@ public class AdminAccount {
     private final String adminUser = "LogicLegion";
     private final String adminPassword = "14541";
     Scanner scanner = new Scanner(System.in);
-    String fileName = "";
     FileManager fileManager = new FileManager();
     
     @Override
@@ -55,23 +54,23 @@ public class AdminAccount {
         return false;
     }
 
-    public void addStudents() {
+    public void addStudents(String fileName) {
         fileManager.addStudents(scanner, fileName);
     }
 
-    public void readStudents() {
+    public void readStudents(String fileName) {
         fileManager.readStudents(scanner, fileName);
     }
 
-    public void updateStudent() {
+    public void updateStudent(String fileName) {
         fileManager.updateStudent(scanner, fileName, true);
     }
     
-    public void deleteStudent() {
+    public void deleteStudent(String fileName) {
         fileManager.deleteStudent(scanner, fileName);
     }
     
-    public void findStudent() {
+    public void findStudent(String fileName) {
         fileManager.findStudent(scanner, fileName);
     }
 }

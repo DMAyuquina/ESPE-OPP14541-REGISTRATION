@@ -28,7 +28,7 @@ public class ManagerMenu {
             passComprobation = scanner.nextLine();
             
             if (account.equals("LogicLegion")) {
-                if (userComprobation.equals(userComprobation) && passComprobation.equals(password)) {
+                if (userComprobation.equals(account) && passComprobation.equals(password)) {
                     System.out.println("Ingreso exitoso!\n");
                     FileManager.pause(scanner);
                     comprobation = false;
@@ -217,7 +217,7 @@ public class ManagerMenu {
                     adminUser.addStudents();
                     break;
                 case 2:
-                    adminUser.readStudents();
+                    adminUser.readStudents(fileName);
                     break;
                 case 3:
                     adminUser.updateStudent();
