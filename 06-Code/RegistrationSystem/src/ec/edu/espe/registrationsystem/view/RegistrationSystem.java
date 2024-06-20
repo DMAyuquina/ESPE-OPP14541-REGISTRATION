@@ -14,9 +14,4 @@ public class RegistrationSystem {
 
     }
 
-    public class CedulaValidator {
-
-        
-    }
-
 }
