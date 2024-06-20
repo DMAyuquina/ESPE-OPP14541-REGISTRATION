@@ -93,38 +93,26 @@ public class Student {
         this.email = email;
     }
 
-    
-    
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    
-    
     public void setTypeOfRegistration(String typeOfRegistration) {
         this.typeOfRegistration = typeOfRegistration;
     }
-    
-    
 
     public void setGrade(String grade) {
         this.grade = grade;
     }
 
-    
-    
     public void setLastChance(String lastChance) {
         this.lastChance = lastChance;
     }
-    
-    
 
     public String getGratuity() {
         return gratuity;
     }
 
-    
-    
     public void setGratuity(String gratuity) {
         this.gratuity = gratuity;
     }
