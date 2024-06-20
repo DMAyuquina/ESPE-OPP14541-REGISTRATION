@@ -14,11 +14,13 @@ public class StudentAccount {
     //Methods
     public void viewReport(){
         
+        
         System.out.println("\n============================================================");
                     System.out.print("Introduzca el Curso: ");
                     fileName = scanner.next();
                     scanner.nextLine();
                     System.out.println("============================================================\n");
                     manageMenu.manageStudents(scanner, fileName);
+                    
     }
 }
