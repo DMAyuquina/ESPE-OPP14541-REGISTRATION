@@ -4,8 +4,8 @@ package ec.edu.espe.registrationsystem.model;
  *
  * @author Logic Legion DCCO-ESPE
  */
-
 public class Career {
+
     private String careers;
 
     public Career(String careers) {
@@ -22,7 +22,7 @@ public class Career {
 
     @Override
     public String toString() {
-        return super.toString(); 
+        return super.toString();
     }
-    
+
 }
