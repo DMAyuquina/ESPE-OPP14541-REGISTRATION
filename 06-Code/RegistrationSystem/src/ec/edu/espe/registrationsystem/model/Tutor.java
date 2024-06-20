@@ -13,7 +13,7 @@ public class Tutor {
     private ArrayList<Career> careers; 
     private String email;
     private String phone;
-    private ArrayList<Course> codeCourses;;
+    private ArrayList<Course> codeCourses;
 
     public Tutor(String dni, String fullName, ArrayList<Career> careers, String email, String phone, ArrayList<Course> codeCourses) {
         this.dni = dni;
