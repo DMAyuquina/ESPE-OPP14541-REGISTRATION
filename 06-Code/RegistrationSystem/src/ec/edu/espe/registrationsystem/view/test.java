@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package ec.edu.espe.registrationsystem.view;
 
 import ec.edu.espe.registrationsystem.model.AdminAccount;
@@ -11,7 +8,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Abner Arboleda, Logic Legion, DCCO-ESPE
+ * @author Logic Legion, DCCO-ESPE
  */
 //public class test {
 //    public static void main(String[] args) {

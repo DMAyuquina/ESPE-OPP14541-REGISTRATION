@@ -4,6 +4,7 @@ package ec.edu.espe.registrationsystem.model;
  *
  * @author Logic Legion, DCCO-ESPE
  */
+
 public class Registration {
     
     private String typeoOfRegistration;

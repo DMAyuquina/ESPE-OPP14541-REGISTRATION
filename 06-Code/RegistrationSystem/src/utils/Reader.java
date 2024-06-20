@@ -11,11 +11,11 @@ import java.util.List;
  *
  * @author Logic Legion, DCCO-ESPE
  */
-
 public class Reader {
 
     public static List<Student> readStudents(String fileName) {
         List<Student> students = new ArrayList<>();
+
         fileName = fileName + ".csv";
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
@@ -23,16 +23,16 @@ public class Reader {
             while ((line = reader.readLine()) != null) {
                 String[] values = line.split(",");
                 Student student = new Student(
-                    values[0],  
-                    values[1],  
-                    values[2],  
-                    values[3],  
-                    values[4],  
-                    values[5],   
-                    values[6],
-                    values[7],
-                    values[8],
-                    values[9]
+                        values[0],
+                        values[1],
+                        values[2],
+                        values[3],
+                        values[4],
+                        values[5],
+                        values[6],
+                        values[7],
+                        values[8],
+                        values[9]
                 );
                 students.add(student);
             }
@@ -41,5 +41,6 @@ public class Reader {
         }
 
         return students;
+
     }
 }

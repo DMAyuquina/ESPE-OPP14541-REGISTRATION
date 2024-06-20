@@ -4,6 +4,7 @@ package ec.edu.espe.registrationsystem.model;
  *
  * @author Logic Legion DCCO-ESPE
  */
+
 public class Course {
     private String codeCourse;
     private Student students[];

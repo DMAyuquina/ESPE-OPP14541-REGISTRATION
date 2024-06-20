@@ -6,6 +6,7 @@ import java.io.Serializable;
  *
  * @author Logic Legion, DCCO-ESPE
  */
+
 public class TutorAccount implements Serializable{
 
     private String tutorUser;
