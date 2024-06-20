@@ -14,7 +14,6 @@ import java.util.Scanner;
  *
  * @author Logic Legion, DCCO-ESPE
  */
-
 public class FileManager {
 
     public static void FileSave(String data, String fileName) {
@@ -72,22 +71,29 @@ public class FileManager {
 
         for (int aux = 0; aux < studentNumber; aux++) {
             System.out.println("Informacion del Estudiante Nuevo");
-            
             String dni;
+            Student student2;
+            boolean validation = false;
+
             do {
                 System.out.println("------------------------------------------------------------");
 
                 System.out.print("Cedula: ");
                 dni = scanner.next();
+                student2 = Searcher.findStudentByDNI(fileName, dni);
+
                 if (dni.length() == 10) {
-                    if (!validacionCedula(dni.length(), dni)) {
-                        System.out.println("La cedula ingresada no es valida, intente de nuevo");
+                    if (!validationDni(dni.length(), dni) || student2 != null) {
+                        System.out.println("La cedula ingresada no es valida o ya existe, intente de nuevo");
+                    } else {
+                        validation = false;
                     }
                 } else {
+                    validation = true;
                     System.out.println("Cedula ingresada no valida");
                 }
                 System.out.println("============================================================");
-            } while (!validacionCedula(dni.length(), dni));
+            } while (validation || student2 != null);
             System.out.println("------------------------------------------------------------");
 
             scanner.nextLine();
@@ -107,17 +113,26 @@ public class FileManager {
             String email = scanner.next();
             System.out.println("------------------------------------------------------------");
 
-            System.out.print("Celular: ");
-            String phone = scanner.next();
-            System.out.println("------------------------------------------------------------");
+            String phone = "";
+            do {
+
+                System.out.print("Celular: ");
+                phone = scanner.next();
+                scanner.nextLine();
+                System.out.println("------------------------------------------------------------");
+                if (phone.length() != 10) {
+                    System.out.println("Numero de telefono mal ingresado. Intente de nuevo.");
+                }
+
+            } while (phone.length() != 10);
 
             System.out.print("Tipo de Matricula: ");
             String typeOfRegistration = scanner.next();
             System.out.println("------------------------------------------------------------");
-
+            typeOfRegistration = typeOfRegistration.toUpperCase();
             String gratuity;
 
-            if (typeOfRegistration.equals("Primera")) {
+            if (typeOfRegistration.equals("PRIMERA")) {
                 gratuity = "Con Gratuidad";
             } else {
                 gratuity = "Sin Gratuidad";
@@ -126,12 +141,19 @@ public class FileManager {
             System.out.print("Calificacion: ");
             StudentReport studentReport = new StudentReport();
             String grade = studentReport.calculateGrade();
-            System.out.println("------------------------------------------------------------");
-
-            System.out.print("Supletorio: ");
-            String lastChance = scanner.next();
             scanner.nextLine();
             System.out.println("------------------------------------------------------------");
+
+            float gradeI = Float.parseFloat(grade);
+            String lastChance = "";
+            if (gradeI < 14) {
+                System.out.print("Supletorio: ");
+                lastChance = scanner.next();
+                scanner.nextLine();
+                System.out.println("------------------------------------------------------------");
+            } else {
+                lastChance = "No requiere supletorio";
+            }
 
             Student student = new Student(dni, name, lastName, careerCode, email, phone, typeOfRegistration, grade, lastChance, gratuity);
             FileManager.FileSave(student.toString(), fileName);
@@ -160,19 +182,22 @@ public class FileManager {
     public void updateStudent(Scanner scanner, String fileName, boolean adminOProfesor) {
         System.out.println("\n============================================================");
         String dni;
+
         do {
             System.out.print("Introduzca la Cedula del Estudiante a Editar: ");
             dni = scanner.next();
             scanner.nextLine();
+
             if (dni.length() == 10) {
-                if (!validacionCedula(dni.length(), dni)) {
+                if (!validationDni(dni.length(), dni)) {
                     System.out.println("La cedula ingresada no es valida, intente de nuevo");
                 }
             } else {
+
                 System.out.println("Cedula ingresada no valida");
             }
             System.out.println("============================================================");
-        } while (!validacionCedula(dni.length(), dni));
+        } while (!validationDni(dni.length(), dni));
 
         Student existingStudent = Searcher.findStudentByDNI(fileName, dni);
 
@@ -198,19 +223,27 @@ public class FileManager {
             scanner.nextLine();
             System.out.println("------------------------------------------------------------");
 
-            System.out.print("Celular [" + existingStudent.getPhone() + "]: ");
-            String phone = scanner.next();
-            scanner.nextLine();
-            System.out.println("------------------------------------------------------------");
+            String phone = "";
+            do {
+
+                System.out.print("Celular [" + existingStudent.getPhone() + "]: ");
+                phone = scanner.next();
+                scanner.nextLine();
+                System.out.println("------------------------------------------------------------");
+                if (phone.length() != 10) {
+                    System.out.println("Numero de telefono mal ingresado. Intente de nuevo.");
+                }
+
+            } while (phone.length() != 10);
 
             System.out.print("Tipo de Matricula [" + existingStudent.getTypeOfRegistration() + "]: ");
             String typeOfRegistration = scanner.next();
             scanner.nextLine();
             System.out.println("------------------------------------------------------------");
-
+            typeOfRegistration = typeOfRegistration.toUpperCase();
             String gratuity;
 
-            if (typeOfRegistration.equals("Primera")) {
+            if (typeOfRegistration.equals("PRIMERA")) {
                 gratuity = "Con Gratuidad";
             } else {
                 gratuity = "Sin Gratuidad";
@@ -222,10 +255,16 @@ public class FileManager {
             scanner.nextLine();
             System.out.println("------------------------------------------------------------");
 
-            System.out.print("Supletorio [" + existingStudent.getLastChance() + "]: ");
-            String lastChance = scanner.next();
-            scanner.nextLine();
-            System.out.println("------------------------------------------------------------");
+            float gradeF = Float.parseFloat(grade);
+            String lastChance = "";
+            if (gradeF < 14) {
+                System.out.print("Supletorio [" + existingStudent.getLastChance() + "]: ");
+                lastChance = scanner.next();
+                scanner.nextLine();
+                System.out.println("------------------------------------------------------------");
+            } else {
+                lastChance = "No requiere supletorio";
+            }
 
             Student updatedStudent = new Student(dni, name, lastName, careerCode, email, phone, typeOfRegistration, grade, lastChance, gratuity);
             Updater.updateStudent(fileName, updatedStudent);
@@ -241,10 +280,17 @@ public class FileManager {
                 System.out.println("------------------------------------------------------------");
                 existingStudent.setGrade(grade);
 
-                System.out.print("Supletorio [" + existingStudent.getLastChance() + "]: ");
-                String lastChance = scanner.next();
-                scanner.nextLine();
-                System.out.println("------------------------------------------------------------");
+                float gradeF = Float.parseFloat(grade);
+                String lastChance = "";
+
+                if (gradeF < 14) {
+                    System.out.print("Supletorio [" + existingStudent.getLastChance() + "]: ");
+                    lastChance = scanner.next();
+                    scanner.nextLine();
+                    System.out.println("------------------------------------------------------------");
+                } else {
+                    lastChance = "No requiere supletorio";
+                }
                 existingStudent.setLastChance(lastChance);
                 Updater.updateStudent(fileName, existingStudent);
             }
@@ -258,7 +304,7 @@ public class FileManager {
         String dni = scanner.next();
         System.out.println("============================================================");
         if (dni.length() == 10) {
-            if (validacionCedula(dni.length(), dni)) {
+            if (validationDni(dni.length(), dni)) {
                 Student student = Searcher.findStudentByDNI(fileName, dni);
                 scanner.nextLine();
                 Eraser.deleteStudent(fileName, dni);
@@ -279,7 +325,7 @@ public class FileManager {
         System.out.println("============================================================");
 
         if (dni.length() == 10) {
-            if (validacionCedula(dni.length(), dni)) {
+            if (validationDni(dni.length(), dni)) {
                 scanner.nextLine();
                 System.out.println("Curso: " + fileName);
                 Student student = Searcher.findStudentByDNI(fileName, dni);
@@ -299,7 +345,8 @@ public class FileManager {
         }
     }
 
-    public static boolean validacionCedula(int length, String dni) {
+    public static boolean validationDni(int length, String dni) {
+
         int digOdd = 0, digPair = 0, addOdds = 0, addPairs = 0, comp, comp2;
         String dig1, dig2;
 

@@ -2,6 +2,7 @@ package ec.edu.espe.registrationsystem.view;
 
 import ec.edu.espe.registrationsystem.model.AdminAccount;
 import ec.edu.espe.registrationsystem.model.StudentAccount;
+import java.util.InputMismatchException;
 import utils.FileManager;
 import java.util.Scanner;
 
@@ -9,7 +10,6 @@ import java.util.Scanner;
  *
  * @author Logic Legion, DCCO-ESPE
  */
-
 public class ManagerMenu {
 
     public static boolean loginAccounts(String password, String account, Scanner scanner) {
@@ -26,7 +26,7 @@ public class ManagerMenu {
             userComprobation = scanner.nextLine();
             System.out.print("Clave: ");
             passComprobation = scanner.nextLine();
-            
+
             if (account.equals("LogicLegion")) {
                 if (userComprobation.equals(account) && passComprobation.equals(password)) {
                     System.out.println("Ingreso exitoso!\n");
@@ -39,8 +39,11 @@ public class ManagerMenu {
             } else {
                 AdminAccount admin = new AdminAccount();
                 comprobation = !admin.validateTutorLogin(userComprobation, passComprobation);
-                if(!comprobation){System.out.println("Ingreso Exitoso");}
-                else{System.out.println("Usuario o clave mal ingresada. Intente de nuevo\n");}
+                if (!comprobation) {
+                    System.out.println("Ingreso Exitoso");
+                } else {
+                    System.out.println("Usuario o clave mal ingresada. Intente de nuevo\n");
+                }
             }
 
         }
@@ -66,95 +69,112 @@ public class ManagerMenu {
             System.out.println("Seleccione un usuario:");
             System.out.println("------------------------------------------------------------");
             System.out.println("1. Estudiantes");
-            System.out.println("2. Personal administrativo");
-            System.out.println("3. Profesores");
+            System.out.println("2. Profesores");
+            System.out.println("3. Personal Administrativo");
             System.out.println("4. Salir");
             System.out.println("------------------------------------------------------------");
 
             System.out.print(">>");
-            int userType = scanner.nextInt();
+            int userType = 0;
+            try {
+                userType = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Se ha ingresado una opcion no valida");
+                FileManager.pause(scanner);
+            }
             scanner.nextLine();
 
-            switch (userType) {
-                case 1 -> {
-                    StudentAccount studentAccount = new StudentAccount();
-                    studentAccount.viewReport();
-                }
-                case 2 -> {
-                    exit = loginAccounts(adminUser.getAdminPassword(), adminUser.getAdminUser(), scanner);
-                    if (exit == true) {
-                        exit = false;
-                        break;
+            if (userType != 0) {
+                switch (userType) {
+                    case 1 -> {
+                        StudentAccount studentAccount = new StudentAccount();
+                        studentAccount.viewReport();
                     }
-                    
-                    System.out.println("\n============================================================");
-                    System.out.print("Introduzca el Curso: ");
-                    fileName = scanner.next();
-                    scanner.nextLine();
-                    System.out.println("============================================================\n");
-                    manageAdminStaff(scanner, fileName);
-                }
-                case 3 -> {
+                    case 2 -> {
+                        exit = loginAccounts("", "", scanner);
+                        if (exit == true) {
+                            exit = false;
+                            break;
+                        }
 
-                    exit = loginAccounts("", "", scanner);
-                    if (exit == true) {
-                        exit = false;
-                        break;
+                        System.out.println("\n============================================================");
+                        System.out.print("Introduzca el Curso: ");
+                        fileName = scanner.next();
+                        scanner.nextLine();
+                        System.out.println("============================================================\n");
+                        manageProfessors(scanner, fileName);
                     }
+                    case 3 -> {
 
-                    System.out.println("\n============================================================");
-                    System.out.print("Introduzca el Curso: ");
-                    fileName = scanner.next();
-                    scanner.nextLine();
-                    System.out.println("============================================================\n");
-                    manageProfessors(scanner, fileName);
+                        exit = loginAccounts(adminUser.getAdminPassword(), adminUser.getAdminUser(), scanner);
+                        if (exit == true) {
+                            exit = false;
+                            break;
+                        }
+
+                        System.out.println("\n============================================================");
+                        System.out.print("Introduzca el Curso: ");
+                        fileName = scanner.next();
+                        scanner.nextLine();
+                        System.out.println("============================================================\n");
+                        manageAdminStaff(scanner, fileName);
+                    }
+                    case 4 ->
+                        exit = true;
+                    default -> {
+                        System.out.println("Seleccion invalida. Por favor, intentelo de nuevo.");
+                        FileManager.pause(scanner);
+                    }
                 }
-                case 4 ->
-                    exit = true;
-                default ->
-                    System.out.println("Seleccion invalida. Por favor, intentelo de nuevo.");
             }
         }
     }
 
     private static void manageProfessors(Scanner scanner, String fileName) {
-    FileManager fileManager = new FileManager();
-    boolean exit = false;
+        FileManager fileManager = new FileManager();
+        boolean exit = false;
 
-    while (!exit) {
-        System.out.println("============================================================");
-        System.out.println("Sistema para Profesores:");
-        System.out.println("============================================================");
-        System.out.println("1. Encontrar Estudiantes");
-        System.out.println("2. Modificar Nota Estudiantes");
-        System.out.println("3. Cambiar de Curso");
-        System.out.println("4. Volver al menu principal");
-        System.out.println("------------------------------------------------------------");
-        System.out.print(">>");
-        int operation = scanner.nextInt();
-        scanner.nextLine(); // Consumir el salto de línea
+        while (!exit) {
+            System.out.println("============================================================");
+            System.out.println("Sistema para Profesores:");
+            System.out.println("============================================================");
+            System.out.println("1. Encontrar Estudiantes");
+            System.out.println("2. Modificar Nota Estudiantes");
+            System.out.println("3. Cambiar de Curso");
+            System.out.println("4. Volver al menu principal");
+            System.out.println("------------------------------------------------------------");
+            System.out.print(">>");
+            int operation = 0;
+            try {
+                operation = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Se ha ingresado una opcion no valida");
+                FileManager.pause(scanner);
+            }
+            scanner.nextLine();// Consumir el salto de línea
 
-        switch (operation) {
-            case 1:
-                fileManager.findStudent(scanner, fileName);
-                break;
-            case 2:
-                fileManager.updateStudent(scanner, fileName, false);
-                break;
-            case 3:
-                System.out.print("Introduzca el Curso: ");
-                fileName = scanner.nextLine();
-                break;
-            case 4:
-                exit = true;
-                break;
-            default:
-                System.out.println("Selección invalida. Por favor, intentelo de nuevo.");
-                break;
+            if (operation != 0) {
+                switch (operation) {
+                    case 1:
+                        fileManager.findStudent(scanner, fileName);
+                        break;
+                    case 2:
+                        fileManager.updateStudent(scanner, fileName, false);
+                        break;
+                    case 3:
+                        System.out.print("Introduzca el Curso: ");
+                        fileName = scanner.nextLine();
+                        break;
+                    case 4:
+                        exit = true;
+                        break;
+                    default:
+                        System.out.println("Seleccion invalida. Por favor, intentelo de nuevo.");
+                        FileManager.pause(scanner);
+                }
+            }
         }
     }
-}
-
 
     public void manageStudents(Scanner scanner, String fileName) {
 
@@ -166,28 +186,37 @@ public class ManagerMenu {
             System.out.println("Sistema para Estudiantes:");
             System.out.println("============================================================");
             System.out.println("1. Encontrar Estudiantes");
-             System.out.println("2. Cambiar de Curso");
+            System.out.println("2. Cambiar de Curso");
             System.out.println("3. Volver");
             System.out.println("------------------------------------------------------------");
             System.out.print(">>");
 
-            int operation = scanner.nextInt();
-            scanner.nextLine(); 
-
-            switch (operation) {
-                case 1 -> {
-                    fileManager.findStudent(scanner, fileName);
+            int operation = 0;
+            try {
+                operation = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Se ha ingresado una opcion no valida");
+                FileManager.pause(scanner);
+            }
+            scanner.nextLine();
+            if (operation != 0) {
+                switch (operation) {
+                    case 1 -> {
+                        fileManager.findStudent(scanner, fileName);
+                    }
+                    case 2 -> {
+                        System.out.print("Introduzca el Curso: ");
+                        fileName = scanner.nextLine();
+                    }
+                    case 3 ->
+                        exit = true;
+                    default ->{
+                        System.out.println("Seleccion invalida. Por favor, intentelo de nuevo.");
+                        FileManager.pause(scanner);                }
                 }
-                case 2 -> {
-                    System.out.print("Introduzca el Curso: ");
-                    fileName = scanner.nextLine();
-                }
-                case 3 -> exit = true;
-                default -> System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
             }
         }
     }
-
 
     private static void manageAdminStaff(Scanner scanner, String fileName) {
         AdminAccount adminUser = new AdminAccount();
@@ -209,35 +238,44 @@ public class ManagerMenu {
             System.out.println("------------------------------------------------------------");
             System.out.print(">>");
 
-            int operation = scanner.nextInt();
-            scanner.nextLine(); // Consumir el salto de línea después de nextInt()
+            int operation = 0;
+            try {
+                operation = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Se ha ingresado una opcion no valida");
+                FileManager.pause(scanner);
+            }
+            scanner.nextLine();// Consumir el salto de línea después de nextInt()
 
-            switch (operation) {
-                case 1:
-                    adminUser.addStudents();
-                    break;
-                case 2:
-                    adminUser.readStudents(fileName);
-                    break;
-                case 3:
-                    adminUser.updateStudent();
-                    break;
-                case 4:
-                    adminUser.deleteStudent();
-                    break;
-                case 5:
-                    adminUser.findStudent();
-                    break;
-                case 6:
-                    System.out.print("Introduzca el Curso: ");
-                    fileName = scanner.nextLine();
-                    break;
-                case 7:
-                    exit = true;
-                    break;
-                default:
-                    System.out.println("Selección invalida. Por favor, intentelo de nuevo.");
-                    break;
+            if (operation != 0) {
+                switch (operation) {
+                    case 1:
+                        adminUser.addStudents(fileName);
+                        break;
+                    case 2:
+                        adminUser.readStudents(fileName);
+                        break;
+                    case 3:
+                        adminUser.updateStudent(fileName);
+                        break;
+                    case 4:
+                        adminUser.deleteStudent(fileName);
+                        break;
+                    case 5:
+                        adminUser.findStudent(fileName);
+                        break;
+                    case 6:
+                        System.out.print("Introduzca el Curso: ");
+                        fileName = scanner.nextLine();
+                        break;
+                    case 7:
+                        exit = true;
+                        break;
+                    default:
+                        System.out.println("Seleccion invalida. Por favor, intentelo de nuevo.");
+                        FileManager.pause(scanner);
+                        break;
+                }
             }
         }
     }

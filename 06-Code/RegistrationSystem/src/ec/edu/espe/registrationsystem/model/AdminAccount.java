@@ -73,4 +73,32 @@ public class AdminAccount {
     public void findStudent(String fileName) {
         fileManager.findStudent(scanner, fileName);
     }
+    public void a(){
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }
 }
