@@ -20,7 +20,7 @@ public class Reader {
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
-            while ((line = reader.readLine()) != null) {
+             while ((line = reader.readLine()) != null) {
                 String[] values = line.split(",");
                 Student student = new Student(
                         values[0],
@@ -33,6 +33,8 @@ public class Reader {
                         values[7],
                         values[8],
                         values[9]
+            
+           
                 );
                 students.add(student);
             }
