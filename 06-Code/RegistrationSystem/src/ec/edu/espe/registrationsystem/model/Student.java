@@ -6,7 +6,6 @@ import java.util.Scanner;
  *
  * @author Logic Legion, DCCO-ESPE
  */
-
 public class Student {
 
     private String dni;
@@ -117,6 +116,5 @@ public class Student {
     public void setGratuity(String gratuity) {
         this.gratuity = gratuity;
     }
-    
 
 }
