@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
+import static utils.Validation.validationDni;
 
 /**
  *
@@ -63,37 +64,51 @@ public class FileManager {
     }
 
     public void addStudents(Scanner scanner, String fileName) {
-        System.out.println("\n============================================================");
-        System.out.print("Cuantos estudiantes quiere agregar?: ");
-        int studentNumber = scanner.nextInt();
-        scanner.nextLine();
+        int studentNumber = 0;
+        do {
+            System.out.println("\n============================================================");
+            System.out.print("Cuantos estudiantes quiere agregar?: ");
+            studentNumber = Validation.validationOfInt(studentNumber, scanner);
+
+        } while (studentNumber <= 0);
         System.out.println("============================================================");
+        scanner.nextLine();
 
         for (int aux = 0; aux < studentNumber; aux++) {
             System.out.println("Informacion del Estudiante Nuevo");
             String dni;
-            Student student2;
+            Student student2=null;
             boolean validation = false;
+            boolean dniValidation = false;
 
             do {
                 System.out.println("------------------------------------------------------------");
 
                 System.out.print("Cedula: ");
                 dni = scanner.next();
-                student2 = Searcher.findStudentByDNI(fileName, dni);
+                dniValidation = Validation.validationOfCharacter(dni);
+                
+                if(!dniValidation){
+                    student2 = Searcher.findStudentByDNI(fileName, dni);
 
-                if (dni.length() == 10) {
-                    if (!validationDni(dni.length(), dni) || student2 != null) {
-                        System.out.println("La cedula ingresada no es valida o ya existe, intente de nuevo");
-                    } else {
-                        validation = false;
+                    boolean validationNumbersDni = Validation.validationOfCharacter(dni);
+                    if (!validationNumbersDni) {
+                        if (dni.length() == 10) {
+                            if (!validationDni(dni.length(), dni) || student2 != null) {
+                                System.out.println("La cedula ingresada no es valida o ya existe, intente de nuevo");
+                            } else {
+                                validation = false;
+                            }
+                        } else {
+                            validation = true;
+                            System.out.println("Cedula ingresada no valida");
+                        }
+                        System.out.println("============================================================");
                     }
-                } else {
-                    validation = true;
-                    System.out.println("Cedula ingresada no valida");
+                }else{
+                    System.out.println("Se ha ingresado un caracter no válido");
                 }
-                System.out.println("============================================================");
-            } while (validation || student2 != null);
+            } while (validation || student2 != null || dniValidation);
             System.out.println("------------------------------------------------------------");
 
             scanner.nextLine();
@@ -115,7 +130,6 @@ public class FileManager {
 
             String phone = "";
             do {
-
                 System.out.print("Celular: ");
                 phone = scanner.next();
                 scanner.nextLine();
@@ -188,15 +202,18 @@ public class FileManager {
             dni = scanner.next();
             scanner.nextLine();
 
-            if (dni.length() == 10) {
-                if (!validationDni(dni.length(), dni)) {
-                    System.out.println("La cedula ingresada no es valida, intente de nuevo");
-                }
-            } else {
+            boolean validationNumbersDni = Validation.validationOfCharacter(dni);
+            if (!validationNumbersDni) {
+                if (dni.length() == 10) {
+                    if (!validationDni(dni.length(), dni)) {
+                        System.out.println("La cedula ingresada no es valida, intente de nuevo");
+                    }
+                } else {
 
-                System.out.println("Cedula ingresada no valida");
+                    System.out.println("Cedula ingresada no valida");
+                }
+                System.out.println("============================================================");
             }
-            System.out.println("============================================================");
         } while (!validationDni(dni.length(), dni));
 
         Student existingStudent = Searcher.findStudentByDNI(fileName, dni);
@@ -303,18 +320,21 @@ public class FileManager {
         System.out.print("Introduzca la Cedula del Estudiante a Eliminar: ");
         String dni = scanner.next();
         System.out.println("============================================================");
-        if (dni.length() == 10) {
-            if (validationDni(dni.length(), dni)) {
-                Student student = Searcher.findStudentByDNI(fileName, dni);
-                scanner.nextLine();
-                Eraser.deleteStudent(fileName, dni);
+
+        boolean validationNumbersDni = Validation.validationOfCharacter(dni);
+        if (!validationNumbersDni) {
+            if (dni.length() == 10) {
+                if (validationDni(dni.length(), dni)) {
+                    Student student = Searcher.findStudentByDNI(fileName, dni);
+                    scanner.nextLine();
+                    Eraser.deleteStudent(fileName, dni);
+                } else {
+                    System.out.println("Cedula ingreada no válida.");
+                }
             } else {
                 System.out.println("Cedula ingreada no válida.");
             }
-        } else {
-            System.out.println("Cedula ingreada no válida.");
         }
-
         pause(scanner);
     }
 
@@ -324,56 +344,29 @@ public class FileManager {
         String dni = scanner.next();
         System.out.println("============================================================");
 
-        if (dni.length() == 10) {
-            if (validationDni(dni.length(), dni)) {
-                scanner.nextLine();
-                System.out.println("Curso: " + fileName);
-                Student student = Searcher.findStudentByDNI(fileName, dni);
-                System.out.println("------------------------------------------------------------");
-                if (student != null) {
-                    System.out.println("Estudiante encontrado: \n" + student);
+        boolean validationNumbersDni = Validation.validationOfCharacter(dni);
+        if (!validationNumbersDni) {
+            if (dni.length() == 10) {
+                if (validationDni(dni.length(), dni)) {
+                    scanner.nextLine();
+                    System.out.println("Curso: " + fileName);
+                    Student student = Searcher.findStudentByDNI(fileName, dni);
                     System.out.println("------------------------------------------------------------");
+                    if (student != null) {
+                        System.out.println("Estudiante encontrado: \n" + student);
+                        System.out.println("------------------------------------------------------------");
+                    }
+                    pause(scanner);
+                } else {
+                    scanner.nextLine();
+                    System.out.println("Cedula ingreada no valida.\n");
+                    pause(scanner);
                 }
-                pause(scanner);
             } else {
-                scanner.nextLine();
-                System.out.println("Cedula ingreada no valida.\n");
-                pause(scanner);
+                System.out.println("Cedula ingresada no valida");
             }
         } else {
-            System.out.println("Cedula ingresada no valida");
-        }
-    }
-
-    public static boolean validationDni(int length, String dni) {
-
-        int digOdd = 0, digPair = 0, addOdds = 0, addPairs = 0, comp, comp2;
-        String dig1, dig2;
-
-        for (int j = 0; j < length - 1; j++) {
-            if ((j + 1) % 2 != 0) {
-                dig1 = Character.toString(dni.charAt(j));
-                digOdd = 2 * Integer.parseInt(dig1);
-                if (digOdd > 9) {
-                    digOdd = digOdd - 9;
-                }
-                addOdds += digOdd;
-            } else {
-                dig2 = Character.toString(dni.charAt(j));
-                digPair = Integer.parseInt(dig2);
-                addPairs += digPair;
-            }
-        }
-
-        dig1 = Character.toString(dni.charAt(9));
-        digPair = Integer.parseInt(dig1);
-        comp = (addOdds + addPairs) % 10;
-        comp2 = 10 - comp;
-
-        if (comp == 0) {
-            return comp == digPair;
-        } else {
-            return comp2 == digPair;
+            System.out.println("Se ha ingresado un caracter no valido.");
         }
     }
 
@@ -381,7 +374,4 @@ public class FileManager {
         System.out.print("Pulse Enter para continuar...\n");
         scanner.nextLine();
     }
-
-
-
 }

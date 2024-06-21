@@ -2,9 +2,9 @@ package ec.edu.espe.registrationsystem.view;
 
 import ec.edu.espe.registrationsystem.model.AdminAccount;
 import ec.edu.espe.registrationsystem.model.StudentAccount;
-import java.util.InputMismatchException;
 import utils.FileManager;
 import java.util.Scanner;
+import utils.Validation;
 
 /**
  *
@@ -76,14 +76,8 @@ public class ManagerMenu {
 
             System.out.print(">>");
             int userType = 0;
-            try {
-                userType = scanner.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.println("Se ha ingresado una opcion no valida");
-                FileManager.pause(scanner);
-            }
-            scanner.nextLine();
-
+            userType = Validation.validationOfInt(userType, scanner);
+         
             if (userType != 0) {
                 switch (userType) {
                     case 1 -> {
@@ -145,13 +139,9 @@ public class ManagerMenu {
             System.out.println("------------------------------------------------------------");
             System.out.print(">>");
             int operation = 0;
-            try {
-                operation = scanner.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.println("Se ha ingresado una opcion no valida");
-                FileManager.pause(scanner);
-            }
-            scanner.nextLine();// Consumir el salto de línea
+            
+            operation = Validation.validationOfInt(operation, scanner);
+            
 
             if (operation != 0) {
                 switch (operation) {
@@ -192,13 +182,9 @@ public class ManagerMenu {
             System.out.print(">>");
 
             int operation = 0;
-            try {
-                operation = scanner.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.println("Se ha ingresado una opcion no valida");
-                FileManager.pause(scanner);
-            }
-            scanner.nextLine();
+            
+            operation = Validation.validationOfInt(operation, scanner);
+            
             if (operation != 0) {
                 switch (operation) {
                     case 1 -> {
@@ -239,14 +225,9 @@ public class ManagerMenu {
             System.out.print(">>");
 
             int operation = 0;
-            try {
-                operation = scanner.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.println("Se ha ingresado una opcion no valida");
-                FileManager.pause(scanner);
-            }
-            scanner.nextLine();// Consumir el salto de línea después de nextInt()
-
+            
+            operation = Validation.validationOfInt(operation, scanner);
+            
             if (operation != 0) {
                 switch (operation) {
                     case 1:
