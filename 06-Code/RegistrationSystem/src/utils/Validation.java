@@ -24,13 +24,26 @@ public class Validation {
     }
 
     public static boolean validationOfCharacter(String phrase) {
-        
+
+        boolean validation = false;
         for (int i = 0; i < phrase.length(); i++) {
-            if (Character.isLetter(phrase.charAt(i))) {
-                return true;
+            if (Character.isLetter(phrase.charAt(i)) || phrase.charAt(i) == ' ') {
+                validation = true;
+            } else {
+                return false;
             }
         }
+        return validation;
+    }
+
+    public static boolean validationEmail(String email) {
         
+
+        for (int i = 0; i < email.length(); i++) {
+            if(email.charAt(i)=='@'){
+                return true;
+            }   
+        }
         return false;
     }
 

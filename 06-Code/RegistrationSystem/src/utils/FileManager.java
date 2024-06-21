@@ -72,12 +72,11 @@ public class FileManager {
 
         } while (studentNumber <= 0);
         System.out.println("============================================================");
-        scanner.nextLine();
 
         for (int aux = 0; aux < studentNumber; aux++) {
             System.out.println("Informacion del Estudiante Nuevo");
             String dni;
-            Student student2=null;
+            Student student2 = null;
             boolean validation = false;
             boolean dniValidation = false;
 
@@ -87,8 +86,8 @@ public class FileManager {
                 System.out.print("Cedula: ");
                 dni = scanner.next();
                 dniValidation = Validation.validationOfCharacter(dni);
-                
-                if(!dniValidation){
+
+                if (!dniValidation) {
                     student2 = Searcher.findStudentByDNI(fileName, dni);
 
                     boolean validationNumbersDni = Validation.validationOfCharacter(dni);
@@ -105,41 +104,59 @@ public class FileManager {
                         }
                         System.out.println("============================================================");
                     }
-                }else{
+                } else {
                     System.out.println("Se ha ingresado un caracter no válido");
                 }
             } while (validation || student2 != null || dniValidation);
-            System.out.println("------------------------------------------------------------");
-
             scanner.nextLine();
-            System.out.print("Nombres: ");
-            String name = scanner.nextLine();
-            System.out.println("------------------------------------------------------------");
 
-            System.out.print("Apellidos: ");
-            String lastName = scanner.nextLine();
-            System.out.println("------------------------------------------------------------");
+            String name = "";
+            do {
+                System.out.println("------------------------------------------------------------");
+                System.out.print("Nombres: ");
+                name = scanner.nextLine();
+                validation = Validation.validationOfCharacter(name);
+            } while (!validation);
 
-            System.out.print("Codigo de Carrera: ");
-            String careerCode = scanner.next();
-            System.out.println("------------------------------------------------------------");
+            String lastName = "";
+            do {
+                System.out.println("------------------------------------------------------------");
+                System.out.print("Apellidos: ");
+                lastName = scanner.nextLine();
+                validation = Validation.validationOfCharacter(lastName);
+            } while (!validation);
 
-            System.out.print("Email: ");
-            String email = scanner.next();
-            System.out.println("------------------------------------------------------------");
+            String careerCode = "";
+            do {
+                System.out.println("------------------------------------------------------------");
+                System.out.print("Codigo de Carrera: ");
+                careerCode = scanner.next();
+                validation = Validation.validationOfCharacter(careerCode);
+            } while (validation);
 
+            String email = "";
+            do {
+                System.out.println("------------------------------------------------------------");
+                System.out.print("Email: ");
+                email = scanner.next();
+                validation = Validation.validationEmail(email);
+            } while (!validation);
+            
             String phone = "";
             do {
+                System.out.println("------------------------------------------------------------");
                 System.out.print("Celular: ");
                 phone = scanner.next();
                 scanner.nextLine();
-                System.out.println("------------------------------------------------------------");
+                
+                validation = Validation.validationOfCharacter(phone);
                 if (phone.length() != 10) {
                     System.out.println("Numero de telefono mal ingresado. Intente de nuevo.");
                 }
 
-            } while (phone.length() != 10);
+            } while (phone.length() != 10 || validation);
 
+            System.out.println("------------------------------------------------------------");
             System.out.print("Tipo de Matricula: ");
             String typeOfRegistration = scanner.next();
             System.out.println("------------------------------------------------------------");
