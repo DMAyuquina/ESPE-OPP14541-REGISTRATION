@@ -155,20 +155,33 @@ public class FileManager {
                 }
 
             } while (phone.length() != 10 || validation);
+            
+            String typeOfRegistration;
+            String gratuity="";
+            do{
+                System.out.println("------------------------------------------------------------");
+                System.out.print("Tipo de Matricula: ");
+                typeOfRegistration = scanner.next();
 
+                typeOfRegistration = typeOfRegistration.toUpperCase();
+                
+
+                if (typeOfRegistration.equals("PRIMERA")) {
+                    gratuity = "Con Gratuidad";
+                    validation = true;
+                } else {
+                    if(typeOfRegistration.equals("SEGUNDA") || typeOfRegistration.equals("TERCERA")){
+                        gratuity = "Sin Gratuidad";
+                        validation = true;
+                    }else{
+                        System.out.println("Se ha ingresado una opcion no valida intentelo de nuevo.");
+                        validation = false;
+                    }
+                }
+                
+            }while(!validation);
+            
             System.out.println("------------------------------------------------------------");
-            System.out.print("Tipo de Matricula: ");
-            String typeOfRegistration = scanner.next();
-            System.out.println("------------------------------------------------------------");
-            typeOfRegistration = typeOfRegistration.toUpperCase();
-            String gratuity;
-
-            if (typeOfRegistration.equals("PRIMERA")) {
-                gratuity = "Con Gratuidad";
-            } else {
-                gratuity = "Sin Gratuidad";
-            }
-
             System.out.print("Calificacion: ");
             StudentReport studentReport = new StudentReport();
             String grade = studentReport.calculateGrade();

@@ -22,7 +22,19 @@ public class Validation {
         scanner.nextLine();
         return number;
     }
+    
 
+    public static float validationOfFloat(float grade, Scanner scanner){
+        
+        try{
+            grade = scanner.nextFloat();
+        }catch(InputMismatchException e){
+            grade = -1.0F;
+            System.out.println("Se ha ingresado un valor no valido.");
+        }
+        scanner.nextLine();
+        return grade;
+    }
     public static boolean validationOfCharacter(String phrase) {
 
         boolean validation = false;
@@ -46,7 +58,7 @@ public class Validation {
         }
         return false;
     }
-
+    
     public static boolean validationDni(int length, String dni) {
 
         int digOdd = 0, digPair = 0, addOdds = 0, addPairs = 0, comp, comp2;

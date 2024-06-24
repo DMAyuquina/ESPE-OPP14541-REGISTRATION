@@ -1,6 +1,9 @@
 package ec.edu.espe.registrationsystem.model;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
+import utils.FileManager;
+import utils.Validation;
 
 /**
  *
@@ -13,7 +16,7 @@ public class StudentReport {
         double finalGrade = (unit1Grade + unit2Grade + supplementaryGrade) / 3;
 
         System.out.println("La calificación final del estudiante es: " + finalGrade);
-        
+
     }
 
     public void determinateTypeOfRegistration(String registrationType) {
@@ -39,15 +42,23 @@ public class StudentReport {
     }
 
     public String calculateGrade() {
+
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese notas del alumno:");
         String stringFinalGrade;
-        System.out.print("Unidad 1: ");
-        float unitOne = scanner.nextFloat();
 
-        System.out.print("Unidad 2: ");
-        float unitTwo = scanner.nextFloat();
-
+        System.out.println("Ingrese notas del alumno:");
+        float unitOne = 0.0F;
+        do {
+            System.out.print("Unidad 1: ");
+            unitOne = Validation.validationOfFloat(unitOne, scanner);
+        } while (unitOne == -1.0F);
+        
+        float unitTwo = 0.0F;
+        do {
+            System.out.print("Unidad 2: ");
+            unitTwo = Validation.validationOfFloat(unitTwo, scanner);
+        } while (unitTwo == -1.0F);
+        
         float finalGrade = (unitOne + unitTwo) / 2;
 
         stringFinalGrade = String.valueOf(finalGrade);
