@@ -89,6 +89,7 @@ public class ManagerMenu {
                     case 1 -> {
                         StudentAccount studentAccount = new StudentAccount();
                         studentAccount.viewReport();
+                        
                     }
                     case 2 -> {
                         exit = loginAccounts("", "", scanner);
@@ -261,6 +262,39 @@ public class ManagerMenu {
 
 
     public void manageStudents(Scanner scanner, String fileName) {
-        throw new UnsupportedOperationException("Not supported yet."); 
-}
+       FileManager fileManager = new FileManager();
+        boolean exit = false;
+
+        while (!exit) {
+            System.out.println("============================================================");
+            System.out.println("Sistema para Estudiantes:");
+            System.out.println("============================================================");
+            System.out.println("1. Encontrar Estudiantes");
+            System.out.println("2. Cambiar de Curso");
+            System.out.println("3. Volver");
+            System.out.println("------------------------------------------------------------");
+            System.out.print(">>");
+
+            int operation = 0;
+
+            operation = Validation.validationOfInt(operation, scanner);
+
+            if (operation != 0) {
+                switch (operation) {
+                    case 1 -> {
+                        fileManager.findStudent(scanner, fileName);
+                    }
+                    case 2 -> {
+                        System.out.print("Introduzca el Curso: ");
+                        fileName = scanner.nextLine();
+                    }
+                    case 3 ->
+                        exit = true;
+                    default ->{
+                        System.out.println("Seleccion invalida. Por favor, intentelo de nuevo.");
+                        FileManager.pause(scanner);                }
+                }
+            }
+        }
+    } 
 }
