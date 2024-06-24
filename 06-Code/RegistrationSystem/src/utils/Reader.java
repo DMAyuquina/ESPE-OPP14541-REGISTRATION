@@ -1,5 +1,6 @@
 package utils;
 
+import ec.edu.espe.registrationsystem.model.Registration;
 import ec.edu.espe.registrationsystem.model.Student;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -16,12 +17,14 @@ public class Reader {
     public static List<Student> readStudents(String fileName) {
         List<Student> students = new ArrayList<>();
 
+        
         fileName = fileName + ".csv";
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
              while ((line = reader.readLine()) != null) {
                 String[] values = line.split(",");
+                Registration typeOfRegistration = new Registration(values[6]);
                 Student student = new Student(
                         values[0],
                         values[1],
@@ -29,7 +32,7 @@ public class Reader {
                         values[3],
                         values[4],
                         values[5],
-                        values[6],
+                        typeOfRegistration,
                         values[7],
                         values[8],
                         values[9]
