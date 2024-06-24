@@ -216,19 +216,19 @@ public class ManagerMenu {
             if (operation != 0) {
                 switch (operation) {
                     case 1:
-                        adminUser.addStudents(fileName);
+                        adminUser.addStudents(scanner, fileName);
                         break;
                     case 2:
-                        adminUser.readStudents(fileName);
+                        adminUser.readStudents(scanner, fileName);
                         break;
                     case 3:
-                        adminUser.updateStudent(fileName);
+                        adminUser.updateStudent(scanner, fileName);
                         break;
                     case 4:
-                        adminUser.deleteStudent(fileName);
+                        adminUser.deleteStudent(scanner, fileName);
                         break;
                     case 5:
-                        adminUser.findStudent(fileName);
+                        adminUser.findStudent(scanner, fileName);
                         break;
                     case 6:
                         System.out.print("Introduzca el Curso: ");

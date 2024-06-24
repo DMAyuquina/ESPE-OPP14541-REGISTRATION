@@ -16,6 +16,20 @@ public class Tutor {
     private String phone;
     private ArrayList<Course> codeCourses;
 
+    @Override
+    public String toString() {
+        return "Tutor{" + "dni=" + dni + ", fullName=" + fullName + ", careers=" + careers + ", email=" + email + ", phone=" + phone + ", codeCourses=" + codeCourses + '}';
+    }
+
+    public Tutor(String dni, String fullName, Career careers, String email, String phone, ArrayList<Course> codeCourses) {
+        this.dni = dni;
+        this.fullName = fullName;
+        this.careers = careers;
+        this.email = email;
+        this.phone = phone;
+        this.codeCourses = codeCourses;
+    }
+
     /**
      * @return the dni
      */
