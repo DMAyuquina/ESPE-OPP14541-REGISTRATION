@@ -181,6 +181,7 @@ public class FileManager {
                 }
                 
             }while(!validation);
+            
             Registration registrationType = new Registration(typeOfRegistration);
             System.out.println("------------------------------------------------------------");
             System.out.print("Calificacion: ");
