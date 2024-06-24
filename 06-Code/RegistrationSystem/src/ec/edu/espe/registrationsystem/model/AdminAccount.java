@@ -57,8 +57,8 @@ public class AdminAccount {
         fileManager.addStudents(scanner, fileName);
     }
 
-    public void readStudents(Scanner scanner, String fileName) {
-        fileManager.readStudents(scanner, fileName);
+    public void viewReport(Scanner scanner, String fileName) {
+        StudentReport.generateReport(scanner, fileName);
     }
 
     public void updateStudent(Scanner scanner, String fileName) {

@@ -1,6 +1,7 @@
 package ec.edu.espe.registrationsystem.model;
 
 import java.io.Serializable;
+import java.util.Scanner;
 
 /**
  *
@@ -31,5 +32,9 @@ public class TutorAccount implements Serializable{
 
     public void setTutorPasword(String tutorPasword) {
         this.tutorPasword = tutorPasword;
+    }
+    
+    public static void viewReport(Scanner scanner, String fileName) {
+        StudentReport.generateReport(scanner, fileName);
     }
 }
