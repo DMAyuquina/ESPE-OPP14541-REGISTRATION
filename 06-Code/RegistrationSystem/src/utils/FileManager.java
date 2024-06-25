@@ -255,7 +255,7 @@ public class FileManager {
             if (!lastName.isEmpty()) {
                 existingStudent.setLastName(lastName);
             }
-            
+
             String careerCode = "";
             do {
                 System.out.println("------------------------------------------------------------");
@@ -267,14 +267,14 @@ public class FileManager {
             if (!careerCode.isEmpty()) {
                 existingStudent.setCareerCode(careerCode);
             }
-            
+
             String email = "";
-            do{
-            System.out.println("------------------------------------------------------------");
-            System.out.print("Email [" + existingStudent.getEmail() + "]: ");
-            email = scanner.next();
-            validation = Validation.validationEmail(email);
-            }while(!validation);
+            do {
+                System.out.println("------------------------------------------------------------");
+                System.out.print("Email [" + existingStudent.getEmail() + "]: ");
+                email = scanner.next();
+                validation = Validation.validationEmail(email);
+            } while (!validation);
             if (!email.isEmpty()) {
                 existingStudent.setEmail(email);
             }
@@ -284,27 +284,39 @@ public class FileManager {
             do {
                 System.out.print("Celular [" + existingStudent.getPhone() + "]: ");
                 phone = scanner.next();
+                validation = Validation.validationOfCharacter(phone);
                 scanner.nextLine();
                 if (phone.length() != 10) {
                     System.out.println("Numero de telefono mal ingresado. Intente de nuevo.");
                 }
                 System.out.println("------------------------------------------------------------");
-            } while (phone.length() != 10);
+            } while (phone.length() != 10|| validation);
 
             existingStudent.setPhone(phone);
 
-            System.out.print("Tipo de Matricula [" + existingStudent.getTypeOfRegistration() + "]: ");
-            String typeOfRegistration = scanner.next();
-            scanner.nextLine();
-            System.out.println("------------------------------------------------------------");
-            typeOfRegistration = typeOfRegistration.toUpperCase();
-            String gratuity;
+            String typeOfRegistration;
+            String gratuity = "";
+            do {
+                System.out.println("------------------------------------------------------------");
+                System.out.print("Tipo de Matricula [" + existingStudent.getTypeOfRegistration() + "]: ");
+                typeOfRegistration = scanner.next();
 
-            if (typeOfRegistration.equals("PRIMERA")) {
-                gratuity = "Con Gratuidad";
-            } else {
-                gratuity = "Sin Gratuidad";
-            }
+                typeOfRegistration = typeOfRegistration.toUpperCase();
+
+                if (typeOfRegistration.equals("PRIMERA")) {
+                    gratuity = "Con Gratuidad";
+                    validation = true;
+                } else {
+                    if (typeOfRegistration.equals("SEGUNDA") || typeOfRegistration.equals("TERCERA")) {
+                        gratuity = "Sin Gratuidad";
+                        validation = true;
+                    } else {
+                        System.out.println("Se ha ingresado una opcion no valida intentelo de nuevo.");
+                        validation = false;
+                    }
+                }
+
+            } while (!validation);
 
             System.out.print("Calificacion [" + existingStudent.getGrade() + "]: ");
             StudentReport studentReport = new StudentReport();
