@@ -371,6 +371,34 @@ public class Tutor {
 
         scanner.nextLine();
     }
+    
+    public void deleteTutors(Scanner scanner, String fileName) {
+        System.out.println("============================================================");
+        System.out.print("Introduzca la cedula del Tutor a eliminar: ");
+        String dni = scanner.next();
+        System.out.println("============================================================");
+
+        List<Tutor> tutors = readTutors(fileName);
+        boolean found = false;
+
+        for (int i = 0; i < tutors.size(); i++) {
+            if (tutors.get(i).getDni().equals(dni)) {
+                tutors.remove(i);
+                found = true;
+                break;
+            }
+        }
+
+        if (found) {
+            FileManager.clearFile(fileName);
+            for (Tutor tutor : tutors) {
+                FileManager.FileSave(tutor.toString(), fileName);
+            }
+            System.out.println("Tutor eliminado exitosamente");
+        } else {
+            System.out.println("Tutor con cedula " + dni + " no encontrado");
+        }
+    }
 
     public static void pause(Scanner scanner) {
         System.out.print("Pulse Enter para continuar...\n");

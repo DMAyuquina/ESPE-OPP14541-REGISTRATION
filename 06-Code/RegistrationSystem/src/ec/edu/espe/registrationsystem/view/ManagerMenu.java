@@ -2,18 +2,11 @@ package ec.edu.espe.registrationsystem.view;
 
 import ec.edu.espe.registrationsystem.model.AdminAccount;
 import ec.edu.espe.registrationsystem.model.StudentAccount;
-import ec.edu.espe.registrationsystem.model.StudentReport;
 import ec.edu.espe.registrationsystem.model.Tutor;
 import ec.edu.espe.registrationsystem.model.TutorAccount;
 import java.util.List;
 import utils.FileManager;
 import java.util.Scanner;
-import utils.Validation;
-
-import utils.Validation;
-
-import utils.Validation;
-
 import utils.Validation;
 
 /**
@@ -165,7 +158,7 @@ public class ManagerMenu {
                         } else if (option == 2) {
                             System.out.println("Abriendo archivo de cuentas de tutores...");
                             String tutorsFileName = "tutorsAccount";
-                            manageAccountTutors(tutorsFileName);
+                            manageAccountTutors(scanner, fileName);
                         } else if (option == 3) {
                             System.out.println("Abriendo archivo de tutores...");
                             String tutorsFile = "tutors";
@@ -286,9 +279,57 @@ public class ManagerMenu {
         }
     }
 
-    private static void manageAccountTutors(String fileName) {
+    private static void manageAccountTutors(Scanner scanner, String fileName) {
+    TutorAccount tutorAUser = new TutorAccount (fileName, fileName);
+        
+        boolean exit = false;
+        while (!exit) {
+            System.out.println("\n============================================================");
+            System.out.println("Sistema para Administrar Cuenta de Tutores");
+            System.out.println("============================================================");
+            System.out.println("1. Agregar Cuenta de Tutores");
+            System.out.println("2. Visualizar Cuenta de Tutores");
+            System.out.println("3. Modificar Cuenta de Tutor");
+            System.out.println("4. Eliminar Cuenta de Tutor");
+            System.out.println("5. Encontrar Cuenta de Tutor Usuario");
+            System.out.println("6. Salir");
+            System.out.println("------------------------------------------------------------");
+            System.out.print("Seleccione una opción: ");
 
+            int operation = Validation.validationOfInt(0, scanner);
+
+            switch (operation) {
+                case 1:
+                    tutorAUser.addTutorsA(fileName);
+                    break;
+                case 2:
+                    List<TutorAccount> tutorsA = TutorAccount.readTutorsA(fileName);
+                    TutorAccount.printTutors(tutorsA);
+                    FileManager.pause(scanner);
+                    break;
+                case 3:
+                    tutorAUser.updateTutorsA(scanner, fileName, true);
+                    break;
+                case 4:
+                    tutorAUser.deleteTutorsA(scanner, fileName); 
+                    break;
+                case 5:
+                    tutorAUser.findTutorA(scanner, fileName);
+                    break;
+
+
+                case 6:
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
+                    FileManager.pause(scanner);
+                    break;
+            }
+        }
+    
     }
+    
 
     private static void manageTutors(Scanner scanner, String fileName) {
 
