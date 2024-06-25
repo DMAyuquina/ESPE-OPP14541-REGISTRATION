@@ -65,7 +65,7 @@ public class ManagerMenu {
             System.out.println("============================================================");
             System.out.println("        INSTITUTO TECNOLOGICO SUPERIOR BOLIVAR V0.12");
             System.out.println("============================================================");
-            System.out.println("SISTEMA DE MATRICULAS DE ESTUDIANTES");
+            System.out.println("            SISTEMA DE MATRICULAS DE ESTUDIANTES");
             System.out.println("------------------------------------------------------------");
 
             System.out.println("Seleccione un usuario:");
@@ -92,6 +92,7 @@ public class ManagerMenu {
                         
                     }
                     case 2 -> {
+                        
                         exit = loginAccounts("", "", scanner);
                         if (exit) {
                             exit = false;
