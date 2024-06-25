@@ -170,7 +170,7 @@ public class Tutor {
         }
     }
 
-   private static Tutor findTutorByDni(String fileName, String dni) {
+    private static Tutor findTutorByDni(String fileName, String dni) {
         List<Tutor> tutors = readTutors(fileName);
 
         for (Tutor tutor : tutors) {
@@ -187,29 +187,34 @@ public class Tutor {
 
     public static List<Tutor> readTutors(String fileName) {
         List<Tutor> tutors = new ArrayList<>();
+        int i = 0;
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName + ".csv"))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] values = line.split(",");
-                Tutor tutor = new Tutor(
-                        values[0],
-                        values[1],
-                        values[2],
-                        values[3],
-                        values[4],
-                        values[5]
-                );
-                tutors.add(tutor);
+                if (i != 0) {
+                    String[] values = line.split(",");
+                    Tutor tutor = new Tutor(
+                            values[0],
+                            values[1],
+                            values[2],
+                            values[3],
+                            values[4],
+                            values[5]
+                    );
+                    tutors.add(tutor);
+                }
+                i++;
             }
         } catch (IOException e) {
             System.err.println("Error leyendo el archivo: " + e.getMessage());
         }
 
         return tutors;
-        
+
     }
-   public static void printTutors(List<Tutor> tutors) {
+
+    public static void printTutors(List<Tutor> tutors) {
         if (tutors.isEmpty()) {
             System.out.println("No hay tutores registrados.");
         } else {
@@ -228,7 +233,6 @@ public class Tutor {
             System.out.println("-------------------------------------------------------------------------------------");
         }
     }
-
 
     public void updateTutors(Scanner scanner, String fileName, boolean adminOProfesor) {
         System.out.println("\n============================================================");

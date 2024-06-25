@@ -164,11 +164,11 @@ public class ManagerMenu {
                             manageAdminStaff(scanner, fileName);
                         } else if (option == 2) {
                             System.out.println("Abriendo archivo de cuentas de tutores...");
-                            String tutorsFileName = "tutorsAccount.csv";
+                            String tutorsFileName = "tutorsAccount";
                             manageAccountTutors(tutorsFileName);
                         } else if (option == 3) {
                             System.out.println("Abriendo archivo de tutores...");
-                            String tutorsFile = "tutors.csv";
+                            String tutorsFile = "tutors";
                             manageTutors(scanner, tutorsFile);
                         } else {
                             System.out.println("Opción no válida.");
@@ -216,8 +216,8 @@ public class ManagerMenu {
                         TutorAccount.viewReport(scanner, fileName);
                         break;
                     case 4:
-                        System.out.print("Introduzca el Curso: ");
-                        fileName = scanner.nextLine();
+                        
+                        fileName = selectCourse(fileName);
                         break;
                     case 5:
                         exit = true;
@@ -272,8 +272,7 @@ public class ManagerMenu {
                         adminUser.findStudent(scanner, fileName);
                         break;
                     case 6:
-                        System.out.print("Introduzca el Curso: ");
-                        fileName = scanner.nextLine();
+                        fileName = selectCourse(fileName);
                         break;
                     case 7:
                         exit = true;
@@ -294,7 +293,7 @@ public class ManagerMenu {
     private static void manageTutors(Scanner scanner, String fileName) {
 
         Tutor tutorUser = new Tutor(fileName, fileName, fileName, fileName, fileName, fileName);
-
+        
         boolean exit = false;
         while (!exit) {
             System.out.println("\n============================================================");
@@ -317,7 +316,9 @@ public class ManagerMenu {
                     tutorUser.addTutors(fileName);
                     break;
                 case 2:
+                    List<Tutor> tutors = Tutor.readTutors(fileName);
                     Tutor.printTutors(tutors);
+                    FileManager.pause(scanner);
                     break;
                 case 3:
                     tutorUser.updateTutors(scanner, fileName, true);
