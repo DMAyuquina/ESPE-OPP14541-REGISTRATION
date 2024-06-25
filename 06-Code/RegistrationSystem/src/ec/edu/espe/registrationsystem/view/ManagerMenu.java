@@ -317,7 +317,7 @@ public class ManagerMenu {
                     tutorUser.addTutors(fileName);
                     break;
                 case 2:
-                    tutorUser.readTutors(fileName);
+                    Tutor.printTutors(tutors);
                     break;
                 case 3:
                     tutorUser.updateTutors(scanner, fileName, true);
