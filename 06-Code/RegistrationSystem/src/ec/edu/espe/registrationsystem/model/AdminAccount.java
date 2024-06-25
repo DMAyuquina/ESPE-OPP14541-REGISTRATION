@@ -5,18 +5,18 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 import utils.FileManager;
+import utils.Validation;
 
 /**
  *
  * @author LogicLegion, DCCO-ESPE
  */
-
 public class AdminAccount {
 
     private final String adminUser = "LogicLegion";
     private final String adminPassword = "14541";
     FileManager fileManager = new FileManager();
-    
+
     @Override
     public String toString() {
         return "AdminAccount{" + "adminUser=" + adminUser + ", adminPassword=" + adminPassword + '}';
@@ -30,29 +30,28 @@ public class AdminAccount {
         return adminPassword;
     }
 
-    //Methods
-    
     public static void createTutorAccounts() {
         Scanner scanner = new Scanner(System.in);
-        
-        System.out.print("Ingrese el número de cuentas de tutores que desea añadir: ");
-        int numAccounts = scanner.nextInt();
-        scanner.nextLine(); // Consumir el salto de línea
+        int numAccounts = 0;
+        do {
+            System.out.print("Ingrese el número de cuentas de tutores que desea añadir: ");
+            numAccounts = Validation.validationOfInt(numAccounts, scanner);
+        } while (numAccounts <= 0);
 
         for (int i = 0; i < numAccounts; i++) {
             System.out.print("Ingrese el nombre de usuario del tutor " + (i + 1) + ": ");
             String tutorUser = scanner.nextLine();
-            
+
             System.out.print("Ingrese la contraseña del tutor " + (i + 1) + ": ");
             String tutorPassword = scanner.nextLine();
-            
-            createTutorAccount(tutorUser, tutorPassword);
+
+            saveTutorAccount(tutorUser, tutorPassword);
         }
-        
+
         System.out.println("Cuentas de tutores añadidas exitosamente.");
     }
 
-    public static void createTutorAccount(String tutorUser, String tutorPassword) {
+    public static void saveTutorAccount(String tutorUser, String tutorPassword) {
         TutorAccount tutor = new TutorAccount(tutorUser, tutorPassword);
         String data = tutor.getTutorUser() + "," + tutor.getTutorPasword();
         FileManager.FileSave(data, "tutorsAccount");
@@ -84,13 +83,13 @@ public class AdminAccount {
     public void updateStudent(Scanner scanner, String fileName) {
         fileManager.updateStudent(scanner, fileName, true);
     }
-    
+
     public void deleteStudent(Scanner scanner, String fileName) {
         fileManager.deleteStudent(scanner, fileName);
     }
-    
+
     public void findStudent(Scanner scanner, String fileName) {
         fileManager.findStudent(scanner, fileName);
     }
-    
+
 }

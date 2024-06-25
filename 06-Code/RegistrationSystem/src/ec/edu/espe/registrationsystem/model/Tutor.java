@@ -157,27 +157,24 @@ public class Tutor {
 
     public static ArrayList<Tutor> readTutors(String fileName) {
         ArrayList<Tutor> tutors = new ArrayList<>();
-        int i = 0;
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName + ".csv"))) {
             String line;
             while ((line = reader.readLine()) != null) {
 
-                if (i != 0) {
-                    String[] values = line.split(",");
-                    Career careerName = new Career(values[3]);
-                    Course courseName = new Course(values[6]);
-                    Tutor tutor = new Tutor(
-                            values[0],
-                            values[1],
-                            values[2],
-                            careerName,
-                            values[4],
-                            values[5],
-                            courseName
-                    );
-                    tutors.add(tutor);
-                }
-                i++;
+                String[] values = line.split(",");
+                Career careerName = new Career(values[3]);
+                Course courseName = new Course(values[6]);
+                Tutor tutor = new Tutor(
+                        values[0],
+                        values[1],
+                        values[2],
+                        careerName,
+                        values[4],
+                        values[5],
+                        courseName
+                );
+                tutors.add(tutor);
+
             }
         } catch (IOException e) {
             System.err.println("Error leyendo el archivo: " + e.getMessage());
@@ -188,6 +185,7 @@ public class Tutor {
     }
 
     public static void printTutors(List<Tutor> tutors) {
+        int tutorSeparator = 0;
         if (tutors.isEmpty()) {
             System.out.println("No hay tutores registrados.");
         } else {
@@ -195,14 +193,17 @@ public class Tutor {
             System.out.println("Lista de Tutores:");
             System.out.println("===================================================================================");
             for (Tutor tutor : tutors) {
-                System.out.println("-------------------------------------------------------------------------------------");
-                System.out.println("Cedula: " + tutor.getDni());
-                System.out.println("Nombre: " + tutor.getName());
-                System.out.println("Apellido: " + tutor.getLastName());
-                System.out.println("Codigo de Carrera: " + tutor.getCareer());
-                System.out.println("Email: " + tutor.getEmail());
-                System.out.println("Celular: " + tutor.getPhone());
-                System.out.println("Curso: " + tutor.getCourse());
+                if(tutorSeparator != 0){
+                    System.out.println("-------------------------------------------------------------------------------------");
+                    System.out.println("Cedula: " + tutor.getDni());
+                    System.out.println("Nombre: " + tutor.getName());
+                    System.out.println("Apellido: " + tutor.getLastName());
+                    System.out.println("Codigo de Carrera: " + tutor.getCareer());
+                    System.out.println("Email: " + tutor.getEmail());
+                    System.out.println("Celular: " + tutor.getPhone());
+                    System.out.println("Curso: " + tutor.getCourse());
+                }
+                tutorSeparator++;
             }
             System.out.println("-------------------------------------------------------------------------------------");
         }
