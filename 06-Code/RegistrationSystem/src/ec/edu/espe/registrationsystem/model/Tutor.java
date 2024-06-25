@@ -19,18 +19,15 @@ import static utils.Validation.validationDni;
 public class Tutor {
 
     private String dni;
-<<<<<<< HEAD
+
     private String name;
     private String lastName;
     private String careerCode;
-=======
     private String fullName;
     private Career careers; 
->>>>>>> fce15ebb908ca647d97dc58e259ff8963e72245b
     private String email;
     private String phone;
 
-<<<<<<< HEAD
     public Tutor(String dni, String name, String lastName, String careerCode, String email, String phone, String value6) {
         this.dni = dni;
         this.name = name;
@@ -466,113 +463,12 @@ public class Tutor {
     public static void pause(Scanner scanner) {
         System.out.print("Pulse Enter para continuar...\n");
         scanner.nextLine();
-
-
-
-
-
-
+    }
 }
-=======
-    @Override
-    public String toString() {
-        return "Tutor{" + "dni=" + dni + ", fullName=" + fullName + ", careers=" + careers + ", email=" + email + ", phone=" + phone + ", codeCourses=" + codeCourses + '}';
-    }
 
-    public Tutor(String dni, String fullName, Career careers, String email, String phone, ArrayList<Course> codeCourses) {
-        this.dni = dni;
-        this.fullName = fullName;
-        this.careers = careers;
-        this.email = email;
-        this.phone = phone;
-        this.codeCourses = codeCourses;
-    }
 
-    /**
-     * @return the dni
-     */
-    public String getDni() {
-        return dni;
-    }
 
-    /**
-     * @param dni the dni to set
-     */
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
 
-    /**
-     * @return the fullName
-     */
-    public String getFullName() {
-        return fullName;
-    }
 
-    /**
-     * @param fullName the fullName to set
-     */
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
 
-    /**
-     * @return the careers
-     */
-    public Career getCareers() {
-        return careers;
-    }
-
-    /**
-     * @param careers the careers to set
-     */
-    public void setCareers(Career careers) {
-        this.careers = careers;
-    }
-
-    /**
-     * @return the email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * @param email the email to set
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
-     * @return the phone
-     */
-    public String getPhone() {
-        return phone;
-    }
-
-    /**
-     * @param phone the phone to set
-     */
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    /**
-     * @return the codeCourses
-     */
-    public ArrayList<Course> getCodeCourses() {
-        return codeCourses;
-    }
-
-    /**
-     * @param codeCourses the codeCourses to set
-     */
-    public void setCodeCourses(ArrayList<Course> codeCourses) {
-        this.codeCourses = codeCourses;
-    }
-
-    
-
->>>>>>> fce15ebb908ca647d97dc58e259ff8963e72245b
-}
+   

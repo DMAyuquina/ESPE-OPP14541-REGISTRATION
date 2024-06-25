@@ -4,12 +4,11 @@ import ec.edu.espe.registrationsystem.model.AdminAccount;
 import ec.edu.espe.registrationsystem.model.StudentAccount;
 import ec.edu.espe.registrationsystem.model.StudentReport;
 import ec.edu.espe.registrationsystem.model.Tutor;
+import ec.edu.espe.registrationsystem.model.TutorAccount;
 import utils.FileManager;
 import java.util.Scanner;
 import utils.Validation;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+
 
 /**
  *
@@ -252,7 +251,10 @@ public class ManagerMenu {
         }
     }
 
-<<<<<<< HEAD
+    private static void manageAccountTutors(String fileName) {
+
+    }
+    
     private static void manageTutors(Scanner scanner, String fileName) {
     Tutor tutorUser = new Tutor();  
 
@@ -305,25 +307,6 @@ public class ManagerMenu {
     }
 }
 
-
-    
-
-        
-    private static void manageAccountTutors(String fileName) {
-        
-=======
-    private static void manageTutors(String fileName) {
->>>>>>> fce15ebb908ca647d97dc58e259ff8963e72245b
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] tutorDetails = line.split(",");
-                System.out.println("Tutor: " + String.join(", ", tutorDetails));
-            }
-        } catch (IOException e) {
-            System.err.println("Error al leer el archivo: " + e.getMessage());
-        }
-    }
 
 
     public static void manageStudents(Scanner scanner, String fileName) {

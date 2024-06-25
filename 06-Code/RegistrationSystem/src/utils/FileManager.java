@@ -178,16 +178,12 @@ public class FileManager {
                         validation = false;
                     }
                 }
-<<<<<<< HEAD
+
 
             } while (!validation);
 
-=======
-                
-            }while(!validation);
-            
             Registration registrationType = new Registration(typeOfRegistration);
->>>>>>> fce15ebb908ca647d97dc58e259ff8963e72245b
+
             System.out.println("------------------------------------------------------------");
             System.out.print("Calificacion: ");
             StudentReport studentReport = new StudentReport();
