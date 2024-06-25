@@ -154,7 +154,6 @@ public class FileManager {
                     }
                 }
 
-
             } while (!validation);
 
             Registration registrationType = new Registration(typeOfRegistration);
@@ -236,32 +235,46 @@ public class FileManager {
             System.out.println("Celular: " + existingStudent.getPhone());
             System.out.println("------------------------------------------------------------");
 
-            System.out.print("Nombre [" + existingStudent.getName() + "]: ");
-            String name = scanner.nextLine();
-            validation = Validation.validationOfCharacter(name);
+            String name = "";
+            do {
+                System.out.print("Nombre [" + existingStudent.getName() + "]: ");
+                name = scanner.nextLine();
+                validation = Validation.validationOfCharacter(name);
+            } while (!validation);
             if (!name.isEmpty()) {
                 existingStudent.setName(name);
             }
-            System.out.println("------------------------------------------------------------");
 
-            System.out.print("Apellido [" + existingStudent.getLastName() + "]: ");
-            String lastName = scanner.nextLine();
+            String lastName = "";
+            do {
+                System.out.println("------------------------------------------------------------");
+                System.out.print("Apellido [" + existingStudent.getLastName() + "]: ");
+                lastName = scanner.nextLine();
+                validation = Validation.validationOfCharacter(lastName);
+            } while (!validation);
             if (!lastName.isEmpty()) {
                 existingStudent.setLastName(lastName);
             }
-            System.out.println("------------------------------------------------------------");
-
-            System.out.print("Codigo de Carrera [" + existingStudent.getCareerCode() + "]: ");
-            String careerCode = scanner.next();
-            scanner.nextLine();
+            
+            String careerCode = "";
+            do {
+                System.out.println("------------------------------------------------------------");
+                System.out.print("Codigo de Carrera [" + existingStudent.getCareerCode() + "]: ");
+                careerCode = scanner.next();
+                scanner.nextLine();
+                validation = Validation.validationOfCharacter(careerCode);
+            } while (validation);
             if (!careerCode.isEmpty()) {
                 existingStudent.setCareerCode(careerCode);
             }
+            
+            String email = "";
+            do{
             System.out.println("------------------------------------------------------------");
-
             System.out.print("Email [" + existingStudent.getEmail() + "]: ");
-            String email = scanner.next();
-            scanner.nextLine();
+            email = scanner.next();
+            validation = Validation.validationEmail(email);
+            }while(!validation);
             if (!email.isEmpty()) {
                 existingStudent.setEmail(email);
             }
@@ -309,7 +322,7 @@ public class FileManager {
             } else {
                 lastChance = "No requiere supletorio";
             }
-            
+
             Registration registrationType = new Registration(typeOfRegistration);
             Student updatedStudent = new Student(dni, name, lastName, careerCode, email, phone, registrationType, grade, lastChance, gratuity);
             Updater.updateStudent(fileName, updatedStudent);
@@ -404,5 +417,3 @@ public class FileManager {
         pause(scanner);
     }
 }
-
-
