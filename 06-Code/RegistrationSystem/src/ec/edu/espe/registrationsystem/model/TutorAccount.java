@@ -57,8 +57,9 @@ public class TutorAccount implements Serializable {
             String tutorPasword = scanner.next();
 
             TutorAccount tutorAccount = new TutorAccount(tutorUser, tutorPasword);
-            
+
         }
+        
     }
 
     private static TutorAccount findTutorByUser(String fileName, String tutorUser) {
@@ -78,20 +79,18 @@ public class TutorAccount implements Serializable {
 
     public static List<TutorAccount> readTutorsA(String fileName) {
         List<TutorAccount> tutors = new ArrayList<>();
-        int i = 0;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName + ".csv"))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                if (i != 0) {
-                    String[] values = line.split(",");
-                    TutorAccount tutor = new TutorAccount(
-                            values[0],
-                            values[1]
-                    );
-                    tutors.add(tutor);
-                }
-                i++;
+
+                String[] values = line.split(",");
+                TutorAccount tutor = new TutorAccount(
+                        values[0],
+                        values[1]
+                );
+                tutors.add(tutor);
+
             }
         } catch (IOException e) {
             System.err.println("Error leyendo el archivo: " + e.getMessage());
@@ -197,8 +196,8 @@ public class TutorAccount implements Serializable {
 
         scanner.nextLine();
     }
-    
-        public void deleteTutorsA(Scanner scanner, String fileName) {
+
+    public void deleteTutorsA(Scanner scanner, String fileName) {
         System.out.println("============================================================");
         System.out.print("Introduzca el usuario del Tutor a eliminar: ");
         String tutorUser = scanner.next();

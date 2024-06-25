@@ -185,8 +185,8 @@ public class Tutor {
         return null;
     }
 
-    public static List<Tutor> readTutors(String fileName) {
-        List<Tutor> tutors = new ArrayList<>();
+    public static ArrayList<Tutor> readTutors(String fileName) {
+        ArrayList<Tutor> tutors = new ArrayList<>();
         int i = 0;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName + ".csv"))) {

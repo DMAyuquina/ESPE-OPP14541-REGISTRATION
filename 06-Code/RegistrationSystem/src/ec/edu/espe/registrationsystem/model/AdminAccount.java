@@ -32,10 +32,10 @@ public class AdminAccount {
 
     //Methods
 
-    public void createTutorAccount(String tutorUser, String tutorPassword) {
+    public static void createTutorAccount(String tutorUser, String tutorPassword) {
         TutorAccount tutor = new TutorAccount(tutorUser, tutorPassword);
         String data = tutor.getTutorUser() + "," + tutor.getTutorPasword();
-        FileManager.FileSave(data, "tutors");
+        FileManager.FileSave(data, "tutorsAccount");
     }
 
     public boolean validateTutorLogin(String tutorUser, String tutorPassword) {
