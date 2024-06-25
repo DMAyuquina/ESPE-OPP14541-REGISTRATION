@@ -10,16 +10,12 @@ import utils.FileManager;
 import java.util.Scanner;
 import utils.Validation;
 
-<<<<<<< HEAD
 import utils.Validation;
 
 import utils.Validation;
 
 import utils.Validation;
 
-
-=======
->>>>>>> 2d06f64a1e87445a17c099b206d1196d689954d0
 /**
  *
  * @autor Logic Legion, DCCO-ESPE
@@ -299,23 +295,7 @@ public class ManagerMenu {
 
         Tutor tutorUser = new Tutor(fileName, fileName, fileName, fileName, fileName, fileName);
 
-<<<<<<< HEAD
-    while (!exit) {
-        System.out.println("\n============================================================");
-        System.out.println("Sistema para Administrar Tutores");
-        System.out.println("============================================================");
-        System.out.println("1. Agregar Tutores");
-        System.out.println("2. Visualizar Tutores");
-        System.out.println("3. Modificar Tutor");
-        System.out.println("4. Eliminar Tutor");
-        System.out.println("5. Encontrar Tutor por Cédula");
-        System.out.println("6. Salir");
-        System.out.println("------------------------------------------------------------");
-        System.out.print("Seleccione una opción: ");
-=======
         boolean exit = false;
->>>>>>> 2d06f64a1e87445a17c099b206d1196d689954d0
-
         while (!exit) {
             System.out.println("\n============================================================");
             System.out.println("Sistema para Administrar Tutores");
@@ -330,36 +310,6 @@ public class ManagerMenu {
             System.out.println("------------------------------------------------------------");
             System.out.print("Seleccione una opción: ");
 
-<<<<<<< HEAD
-        switch (operation) {
-            case 1:
-                tutorUser.addTutors(fileName);
-                break;
-            case 2:
-            {
-                List<Tutor> tutors = null;
-                Tutor.printTutors(tutors);
-            }
-                break;
-
-            case 3:
-                tutorUser.updateTutors(scanner, fileName, true); 
-                break;
-            case 4:
-                //tutorUser.deleteTutors(scanner, fileName); 
-                break;
-            case 5:
-                tutorUser.findTutor(scanner, fileName);
-                break;
-            
-            case 7:
-                exit = true;
-                break;
-            default:
-                System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
-                FileManager.pause(scanner);
-                break;
-=======
             int operation = Validation.validationOfInt(0, scanner);
 
             switch (operation) {
@@ -390,10 +340,10 @@ public class ManagerMenu {
                     FileManager.pause(scanner);
                     break;
             }
->>>>>>> 2d06f64a1e87445a17c099b206d1196d689954d0
         }
+    
     }
-
+    
     public static void manageStudents(Scanner scanner, String fileName) {
         FileManager fileManager = new FileManager();
         boolean exit = false;
