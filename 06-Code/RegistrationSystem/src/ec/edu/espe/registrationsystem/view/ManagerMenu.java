@@ -2,6 +2,7 @@ package ec.edu.espe.registrationsystem.view;
 
 import ec.edu.espe.registrationsystem.model.AdminAccount;
 import ec.edu.espe.registrationsystem.model.StudentAccount;
+import ec.edu.espe.registrationsystem.model.StudentReport;
 import ec.edu.espe.registrationsystem.model.Tutor;
 import utils.FileManager;
 import java.util.Scanner;
@@ -83,8 +84,12 @@ public class ManagerMenu {
             if (userType != 0) {
                 switch (userType) {
                     case 1 -> {
-                        StudentAccount studentAccount = new StudentAccount();
-                        studentAccount.viewReport();
+                        System.out.println("\n============================================================");
+                        System.out.print("Introduzca el Curso: ");
+                        fileName = scanner.next();
+                        scanner.nextLine();
+                        System.out.println("============================================================\n");
+                        manageStudents(scanner, fileName);
                         
                     }
                     case 2 -> {
@@ -155,7 +160,7 @@ public class ManagerMenu {
             System.out.println("============================================================");
             System.out.println("1. Encontrar Estudiantes");
             System.out.println("2. Modificar Nota Estudiantes");
-            System.out.println("3. Visualizar estudiantes");
+            System.out.println("3. Ver Reporte de estudiantes");
             System.out.println("4. Cambiar de Curso");
             System.out.println("5. Volver al menu principal");
             System.out.println("------------------------------------------------------------");
@@ -173,7 +178,7 @@ public class ManagerMenu {
                         fileManager.updateStudent(scanner, fileName, false);
                         break;
                     case 3:
-                        fileManager.readStudents(scanner, fileName);
+                        TutorAccount.viewReport(scanner, fileName);
                         break;
                     case 4:
                         System.out.print("Introduzca el Curso: ");
@@ -217,19 +222,19 @@ public class ManagerMenu {
             if (operation != 0) {
                 switch (operation) {
                     case 1:
-                        adminUser.addStudents(fileName);
+                        adminUser.addStudents(scanner, fileName);
                         break;
                     case 2:
-                        adminUser.readStudents(fileName);
+                        adminUser.viewReport(scanner, fileName);
                         break;
                     case 3:
-                        adminUser.updateStudent(fileName);
+                        adminUser.updateStudent(scanner, fileName);
                         break;
                     case 4:
-                        adminUser.deleteStudent(fileName);
+                        adminUser.deleteStudent(scanner, fileName);
                         break;
                     case 5:
-                        adminUser.findStudent(fileName);
+                        adminUser.findStudent(scanner, fileName);
                         break;
                     case 6:
                         System.out.print("Introduzca el Curso: ");
@@ -247,6 +252,7 @@ public class ManagerMenu {
         }
     }
 
+<<<<<<< HEAD
     private static void manageTutors(Scanner scanner, String fileName) {
     Tutor tutorUser = new Tutor();  
 
@@ -305,6 +311,9 @@ public class ManagerMenu {
         
     private static void manageAccountTutors(String fileName) {
         
+=======
+    private static void manageTutors(String fileName) {
+>>>>>>> fce15ebb908ca647d97dc58e259ff8963e72245b
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -317,7 +326,7 @@ public class ManagerMenu {
     }
 
 
-    public void manageStudents(Scanner scanner, String fileName) {
+    public static void manageStudents(Scanner scanner, String fileName) {
        FileManager fileManager = new FileManager();
         boolean exit = false;
 
@@ -325,7 +334,7 @@ public class ManagerMenu {
             System.out.println("============================================================");
             System.out.println("Sistema para Estudiantes:");
             System.out.println("============================================================");
-            System.out.println("1. Encontrar Estudiantes");
+            System.out.println("1. Ver reporte de estudiante");
             System.out.println("2. Cambiar de Curso");
             System.out.println("3. Volver");
             System.out.println("------------------------------------------------------------");
@@ -338,7 +347,7 @@ public class ManagerMenu {
             if (operation != 0) {
                 switch (operation) {
                     case 1 -> {
-                        fileManager.findStudent(scanner, fileName);
+                        StudentAccount.viewReport(scanner, fileName);
                     }
                     case 2 -> {
                         System.out.print("Introduzca el Curso: ");

@@ -1,5 +1,6 @@
 package utils;
 
+import ec.edu.espe.registrationsystem.model.Registration;
 import ec.edu.espe.registrationsystem.model.Student;
 import ec.edu.espe.registrationsystem.model.StudentReport;
 import java.io.BufferedReader;
@@ -177,9 +178,16 @@ public class FileManager {
                         validation = false;
                     }
                 }
+<<<<<<< HEAD
 
             } while (!validation);
 
+=======
+                
+            }while(!validation);
+            
+            Registration registrationType = new Registration(typeOfRegistration);
+>>>>>>> fce15ebb908ca647d97dc58e259ff8963e72245b
             System.out.println("------------------------------------------------------------");
             System.out.print("Calificacion: ");
             StudentReport studentReport = new StudentReport();
@@ -198,7 +206,7 @@ public class FileManager {
                 lastChance = "No requiere supletorio";
             }
 
-            Student student = new Student(dni, name, lastName, careerCode, email, phone, typeOfRegistration, grade, lastChance, gratuity);
+            Student student = new Student(dni, name, lastName, careerCode, email, phone, registrationType, grade, lastChance, gratuity);
             FileManager.FileSave(student.toString(), fileName);
         }
         pause(scanner);
@@ -328,8 +336,9 @@ public class FileManager {
             } else {
                 lastChance = "No requiere supletorio";
             }
-
-            Student updatedStudent = new Student(dni, name, lastName, careerCode, email, phone, typeOfRegistration, grade, lastChance, gratuity);
+            
+            Registration registrationType = new Registration(typeOfRegistration);
+            Student updatedStudent = new Student(dni, name, lastName, careerCode, email, phone, registrationType, grade, lastChance, gratuity);
             Updater.updateStudent(fileName, updatedStudent);
         } else {
             if (existingStudent != null && !adminOProfesor) {

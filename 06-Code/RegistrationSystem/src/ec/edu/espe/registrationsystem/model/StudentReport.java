@@ -33,12 +33,14 @@ public class StudentReport {
         }
     }
 
-    public void generateStudentReport(double unit1Grade, double unit2Grade, double supplementaryGrade, String registrationType) {
-
-        calculateFinalGrade(unit1Grade, unit2Grade, supplementaryGrade);
-
-        determinateTypeOfRegistration(registrationType);
-
+    public static void generateStudentReport(Scanner scanner, String fileName) {
+        FileManager fileManager = new FileManager();
+        fileManager.findStudent(scanner, fileName);
+    }
+    
+    public static void generateReport(Scanner scanner, String fileName) {
+        FileManager fileManager = new FileManager();
+        fileManager.readStudents(scanner, fileName);
     }
 
     public String calculateGrade() {
