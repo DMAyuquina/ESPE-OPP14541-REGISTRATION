@@ -80,7 +80,7 @@ public class ManagerMenu {
             case 2:
                 return "Quimica";
             case 3:
-                return "Administracion Financiera";
+                return "AdministracionFinanciera";
             case 4:
                 return "Contabilidad";
             case 5:
