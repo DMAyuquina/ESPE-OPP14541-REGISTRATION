@@ -256,7 +256,8 @@ public class ManagerMenu {
     }
     
     private static void manageTutors(Scanner scanner, String fileName) {
-    Tutor tutorUser = new Tutor();  
+        
+    Tutor tutorUser = new Tutor(fileName, fileName, fileName, fileName, fileName, fileName);  
 
     boolean exit = false;
 

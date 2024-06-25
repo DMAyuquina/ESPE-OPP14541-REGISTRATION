@@ -7,28 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import utils.FileManager;
-import utils.Reader;
-import utils.Searcher;
-import utils.Validation;
-import static utils.Validation.validationDni;
 
-/**
- *
- * @author Logic Legion DCCO-ESPE
- */
+import utils.Validation;
+
 public class Tutor {
 
     private String dni;
-
     private String name;
     private String lastName;
     private String careerCode;
-    private String fullName;
-    private Career careers; 
     private String email;
     private String phone;
 
-    public Tutor(String dni, String name, String lastName, String careerCode, String email, String phone, String value6) {
+    public Tutor(String dni, String name, String lastName, String careerCode, String email, String phone) {
         this.dni = dni;
         this.name = name;
         this.lastName = lastName;
@@ -37,90 +28,50 @@ public class Tutor {
         this.phone = phone;
     }
 
-    public Tutor() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    /**
-     * @return the dni
-     */
     public String getDni() {
         return dni;
     }
 
-    /**
-     * @param dni the dni to set
-     */
     public void setDni(String dni) {
         this.dni = dni;
     }
 
-    /**
-     * @return the name
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name the name to set
-     */
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     * @return the lastName
-     */
     public String getLastName() {
         return lastName;
     }
 
-    /**
-     * @param lastName the lastName to set
-     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    /**
-     * @return the careerCode
-     */
     public String getCareerCode() {
         return careerCode;
     }
 
-    /**
-     * @param careerCode the careerCode to set
-     */
     public void setCareerCode(String careerCode) {
         this.careerCode = careerCode;
     }
 
-    /**
-     * @return the email
-     */
     public String getEmail() {
         return email;
     }
 
-    /**
-     * @param email the email to set
-     */
     public void setEmail(String email) {
         this.email = email;
     }
 
-    /**
-     * @return the phone
-     */
     public String getPhone() {
         return phone;
     }
 
-    /**
-     * @param phone the phone to set
-     */
     public void setPhone(String phone) {
         this.phone = phone;
     }
@@ -132,32 +83,27 @@ public class Tutor {
             System.out.println("\n============================================================");
             System.out.print("Cuantos profesores quiere agregar?: ");
             tutorNumber = Validation.validationOfInt(tutorNumber, scanner);
-
         } while (tutorNumber <= 0);
         System.out.println("============================================================");
 
         for (int aux = 0; aux < tutorNumber; aux++) {
             System.out.println("Informacion del Profesor Nuevo");
             String dni;
-            Student tutor2 = null;
             boolean validation = false;
             boolean dniValidation = false;
 
             do {
                 System.out.println("------------------------------------------------------------");
-
                 System.out.print("Cedula: ");
                 dni = scanner.next();
                 dniValidation = Validation.validationOfCharacter(dni);
 
                 if (!dniValidation) {
-                    tutor2 = Searcher.findStudentByDNI(fileName, dni);
-
                     boolean validationNumbersDni = Validation.validationOfCharacter(dni);
                     if (!validationNumbersDni) {
                         if (dni.length() == 10) {
-                            if (!validationDni(dni.length(), dni) || tutor2 != null) {
-                                System.out.println("La cedula ingresada no es valida o ya existe, intente de nuevo");
+                            if (!Validation.validationDni(dni.length(), dni)) {
+                                System.out.println("La cedula ingresada no es valida, intente de nuevo");
                             } else {
                                 validation = false;
                             }
@@ -170,7 +116,8 @@ public class Tutor {
                 } else {
                     System.out.println("Se ha ingresado un caracter no válido");
                 }
-            } while (validation || tutor2 != null || dniValidation);
+            } while (validation || dniValidation);
+
             scanner.nextLine();
 
             String name = "";
@@ -216,15 +163,14 @@ public class Tutor {
                 if (phone.length() != 10) {
                     System.out.println("Numero de telefono mal ingresado. Intente de nuevo.");
                 }
-
             } while (phone.length() != 10 || validation);
+
+            Tutor tutor = new Tutor(dni, name, lastName, careerCode, email, phone);
+            FileManager.FileSave(tutor.toString(), fileName);
         }
     }
 
- 
-        
-
-    private static Tutor findTutorByDni(String fileName, String dni) {
+   private static Tutor findTutorByDni(String fileName, String dni) {
         List<Tutor> tutors = readTutors(fileName);
 
         for (Tutor tutor : tutors) {
@@ -234,12 +180,11 @@ public class Tutor {
         }
 
         System.out.println("------------------------------------------------------------");
-        System.out.println("Tutor con cedula: " + dni + " no encontrado.");
+        System.out.println("Tutor con cedula: " + dni + " no encontrado");
         System.out.println("------------------------------------------------------------");
         return null;
     }
-    
-    
+
     public static List<Tutor> readTutors(String fileName) {
         List<Tutor> tutors = new ArrayList<>();
 
@@ -253,8 +198,7 @@ public class Tutor {
                         values[2],
                         values[3],
                         values[4],
-                        values[5],
-                        values[6]
+                        values[5]
                 );
                 tutors.add(tutor);
             }
@@ -287,21 +231,18 @@ public class Tutor {
             }
         } while (!Validation.validationDni(dni.length(), dni));
 
-        // Buscar el tutor por su cedula (dni)
         Tutor existingTutor = Tutor.findTutorByDni(fileName, dni);
 
         if (existingTutor != null && adminOProfesor) {
-            System.out.println("Edicion la Informacion del Tutor:");
+            System.out.println("Edicion la Informacion del Tutor");
             System.out.println("------------------------------------------------------------");
 
-            
             System.out.println("Nombre: " + existingTutor.getName());
             System.out.println("Apellido: " + existingTutor.getLastName());
             System.out.println("Codigo de Carrera: " + existingTutor.getCareerCode());
             System.out.println("Email: " + existingTutor.getEmail());
             System.out.println("Celular: " + existingTutor.getPhone());
 
-            
             System.out.println("------------------------------------------------------------");
             System.out.print("Nombre [" + existingTutor.getName() + "]: ");
             String name = scanner.nextLine();
@@ -341,63 +282,9 @@ public class Tutor {
 
             existingTutor.setPhone(phone);
 
-            // Guardar los cambios en el archivo
             updateTutorInFile(fileName, existingTutor);
         } else {
-            System.out.println("Tutor no encontrado o no tiene permisos para editar.");
-        }
-
-        if (existingTutor != null && adminOProfesor) {
-            System.out.println("Edicion la Informacion del Tutor:");
-            System.out.println("------------------------------------------------------------");
-
-            System.out.print("Nombre [" + existingTutor.getName() + "]: ");
-            String name = scanner.nextLine();
-            if (!name.isEmpty()) {
-                existingTutor.setName(name);
-            }
-            System.out.println("------------------------------------------------------------");
-
-            System.out.print("Apellido [" + existingTutor.getLastName() + "]: ");
-            String lastName = scanner.nextLine();
-            if (!lastName.isEmpty()) {
-                existingTutor.setLastName(lastName);
-            }
-            System.out.println("------------------------------------------------------------");
-
-            System.out.print("Codigo de Carrera [" + existingTutor.getCareerCode() + "]: ");
-            String careerCode = scanner.next();
-            scanner.nextLine();
-            if (!careerCode.isEmpty()) {
-                existingTutor.setCareerCode(careerCode);
-            }
-            System.out.println("------------------------------------------------------------");
-
-            System.out.print("Email [" + existingTutor.getEmail() + "]: ");
-            String email = scanner.next();
-            scanner.nextLine();
-            if (!email.isEmpty()) {
-                existingTutor.setEmail(email);
-            }
-            System.out.println("------------------------------------------------------------");
-
-            String phone;
-            do {
-                System.out.print("Celular [" + existingTutor.getPhone() + "]: ");
-                phone = scanner.next();
-                scanner.nextLine();
-                System.out.println("------------------------------------------------------------");
-                if (phone.length() != 10) {
-                    System.out.println("Numero de telefono mal ingresado. Intente de nuevo.");
-                }
-            } while (phone.length() != 10);
-
-            existingTutor.setPhone(phone);
-
-            // Guardar los cambios en el archivo
-            updateTutorInFile(fileName, existingTutor);
-        } else {
-            System.out.println("Tutor no encontrado o no tiene permisos para editar.");
+            System.out.println("Tutor no encontrado o no tiene permisos para editar");
         }
     }
 
@@ -418,9 +305,9 @@ public class Tutor {
             for (Tutor tutor : tutors) {
                 FileManager.FileSave(tutor.toString(), fileName);
             }
-            System.out.println("Tutor actualizado exitosamente.");
+            System.out.println("Tutor actualizado exitosamente");
         } else {
-            System.out.println("Tutor con Cédula " + updatedTutor.getDni() + " no encontrado.");
+            System.out.println("Tutor con Cédula " + updatedTutor.getDni() + " no encontrado");
         }
     }
 
@@ -444,20 +331,20 @@ public class Tutor {
                         System.out.println("Email: " + tutor.getEmail());
                         System.out.println("Celular: " + tutor.getPhone());
                     } else {
-                        System.out.println("Tutor con cedula " + dni + " no encontrado.");
+                        System.out.println("Tutor con cedula " + dni + " no encontrado");
                     }
                     System.out.println("------------------------------------------------------------");
                 } else {
-                    System.out.println("Cedula ingresada no valida.\n");
+                    System.out.println("Cedula ingresada no valida");
                 }
             } else {
-                System.out.println("Cedula debe tener 10 dígitos.");
+                System.out.println("Cedula debe tener 10 dígitos");
             }
         } else {
-            System.out.println("Se ha ingresado un caracter no valido.");
+            System.out.println("Se ha ingresado un caracter no valido");
         }
 
-        pause(scanner);
+        scanner.nextLine();
     }
 
     public static void pause(Scanner scanner) {
@@ -465,10 +352,3 @@ public class Tutor {
         scanner.nextLine();
     }
 }
-
-
-
-
-
-
-   
