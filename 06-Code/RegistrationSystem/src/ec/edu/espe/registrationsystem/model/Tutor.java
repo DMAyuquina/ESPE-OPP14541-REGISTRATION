@@ -207,7 +207,28 @@ public class Tutor {
         }
 
         return tutors;
+        
     }
+   public static void printTutors(List<Tutor> tutors) {
+        if (tutors.isEmpty()) {
+            System.out.println("No hay tutores registrados.");
+        } else {
+            System.out.println("\n===================================================================================");
+            System.out.println("Lista de Tutores:");
+            System.out.println("===================================================================================");
+            for (Tutor tutor : tutors) {
+                System.out.println("-------------------------------------------------------------------------------------");
+                System.out.println("Cedula: " + tutor.getDni());
+                System.out.println("Nombre: " + tutor.getName());
+                System.out.println("Apellido: " + tutor.getLastName());
+                System.out.println("Codigo de Carrera: " + tutor.getCareerCode());
+                System.out.println("Email: " + tutor.getEmail());
+                System.out.println("Celular: " + tutor.getPhone());
+            }
+            System.out.println("-------------------------------------------------------------------------------------");
+        }
+    }
+
 
     public void updateTutors(Scanner scanner, String fileName, boolean adminOProfesor) {
         System.out.println("\n============================================================");

@@ -5,8 +5,15 @@ import ec.edu.espe.registrationsystem.model.StudentAccount;
 import ec.edu.espe.registrationsystem.model.StudentReport;
 import ec.edu.espe.registrationsystem.model.Tutor;
 import ec.edu.espe.registrationsystem.model.TutorAccount;
+import java.util.List;
 import utils.FileManager;
 import java.util.Scanner;
+import utils.Validation;
+
+import utils.Validation;
+
+import utils.Validation;
+
 import utils.Validation;
 
 
@@ -270,8 +277,7 @@ public class ManagerMenu {
         System.out.println("3. Modificar Tutor");
         System.out.println("4. Eliminar Tutor");
         System.out.println("5. Encontrar Tutor por Cédula");
-        System.out.println("6. Cambiar Archivo de Tutores");
-        System.out.println("7. Salir");
+        System.out.println("6. Salir");
         System.out.println("------------------------------------------------------------");
         System.out.print("Seleccione una opción: ");
 
@@ -282,8 +288,12 @@ public class ManagerMenu {
                 tutorUser.addTutors(fileName);
                 break;
             case 2:
-                tutorUser.readTutors(fileName);
+            {
+                List<Tutor> tutors = null;
+                Tutor.printTutors(tutors);
+            }
                 break;
+
             case 3:
                 tutorUser.updateTutors(scanner, fileName, true); 
                 break;
@@ -293,10 +303,7 @@ public class ManagerMenu {
             case 5:
                 tutorUser.findTutor(scanner, fileName);
                 break;
-            case 6:
-                System.out.print("Introduzca el nuevo archivo de tutores: ");
-                fileName = scanner.nextLine();
-                break;
+            
             case 7:
                 exit = true;
                 break;
