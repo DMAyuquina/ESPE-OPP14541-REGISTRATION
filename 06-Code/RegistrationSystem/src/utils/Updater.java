@@ -25,7 +25,7 @@ public class Updater {
         if (found) {
             FileManager.clearFile(fileName);  // Clear the file first
             for (Student student : students) {
-                FileManager.FileSave(student.toString(), fileName);
+                FileManager.fileSave(student.toString(), fileName);
             }
         } else {
             System.out.println("Estudiante con Cédula " + updatedStudent.getDni() + " No Encontrado.");

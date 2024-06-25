@@ -54,7 +54,7 @@ public class AdminAccount {
     public static void saveTutorAccount(String tutorUser, String tutorPassword) {
         TutorAccount tutor = new TutorAccount(tutorUser, tutorPassword);
         String data = tutor.getTutorUser() + "," + tutor.getTutorPasword();
-        FileManager.FileSave(data, "tutorsAccount");
+        FileManager.fileSave(data, "tutorsAccount");
     }
 
     public boolean validateTutorLogin(String tutorUser, String tutorPassword) {

@@ -4,7 +4,6 @@ import ec.edu.espe.registrationsystem.model.AdminAccount;
 import ec.edu.espe.registrationsystem.model.StudentAccount;
 import ec.edu.espe.registrationsystem.model.Tutor;
 import ec.edu.espe.registrationsystem.model.TutorAccount;
-import java.util.ArrayList;
 import java.util.List;
 import utils.FileManager;
 import java.util.Scanner;
@@ -422,9 +421,8 @@ public class ManagerMenu {
                     case 1 -> {
                         StudentAccount.viewReport(scanner, fileName);
                     }
-                    case 2 -> {
-                        System.out.print("Introduzca el Curso: ");
-                        fileName = scanner.nextLine();
+                    case 2 ->{
+                        fileName = selectCourse(fileName);
                     }
                     case 3 ->
                         exit = true;

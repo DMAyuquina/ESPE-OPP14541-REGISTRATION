@@ -16,7 +16,7 @@ public class Eraser {
         
         FileManager.clearFile(fileName);  // Clear the file first
         for (Student student : students) {
-            FileManager.FileSave(student.toString(), fileName);
+            FileManager.fileSave(student.toString(), fileName);
         }
     }
 }

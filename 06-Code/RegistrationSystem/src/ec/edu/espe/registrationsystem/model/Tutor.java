@@ -136,7 +136,7 @@ public class Tutor {
             Career careerName = new Career(careerCode);
             Course courseName = new Course(course);
             Tutor tutor = new Tutor(dni, name, lastName, careerName, email, phone, courseName);
-            FileManager.FileSave(tutor.toString(), fileName);
+            FileManager.fileSave(tutor.toString(), fileName);
         }
     }
 
@@ -313,7 +313,7 @@ public class Tutor {
         if (found) {
             FileManager.clearFile(fileName);
             for (Tutor tutor : tutors) {
-                FileManager.FileSave(tutor.toString(), fileName);
+                FileManager.fileSave(tutor.toString(), fileName);
             }
             System.out.println("Tutor actualizado exitosamente");
         } else {
@@ -378,7 +378,7 @@ public class Tutor {
         if (found) {
             FileManager.clearFile(fileName);
             for (Tutor tutor : tutors) {
-                FileManager.FileSave(tutor.toString(), fileName);
+                FileManager.fileSave(tutor.toString(), fileName);
             }
             System.out.println("Tutor eliminado exitosamente");
         } else {

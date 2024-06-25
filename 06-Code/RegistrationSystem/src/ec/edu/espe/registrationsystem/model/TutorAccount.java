@@ -168,7 +168,7 @@ public class TutorAccount implements Serializable {
         if (found) {
             FileManager.clearFile(fileName);
             for (TutorAccount tutor : tutors) {
-                FileManager.FileSave(tutor.toString(), fileName);
+                FileManager.fileSave(tutor.toString(), fileName);
             }
             System.out.println("Tutor actualizado exitosamente");
         } else {
@@ -217,7 +217,7 @@ public class TutorAccount implements Serializable {
         if (found) {
             FileManager.clearFile(fileName);
             for (TutorAccount tutor : tutors) {
-                FileManager.FileSave(tutor.toString(), fileName);
+                FileManager.fileSave(tutor.toString(), fileName);
             }
             System.out.println("Tutor eliminado exitosamente");
         } else {

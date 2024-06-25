@@ -18,7 +18,7 @@ import static utils.Validation.validationDni;
  */
 public class FileManager {
 
-    public static void FileSave(String data, String fileName) {
+    public static void fileSave(String data, String fileName) {
         fileName = fileName + ".csv";
 
         try (FileWriter fileWriter = new FileWriter(fileName, true); BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
@@ -37,31 +37,6 @@ public class FileManager {
         } catch (IOException e) {
             System.err.println("Error clearing the file: " + e.getMessage());
         }
-    }
-//Revisar
-    public static int FileReadLastId(String fileName) {
-        String lastLine = "";
-        fileName = fileName + ".csv";
-        String separator = ",";
-
-        try (BufferedReader read = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = read.readLine()) != null) {
-                lastLine = line;
-            }
-            if (lastLine != null) {
-                String[] values = lastLine.split(separator);
-                try {
-                    return Integer.parseInt(values[0]);
-                } catch (NumberFormatException e) {
-                    System.out.println("Error reading last data");
-                    return 0;
-                }
-            }
-        } catch (IOException e) {
-            System.err.println("Error reading the file: " + e.getMessage());
-        }
-        return 0;
     }
 
     public void addStudents(Scanner scanner, String fileName) {
@@ -203,7 +178,7 @@ public class FileManager {
             }
 
             Student student = new Student(dni, name, lastName, careerCode, email, phone, registrationType, grade, lastChance, gratuity);
-            FileManager.FileSave(student.toString(), fileName);
+            FileManager.fileSave(student.toString(), fileName);
         }
         pause(scanner);
     }
@@ -229,6 +204,7 @@ public class FileManager {
     public void updateStudent(Scanner scanner, String fileName, boolean adminOProfesor) {
         System.out.println("\n============================================================");
         String dni;
+        boolean validation = false;
 
         do {
             System.out.print("Introduzca la Cedula del Estudiante a Editar: ");
@@ -252,7 +228,7 @@ public class FileManager {
 
         if (existingStudent != null && adminOProfesor) {
             System.out.println("Edicion la Informacion del Estudiante:");
-            System.out.println("------------------------------------------------------------");
+            System.out.println("============================================================");
             System.out.println("Nombre: " + existingStudent.getName());
             System.out.println("Apellido: " + existingStudent.getLastName());
             System.out.println("Codigo de Carrera: " + existingStudent.getCareerCode());
@@ -262,6 +238,7 @@ public class FileManager {
 
             System.out.print("Nombre [" + existingStudent.getName() + "]: ");
             String name = scanner.nextLine();
+            validation = Validation.validationOfCharacter(name);
             if (!name.isEmpty()) {
                 existingStudent.setName(name);
             }
