@@ -141,46 +141,45 @@ public class FileManager {
                 email = scanner.next();
                 validation = Validation.validationEmail(email);
             } while (!validation);
-            
+
             String phone = "";
             do {
                 System.out.println("------------------------------------------------------------");
                 System.out.print("Celular: ");
                 phone = scanner.next();
                 scanner.nextLine();
-                
+
                 validation = Validation.validationOfCharacter(phone);
                 if (phone.length() != 10) {
                     System.out.println("Numero de telefono mal ingresado. Intente de nuevo.");
                 }
 
             } while (phone.length() != 10 || validation);
-            
+
             String typeOfRegistration;
-            String gratuity="";
-            do{
+            String gratuity = "";
+            do {
                 System.out.println("------------------------------------------------------------");
                 System.out.print("Tipo de Matricula: ");
                 typeOfRegistration = scanner.next();
 
                 typeOfRegistration = typeOfRegistration.toUpperCase();
-                
 
                 if (typeOfRegistration.equals("PRIMERA")) {
                     gratuity = "Con Gratuidad";
                     validation = true;
                 } else {
-                    if(typeOfRegistration.equals("SEGUNDA") || typeOfRegistration.equals("TERCERA")){
+                    if (typeOfRegistration.equals("SEGUNDA") || typeOfRegistration.equals("TERCERA")) {
                         gratuity = "Sin Gratuidad";
                         validation = true;
-                    }else{
+                    } else {
                         System.out.println("Se ha ingresado una opcion no valida intentelo de nuevo.");
                         validation = false;
                     }
                 }
-                
-            }while(!validation);
-            
+
+            } while (!validation);
+
             System.out.println("------------------------------------------------------------");
             System.out.print("Calificacion: ");
             StudentReport studentReport = new StudentReport();
@@ -235,53 +234,70 @@ public class FileManager {
             boolean validationNumbersDni = Validation.validationOfCharacter(dni);
             if (!validationNumbersDni) {
                 if (dni.length() == 10) {
-                    if (!validationDni(dni.length(), dni)) {
+                    if (!Validation.validationDni(dni.length(), dni)) {
                         System.out.println("La cedula ingresada no es valida, intente de nuevo");
                     }
                 } else {
-
                     System.out.println("Cedula ingresada no valida");
                 }
                 System.out.println("============================================================");
             }
-        } while (!validationDni(dni.length(), dni));
+        } while (!Validation.validationDni(dni.length(), dni));
 
         Student existingStudent = Searcher.findStudentByDNI(fileName, dni);
 
         if (existingStudent != null && adminOProfesor) {
             System.out.println("Edicion la Informacion del Estudiante:");
             System.out.println("------------------------------------------------------------");
+            System.out.println("Nombre: " + existingStudent.getName());
+            System.out.println("Apellido: " + existingStudent.getLastName());
+            System.out.println("Codigo de Carrera: " + existingStudent.getCareerCode());
+            System.out.println("Email: " + existingStudent.getEmail());
+            System.out.println("Celular: " + existingStudent.getPhone());
+            System.out.println("------------------------------------------------------------");
 
             System.out.print("Nombre [" + existingStudent.getName() + "]: ");
             String name = scanner.nextLine();
+            if (!name.isEmpty()) {
+                existingStudent.setName(name);
+            }
             System.out.println("------------------------------------------------------------");
 
             System.out.print("Apellido [" + existingStudent.getLastName() + "]: ");
             String lastName = scanner.nextLine();
+            if (!lastName.isEmpty()) {
+                existingStudent.setLastName(lastName);
+            }
             System.out.println("------------------------------------------------------------");
 
             System.out.print("Codigo de Carrera [" + existingStudent.getCareerCode() + "]: ");
             String careerCode = scanner.next();
             scanner.nextLine();
+            if (!careerCode.isEmpty()) {
+                existingStudent.setCareerCode(careerCode);
+            }
             System.out.println("------------------------------------------------------------");
 
             System.out.print("Email [" + existingStudent.getEmail() + "]: ");
             String email = scanner.next();
             scanner.nextLine();
+            if (!email.isEmpty()) {
+                existingStudent.setEmail(email);
+            }
             System.out.println("------------------------------------------------------------");
 
             String phone = "";
             do {
-
                 System.out.print("Celular [" + existingStudent.getPhone() + "]: ");
                 phone = scanner.next();
                 scanner.nextLine();
-                System.out.println("------------------------------------------------------------");
                 if (phone.length() != 10) {
                     System.out.println("Numero de telefono mal ingresado. Intente de nuevo.");
                 }
-
+                System.out.println("------------------------------------------------------------");
             } while (phone.length() != 10);
+
+            existingStudent.setPhone(phone);
 
             System.out.print("Tipo de Matricula [" + existingStudent.getTypeOfRegistration() + "]: ");
             String typeOfRegistration = scanner.next();
@@ -317,8 +333,7 @@ public class FileManager {
             Updater.updateStudent(fileName, updatedStudent);
         } else {
             if (existingStudent != null && !adminOProfesor) {
-
-                System.out.println("Estudiante [" + existingStudent.getName() + existingStudent.getLastName() + "]\nDni:" + existingStudent.getDni() + "]:");
+                System.out.println("Estudiante [" + existingStudent.getName() + " " + existingStudent.getLastName() + "]\nDni:" + existingStudent.getDni() + "]:");
                 System.out.println("------------------------------------------------------------");
                 System.out.print("Calificacion [" + existingStudent.getGrade() + "]: ");
                 StudentReport studentReport = new StudentReport();
@@ -343,6 +358,12 @@ public class FileManager {
             }
         }
         pause(scanner);
+    }
+
+    public static void pause(Scanner scanner) {
+        System.out.print("Pulse Enter para continuar...");
+        scanner.nextLine();
+        System.out.println();
     }
 
     public void deleteStudent(Scanner scanner, String fileName) {
@@ -398,10 +419,8 @@ public class FileManager {
         } else {
             System.out.println("Se ha ingresado un caracter no valido.");
         }
-    }
-
-    public static void pause(Scanner scanner) {
-        System.out.print("Pulse Enter para continuar...\n");
-        scanner.nextLine();
+        pause(scanner);
     }
 }
+
+

@@ -1,18 +1,14 @@
 package ec.edu.espe.registrationsystem.view;
 
 import ec.edu.espe.registrationsystem.model.AdminAccount;
-import ec.edu.espe.registrationsystem.model.Career;
-import ec.edu.espe.registrationsystem.model.Course;
 import ec.edu.espe.registrationsystem.model.StudentAccount;
 import ec.edu.espe.registrationsystem.model.Tutor;
-import ec.edu.espe.registrationsystem.model.TutorAccount;
 import utils.FileManager;
 import java.util.Scanner;
 import utils.Validation;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  *
@@ -115,7 +111,8 @@ public class ManagerMenu {
                         System.out.println("\n============================================================");
                         System.out.println("Seleccione una opción:");
                         System.out.println("1. Administrar Estudiantes");
-                        System.out.println("2. Administrar Tutores");
+                        System.out.println("2. Administrar cuenta de  Tutores");
+                        System.out.println("3. Administrar Tutores");
                         System.out.println("============================================================");
                         int option = scanner.nextInt();
                         scanner.nextLine(); 
@@ -127,9 +124,13 @@ public class ManagerMenu {
                             System.out.println("============================================================\n");
                             manageAdminStaff(scanner, fileName); 
                         } else if (option == 2) {
+                            System.out.println("Abriendo archivo de cuentas de tutores...");
+                            String tutorsFileName = "tutorsAccount.csv";
+                            manageAccountTutors(tutorsFileName); 
+                        } else if (option == 3) {
                             System.out.println("Abriendo archivo de tutores...");
-                            String tutorsFileName = "tutors.csv";
-                            manageTutors(tutorsFileName); 
+                            String tutorsFile = null;
+                            manageTutors(scanner, tutorsFile);
                         } else {
                             System.out.println("Opción no válida.");
                         }
@@ -197,7 +198,7 @@ public class ManagerMenu {
 
         while (!exit) {
             System.out.println("\n============================================================");
-            System.out.println("Escoja una operacion:");
+            System.out.println("Sistema para Administrar Estudiantes");
             System.out.println("============================================================");
             System.out.println("1. Agregar Estudiante");
             System.out.println("2. Visualizar Estudiantes");
@@ -246,9 +247,64 @@ public class ManagerMenu {
         }
     }
 
-    private static void manageTutors(String fileName) {
-        // Aquí puedes implementar la lógica para manejar a los tutores
-        // Por ejemplo, leer el archivo CSV y mostrar los datos
+    private static void manageTutors(Scanner scanner, String fileName) {
+    Tutor tutorUser = new Tutor();  
+
+    boolean exit = false;
+
+    while (!exit) {
+        System.out.println("\n============================================================");
+        System.out.println("Sistema para Administrar Tutores");
+        System.out.println("============================================================");
+        System.out.println("1. Agregar Tutores");
+        System.out.println("2. Visualizar Tutores");
+        System.out.println("3. Modificar Tutor");
+        System.out.println("4. Eliminar Tutor");
+        System.out.println("5. Encontrar Tutor por Cédula");
+        System.out.println("6. Cambiar Archivo de Tutores");
+        System.out.println("7. Salir");
+        System.out.println("------------------------------------------------------------");
+        System.out.print("Seleccione una opción: ");
+
+        int operation = Validation.validationOfInt(0, scanner);
+
+        switch (operation) {
+            case 1:
+                tutorUser.addTutors(fileName);
+                break;
+            case 2:
+                tutorUser.readTutors(fileName);
+                break;
+            case 3:
+                tutorUser.updateTutors(scanner, fileName, true); 
+                break;
+            case 4:
+                //tutorUser.deleteTutors(scanner, fileName); 
+                break;
+            case 5:
+                tutorUser.findTutor(scanner, fileName);
+                break;
+            case 6:
+                System.out.print("Introduzca el nuevo archivo de tutores: ");
+                fileName = scanner.nextLine();
+                break;
+            case 7:
+                exit = true;
+                break;
+            default:
+                System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
+                FileManager.pause(scanner);
+                break;
+        }
+    }
+}
+
+
+    
+
+        
+    private static void manageAccountTutors(String fileName) {
+        
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = br.readLine()) != null) {

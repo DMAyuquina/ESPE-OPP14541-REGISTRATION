@@ -11,6 +11,7 @@ import java.util.List;
  *
  * @author Logic Legion, DCCO-ESPE
  */
+
 public class Reader {
 
     public static List<Student> readStudents(String fileName) {
@@ -44,6 +45,10 @@ public class Reader {
 
         return students;
 
+    }
+
+    public static List<Student> readTutors(String fileName) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     public void m(){
         
