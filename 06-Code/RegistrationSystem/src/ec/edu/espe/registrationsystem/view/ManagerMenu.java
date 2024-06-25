@@ -10,6 +10,7 @@ import utils.FileManager;
 import java.util.Scanner;
 import utils.Validation;
 
+<<<<<<< HEAD
 import utils.Validation;
 
 import utils.Validation;
@@ -17,6 +18,8 @@ import utils.Validation;
 import utils.Validation;
 
 
+=======
+>>>>>>> 2d06f64a1e87445a17c099b206d1196d689954d0
 /**
  *
  * @autor Logic Legion, DCCO-ESPE
@@ -60,6 +63,41 @@ public class ManagerMenu {
         return comprobation;
     }
 
+    public static String selectCourse(String fileName) {
+        Scanner scanner = new Scanner(System.in);
+        boolean validate = false;
+        int option = 0;
+        
+        do {
+            System.out.println("\n============================================================");
+            System.out.print("Escoja Un Curso: ");
+            System.out.println("============================================================\n");
+            System.out.println("1. Algebra");
+            System.out.println("2. Quimica");
+            System.out.println("3. Administracion Financiera");
+            System.out.println("4. Contabilidad");
+            System.out.println("5. Marketing");
+            option = Validation.validationOfInt(option, scanner);
+
+        } while (option > 0 && option < 6);
+        
+        switch (option) {
+            case 1:
+                return "Algebra";
+            case 2:
+                return "Quimica";
+            case 3: 
+                return "Administracion Financiera";
+            case 4:
+                return "Contabilidad";
+            case 5: 
+                return "Marketing";
+            default:
+                throw new AssertionError();
+        }
+        
+    }
+
     public static void callMainMenu() {
 
         AdminAccount adminUser = new AdminAccount();
@@ -72,7 +110,7 @@ public class ManagerMenu {
             System.out.println("============================================================");
             System.out.println("        INSTITUTO TECNOLOGICO SUPERIOR BOLIVAR V0.12");
             System.out.println("============================================================");
-            System.out.println("SISTEMA DE MATRICULAS DE ESTUDIANTES");
+            System.out.println("            SISTEMA DE MATRICULAS DE ESTUDIANTES");
             System.out.println("------------------------------------------------------------");
 
             System.out.println("Seleccione un usuario:");
@@ -90,25 +128,21 @@ public class ManagerMenu {
             if (userType != 0) {
                 switch (userType) {
                     case 1 -> {
-                        System.out.println("\n============================================================");
-                        System.out.print("Introduzca el Curso: ");
-                        fileName = scanner.next();
-                        scanner.nextLine();
+                        
+                        fileName = selectCourse(fileName);
                         System.out.println("============================================================\n");
                         manageStudents(scanner, fileName);
-                        
+
                     }
                     case 2 -> {
+
                         exit = loginAccounts("", "", scanner);
                         if (exit) {
                             exit = false;
                             break;
                         }
-
-                        System.out.println("\n============================================================");
-                        System.out.print("Introduzca el Curso: ");
-                        fileName = scanner.next();
-                        scanner.nextLine();
+                        
+                        fileName = selectCourse(fileName);
                         System.out.println("============================================================\n");
                         manageProfessors(scanner, fileName);
                     }
@@ -126,27 +160,26 @@ public class ManagerMenu {
                         System.out.println("3. Administrar Tutores");
                         System.out.println("============================================================");
                         int option = scanner.nextInt();
-                        scanner.nextLine(); 
+                        scanner.nextLine();
 
                         if (option == 1) {
-                            System.out.print("Introduzca el Curso: ");
-                            fileName = scanner.next();
-                            scanner.nextLine(); 
+                            fileName = selectCourse(fileName);
                             System.out.println("============================================================\n");
-                            manageAdminStaff(scanner, fileName); 
+                            manageAdminStaff(scanner, fileName);
                         } else if (option == 2) {
                             System.out.println("Abriendo archivo de cuentas de tutores...");
                             String tutorsFileName = "tutorsAccount.csv";
-                            manageAccountTutors(tutorsFileName); 
+                            manageAccountTutors(tutorsFileName);
                         } else if (option == 3) {
                             System.out.println("Abriendo archivo de tutores...");
-                            String tutorsFile = null;
+                            String tutorsFile = "tutors.csv";
                             manageTutors(scanner, tutorsFile);
                         } else {
                             System.out.println("Opción no válida.");
                         }
                     }
-                    case 4 -> exit = true;
+                    case 4 ->
+                        exit = true;
                     default -> {
                         System.out.println("Seleccion invalida. Por favor, intentelo de nuevo.");
                         FileManager.pause(scanner);
@@ -261,13 +294,12 @@ public class ManagerMenu {
     private static void manageAccountTutors(String fileName) {
 
     }
-    
+
     private static void manageTutors(Scanner scanner, String fileName) {
-        
-    Tutor tutorUser = new Tutor(fileName, fileName, fileName, fileName, fileName, fileName);  
 
-    boolean exit = false;
+        Tutor tutorUser = new Tutor(fileName, fileName, fileName, fileName, fileName, fileName);
 
+<<<<<<< HEAD
     while (!exit) {
         System.out.println("\n============================================================");
         System.out.println("Sistema para Administrar Tutores");
@@ -280,9 +312,25 @@ public class ManagerMenu {
         System.out.println("6. Salir");
         System.out.println("------------------------------------------------------------");
         System.out.print("Seleccione una opción: ");
+=======
+        boolean exit = false;
+>>>>>>> 2d06f64a1e87445a17c099b206d1196d689954d0
 
-        int operation = Validation.validationOfInt(0, scanner);
+        while (!exit) {
+            System.out.println("\n============================================================");
+            System.out.println("Sistema para Administrar Tutores");
+            System.out.println("============================================================");
+            System.out.println("1. Agregar Tutores");
+            System.out.println("2. Visualizar Tutores");
+            System.out.println("3. Modificar Tutor");
+            System.out.println("4. Eliminar Tutor");
+            System.out.println("5. Encontrar Tutor por Cédula");
+            System.out.println("6. Cambiar Archivo de Tutores");
+            System.out.println("7. Salir");
+            System.out.println("------------------------------------------------------------");
+            System.out.print("Seleccione una opción: ");
 
+<<<<<<< HEAD
         switch (operation) {
             case 1:
                 tutorUser.addTutors(fileName);
@@ -311,14 +359,43 @@ public class ManagerMenu {
                 System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
                 FileManager.pause(scanner);
                 break;
+=======
+            int operation = Validation.validationOfInt(0, scanner);
+
+            switch (operation) {
+                case 1:
+                    tutorUser.addTutors(fileName);
+                    break;
+                case 2:
+                    tutorUser.readTutors(fileName);
+                    break;
+                case 3:
+                    tutorUser.updateTutors(scanner, fileName, true);
+                    break;
+                case 4:
+                    //tutorUser.deleteTutors(scanner, fileName); 
+                    break;
+                case 5:
+                    tutorUser.findTutor(scanner, fileName);
+                    break;
+                case 6:
+                    System.out.print("Introduzca el nuevo archivo de tutores: ");
+                    fileName = scanner.nextLine();
+                    break;
+                case 7:
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Selección inválida. Por favor, inténtelo de nuevo.");
+                    FileManager.pause(scanner);
+                    break;
+            }
+>>>>>>> 2d06f64a1e87445a17c099b206d1196d689954d0
         }
     }
-}
-
-
 
     public static void manageStudents(Scanner scanner, String fileName) {
-       FileManager fileManager = new FileManager();
+        FileManager fileManager = new FileManager();
         boolean exit = false;
 
         while (!exit) {
@@ -346,11 +423,12 @@ public class ManagerMenu {
                     }
                     case 3 ->
                         exit = true;
-                    default ->{
+                    default -> {
                         System.out.println("Seleccion invalida. Por favor, intentelo de nuevo.");
-                        FileManager.pause(scanner);                }
+                        FileManager.pause(scanner);
+                    }
                 }
             }
         }
-    } 
+    }
 }
