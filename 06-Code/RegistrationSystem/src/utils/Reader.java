@@ -15,15 +15,14 @@ import java.util.List;
 
 public class Reader {
 
-    public static List<Student> readStudents(String fileName) {
-        List<Student> students = new ArrayList<>();
+    public static ArrayList<Student> readStudents(String fileName) {
+        ArrayList<Student> students = new ArrayList();
 
-        
         fileName = fileName + ".csv";
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
-             while ((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
                 String[] values = line.split(",");
                 Registration typeOfRegistration = new Registration(values[6]);
                 Student student = new Student(
@@ -37,8 +36,6 @@ public class Reader {
                         values[7],
                         values[8],
                         values[9]
-            
-           
                 );
                 students.add(student);
             }
@@ -48,29 +45,5 @@ public class Reader {
 
         return students;
 
-    }
-
-    public static List<Student> readTutors(String fileName) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    public void m(){
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    }
+    }    
 }
