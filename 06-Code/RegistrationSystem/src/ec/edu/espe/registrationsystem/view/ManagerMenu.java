@@ -294,7 +294,7 @@ public class ManagerMenu {
             System.out.println("2. Visualizar Cuenta de Tutores");
             System.out.println("3. Modificar Cuenta de Tutor");
             System.out.println("4. Eliminar Cuenta de Tutor");
-            System.out.println("5. Encontrar Cuenta de Tutor Usuario");
+            System.out.println("5. Encontrar Cuenta de Tutor por Usuario");
             System.out.println("6. Salir");
             System.out.println("------------------------------------------------------------");
             System.out.print("Seleccione una opción: ");
@@ -303,10 +303,8 @@ public class ManagerMenu {
 
             switch (operation) {
                 case 1:
-                    String user = "", passWord = "";
-                    ArrayList<Tutor> tutors = Tutor.readTutors("tutors");
-                    AdminAccount.createTutorAccount(fileName, fileName);
-                    break;
+                    AdminAccount.createTutorAccounts();
+                    FileManager.pause(scanner);
                 case 2:
                     List<TutorAccount> tutorsA = TutorAccount.readTutorsA(fileName);
                     TutorAccount.printTutors(tutorsA);
@@ -317,9 +315,11 @@ public class ManagerMenu {
                     break;
                 case 4:
                     tutorAUser.deleteTutorsA(scanner, fileName);
+                    FileManager.pause(scanner);
                     break;
                 case 5:
                     tutorAUser.findTutorA(scanner, fileName);
+                    FileManager.pause(scanner);
                     break;
 
                 case 6:
@@ -336,7 +336,6 @@ public class ManagerMenu {
 
     private static void manageTutors(Scanner scanner, String fileName) {
 
-        Tutor tutorUser = new Tutor(fileName, fileName, fileName, fileName, fileName, fileName);
 
         boolean exit = false;
         while (!exit) {
@@ -357,7 +356,7 @@ public class ManagerMenu {
 
             switch (operation) {
                 case 1:
-                    tutorUser.addTutors(fileName);
+                    Tutor.addTutors(fileName);
                     break;
                 case 2:
                     List<Tutor> tutors = Tutor.readTutors(fileName);
@@ -365,13 +364,13 @@ public class ManagerMenu {
                     FileManager.pause(scanner);
                     break;
                 case 3:
-                    tutorUser.updateTutors(scanner, fileName, true);
+                    Tutor.updateTutors(scanner, fileName, true);
                     break;
                 case 4:
-                    //tutorUser.deleteTutors(scanner, fileName); 
+                    Tutor.deleteTutors(scanner, fileName); 
                     break;
                 case 5:
-                    tutorUser.findTutor(scanner, fileName);
+                    Tutor.findTutor(scanner, fileName);
                     break;
                 case 6:
                     System.out.print("Introduzca el nuevo archivo de tutores: ");

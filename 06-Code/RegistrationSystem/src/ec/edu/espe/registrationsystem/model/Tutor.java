@@ -15,68 +15,28 @@ public class Tutor {
     private String dni;
     private String name;
     private String lastName;
-    private String careerCode;
+    private Career career;
     private String email;
     private String phone;
+    private Course course;
 
-    public Tutor(String dni, String name, String lastName, String careerCode, String email, String phone) {
+    public Tutor(String dni, String name, String lastName, Career career, String email, String phone, Course course) {
         this.dni = dni;
         this.name = name;
         this.lastName = lastName;
-        this.careerCode = careerCode;
+        this.career = career;
         this.email = email;
         this.phone = phone;
+        this.course = course;
     }
 
-    public String getDni() {
-        return dni;
+    @Override
+    public String toString() {
+        return dni + "," + name + "," + lastName + "," + career + "," + email + "," + phone + "," + course;
     }
 
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
+    public static void addTutors(String fileName) {
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getCareerCode() {
-        return careerCode;
-    }
-
-    public void setCareerCode(String careerCode) {
-        this.careerCode = careerCode;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public void addTutors(String fileName) {
         Scanner scanner = new Scanner(System.in);
         int tutorNumber = 0;
         do {
@@ -165,7 +125,17 @@ public class Tutor {
                 }
             } while (phone.length() != 10 || validation);
 
-            Tutor tutor = new Tutor(dni, name, lastName, careerCode, email, phone);
+            String course = "";
+            do {
+                System.out.println("------------------------------------------------------------");
+                System.out.print("Ingrese el curso: ");
+                course = scanner.next();
+                validation = Validation.validationOfCharacter(course);
+            } while (!validation);
+
+            Career careerName = new Career(careerCode);
+            Course courseName = new Course(course);
+            Tutor tutor = new Tutor(dni, name, lastName, careerName, email, phone, courseName);
             FileManager.FileSave(tutor.toString(), fileName);
         }
     }
@@ -188,19 +158,22 @@ public class Tutor {
     public static ArrayList<Tutor> readTutors(String fileName) {
         ArrayList<Tutor> tutors = new ArrayList<>();
         int i = 0;
-
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName + ".csv"))) {
             String line;
             while ((line = reader.readLine()) != null) {
+
                 if (i != 0) {
                     String[] values = line.split(",");
+                    Career careerName = new Career(values[3]);
+                    Course courseName = new Course(values[6]);
                     Tutor tutor = new Tutor(
                             values[0],
                             values[1],
                             values[2],
-                            values[3],
+                            careerName,
                             values[4],
-                            values[5]
+                            values[5],
+                            courseName
                     );
                     tutors.add(tutor);
                 }
@@ -226,15 +199,16 @@ public class Tutor {
                 System.out.println("Cedula: " + tutor.getDni());
                 System.out.println("Nombre: " + tutor.getName());
                 System.out.println("Apellido: " + tutor.getLastName());
-                System.out.println("Codigo de Carrera: " + tutor.getCareerCode());
+                System.out.println("Codigo de Carrera: " + tutor.getCareer());
                 System.out.println("Email: " + tutor.getEmail());
                 System.out.println("Celular: " + tutor.getPhone());
+                System.out.println("Curso: " + tutor.getCourse());
             }
             System.out.println("-------------------------------------------------------------------------------------");
         }
     }
 
-    public void updateTutors(Scanner scanner, String fileName, boolean adminOProfesor) {
+    public static void updateTutors(Scanner scanner, String fileName, boolean adminOProfesor) {
         System.out.println("\n============================================================");
         String dni;
 
@@ -264,9 +238,10 @@ public class Tutor {
 
             System.out.println("Nombre: " + existingTutor.getName());
             System.out.println("Apellido: " + existingTutor.getLastName());
-            System.out.println("Codigo de Carrera: " + existingTutor.getCareerCode());
+            System.out.println("Codigo de Carrera: " + existingTutor.getCareer());
             System.out.println("Email: " + existingTutor.getEmail());
             System.out.println("Celular: " + existingTutor.getPhone());
+            System.out.println("Curso: " + existingTutor.getCourse());
 
             System.out.println("------------------------------------------------------------");
             System.out.print("Nombre [" + existingTutor.getName() + "]: ");
@@ -281,11 +256,12 @@ public class Tutor {
                 existingTutor.setLastName(lastName);
             }
 
-            System.out.print("Codigo de Carrera [" + existingTutor.getCareerCode() + "]: ");
+            System.out.print("Codigo de Carrera [" + existingTutor.getCareer() + "]: ");
             String careerCode = scanner.next();
+            Career careerName = new Career(careerCode);
             scanner.nextLine();
             if (!careerCode.isEmpty()) {
-                existingTutor.setCareerCode(careerCode);
+                existingTutor.setCareer(careerName);
             }
 
             System.out.print("Email [" + existingTutor.getEmail() + "]: ");
@@ -307,13 +283,21 @@ public class Tutor {
 
             existingTutor.setPhone(phone);
 
+            System.out.print("Curso [" + existingTutor.getCourse() + "]: ");
+            String course = scanner.next();
+            Course courseName = new Course(course);
+            scanner.nextLine();
+            if (!careerCode.isEmpty()) {
+                existingTutor.setCourse(courseName);
+            }
+
             updateTutorInFile(fileName, existingTutor);
         } else {
             System.out.println("Tutor no encontrado o no tiene permisos para editar");
         }
     }
 
-    private void updateTutorInFile(String fileName, Tutor updatedTutor) {
+    public static void updateTutorInFile(String fileName, Tutor updatedTutor) {
         List<Tutor> tutors = readTutors(fileName);
         boolean found = false;
 
@@ -336,7 +320,7 @@ public class Tutor {
         }
     }
 
-    public void findTutor(Scanner scanner, String fileName) {
+    public static void findTutor(Scanner scanner, String fileName) {
         System.out.println("============================================================");
         System.out.print("Introduzca la cedula del Tutor: ");
         String dni = scanner.next();
@@ -352,9 +336,10 @@ public class Tutor {
                         System.out.println("------------------------------------------------------------");
                         System.out.println("Nombre: " + tutor.getName());
                         System.out.println("Apellido: " + tutor.getLastName());
-                        System.out.println("Codigo de Carrera: " + tutor.getCareerCode());
+                        System.out.println("Codigo de Carrera: " + tutor.getCareer());
                         System.out.println("Email: " + tutor.getEmail());
                         System.out.println("Celular: " + tutor.getPhone());
+                        System.out.println("Curso: " + tutor.getCourse());
                     } else {
                         System.out.println("Tutor con cedula " + dni + " no encontrado");
                     }
@@ -371,8 +356,8 @@ public class Tutor {
 
         scanner.nextLine();
     }
-    
-    public void deleteTutors(Scanner scanner, String fileName) {
+
+    public static void deleteTutors(Scanner scanner, String fileName) {
         System.out.println("============================================================");
         System.out.print("Introduzca la cedula del Tutor a eliminar: ");
         String dni = scanner.next();
@@ -403,5 +388,103 @@ public class Tutor {
     public static void pause(Scanner scanner) {
         System.out.print("Pulse Enter para continuar...\n");
         scanner.nextLine();
+    }
+
+    /**
+     * @return the dni
+     */
+    public String getDni() {
+        return dni;
+    }
+
+    /**
+     * @param dni the dni to set
+     */
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * @return the lastName
+     */
+    public String getLastName() {
+        return lastName;
+    }
+
+    /**
+     * @param lastName the lastName to set
+     */
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    /**
+     * @return the career
+     */
+    public Career getCareer() {
+        return career;
+    }
+
+    /**
+     * @param career the career to set
+     */
+    public void setCareer(Career career) {
+        this.career = career;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * @return the phone
+     */
+    public String getPhone() {
+        return phone;
+    }
+
+    /**
+     * @param phone the phone to set
+     */
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    /**
+     * @return the course
+     */
+    public Course getCourse() {
+        return course;
+    }
+
+    /**
+     * @param course the course to set
+     */
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }

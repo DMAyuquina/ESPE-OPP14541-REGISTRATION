@@ -9,11 +9,30 @@ import utils.Reader;
  */
 public class Course {
 
-    private String courses;
-    private ArrayList<Student> students = Reader.readStudents(courses);
-    private Tutor tutor;
-    
-    public static void readCourse(){
-        
+    private String course;
+
+    @Override
+    public String toString() {
+        return course;
     }
+
+    public Course(String course) {
+        this.course = course;
+    }
+
+    /**
+     * @return the course
+     */
+    public String getCourse() {
+        return course;
+    }
+
+    /**
+     * @param course the course to set
+     */
+    public void setCourse(String course) {
+        this.course = course;
+    }
+    
+    
 }

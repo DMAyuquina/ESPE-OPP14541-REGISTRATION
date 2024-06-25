@@ -31,6 +31,26 @@ public class AdminAccount {
     }
 
     //Methods
+    
+    public static void createTutorAccounts() {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Ingrese el número de cuentas de tutores que desea añadir: ");
+        int numAccounts = scanner.nextInt();
+        scanner.nextLine(); // Consumir el salto de línea
+
+        for (int i = 0; i < numAccounts; i++) {
+            System.out.print("Ingrese el nombre de usuario del tutor " + (i + 1) + ": ");
+            String tutorUser = scanner.nextLine();
+            
+            System.out.print("Ingrese la contraseña del tutor " + (i + 1) + ": ");
+            String tutorPassword = scanner.nextLine();
+            
+            createTutorAccount(tutorUser, tutorPassword);
+        }
+        
+        System.out.println("Cuentas de tutores añadidas exitosamente.");
+    }
 
     public static void createTutorAccount(String tutorUser, String tutorPassword) {
         TutorAccount tutor = new TutorAccount(tutorUser, tutorPassword);

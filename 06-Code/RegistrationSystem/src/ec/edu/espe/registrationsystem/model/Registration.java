@@ -12,7 +12,7 @@ public class Registration {
     
     @Override
     public String toString() {
-        return "Registration{" + "typeoOfRegistration=" + typeoOfRegistration + '}';
+        return typeoOfRegistration;
     }
     
     public Registration(String typeoOfRegistration) {

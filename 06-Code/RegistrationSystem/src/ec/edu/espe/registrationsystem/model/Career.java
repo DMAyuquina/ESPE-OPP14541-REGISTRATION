@@ -6,23 +6,22 @@ package ec.edu.espe.registrationsystem.model;
  */
 public class Career {
 
-    private String careers;
-
-    public Career(String careers) {
-        this.careers = careers;
-    }
-
-    public String getCareers() {
-        return careers;
-    }
-
-    public void setCareers(String careers) {
-        this.careers = careers;
-    }
+    private String career;
 
     @Override
     public String toString() {
-        return super.toString();
+        return career;
     }
 
+    public Career(String career) {
+        this.career = career;
+    }
+
+    public String getCareer() {
+        return career;
+    }
+
+    public void setCareer(String career) {
+        this.career = career;
+    }
 }
