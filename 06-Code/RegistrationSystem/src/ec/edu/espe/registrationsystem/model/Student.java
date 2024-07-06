@@ -21,16 +21,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Dni=" + dni 
-                +"\nNombre :" + name + 
-                "\nApellido : " + lastName 
-                +"\nCodigo de carrera :" + careerCode + 
-                "\nEmail : " + email 
-                +"\nTelefono : " + phone + 
-                "\nTipo de matricula : " + typeOfRegistration 
-                +"\nNota : " + grade 
-                +"\nSupletorio : " + lastChance 
-                +"\nGratuity : " + gratuity;
+        return dni +"," + name + "," + lastName +"," + careerCode +"," + email +"," + phone + "," + typeOfRegistration +"," + grade+"," + lastChance +"," + gratuity;
     }
 
     public Student(String dni, String name, String lastName, String careerCode, String email, String phone, Registration typeOfRegistration, String grade, String lastChance, String gratuity) {
