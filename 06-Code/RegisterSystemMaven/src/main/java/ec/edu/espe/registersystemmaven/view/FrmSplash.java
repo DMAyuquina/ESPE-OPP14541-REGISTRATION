@@ -34,7 +34,6 @@ public class FrmSplash extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("INSTITUTO SUPERIOR SIMÓN BOLÍVAR");
 
-        BtnNextSplashScreen.setBackground(new java.awt.Color(204, 0, 0));
         BtnNextSplashScreen.setText("Siguiente");
         BtnNextSplashScreen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

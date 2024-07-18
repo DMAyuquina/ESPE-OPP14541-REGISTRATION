@@ -34,23 +34,17 @@
             <Property name="text" type="java.lang.String" value="Curso"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="menuAlgebra">
+            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jCheckBoxMenuItem1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#xc1;lgebra"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuAlgebraActionPerformed"/>
-              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="menuChemestry">
+            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jCheckBoxMenuItem2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Quimica"/>
+                <Property name="text" type="java.lang.String" value="Qu&#xed;mica"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuChemestryActionPerformed"/>
-              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="menuAdministration">
+            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jCheckBoxMenuItem3">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Administraci&#xf3;n financiera"/>
               </Properties>
@@ -62,22 +56,38 @@
             <Property name="text" type="java.lang.String" value="Tipo de b&#xfa;squeda"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="menuById">
+            <MenuItem class="javax.swing.JMenuItem" name="menuByDni">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Por c&#xe9;dula"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuByDniActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menuByName">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Por nombre"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuByNameActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu3">
+        <Menu class="javax.swing.JMenu" name="mReport">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Generar Reporte"/>
+            <Property name="text" type="java.lang.String" value="Reporte"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="menuReport">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Generar reporte"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuReportActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
         </Menu>
       </SubComponents>
     </Menu>

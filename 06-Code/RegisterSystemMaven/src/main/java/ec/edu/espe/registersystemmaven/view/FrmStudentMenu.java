@@ -33,13 +33,14 @@ public class FrmStudentMenu extends javax.swing.JFrame {
         menuUser = new javax.swing.JMenu();
         menuLogOut = new javax.swing.JMenuItem();
         menuCourse = new javax.swing.JMenu();
-        menuAlgebra = new javax.swing.JMenuItem();
-        menuChemestry = new javax.swing.JMenuItem();
-        menuAdministration = new javax.swing.JMenuItem();
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItem3 = new javax.swing.JCheckBoxMenuItem();
         menuTypeOfSearch = new javax.swing.JMenu();
-        menuById = new javax.swing.JMenuItem();
+        menuByDni = new javax.swing.JMenuItem();
         menuByName = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        mReport = new javax.swing.JMenu();
+        menuReport = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -74,39 +75,48 @@ public class FrmStudentMenu extends javax.swing.JFrame {
 
         menuCourse.setText("Curso");
 
-        menuAlgebra.setText("Álgebra");
-        menuAlgebra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuAlgebraActionPerformed(evt);
-            }
-        });
-        menuCourse.add(menuAlgebra);
+        jCheckBoxMenuItem1.setText("Álgebra");
+        menuCourse.add(jCheckBoxMenuItem1);
 
-        menuChemestry.setText("Quimica");
-        menuChemestry.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuChemestryActionPerformed(evt);
-            }
-        });
-        menuCourse.add(menuChemestry);
+        jCheckBoxMenuItem2.setText("Química");
+        menuCourse.add(jCheckBoxMenuItem2);
 
-        menuAdministration.setText("Administración financiera");
-        menuCourse.add(menuAdministration);
+        jCheckBoxMenuItem3.setText("Administración financiera");
+        menuCourse.add(jCheckBoxMenuItem3);
 
         jMenuBar1.add(menuCourse);
 
         menuTypeOfSearch.setText("Tipo de búsqueda");
 
-        menuById.setText("Por cédula");
-        menuTypeOfSearch.add(menuById);
+        menuByDni.setText("Por cédula");
+        menuByDni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuByDniActionPerformed(evt);
+            }
+        });
+        menuTypeOfSearch.add(menuByDni);
 
         menuByName.setText("Por nombre");
+        menuByName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuByNameActionPerformed(evt);
+            }
+        });
         menuTypeOfSearch.add(menuByName);
 
         jMenuBar1.add(menuTypeOfSearch);
 
-        jMenu3.setText("Generar Reporte");
-        jMenuBar1.add(jMenu3);
+        mReport.setText("Reporte");
+
+        menuReport.setText("Generar reporte");
+        menuReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuReportActionPerformed(evt);
+            }
+        });
+        mReport.add(menuReport);
+
+        jMenuBar1.add(mReport);
 
         setJMenuBar(jMenuBar1);
 
@@ -124,17 +134,30 @@ public class FrmStudentMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void menuChemestryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuChemestryActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menuChemestryActionPerformed
-
     private void menuLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLogOutActionPerformed
-        // TODO add your handling code here:
+        FrmLogin frmLogin = new FrmLogin();
+        this.setVisible(false);
+        frmLogin.setVisible(true);
     }//GEN-LAST:event_menuLogOutActionPerformed
 
-    private void menuAlgebraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAlgebraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menuAlgebraActionPerformed
+    private void menuByDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuByDniActionPerformed
+        FrmSearchingByDni frmSearchingByDni = new FrmSearchingByDni();
+        this.setVisible(false);
+        frmSearchingByDni.setVisible(true);
+    }//GEN-LAST:event_menuByDniActionPerformed
+
+    private void menuByNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuByNameActionPerformed
+        FrmSearchingByName frmSearchingByName = new FrmSearchingByName();
+        this.setVisible(false);
+        frmSearchingByName.setVisible(true);
+    }//GEN-LAST:event_menuByNameActionPerformed
+
+    private void menuReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuReportActionPerformed
+        FrmStudentReport frmStudentReport = new FrmStudentReport();
+        this. setVisible(false);
+        frmStudentReport.setVisible(true);
+        
+    }//GEN-LAST:event_menuReportActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,18 +196,19 @@ public class FrmStudentMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu3;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JMenuItem menuAdministration;
-    private javax.swing.JMenuItem menuAlgebra;
-    private javax.swing.JMenuItem menuById;
+    private javax.swing.JMenu mReport;
+    private javax.swing.JMenuItem menuByDni;
     private javax.swing.JMenuItem menuByName;
-    private javax.swing.JMenuItem menuChemestry;
     private javax.swing.JMenu menuCourse;
     private javax.swing.JMenuItem menuLogOut;
+    private javax.swing.JMenuItem menuReport;
     private javax.swing.JMenu menuTypeOfSearch;
     private javax.swing.JMenu menuUser;
     // End of variables declaration//GEN-END:variables
