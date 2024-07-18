@@ -43,26 +43,37 @@ public class FrmStudentReport extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel1.setForeground(new java.awt.Color(153, 0, 51));
         jLabel1.setText("Cédula:");
 
+        jLabel2.setForeground(new java.awt.Color(153, 0, 51));
         jLabel2.setText("Nombres:");
 
+        jLabel3.setForeground(new java.awt.Color(153, 0, 51));
         jLabel3.setText("Apellidos:");
 
+        jLabel4.setForeground(new java.awt.Color(153, 0, 51));
         jLabel4.setText("Código de carrera:");
 
+        jLabel5.setForeground(new java.awt.Color(153, 0, 51));
         jLabel5.setText("Email:");
 
+        jLabel6.setForeground(new java.awt.Color(153, 0, 51));
         jLabel6.setText("Celular:");
 
+        jLabel7.setForeground(new java.awt.Color(153, 0, 51));
         jLabel7.setText("Tipo de matrícula:");
 
+        jLabel8.setForeground(new java.awt.Color(153, 0, 51));
         jLabel8.setText("Calificación:");
 
+        jLabel9.setForeground(new java.awt.Color(153, 0, 51));
         jLabel9.setText("Supletorio:");
 
+        jLabel10.setForeground(new java.awt.Color(153, 0, 51));
         jLabel10.setText("Gratuidad:");
 
+        btnBack.setBackground(new java.awt.Color(153, 0, 51));
         btnBack.setText("Regresar");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
