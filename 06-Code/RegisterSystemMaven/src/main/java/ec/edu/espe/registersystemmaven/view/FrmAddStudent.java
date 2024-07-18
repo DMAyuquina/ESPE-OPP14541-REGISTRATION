@@ -4,6 +4,9 @@
  */
 package ec.edu.espe.registersystemmaven.view;
 
+import java.awt.Color;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Danny Ayuquina, LogicLegion, DCCO-ESPE
@@ -52,6 +55,7 @@ public class FrmAddStudent extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        btnAddStudents = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -147,6 +151,15 @@ public class FrmAddStudent extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(153, 0, 51));
         jLabel11.setText("Datos Generales");
 
+        btnAddStudents.setBackground(new java.awt.Color(153, 0, 51));
+        btnAddStudents.setForeground(new java.awt.Color(255, 255, 255));
+        btnAddStudents.setText("Agregar");
+        btnAddStudents.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddStudentsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -188,17 +201,18 @@ public class FrmAddStudent extends javax.swing.JFrame {
                 .addContainerGap(11, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnBack)
-                        .addGap(35, 35, 35))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(151, 151, 151))))
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(151, 151, 151))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(157, 157, 157)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(btnAddStudents)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnBack)
+                .addGap(35, 35, 35))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,7 +264,9 @@ public class FrmAddStudent extends javax.swing.JFrame {
                     .addComponent(jLabel10)
                     .addComponent(txtLastChance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addComponent(btnBack)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBack)
+                    .addComponent(btnAddStudents))
                 .addGap(18, 18, 18))
         );
 
@@ -275,7 +291,8 @@ public class FrmAddStudent extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
-        // TODO add your handling code here:
+        this.txtId.getText();
+
     }//GEN-LAST:event_txtIdActionPerformed
 
     private void txtLastChanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLastChanceActionPerformed
@@ -285,6 +302,31 @@ public class FrmAddStudent extends javax.swing.JFrame {
     private void txtGradeU2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGradeU2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGradeU2ActionPerformed
+
+    private void btnAddStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStudentsActionPerformed
+        String id = this.txtId.getText();
+
+        if (utils.Validation.validationDni(id.length(), id)) {
+            // Código para agregar estudiante
+            // Recoger los valores de los demás campos de texto y procesarlos según sea necesario
+            String Name = txtName.getText();
+            String LastName = txtLastName.getText();
+            String codigoCarrera = txtCarrearCode.getText();
+            String email = txtEmail.getText();
+            String celular = txtPhone.getText();
+            String tipoMatricula = cmbRegistrationType.getSelectedItem().toString();
+            String unidad1 = txtGradeU1.getText();
+            String unidad2 = txtGradeU2.getText();
+            String supletorio = txtLastChance.getText();
+
+            // Aquí puedes agregar el código para guardar estos datos en la base de datos o en la nube
+            JOptionPane.showMessageDialog(this, "Estudiante agregado exitosamente.");
+            txtId.setBackground(Color.WHITE); // Restablecer el color de fondo en caso de éxito
+        } else {
+            txtId.setBackground(Color.RED);
+            JOptionPane.showMessageDialog(this, "Cédula inválida.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAddStudentsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -323,6 +365,7 @@ public class FrmAddStudent extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddStudents;
     private javax.swing.JButton btnBack;
     private javax.swing.JComboBox<String> cmbRegistrationType;
     private javax.swing.JLabel jLabel1;

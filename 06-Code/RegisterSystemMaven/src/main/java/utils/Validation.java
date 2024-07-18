@@ -60,34 +60,39 @@ public class Validation {
     }
     
     public static boolean validationDni(int length, String dni) {
+        if(length==10){
+            int digOdd = 0, digPair = 0, addOdds = 0, addPairs = 0, comp, comp2;
+            String dig1, dig2;
 
-        int digOdd = 0, digPair = 0, addOdds = 0, addPairs = 0, comp, comp2;
-        String dig1, dig2;
-
-        for (int j = 0; j < length - 1; j++) {
-            if ((j + 1) % 2 != 0) {
-                dig1 = Character.toString(dni.charAt(j));
-                digOdd = 2 * Integer.parseInt(dig1);
-                if (digOdd > 9) {
-                    digOdd = digOdd - 9;
+            for (int j = 0; j < length - 1; j++) {
+                if ((j + 1) % 2 != 0) {
+                    dig1 = Character.toString(dni.charAt(j));
+                    digOdd = 2 * Integer.parseInt(dig1);
+                    if (digOdd > 9) {
+                        digOdd = digOdd - 9;
+                    }
+                    addOdds += digOdd;
+                } else {
+                    dig2 = Character.toString(dni.charAt(j));
+                    digPair = Integer.parseInt(dig2);
+                    addPairs += digPair;
                 }
-                addOdds += digOdd;
+            }
+
+            dig1 = Character.toString(dni.charAt(9));
+            digPair = Integer.parseInt(dig1);
+            comp = (addOdds + addPairs) % 10;
+            comp2 = 10 - comp;
+
+            if (comp == 0) {
+                return comp == digPair;
             } else {
-                dig2 = Character.toString(dni.charAt(j));
-                digPair = Integer.parseInt(dig2);
-                addPairs += digPair;
+                return comp2 == digPair;
             }
         }
-
-        dig1 = Character.toString(dni.charAt(9));
-        digPair = Integer.parseInt(dig1);
-        comp = (addOdds + addPairs) % 10;
-        comp2 = 10 - comp;
-
-        if (comp == 0) {
-            return comp == digPair;
-        } else {
-            return comp2 == digPair;
-        }
+        return false;
     }
 }
+    
+    
+
