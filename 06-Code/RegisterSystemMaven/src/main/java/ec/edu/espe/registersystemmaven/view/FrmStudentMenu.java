@@ -31,7 +31,7 @@ public class FrmStudentMenu extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuUser = new javax.swing.JMenu();
-        menuLogOut = new javax.swing.JMenuItem();
+        mnuiBack = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         menuCourse = new javax.swing.JMenu();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
@@ -64,13 +64,13 @@ public class FrmStudentMenu extends javax.swing.JFrame {
 
         menuUser.setText("Usuario");
 
-        menuLogOut.setText("Cerrar sesión");
-        menuLogOut.addActionListener(new java.awt.event.ActionListener() {
+        mnuiBack.setText("Regresar");
+        mnuiBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuLogOutActionPerformed(evt);
+                mnuiBackActionPerformed(evt);
             }
         });
-        menuUser.add(menuLogOut);
+        menuUser.add(mnuiBack);
 
         jMenuItem3.setText("Salir");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -82,7 +82,7 @@ public class FrmStudentMenu extends javax.swing.JFrame {
 
         jMenuBar1.add(menuUser);
 
-        menuCourse.setText("Curso");
+        menuCourse.setText("Estudiante");
 
         jCheckBoxMenuItem1.setText("Álgebra");
         menuCourse.add(jCheckBoxMenuItem1);
@@ -143,11 +143,11 @@ public class FrmStudentMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void menuLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLogOutActionPerformed
+    private void mnuiBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuiBackActionPerformed
         FrmLogin frmLogin = new FrmLogin();
         this.setVisible(false);
         frmLogin.setVisible(true);
-    }//GEN-LAST:event_menuLogOutActionPerformed
+    }//GEN-LAST:event_mnuiBackActionPerformed
 
     private void menuByDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuByDniActionPerformed
         FrmSearchingByDni frmSearchingByDni = new FrmSearchingByDni();
@@ -162,7 +162,7 @@ public class FrmStudentMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_menuByNameActionPerformed
 
     private void menuReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuReportActionPerformed
-        FrmStudentReport frmStudentReport = new FrmStudentReport();
+        FrmAddStudent frmStudentReport = new FrmAddStudent();
         this. setVisible(false);
         frmStudentReport.setVisible(true);
         
@@ -221,9 +221,9 @@ public class FrmStudentMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuByDni;
     private javax.swing.JMenuItem menuByName;
     private javax.swing.JMenu menuCourse;
-    private javax.swing.JMenuItem menuLogOut;
     private javax.swing.JMenuItem menuReport;
     private javax.swing.JMenu menuTypeOfSearch;
     private javax.swing.JMenu menuUser;
+    private javax.swing.JMenuItem mnuiBack;
     // End of variables declaration//GEN-END:variables
 }

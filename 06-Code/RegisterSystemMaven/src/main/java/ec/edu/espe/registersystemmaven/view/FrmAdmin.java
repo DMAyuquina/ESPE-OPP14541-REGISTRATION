@@ -34,6 +34,11 @@ public class FrmAdmin extends javax.swing.JFrame {
         mnuiExit = new javax.swing.JMenuItem();
         mnuStudent = new javax.swing.JMenu();
         mnuiCourse = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         mnuTutor = new javax.swing.JMenu();
         mnuiManageAccounts = new javax.swing.JMenuItem();
         mnuiManageTutors = new javax.swing.JMenuItem();
@@ -50,11 +55,11 @@ public class FrmAdmin extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 640, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGap(0, 369, Short.MAX_VALUE)
         );
 
         mnuUser.setText("Usuario");
@@ -82,8 +87,29 @@ public class FrmAdmin extends javax.swing.JFrame {
 
         mnuStudent.setText("Estudiante");
 
-        mnuiCourse.setText("Curso");
+        mnuiCourse.setText("Agregar Estudiante en un curso");
+        mnuiCourse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuiCourseActionPerformed(evt);
+            }
+        });
         mnuStudent.add(mnuiCourse);
+
+        jMenu1.setText("Buscar Estudiante");
+
+        jMenuItem1.setText("Por Cedula");
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("Por Nombre");
+        jMenu1.add(jMenuItem2);
+
+        mnuStudent.add(jMenu1);
+
+        jMenuItem3.setText("Eliminar Estudiante");
+        mnuStudent.add(jMenuItem3);
+
+        jMenuItem4.setText("Editar información del estudiante");
+        mnuStudent.add(jMenuItem4);
 
         jMenuBar1.add(mnuStudent);
 
@@ -134,6 +160,10 @@ public class FrmAdmin extends javax.swing.JFrame {
         
     }//GEN-LAST:event_mnuiExitActionPerformed
 
+    private void mnuiCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuiCourseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnuiCourseActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -170,7 +200,12 @@ public class FrmAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenu mnuReport;
     private javax.swing.JMenu mnuStudent;
