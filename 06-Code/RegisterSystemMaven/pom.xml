@@ -9,6 +9,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
-        <exec.mainClass>ec.edu.espe.registersystemmaven.RegisterSystemMaven</exec.mainClass>
+        <exec.mainClass>ec.edu.espe.registersystemmaven..view.FrmSplash</exec.mainClass>
     </properties>
 </project>
