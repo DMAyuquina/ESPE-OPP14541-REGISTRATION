@@ -71,6 +71,11 @@ public class FrmAdmin extends javax.swing.JFrame {
         mnuUser.add(mnuiLogout);
 
         mnuiExit.setText("Salir");
+        mnuiExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuiExitActionPerformed(evt);
+            }
+        });
         mnuUser.add(mnuiExit);
 
         jMenuBar1.add(mnuUser);
@@ -124,6 +129,10 @@ public class FrmAdmin extends javax.swing.JFrame {
     private void mnuiProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuiProfileActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mnuiProfileActionPerformed
+
+    private void mnuiExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuiExitActionPerformed
+        
+    }//GEN-LAST:event_mnuiExitActionPerformed
 
     /**
      * @param args the command line arguments
