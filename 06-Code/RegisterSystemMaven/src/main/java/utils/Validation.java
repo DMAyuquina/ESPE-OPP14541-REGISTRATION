@@ -3,64 +3,46 @@ package utils;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-/**
- *
- * @author LogicLegion, DCCO-ESPE
- */
 public class Validation {
 
     public static int validationOfInt(int number, Scanner scanner) {
         try {
             number = scanner.nextInt();
-
         } catch (InputMismatchException e) {
             scanner.nextLine();
             System.out.println("Se ha ingresado un caracter no valido");
-            
             return 0;
         }
         scanner.nextLine();
         return number;
     }
-    
 
-    public static float validationOfFloat(float grade, Scanner scanner){
-        
-        try{
+    public static float validationOfFloat(float grade, Scanner scanner) {
+        try {
             grade = scanner.nextFloat();
-        }catch(InputMismatchException e){
+        } catch (InputMismatchException e) {
             grade = -1.0F;
             System.out.println("Se ha ingresado un valor no valido.");
         }
         scanner.nextLine();
         return grade;
     }
-    public static boolean validationOfCharacter(String phrase) {
 
-        boolean validation = false;
+    public static boolean validationOfCharacter(String phrase) {
         for (int i = 0; i < phrase.length(); i++) {
-            if (Character.isLetter(phrase.charAt(i)) || phrase.charAt(i) == ' ') {
-                validation = true;
-            } else {
+            if (!Character.isLetter(phrase.charAt(i)) && phrase.charAt(i) != ' ') {
                 return false;
             }
         }
-        return validation;
+        return true;
     }
 
     public static boolean validationEmail(String email) {
-        
-
-        for (int i = 0; i < email.length(); i++) {
-            if(email.charAt(i)=='@'){
-                return true;
-            }   
-        }
-        return false;
+        return email.contains("@");
     }
-    
+
     public static boolean validationDni(int length, String dni) {
-        if(length==10){
+        if (length == 10) {
             int digOdd = 0, digPair = 0, addOdds = 0, addPairs = 0, comp, comp2;
             String dig1, dig2;
 
@@ -84,15 +66,21 @@ public class Validation {
             comp = (addOdds + addPairs) % 10;
             comp2 = 10 - comp;
 
-            if (comp == 0) {
-                return comp == digPair;
-            } else {
-                return comp2 == digPair;
-            }
+            return comp == 0 ? comp == digPair : comp2 == digPair;
         }
         return false;
     }
-}
-    
-    
 
+    public static boolean validationPhoneNumber(String phoneNumber) {
+        return phoneNumber.matches("0\\d{9}");
+    }
+
+    public static boolean validationGrade(String grade) {
+        try {
+            float value = Float.parseFloat(grade);
+            return value >= 0 && value <= 10;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+}

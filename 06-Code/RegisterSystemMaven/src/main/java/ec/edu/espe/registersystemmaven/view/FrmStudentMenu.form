@@ -16,7 +16,7 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="menuUser">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Usuario"/>
+            <Property name="text" type="java.lang.String" value="Estudiante"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mnuiBack">
@@ -39,7 +39,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuCourse">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Estudiante"/>
+            <Property name="text" type="java.lang.String" value="Cursos"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jCheckBoxMenuItem1">

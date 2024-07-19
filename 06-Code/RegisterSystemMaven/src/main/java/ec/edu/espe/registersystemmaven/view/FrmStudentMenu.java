@@ -62,7 +62,7 @@ public class FrmStudentMenu extends javax.swing.JFrame {
             .addGap(0, 456, Short.MAX_VALUE)
         );
 
-        menuUser.setText("Usuario");
+        menuUser.setText("Estudiante");
 
         mnuiBack.setText("Regresar");
         mnuiBack.addActionListener(new java.awt.event.ActionListener() {
@@ -82,7 +82,7 @@ public class FrmStudentMenu extends javax.swing.JFrame {
 
         jMenuBar1.add(menuUser);
 
-        menuCourse.setText("Estudiante");
+        menuCourse.setText("Cursos");
 
         jCheckBoxMenuItem1.setText("Álgebra");
         menuCourse.add(jCheckBoxMenuItem1);

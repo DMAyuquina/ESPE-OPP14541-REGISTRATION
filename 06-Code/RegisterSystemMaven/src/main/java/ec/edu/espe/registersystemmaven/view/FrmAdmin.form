@@ -6,7 +6,7 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="mnuUser">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Usuario"/>
+            <Property name="text" type="java.lang.String" value="Administrador"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mnuiProfile">
@@ -21,6 +21,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cerrar Sesi&#xf3;n"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuiLogoutActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mnuiExit">
               <Properties>
@@ -39,7 +42,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mnuiCourse">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Agregar Estudiante en un curso"/>
+                <Property name="text" type="java.lang.String" value="Agregar Estudiante al Curso"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuiCourseActionPerformed"/>
@@ -71,14 +74,25 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Editar informaci&#xf3;n del estudiante"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem4ActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mnuTutor">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Tutor"/>
+            <Property name="text" type="java.lang.String" value="Profesores"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="mnuiAddTutors">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Agregar Profesores"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuiAddTutorsActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mnuiManageAccounts">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Administrar Cuentas"/>
@@ -86,7 +100,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mnuiManageTutors">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Administrar Tutores"/>
+                <Property name="text" type="java.lang.String" value="Administrar Profesores"/>
               </Properties>
             </MenuItem>
           </SubComponents>

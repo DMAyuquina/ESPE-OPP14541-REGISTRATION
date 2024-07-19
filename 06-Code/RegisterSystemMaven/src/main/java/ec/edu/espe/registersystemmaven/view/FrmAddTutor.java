@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ec.edu.espe.registersystemmaven.view;
 
 import java.awt.Color;
@@ -9,14 +5,14 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Danny Ayuquina, LogicLegion, DCCO-ESPE
+ * @author LogicLegion, DCCO-ESPE
  */
-public class FrmAddStudent extends javax.swing.JFrame {
+public class FrmAddTutor extends javax.swing.JFrame {
 
     /**
      * Creates new form FrmStudentReport
      */
-    public FrmAddStudent() {
+    public FrmAddTutor() {
         initComponents();
     }
 
@@ -36,10 +32,6 @@ public class FrmAddStudent extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         txtId = new javax.swing.JTextField();
         txtName = new javax.swing.JTextField();
@@ -47,11 +39,6 @@ public class FrmAddStudent extends javax.swing.JFrame {
         txtCarrearCode = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         txtPhone = new javax.swing.JTextField();
-        txtGradeU1 = new javax.swing.JTextField();
-        txtGradeU2 = new javax.swing.JTextField();
-        cmbRegistrationType = new javax.swing.JComboBox<>();
-        jLabel12 = new javax.swing.JLabel();
-        txtLastChance = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -79,18 +66,6 @@ public class FrmAddStudent extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(153, 0, 51));
         jLabel6.setText("Celular:");
 
-        jLabel7.setForeground(new java.awt.Color(153, 0, 51));
-        jLabel7.setText("Tipo de matrícula:");
-
-        jLabel8.setForeground(new java.awt.Color(153, 0, 51));
-        jLabel8.setText("Unidad 1:");
-
-        jLabel9.setForeground(new java.awt.Color(153, 0, 51));
-        jLabel9.setText("Unidad 2:");
-
-        jLabel10.setForeground(new java.awt.Color(153, 0, 51));
-        jLabel10.setText("Supletorio:");
-
         btnBack.setBackground(new java.awt.Color(153, 0, 51));
         btnBack.setForeground(new java.awt.Color(255, 255, 255));
         btnBack.setText("Regresar");
@@ -106,38 +81,20 @@ public class FrmAddStudent extends javax.swing.JFrame {
             }
         });
 
-        txtGradeU2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtGradeU2ActionPerformed(evt);
-            }
-        });
-
-        cmbRegistrationType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Primera", "Segunda", "Tercera" }));
-
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(153, 0, 51));
-        jLabel12.setText("Calificaciones");
-
-        txtLastChance.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtLastChanceActionPerformed(evt);
-            }
-        });
-
         jPanel2.setBackground(new java.awt.Color(153, 0, 51));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Agregar Estudiantes");
+        jLabel13.setText("Agregar Profesor");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(105, Short.MAX_VALUE)
+                .addContainerGap(117, Short.MAX_VALUE)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(83, 83, 83))
+                .addGap(71, 71, 71))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,41 +135,29 @@ public class FrmAddStudent extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(60, 60, 60)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel10)
                                 .addComponent(jLabel3)
                                 .addComponent(jLabel4)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel6)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel9)
-                                .addComponent(jLabel8))
+                                .addComponent(jLabel5))
                             .addGap(18, 18, 18)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtName)
+                                .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
                                 .addComponent(txtLastName)
                                 .addComponent(txtCarrearCode)
                                 .addComponent(txtEmail)
-                                .addComponent(txtPhone)
-                                .addComponent(txtGradeU1)
-                                .addComponent(txtGradeU2)
-                                .addComponent(cmbRegistrationType, 0, 121, Short.MAX_VALUE)
-                                .addComponent(txtLastChance)))))
+                                .addComponent(txtPhone)))))
                 .addContainerGap(11, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(151, 151, 151))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(157, 157, 157)
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(42, 42, 42)
                 .addComponent(btnAddStudents)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnBack)
-                .addGap(35, 35, 35))
+                .addGap(32, 32, 32))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,29 +190,11 @@ public class FrmAddStudent extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(cmbRegistrationType, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtGradeU1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(txtGradeU2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(txtLastChance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBack)
-                    .addComponent(btnAddStudents))
-                .addGap(18, 18, 18))
+                    .addComponent(btnAddStudents)
+                    .addComponent(btnBack))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -295,14 +222,6 @@ public class FrmAddStudent extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtIdActionPerformed
 
-    private void txtLastChanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLastChanceActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtLastChanceActionPerformed
-
-    private void txtGradeU2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGradeU2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtGradeU2ActionPerformed
-
     private void btnAddStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStudentsActionPerformed
         String id = this.txtId.getText();
 
@@ -312,10 +231,7 @@ public class FrmAddStudent extends javax.swing.JFrame {
             String codigoCarrera = txtCarrearCode.getText();
             String email = txtEmail.getText();
             String celular = txtPhone.getText();
-            String tipoMatricula = cmbRegistrationType.getSelectedItem().toString();
-            String unidad1 = txtGradeU1.getText();
-            String unidad2 = txtGradeU2.getText();
-            String supletorio = txtLastChance.getText();
+
 
             boolean isValid = true;
 
@@ -358,61 +274,9 @@ public class FrmAddStudent extends javax.swing.JFrame {
             } else {
                 txtPhone.setBackground(Color.WHITE);
             }
-
-            if (tipoMatricula.isEmpty()) {
-                cmbRegistrationType.setBackground(Color.RED);
-                JOptionPane.showMessageDialog(this, "Tipo de matrícula inválido.", "Error", JOptionPane.ERROR_MESSAGE);
-                isValid = false;
-            } else {
-                cmbRegistrationType.setBackground(Color.WHITE);
-            }
-
-            if (!utils.Validation.validationGrade(unidad1)) {
-                txtGradeU1.setBackground(Color.RED);
-                JOptionPane.showMessageDialog(this, "Calificación de Unidad 1 inválida. Debe estar entre 0 y 10.", "Error", JOptionPane.ERROR_MESSAGE);
-                isValid = false;
-            } else {
-                txtGradeU1.setBackground(Color.WHITE);
-            }
-
-            float gradeU1 = 0;
-            float gradeU2 = 0;
-
-            if (!utils.Validation.validationGrade(unidad1)) {
-                txtGradeU1.setBackground(Color.RED);
-                JOptionPane.showMessageDialog(this, "Calificación de Unidad 1 inválida. Debe estar entre 0 y 10.", "Error", JOptionPane.ERROR_MESSAGE);
-                isValid = false;
-            } else {
-                txtGradeU1.setBackground(Color.WHITE);
-                gradeU1 = Float.parseFloat(unidad1);
-            }
-
-            if (!utils.Validation.validationGrade(unidad2)) {
-                txtGradeU2.setBackground(Color.RED);
-                JOptionPane.showMessageDialog(this, "Calificación de Unidad 2 inválida. Debe estar entre 0 y 10.", "Error", JOptionPane.ERROR_MESSAGE);
-                isValid = false;
-            } else {
-                txtGradeU2.setBackground(Color.WHITE);
-                gradeU2 = Float.parseFloat(unidad2);
-            }
-
-            float average = (gradeU1 + gradeU2) / 2;
-
-            if (average < 7) {
-                if (!utils.Validation.validationGrade(supletorio)) {
-                    txtLastChance.setBackground(Color.RED);
-                    JOptionPane.showMessageDialog(this, "Calificación de Supletorio inválida. Debe estar entre 0 y 10.", "Error", JOptionPane.ERROR_MESSAGE);
-                    isValid = false;
-                } else {
-                    txtLastChance.setBackground(Color.WHITE);
-                }
-            } else {
-                supletorio = "N/A"; // Not required if average is 7 or above
-            }
-
             if (isValid) {
                 // Aquí puedes agregar el código para guardar estos datos en la base de datos o en la nube
-                JOptionPane.showMessageDialog(this, "Estudiante agregado exitosamente.");
+                JOptionPane.showMessageDialog(this, "Profesor agregado exitosamente.");
                 txtId.setBackground(Color.WHITE);
                 FrmAdmin frmAdmin = new FrmAdmin();
                 this.setVisible(false);
@@ -442,21 +306,23 @@ public class FrmAddStudent extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmAddStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmAddTutor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmAddStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmAddTutor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmAddStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmAddTutor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmAddStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmAddTutor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmAddStudent().setVisible(true);
+                new FrmAddTutor().setVisible(true);
             }
         });
     }
@@ -464,28 +330,19 @@ public class FrmAddStudent extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddStudents;
     private javax.swing.JButton btnBack;
-    private javax.swing.JComboBox<String> cmbRegistrationType;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField txtCarrearCode;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtGradeU1;
-    private javax.swing.JTextField txtGradeU2;
     private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtLastChance;
     private javax.swing.JTextField txtLastName;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPhone;
