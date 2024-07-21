@@ -43,7 +43,7 @@ public class FrmSplashScreen extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(153, 0, 51));
-        jLabel2.setText("INSTITUTO  TECNOLÓGICO SUPERIOR SIMÓN BOLIVAR");
+        jLabel2.setText("INSTITUTO  TECNOLÓGICO SUPERIOR BOLIVAR");
 
         btnNext.setBackground(new java.awt.Color(153, 0, 51));
         btnNext.setText("Siguiente");
@@ -72,7 +72,7 @@ public class FrmSplashScreen extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(80, Short.MAX_VALUE)
+                .addContainerGap(91, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)

@@ -83,10 +83,10 @@ public class FrmAddStudent extends javax.swing.JFrame {
         jLabel7.setText("Tipo de matrícula:");
 
         jLabel8.setForeground(new java.awt.Color(153, 0, 51));
-        jLabel8.setText("Unidad 1:");
+        jLabel8.setText("Parcial 1:");
 
         jLabel9.setForeground(new java.awt.Color(153, 0, 51));
-        jLabel9.setText("Unidad 2:");
+        jLabel9.setText("Parcial 2:");
 
         jLabel10.setForeground(new java.awt.Color(153, 0, 51));
         jLabel10.setText("Supletorio:");
@@ -112,7 +112,7 @@ public class FrmAddStudent extends javax.swing.JFrame {
             }
         });
 
-        cmbRegistrationType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Primera", "Segunda", "Tercera" }));
+        cmbRegistrationType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Segunda", "Tercera" }));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(153, 0, 51));
