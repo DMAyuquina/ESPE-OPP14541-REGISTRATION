@@ -4,8 +4,15 @@
  */
 package ec.edu.espe.registersystemmaven.view;
 
+import Utils.MongoManagerMaven;
+import static Utils.MongoManagerMaven.accessToCollections;
+import static Utils.MongoManagerMaven.insertOneData;
+import static Utils.MongoManagerMaven.openConnectionToMongo;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import org.bson.Document;
 
 /**
  *
@@ -367,14 +374,6 @@ public class FrmAddStudent extends javax.swing.JFrame {
                 cmbRegistrationType.setBackground(Color.WHITE);
             }
 
-            if (!utils.Validation.validationGrade(unidad1)) {
-                txtGradeU1.setBackground(Color.RED);
-                JOptionPane.showMessageDialog(this, "Calificación de Unidad 1 inválida. Debe estar entre 0 y 10.", "Error", JOptionPane.ERROR_MESSAGE);
-                isValid = false;
-            } else {
-                txtGradeU1.setBackground(Color.WHITE);
-            }
-
             float gradeU1 = 0;
             float gradeU2 = 0;
 
@@ -412,11 +411,23 @@ public class FrmAddStudent extends javax.swing.JFrame {
 
             if (isValid) {
                 // Aquí puedes agregar el código para guardar estos datos en la base de datos o en la nube
+                MongoManagerMaven mongoManager = new MongoManagerMaven();
+                String uri = "mongodb+srv://ayuquina:ayuquina@cluster0.crwllgh.mongodb.net/";
+
+                MongoDatabase dataBase = mongoManager.openConnectionToMongo(uri);
+
+                String collection = "RegistrationSystemStudents";
+                MongoCollection<Document> mongoCollection = mongoManager.accessToCollections(dataBase, collection);
+
+                Document student = new Document();
+                        student.append("id", id).append("names", name).append("last names", lastName).append("career code",codigoCarrera)
+                        .append("email", email).append("phone", celular).append("type of registration", tipoMatricula).append("Grade Unit 1", unidad1)
+                        .append("Grade Unit 2", unidad2).append("Last Chance", supletorio);
+                
+                mongoCollection.insertOne(student);
+                
                 JOptionPane.showMessageDialog(this, "Estudiante agregado exitosamente.");
                 txtId.setBackground(Color.WHITE);
-                FrmAdmin frmAdmin = new FrmAdmin();
-                this.setVisible(false);
-                frmAdmin.setVisible(true);
             }
         } else {
             txtId.setBackground(Color.RED);
