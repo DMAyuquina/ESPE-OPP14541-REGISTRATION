@@ -15,11 +15,19 @@ import org.bson.Document;
 public class MongoManagerMaven {
 
     //Abir conexión con mongoDB
-    public static MongoDatabase openConnectionToMongo(String uri) {
+    public static MongoDatabase openConnectionToMongo() {
+        String uri = "mongodb+srv://ayuquina:ayuquina@cluster0.crwllgh.mongodb.net/";
         MongoClient mongoClient = MongoClients.create(uri);
         MongoDatabase dataBase = mongoClient.getDatabase("StudentsDB");
 
         return dataBase;
+    }
+
+    public static void closeConnectionToMongo() {
+        String uri = "mongodb+srv://ayuquina:ayuquina@cluster0.crwllgh.mongodb.net/";
+        MongoClient mongoClient = MongoClients.create(uri);
+        mongoClient.close();
+
     }
 
     //Acceso a colecciones
@@ -45,29 +53,28 @@ public class MongoManagerMaven {
         //Document findDocument = new Document();
 
         MongoCursor<Document> resultDocument = mongoCollection.find(findDocument).iterator();
-        
+
         System.out.println("***************************************");
         System.out.println("People male");
         System.out.println("***************************************");
         while (resultDocument.hasNext()) {
             System.out.println(resultDocument.next().getString("name"));
         }
-        
+
         //return resultDocument;
     }
-    
+
     //Actualización de documentos
-    public static void editDocuments(String key, String data,String newData, MongoCollection<Document> mongoCollection){
-        Document findDocument = new Document(key,data);
-        
-        Document updateDocument = new Document("$set",new Document(key,newData));
-        
+    public static void editDocuments(String key, String data, String newData, MongoCollection<Document> mongoCollection) {
+        Document findDocument = new Document(key, data);
+
+        Document updateDocument = new Document("$set", new Document(key, newData));
+
         mongoCollection.findOneAndUpdate(findDocument, updateDocument);
     }
-    
-    
+
     //Eliminar documentos
-    public static void deleteDocuments(String key, String data, MongoCollection<Document> mongoCollection){
+    public static void deleteDocuments(String key, String data, MongoCollection<Document> mongoCollection) {
         //TODO: Combinar con método de obtención de datos
         Document findDocument = new Document("male", true);
         mongoCollection.findOneAndDelete(findDocument);

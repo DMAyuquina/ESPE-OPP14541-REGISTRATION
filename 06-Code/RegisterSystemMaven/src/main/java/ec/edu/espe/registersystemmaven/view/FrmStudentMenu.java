@@ -162,9 +162,7 @@ public class FrmStudentMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_menuByNameActionPerformed
 
     private void menuReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuReportActionPerformed
-        FrmAddStudent frmStudentReport = new FrmAddStudent();
-        this. setVisible(false);
-        frmStudentReport.setVisible(true);
+        
         
     }//GEN-LAST:event_menuReportActionPerformed
 
