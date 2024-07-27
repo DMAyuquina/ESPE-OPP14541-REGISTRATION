@@ -256,17 +256,19 @@ public class FrmAddTutorAccount extends javax.swing.JFrame {
     }//GEN-LAST:event_txtConfirmPasswordActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        FrmAdmin frmAdmin = new FrmAdmin();
+        FrmAdminMenu frmAdmin = new FrmAdminMenu();
         this.setVisible(false);
         frmAdmin.setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
+        
+
         //Conexión con Mongo
         MongoManagerMaven mongoManager = new MongoManagerMaven();
         MongoDatabase dataBase = mongoManager.openConnectionToMongo();
-        //Obtención colección de tutores
-        String collection = "Tutors";
+        //Conexión colección de cuentas de tutores
+        String collection = "TutorsAccounts";
         MongoCollection<Document> mongoCollection = mongoManager.accessToCollections(dataBase, collection);
 
         String id = txtId.getText();

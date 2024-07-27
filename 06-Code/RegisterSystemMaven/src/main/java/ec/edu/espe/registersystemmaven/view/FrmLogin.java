@@ -1,7 +1,11 @@
 package ec.edu.espe.registersystemmaven.view;
 
+import Utils.MongoManagerMaven;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import ec.edu.espe.registersystemmaven.model.AdminAccount;
 import javax.swing.JOptionPane;
+import org.bson.Document;
 
 /**
  *
@@ -174,11 +178,22 @@ public class FrmLogin extends javax.swing.JFrame {
         AdminAccount admin = new AdminAccount();
         String user = txtUser.getText();
         String password = txtPassword.getText();
+        boolean validation  = false;
+        MongoManagerMaven mongoManager = new MongoManagerMaven();
+            MongoDatabase dataBase = mongoManager.openConnectionToMongo();
+            String collection = "TutorsAccounts";
+            MongoCollection<Document> mongoCollection = mongoManager.accessToCollections(dataBase, collection);
+        
         if (user.equals("LogicLegion") && password.equals("14541")) {
-            FrmAdmin frmAdmin = new FrmAdmin();
+            FrmAdminMenu frmAdmin = new FrmAdminMenu();
             this.setVisible(false);
             frmAdmin.setVisible(true);
-        }else{
+        } else if (mongoManager.searchAccount(mongoCollection, "user", user)&& mongoManager.searchAccount(mongoCollection, "password", password)) {
+            FrmTutorMenu frmTutorMenu = new FrmTutorMenu();
+            this.setVisible(false);
+            frmTutorMenu.setVisible(true);
+
+        } else {
             JOptionPane.showMessageDialog(this, "Cuenta inválida.", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
