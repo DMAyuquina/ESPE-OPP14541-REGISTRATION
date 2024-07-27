@@ -1,7 +1,11 @@
 package ec.edu.espe.registersystemmaven.view;
 
+import Utils.MongoManagerMaven;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import org.bson.Document;
 
 /**
  *
@@ -212,7 +216,7 @@ public class FrmAddTutor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        FrmAdmin frmadmin = new FrmAdmin();
+        FrmAdminMenu frmadmin = new FrmAdminMenu();
         this.setVisible(false);
         frmadmin.setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
@@ -228,9 +232,9 @@ public class FrmAddTutor extends javax.swing.JFrame {
         if (utils.Validation.validationDni(id.length(), id)) {
             String name = txtName.getText();
             String lastName = txtLastName.getText();
-            String codigoCarrera = txtCarrearCode.getText();
+            String careerCode = txtCarrearCode.getText();
             String email = txtEmail.getText();
-            String celular = txtPhone.getText();
+            String phone = txtPhone.getText();
 
 
             boolean isValid = true;
@@ -251,7 +255,7 @@ public class FrmAddTutor extends javax.swing.JFrame {
                 txtLastName.setBackground(Color.WHITE);
             }
 
-            if (codigoCarrera.isEmpty() || !codigoCarrera.matches("\\d+")) {
+            if (careerCode.isEmpty() || !careerCode.matches("\\d+")) {
                 txtCarrearCode.setBackground(Color.RED);
                 JOptionPane.showMessageDialog(this, "Código de carrera inválido.", "Error", JOptionPane.ERROR_MESSAGE);
                 isValid = false;
@@ -267,7 +271,7 @@ public class FrmAddTutor extends javax.swing.JFrame {
                 txtEmail.setBackground(Color.WHITE);
             }
 
-            if (!utils.Validation.validationPhoneNumber(celular)) {
+            if (!utils.Validation.validationPhoneNumber(phone)) {
                 txtPhone.setBackground(Color.RED);
                 JOptionPane.showMessageDialog(this, "Número de celular inválido. Debe ser un número de 10 dígitos que comience con 0.", "Error", JOptionPane.ERROR_MESSAGE);
                 isValid = false;
@@ -276,9 +280,23 @@ public class FrmAddTutor extends javax.swing.JFrame {
             }
             if (isValid) {
                 // Aquí puedes agregar el código para guardar estos datos en la base de datos o en la nube
+                MongoManagerMaven mongoManager = new MongoManagerMaven();
+       
+                MongoDatabase dataBase = mongoManager.openConnectionToMongo();
+                String collection = "Tutors";
+                MongoCollection<Document> mongoCollection = mongoManager.accessToCollections(dataBase, collection);
+
+                Document tutor = new Document();
+                    tutor.append("names", name).append("last names", lastName).append("phone", phone).append("email", email).append("career code", careerCode);
+
+                mongoCollection.insertOne(tutor);
+                
+                mongoManager.closeConnectionToMongo();
+                
+                
                 JOptionPane.showMessageDialog(this, "Profesor agregado exitosamente.");
                 txtId.setBackground(Color.WHITE);
-                FrmAdmin frmAdmin = new FrmAdmin();
+                FrmAdminMenu frmAdmin = new FrmAdminMenu();
                 this.setVisible(false);
                 frmAdmin.setVisible(true);
             }

@@ -1,5 +1,6 @@
 package Utils;
 
+import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -62,6 +63,19 @@ public class MongoManagerMaven {
         }
 
         //return resultDocument;
+    }
+
+    public static boolean searchAccount(MongoCollection<Document> mongoCollection, String key, String variable) {
+        //Si solo busco en base a un solo dato 
+        Document findDocument = new Document(key, variable);
+
+        MongoCursor<Document> resultDocument = mongoCollection.find(findDocument).iterator();
+        System.out.println(resultDocument);
+
+        if (resultDocument.hasNext()) {
+            return true;
+        }
+        return false;
     }
 
     //Actualización de documentos

@@ -5,12 +5,12 @@ package ec.edu.espe.registersystemmaven.view;
  *
  * @author ChelooWs
  */
-public class FrmTutor extends javax.swing.JFrame {
+public class FrmTutorMenu extends javax.swing.JFrame {
 
     /**
  * @author LogicLegion, DCCO-ESPE
      */
-    public FrmTutor() {
+    public FrmTutorMenu() {
         initComponents();
     }
 
@@ -25,6 +25,7 @@ public class FrmTutor extends javax.swing.JFrame {
 
         jMenuItem1 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuTutor = new javax.swing.JMenu();
         itmProfile = new javax.swing.JMenuItem();
@@ -46,16 +47,27 @@ public class FrmTutor extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Logo_ITSB_03.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 369, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(103, 103, 103)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(108, Short.MAX_VALUE))
         );
+
+        jMenuBar1.setBackground(new java.awt.Color(153, 0, 51));
+        jMenuBar1.setForeground(new java.awt.Color(153, 0, 51));
 
         mnuTutor.setText("Tutor");
 
@@ -171,7 +183,9 @@ public class FrmTutor extends javax.swing.JFrame {
     }//GEN-LAST:event_itmProfileActionPerformed
 
     private void itmLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmLogoutActionPerformed
-
+        FrmLogin frmLogin = new FrmLogin();
+        this.setVisible(false);
+        frmLogin.setVisible(true);
     }//GEN-LAST:event_itmLogoutActionPerformed
 
     private void itmAlgebraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmAlgebraActionPerformed
@@ -215,21 +229,23 @@ public class FrmTutor extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmTutor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmTutorMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmTutor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmTutorMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmTutor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmTutorMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmTutor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmTutorMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmTutor().setVisible(true);
+                new FrmTutorMenu().setVisible(true);
             }
         });
     }
@@ -245,6 +261,7 @@ public class FrmTutor extends javax.swing.JFrame {
     private javax.swing.JMenuItem itmLogout;
     private javax.swing.JMenuItem itmProfile;
     private javax.swing.JMenuItem itmUploadGrade;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;

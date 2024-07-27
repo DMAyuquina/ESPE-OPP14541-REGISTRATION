@@ -288,7 +288,7 @@ public class FrmAddStudent extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        FrmAdmin frmadmin = new FrmAdmin();
+        FrmAdminMenu frmadmin = new FrmAdminMenu();
         this.setVisible(false);
         frmadmin.setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
