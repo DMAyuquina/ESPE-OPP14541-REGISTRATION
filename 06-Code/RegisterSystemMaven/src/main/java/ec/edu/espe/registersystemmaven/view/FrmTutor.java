@@ -3,7 +3,7 @@ package ec.edu.espe.registersystemmaven.view;
 
 /**
  *
- * @author ChelooWs
+ * @author LogicLegion, DCCO-ESPE
  */
 public class FrmTutor extends javax.swing.JFrame {
 

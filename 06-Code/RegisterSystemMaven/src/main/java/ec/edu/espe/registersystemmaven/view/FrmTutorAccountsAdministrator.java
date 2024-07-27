@@ -1,12 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package ec.edu.espe.registersystemmaven.view;
 
 /**
  *
- * @author Danny Ayuquina, LogicLegion, DCCO-ESPE
+ * @author LogicLegion, DCCO-ESPE
  */
 public class FrmTutorAccountsAdministrator extends javax.swing.JFrame {
 
@@ -29,6 +26,7 @@ public class FrmTutorAccountsAdministrator extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         menuItemAddAccount = new javax.swing.JMenuItem();
@@ -54,7 +52,20 @@ public class FrmTutorAccountsAdministrator extends javax.swing.JFrame {
 
         jMenu1.setText("Opciones");
 
+        jMenuItem1.setText("Regresar");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
         jMenuItem4.setText("Salir");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem4);
 
         jMenuBar1.add(jMenu1);
@@ -62,6 +73,11 @@ public class FrmTutorAccountsAdministrator extends javax.swing.JFrame {
         jMenu2.setText("Cuentas");
 
         menuItemAddAccount.setText("Añadir cuenta");
+        menuItemAddAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemAddAccountActionPerformed(evt);
+            }
+        });
         jMenu2.add(menuItemAddAccount);
 
         menuItemModifyAccount.setText("Modificar cuenta");
@@ -96,6 +112,22 @@ public class FrmTutorAccountsAdministrator extends javax.swing.JFrame {
     private void menuItemDeleteAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemDeleteAccountActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menuItemDeleteAccountActionPerformed
+
+    private void menuItemAddAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAddAccountActionPerformed
+       FrmAddTutorAccount frmaddTutorAccount = new FrmAddTutorAccount();
+        this.setVisible(false);
+        frmaddTutorAccount.setVisible(true);
+    }//GEN-LAST:event_menuItemAddAccountActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        System.exit(0); 
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        FrmAdmin frmadmin = new FrmAdmin();
+        this.setVisible(false);
+        frmadmin.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -136,6 +168,7 @@ public class FrmTutorAccountsAdministrator extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem menuItemAddAccount;

@@ -169,6 +169,11 @@ public class FrmAdmin extends javax.swing.JFrame {
         mnuTutor.add(mnuiAddTutors);
 
         mnuiManageAccounts.setText("Administrar Cuentas");
+        mnuiManageAccounts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuiManageAccountsActionPerformed(evt);
+            }
+        });
         mnuTutor.add(mnuiManageAccounts);
 
         mnuiManageTutors.setText("Administrar Profesores");
@@ -234,6 +239,12 @@ public class FrmAdmin extends javax.swing.JFrame {
         this. setVisible(false);
         frmtutor.setVisible(true);
     }//GEN-LAST:event_mnuiAddTutorsActionPerformed
+
+    private void mnuiManageAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuiManageAccountsActionPerformed
+        FrmTutorAccountsAdministrator frmtutorAccountAdministrator = new FrmTutorAccountsAdministrator();
+        this.setVisible(false);
+        frmtutorAccountAdministrator.setVisible(true);
+    }//GEN-LAST:event_mnuiManageAccountsActionPerformed
 
     /**
      * @param args the command line arguments

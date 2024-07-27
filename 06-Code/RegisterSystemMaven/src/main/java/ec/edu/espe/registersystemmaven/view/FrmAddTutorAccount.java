@@ -1,17 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ec.edu.espe.registersystemmaven.view;
 
 import Utils.MongoManagerMaven;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import java.awt.Color;
+import javax.swing.JOptionPane;
 import org.bson.Document;
 
 /**
  *
- * @author Danny Ayuquina, LogicLegion, DCCO-ESPE
+ * @author LogicLegion, DCCO-ESPE
  */
 public class FrmAddTutorAccount extends javax.swing.JFrame {
 
@@ -55,11 +53,11 @@ public class FrmAddTutorAccount extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(153, 0, 51));
         jLabel1.setForeground(new java.awt.Color(153, 0, 51));
-        jLabel1.setText("USUARIO:");
+        jLabel1.setText("Usuario:");
 
         jLabel2.setBackground(new java.awt.Color(153, 0, 51));
         jLabel2.setForeground(new java.awt.Color(153, 0, 51));
-        jLabel2.setText("CONTRASEÑA:");
+        jLabel2.setText("Contraseña:");
 
         txtNames.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,15 +67,15 @@ public class FrmAddTutorAccount extends javax.swing.JFrame {
 
         jLabel3.setBackground(new java.awt.Color(153, 0, 51));
         jLabel3.setForeground(new java.awt.Color(153, 0, 51));
-        jLabel3.setText("NOMBRES:");
+        jLabel3.setText("Nombres:");
 
         jLabel4.setBackground(new java.awt.Color(153, 0, 51));
         jLabel4.setForeground(new java.awt.Color(153, 0, 51));
-        jLabel4.setText("APELLIDOS:");
+        jLabel4.setText("Apellidos:");
 
         jLabel5.setBackground(new java.awt.Color(153, 0, 51));
         jLabel5.setForeground(new java.awt.Color(153, 0, 51));
-        jLabel5.setText("CÉDULA:");
+        jLabel5.setText("Cédula:");
 
         txtLastNames.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,7 +97,7 @@ public class FrmAddTutorAccount extends javax.swing.JFrame {
 
         jLabel6.setBackground(new java.awt.Color(153, 0, 51));
         jLabel6.setForeground(new java.awt.Color(153, 0, 51));
-        jLabel6.setText("CONFIRMAR CONTRASEÑA:");
+        jLabel6.setText("Confirmar Contraseña:");
 
         txtPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,7 +179,7 @@ public class FrmAddTutorAccount extends javax.swing.JFrame {
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
@@ -270,25 +268,69 @@ public class FrmAddTutorAccount extends javax.swing.JFrame {
         //Obtención colección de tutores
         String collection = "Tutors";
         MongoCollection<Document> mongoCollection = mongoManager.accessToCollections(dataBase, collection);
-        
-        //Obtención datos de los txtFields
-        
-        String names = txtNames.getText();
-        String lastNames = txtLastNames.getText();
+
         String id = txtId.getText();
-        String user = txtUser.getText();
-        String password = txtPassword.getText();
-        String confirmPassword = txtConfirmPassword.getText();
-        
-        /*
-            Código para validar registro de nueva cuenta de profesor
-            ...
-            (Las validaciones deben estar en una clase a parte)
-        */
-        
+// Obtención de datos de los txtFields
+        if (utils.Validation.validationDni(id.length(), id)) {
+            String names = txtNames.getText();
+            String lastNames = txtLastNames.getText();
+            String user = txtUser.getText();
+            String password = txtPassword.getText();
+            String confirmPassword = txtConfirmPassword.getText();
+
+            boolean isValid = true;
+
+            // Validación de nombres
+            if (!utils.Validation.validationOfCharacter(names)) {
+                txtNames.setBackground(Color.RED);
+                JOptionPane.showMessageDialog(this, "Nombre inválido.", "Error", JOptionPane.ERROR_MESSAGE);
+                isValid = false;
+            } else {
+                txtNames.setBackground(Color.WHITE);
+            }
+
+            // Validación de apellidos
+            if (!utils.Validation.validationOfCharacter(lastNames)) {
+                txtLastNames.setBackground(Color.RED);
+                JOptionPane.showMessageDialog(this, "Apellido inválido.", "Error", JOptionPane.ERROR_MESSAGE);
+                isValid = false;
+            } else {
+                txtLastNames.setBackground(Color.WHITE);
+            }
+
+            // Validación de usuario
+            if (!utils.Validation.validationOfCharacter(user)) {
+                txtUser.setBackground(Color.RED);
+                JOptionPane.showMessageDialog(this, "Usuario inválido.", "Error", JOptionPane.ERROR_MESSAGE);
+                isValid = false;
+            } else {
+                txtUser.setBackground(Color.WHITE);
+            }
+
+            // Validación de contraseña
+            if (password.isEmpty() || confirmPassword.isEmpty() || !password.equals(confirmPassword)) {
+                txtPassword.setBackground(Color.RED);
+                txtConfirmPassword.setBackground(Color.RED);
+                JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden.", "Error", JOptionPane.ERROR_MESSAGE);
+                isValid = false;
+            } else {
+                txtPassword.setBackground(Color.WHITE);
+                txtConfirmPassword.setBackground(Color.WHITE);
+            }
+
+            // Si todas las validaciones son correctas
+            if (isValid) {
+                // Proceder con el siguiente paso (guardar datos, etc.)
+            }
+            txtUser.setBackground(Color.WHITE);
+        } else {
+            txtId.setBackground(Color.RED);
+            JOptionPane.showMessageDialog(this, "Cédula inválida.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
         //Para añadir al final al tutor
         Document tutor = new Document();
-        
+
         //Para cerrar conección con la base de datos
         mongoManager.closeConnectionToMongo();
     }//GEN-LAST:event_btnAcceptActionPerformed
