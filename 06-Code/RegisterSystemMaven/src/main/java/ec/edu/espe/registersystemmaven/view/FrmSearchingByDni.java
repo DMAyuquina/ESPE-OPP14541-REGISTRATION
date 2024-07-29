@@ -37,6 +37,7 @@ public class FrmSearchingByDni extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         btnAccept.setBackground(new java.awt.Color(153, 0, 51));
+        btnAccept.setForeground(new java.awt.Color(255, 255, 255));
         btnAccept.setText("Aceptar");
         btnAccept.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -45,6 +46,7 @@ public class FrmSearchingByDni extends javax.swing.JFrame {
         });
 
         btnCancel.setBackground(new java.awt.Color(153, 0, 51));
+        btnCancel.setForeground(new java.awt.Color(255, 255, 255));
         btnCancel.setText("Cancelar");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

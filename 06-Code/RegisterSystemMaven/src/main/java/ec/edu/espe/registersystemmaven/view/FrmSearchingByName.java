@@ -45,6 +45,7 @@ public class FrmSearchingByName extends javax.swing.JFrame {
         jLabel2.setText("Apellidos:");
 
         btnAccept.setBackground(new java.awt.Color(153, 0, 51));
+        btnAccept.setForeground(new java.awt.Color(255, 255, 255));
         btnAccept.setText("Aceptar");
         btnAccept.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -53,6 +54,7 @@ public class FrmSearchingByName extends javax.swing.JFrame {
         });
 
         btnCancel.setBackground(new java.awt.Color(153, 0, 51));
+        btnCancel.setForeground(new java.awt.Color(255, 255, 255));
         btnCancel.setText("Cancelar");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
