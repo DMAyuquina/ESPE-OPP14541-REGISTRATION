@@ -124,13 +124,10 @@ public class FrmTutorAccountsAdministrator extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-<<<<<<< HEAD
-       
-=======
+
         FrmAdminMenu frmadmin = new FrmAdminMenu();
         this.setVisible(false);
         frmadmin.setVisible(true);
->>>>>>> 82b444d68b3063051bbe4a1c8a1cbba157ed12c2
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**

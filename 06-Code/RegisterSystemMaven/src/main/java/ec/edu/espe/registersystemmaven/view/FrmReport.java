@@ -86,9 +86,7 @@ public class FrmReport extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tblStudentData);
         if (tblStudentData.getColumnModel().getColumnCount() > 0) {
             tblStudentData.getColumnModel().getColumn(0).setResizable(false);
-            tblStudentData.getColumnModel().getColumn(0).setHeaderValue("TIPO DE DATO");
             tblStudentData.getColumnModel().getColumn(1).setResizable(false);
-            tblStudentData.getColumnModel().getColumn(1).setHeaderValue("DATOS DEL ESTUDIANTE");
         }
 
         btnBack.setBackground(new java.awt.Color(153, 0, 51));

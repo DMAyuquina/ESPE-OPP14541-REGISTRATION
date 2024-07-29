@@ -1,11 +1,11 @@
 package Utils;
 
-import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
 
@@ -17,7 +17,7 @@ public class MongoManagerMaven {
 
     //Abir conexión con mongoDB
     public static MongoDatabase openConnectionToMongo() {
-        String uri = "mongodb+srv://ayuquina:ayuquina@cluster0.crwllgh.mongodb.net/";
+        String uri = "mongodb+srv://logiclegion:logiclegion123@cluster0.pkfbgix.mongodb.net/";
         MongoClient mongoClient = MongoClients.create(uri);
         MongoDatabase dataBase = mongoClient.getDatabase("StudentsDB");
 
@@ -25,7 +25,7 @@ public class MongoManagerMaven {
     }
 
     public static void closeConnectionToMongo() {
-        String uri = "mongodb+srv://ayuquina:ayuquina@cluster0.crwllgh.mongodb.net/";
+        String uri = "mongodb+srv://logiclegion:logiclegion123@cluster0.pkfbgix.mongodb.net/";
         MongoClient mongoClient = MongoClients.create(uri);
         mongoClient.close();
 
@@ -47,22 +47,27 @@ public class MongoManagerMaven {
     }
 
     //Obtención de datos
-    public static void getAllCollection(MongoCollection<Document> mongoCollection) {
-        //Si solo busco en base a un solo dato 
-        Document findDocument = new Document("male", true);
+    public static MongoCursor<Document> getAllCollection(MongoCollection<Document> mongoCollection) {
+
         //Si quiero todo el documento:
-        //Document findDocument = new Document();
+        Document findDocument = new Document();
 
         MongoCursor<Document> resultDocument = mongoCollection.find(findDocument).iterator();
 
-        System.out.println("***************************************");
-        System.out.println("People male");
-        System.out.println("***************************************");
         while (resultDocument.hasNext()) {
             System.out.println(resultDocument.next().getString("name"));
         }
 
-        //return resultDocument;
+        return resultDocument;
+    }
+    public static MongoCursor getStudent(MongoCollection<Document> mongoCollection, String student) {
+
+        //Si quiero todo el documento:
+        Document findDocument = new Document("id", student);
+
+        MongoCursor<Document> resultDocument = mongoCollection.find(findDocument).iterator();
+
+        return resultDocument;
     }
 
     public static boolean searchAccount(MongoCollection<Document> mongoCollection, String key, String variable) {
