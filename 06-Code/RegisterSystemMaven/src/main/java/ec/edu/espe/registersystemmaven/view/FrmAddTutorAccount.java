@@ -262,7 +262,6 @@ public class FrmAddTutorAccount extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
-        
 
         //Conexión con Mongo
         MongoManagerMaven mongoManager = new MongoManagerMaven();
@@ -322,7 +321,17 @@ public class FrmAddTutorAccount extends javax.swing.JFrame {
 
             // Si todas las validaciones son correctas
             if (isValid) {
-                // Proceder con el siguiente paso (guardar datos, etc.)
+
+                collection = "TutorsAccounts";
+                mongoCollection = mongoManager.accessToCollections(dataBase, collection);
+
+                Document tutor = new Document();
+                tutor.append("names", names).append("last names", lastNames).append("user", user)
+                        .append("password", password);
+
+                mongoCollection.insertOne(tutor);
+
+                mongoManager.closeConnectionToMongo();
             }
             txtUser.setBackground(Color.WHITE);
         } else {

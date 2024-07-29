@@ -195,6 +195,7 @@ public class FrmReport extends javax.swing.JFrame {
         MongoCollection<org.bson.Document> mongoCollection = mongoManager.accessToCollections(dataBase, collection);
         Student student = mongoManager.getStudent(mongoCollection, "1753093093");
         //-------------------------------------------------------------------------------------
+        
         //Generate pdf
         Document document = new Document();
         try {
