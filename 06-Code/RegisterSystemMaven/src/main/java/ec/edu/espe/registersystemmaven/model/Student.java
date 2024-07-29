@@ -11,18 +11,29 @@ public class Student {
     private String dni;
     private String names;
     private String lastNames;
-    private String careerCode;
+    private String genre;
     private String email;
+    private String careerCode;
     private String phone;
+    private String career;
     private String typeOfRegistration;
     private String GradeUnit1;
     private String GradeUnit2;
     private String LastChance;
-    
 
-    @Override
-    public String toString() {
-        return getDni() + "," + getNames() + "," + getLastNames() + "," + getCareerCode() + "," + getEmail() + "," + getPhone() + "," + getTypeOfRegistration()+ "," + getGradeUnit1() + "," + getGradeUnit2() + "," + getLastChance();
+    public Student(String dni, String names, String lastNames, String genre, String email, String careerCode, String phone, String career, String typeOfRegistration, String GradeUnit1, String GradeUnit2, String LastChance) {
+        this.dni = dni;
+        this.names = names;
+        this.lastNames = lastNames;
+        this.genre = genre;
+        this.email = email;
+        this.careerCode = careerCode;
+        this.phone = phone;
+        this.career = career;
+        this.typeOfRegistration = typeOfRegistration;
+        this.GradeUnit1 = GradeUnit1;
+        this.GradeUnit2 = GradeUnit2;
+        this.LastChance = LastChance;
     }
 
     /**
@@ -164,7 +175,5 @@ public class Student {
     public void setLastChance(String LastChance) {
         this.LastChance = LastChance;
     }
-    
-    
 
 }

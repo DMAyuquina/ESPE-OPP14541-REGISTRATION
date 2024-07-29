@@ -5,9 +5,6 @@
 package ec.edu.espe.registersystemmaven.view;
 
 import Utils.MongoManagerMaven;
-import static Utils.MongoManagerMaven.accessToCollections;
-import static Utils.MongoManagerMaven.insertOneData;
-import static Utils.MongoManagerMaven.openConnectionToMongo;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import java.awt.Color;

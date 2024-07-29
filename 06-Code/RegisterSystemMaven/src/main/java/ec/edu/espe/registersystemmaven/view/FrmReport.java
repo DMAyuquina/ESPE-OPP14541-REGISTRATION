@@ -1,21 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ec.edu.espe.registersystemmaven.view;
 
-import com.itextpdf.text.Document;
+import Utils.MongoManagerMaven;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
+import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import ec.edu.espe.registersystemmaven.model.Student;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+
 /**
  *
  * @author Danny Ayuquina, LogicLegion, DCCO-ESPE
@@ -184,14 +186,21 @@ public class FrmReport extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnGeneratePDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeneratePDFActionPerformed
-        //inicilization of table
-        
+        //Código que recupera estudiante de la base de datos
+        //------------------------------------------------------------------------------------
+        MongoManagerMaven mongoManager = new MongoManagerMaven();
+
+        MongoDatabase dataBase = mongoManager.openConnectionToMongo();
+        String collection = "Students";
+        MongoCollection<org.bson.Document> mongoCollection = mongoManager.accessToCollections(dataBase, collection);
+        Student student = mongoManager.getStudent(mongoCollection, "1753093093");
+        //-------------------------------------------------------------------------------------
         //Generate pdf
         Document document = new Document();
         try {
             PdfWriter.getInstance(document, new FileOutputStream("student_report.pdf"));
             document.open();
-            
+
             Paragraph title = new Paragraph("Reporte\n\n");
             title.setAlignment(Element.ALIGN_CENTER);
             document.add(title);

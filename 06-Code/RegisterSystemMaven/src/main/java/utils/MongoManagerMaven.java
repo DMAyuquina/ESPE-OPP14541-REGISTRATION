@@ -5,7 +5,7 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import java.util.ArrayList;
+import ec.edu.espe.registersystemmaven.model.Student;
 import java.util.List;
 import org.bson.Document;
 
@@ -60,14 +60,46 @@ public class MongoManagerMaven {
 
         return resultDocument;
     }
-    public static MongoCursor getStudent(MongoCollection<Document> mongoCollection, String student) {
+
+    public static Student getStudent(MongoCollection<Document> mongoCollection, String student) {
 
         //Si quiero todo el documento:
         Document findDocument = new Document("id", student);
 
         MongoCursor<Document> resultDocument = mongoCollection.find(findDocument).iterator();
 
-        return resultDocument;
+        while (resultDocument.hasNext()) {
+            System.out.println(resultDocument.next().getString("names"));
+            System.out.println(resultDocument);
+        }
+        String id="";
+        String names="";
+        String lastNanmes="";
+        String genre="";
+        String phone="";
+        String email="";
+        String career="";
+        String careerCode="";
+        String typeOfRegistration="";
+        String u1="";
+        String u2="";
+        String lastChance="";
+        
+        for (Document doc : mongoCollection.find()) {
+            id = doc.getString("id");
+            names = doc.getString("names");
+            lastNanmes = doc.getString("last names");
+            careerCode = doc.getString("career code");
+            email = doc.getString("email");
+            phone = doc.getString("phone");
+            typeOfRegistration = doc.getString("type of registration");
+            u1 = doc.getString("Grade Unit 1");
+            u2 = doc.getString("Grade Unit 2");
+            lastChance = doc.getString("Last Chance");
+            genre = doc.getString("genre");
+            career = doc.getString("career");
+        }
+        return new Student(id, names, lastNanmes, genre, email, careerCode, phone, career, typeOfRegistration, u1, u2, lastChance);
     }
 
     public static boolean searchAccount(MongoCollection<Document> mongoCollection, String key, String variable) {
