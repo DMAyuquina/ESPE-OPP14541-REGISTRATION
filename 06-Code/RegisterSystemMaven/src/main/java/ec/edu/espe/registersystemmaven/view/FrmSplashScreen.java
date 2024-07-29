@@ -53,6 +53,7 @@ public class FrmSplashScreen extends javax.swing.JFrame {
         jLabel4.setText("(C) 2024 LogicLegion");
 
         btnNext.setBackground(new java.awt.Color(153, 0, 51));
+        btnNext.setForeground(new java.awt.Color(255, 255, 255));
         btnNext.setText("Siguiente");
         btnNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,6 +62,7 @@ public class FrmSplashScreen extends javax.swing.JFrame {
         });
 
         jButton1.setBackground(new java.awt.Color(153, 0, 51));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Salir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
