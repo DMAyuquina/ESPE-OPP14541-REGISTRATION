@@ -3,10 +3,8 @@ package Utils;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import ec.edu.espe.registersystemmaven.model.Student;
-import ec.edu.espe.registersystemmaven.model.Tutor;
+import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
 
@@ -47,14 +45,13 @@ public class MongoManagerMaven {
     }
 
     //Obtención de datos
-    public static MongoCursor<Document> getAllCollection(MongoCollection<Document> mongoCollection, String key, String data) {
+    public static List<Document> getAllCollection(MongoCollection<Document> mongoCollection) {
 
         //Si quiero todo el documento:
-        Document findDocument = new Document(key,data);
 
-        MongoCursor<Document> resultDocument = mongoCollection.find(findDocument).iterator();
+        List<Document> documents = mongoCollection.find().into(new ArrayList<>());
 
-        return resultDocument;
+        return documents;
     }
 
 

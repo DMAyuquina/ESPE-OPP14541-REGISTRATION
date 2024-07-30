@@ -4,17 +4,43 @@
  */
 package ec.edu.espe.registersystemmaven.view;
 
+import Utils.MongoManagerMaven;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import ec.edu.espe.registersystemmaven.controller.CareerFuncionalitities;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import ec.edu.espe.registersystemmaven.controller.StudentFuncionalities;
+import ec.edu.espe.registersystemmaven.model.Career;
+import ec.edu.espe.registersystemmaven.model.Student;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import org.bson.Document;
+
 /**
  *
  * @author Danny Ayuquina, LogicLegion, DCCO-ESPE
  */
 public class FrmGeneralReportStudents extends javax.swing.JFrame {
 
+    private final MongoDatabase dataBase = MongoManagerMaven.openConnectionToMongo();
+    DefaultTableModel mt = new DefaultTableModel();
+
     /**
      * Creates new form FrmGeneralReportStudents
      */
     public FrmGeneralReportStudents() {
         initComponents();
+        String ids[] = {"CEDULA", "NOMBRES", "APELLIDOS", "MATRICULA", "EMAIL", "CELULAR"};
+        mt.setColumnIdentifiers(ids);
+        tblStudents.setModel(mt);
     }
 
     /**
@@ -26,21 +52,232 @@ public class FrmGeneralReportStudents extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblStudents = new javax.swing.JTable();
+        btnBack = new javax.swing.JButton();
+        cmbCareer = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        txtCareerCode = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        btnDownloadPdf = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setBackground(new java.awt.Color(153, 0, 51));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("General report");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(375, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(372, 372, 372))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel1)
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 80));
+
+        tblStudents.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblStudents);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 830, 310));
+
+        btnBack.setBackground(new java.awt.Color(153, 0, 51));
+        btnBack.setForeground(new java.awt.Color(255, 255, 255));
+        btnBack.setText("Volver");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 550, -1, -1));
+
+        cmbCareer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CONTABILIDAD", "MARKETING", "TECNOLOGIA SUPERIOR EN ADMINISTRACION FINANCIERA", "TECNOLOGIA SUPERIOR EN MARKETING", "TECNOLOGIA SUPERIOR EN REDES Y TELECOMUNICACIONES", "TECNOLOGIA SUPERIOR EN DESARROLLO DE SOFTWARE", "SELECCIONAR" }));
+        cmbCareer.setSelectedIndex(6);
+        jPanel1.add(cmbCareer, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 430, -1));
+
+        jLabel2.setText("Seleccione una carrera:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, -1, -1));
+
+        jButton1.setBackground(new java.awt.Color(153, 0, 51));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Buscar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 110, -1, -1));
+
+        txtCareerCode.setEditable(false);
+        jPanel1.add(txtCareerCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 430, -1));
+
+        jLabel3.setText("Código de carrera:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, -1, -1));
+
+        btnDownloadPdf.setBackground(new java.awt.Color(153, 0, 51));
+        btnDownloadPdf.setForeground(new java.awt.Color(255, 255, 255));
+        btnDownloadPdf.setText("Descargar PDF");
+        btnDownloadPdf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDownloadPdfActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnDownloadPdf, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 550, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        FrmAdminMenu frmAdminMenu = new FrmAdminMenu();
+        this.setVisible(false);
+        frmAdminMenu.setVisible(true);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String career = cmbCareer.getSelectedItem().toString();
+
+        if (career.isEmpty()) {
+
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una carrera.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            txtCareerCode.setText(career);
+            String collectionStudents = career;
+            String collectionCareers = "Careers";
+            MongoCollection<org.bson.Document> mongoCollectionStudents = MongoManagerMaven.accessToCollections(dataBase, collectionStudents);
+            MongoCollection<org.bson.Document> mongoCollectionCareers = MongoManagerMaven.accessToCollections(dataBase, collectionCareers);
+
+            Career car = CareerFuncionalitities.getCareer(mongoCollectionCareers, "careerName", career);
+            txtCareerCode.setText(car.getCareerCode());
+            List<Document> students = MongoManagerMaven.getAllCollection(mongoCollectionStudents);
+
+            for (Document std : students) {
+                mt.addRow(new Object[]{std.get("names"), std.get("lastNames"), std.get("typeOfRegistration"), std.get("email"), std.get("phone")});
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnDownloadPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDownloadPdfActionPerformed
+
+        String collection = cmbCareer.getSelectedItem().toString();
+        MongoCollection<org.bson.Document> mongoCollection = MongoManagerMaven.accessToCollections(dataBase, collection);
+        List<Document> students = MongoManagerMaven.getAllCollection(mongoCollection);
+
+        try {
+            String filePath = "general_report.pdf";
+            com.itextpdf.text.Document document = new com.itextpdf.text.Document();
+            PdfWriter.getInstance(document, new FileOutputStream(filePath));
+            document.open();
+
+            // Agregar imagen
+            String imagePath = getClass().getResource("/images/Logo_ITSB_03.png").getPath();
+            com.itextpdf.text.Image image = com.itextpdf.text.Image.getInstance(imagePath);
+            image.scaleToFit(300,300);
+            image.setAlignment(Element.ALIGN_CENTER);
+            document.add(image);
+
+            // Título
+            Paragraph title = new Paragraph("\n\nINSTITUTO SUPERIOR SIMÓN BOLÍVAR", com.itextpdf.text.FontFactory.getFont(com.itextpdf.text.FontFactory.HELVETICA_BOLD, 18));
+            title.setAlignment(Element.ALIGN_CENTER);
+            document.add(title);
+
+            // Fecha
+            Paragraph date = new Paragraph("\n\nFecha: " + java.time.LocalDate.now(), com.itextpdf.text.FontFactory.getFont(com.itextpdf.text.FontFactory.HELVETICA, 12));
+            date.setAlignment(Element.ALIGN_CENTER);
+            document.add(date);
+
+            // Información del estudiante
+            for (Document student : students) {
+                Paragraph studentInfo = new Paragraph(
+                        "\n\nCarrera: " + student.getString("career") + "\n"
+                        + "Código de carrera: " + student.getString("careerCode")+"\n\n\n",
+                        com.itextpdf.text.FontFactory.getFont(com.itextpdf.text.FontFactory.HELVETICA, 12)
+                );
+                studentInfo.setAlignment(Element.ALIGN_LEFT);
+                studentInfo.setIndentationLeft(36); // 2 tabulaciones (18 * 2 = 36)
+                document.add(studentInfo);
+            }
+
+            // Tabla
+            PdfPTable table = new PdfPTable(6); // Número de columnas
+            table.setWidthPercentage(100);
+
+            // Encabezados de la tabla
+            String[] headers = {"CEDULA", "NOMBRES", "APELLIDOS", "MATRICULA", "EMAIL", "CELULAR"};
+            for (String header : headers) {
+                PdfPCell headerCell = new PdfPCell(new Paragraph(header, com.itextpdf.text.FontFactory.getFont(com.itextpdf.text.FontFactory.HELVETICA_BOLD, 12)));
+                headerCell.setBackgroundColor(new com.itextpdf.text.BaseColor(255, 0, 0)); // Color rojo
+                table.addCell(headerCell);
+            }
+
+            // Datos de la tabla
+            for (Document student : students) {
+                table.addCell(student.getString("id"));
+                table.addCell(student.getString("names"));
+                table.addCell(student.getString("lastNames"));
+                table.addCell(student.getString("typeOfRegistration"));
+                table.addCell(student.getString("email"));
+                table.addCell(student.getString("phone"));
+            }
+
+            document.add(table);
+            document.close();
+            
+            mt.setRowCount(0);
+            JOptionPane.showMessageDialog(this, "PDF generado correctamente en " + filePath, "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (IOException | DocumentException e) {
+            JOptionPane.showMessageDialog(this, "Error al generar el PDF: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnDownloadPdfActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +315,17 @@ public class FrmGeneralReportStudents extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnDownloadPdf;
+    private javax.swing.JComboBox<String> cmbCareer;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblStudents;
+    private javax.swing.JTextField txtCareerCode;
     // End of variables declaration//GEN-END:variables
 }

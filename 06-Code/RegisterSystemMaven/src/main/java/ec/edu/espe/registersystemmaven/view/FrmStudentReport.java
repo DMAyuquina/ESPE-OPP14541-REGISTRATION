@@ -207,7 +207,6 @@ public class FrmStudentReport extends javax.swing.JFrame {
 
     private void btnGeneratePDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeneratePDFActionPerformed
 // Recuperar datos del estudiante
-        MongoDatabase dataBase = MongoManagerMaven.openConnectionToMongo();
         String collection = "Students";
         MongoCollection<org.bson.Document> mongoCollection = MongoManagerMaven.accessToCollections(dataBase, collection);
         Student student = StudentFuncionalities.getStudent(mongoCollection, "id", txtId.getText()); 
@@ -265,27 +264,13 @@ public class FrmStudentReport extends javax.swing.JFrame {
             }
 
             document.add(table);
+            
+            mt.setRowCount(0);
         } catch (DocumentException | IOException ex) {
             ex.printStackTrace();
         } finally {
             document.close();
         }
-
-        // Abrir el archivo PDF generado
-//        try {
-//            File pdfFile = new File("student_report.pdf");
-//            if (pdfFile.exists()) {
-//                if (Desktop.isDesktopSupported()) {
-//                    Desktop.getDesktop().open(pdfFile);
-//                } else {
-//                    System.out.println("Awt Desktop is not supported!");
-//                }
-//            } else {
-//                System.out.println("File does not exist!");
-//            }
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
     }//GEN-LAST:event_btnGeneratePDFActionPerformed
 
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed

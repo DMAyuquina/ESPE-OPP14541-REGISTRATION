@@ -359,12 +359,16 @@ public class FrmAddStudent extends javax.swing.JFrame {
 
             if (isValid) {
                 // Aquí puedes agregar el código para guardar estos datos en la base de datos o en la nube
+                String collectionStudentsPerCareer = career;
+                MongoCollection<Document> mongoCollectionStudentsPerCareer = MongoManagerMaven.accessToCollections(dataBase, collectionStudentsPerCareer);
+                
                 Document student = new Document();
                 student.append("id", id).append("names", name).append("lastNames", lastName).append("email", email).append("phone", celular)
                         .append("career", career).append("careerCode", careerCode)
-                        .append("typeOfregistration", tipoMatricula).append("gradeUnitOne", unidad1)
+                        .append("typeOfRegistration", tipoMatricula).append("gradeUnitOne", unidad1)
                         .append("gradeUnitTwo", unidad2).append("lastChance", supletorio);
-
+                
+                mongoCollectionStudentsPerCareer.insertOne(student);
                 mongoCollectionStudents.insertOne(student);
 
                 MongoManagerMaven.closeConnectionToMongo();

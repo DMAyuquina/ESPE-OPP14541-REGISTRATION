@@ -192,12 +192,12 @@ public class FrmAddTutor extends javax.swing.JFrame {
 
     private void btnAddTutorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTutorsActionPerformed
 
-        String collection = "Tutors";
-        MongoCollection<Document> mongoCollection = MongoManagerMaven.accessToCollections(dataBase, collection);
+        String collectionTutors = "Tutors";
+        MongoCollection<Document> mongoCollectionTutors = MongoManagerMaven.accessToCollections(dataBase, collectionTutors);
 
         String id = this.txtId.getText();
 
-        if (utils.ValidationOfData.validationDni(id.length(), id)&& !ValidationOfAccounts.searchForDuplicateId(mongoCollection, "id", id)) {
+        if (utils.ValidationOfData.validationDni(id.length(), id)&& !ValidationOfAccounts.searchForDuplicateId(mongoCollectionTutors, "id", id)) {
             String name = txtName.getText().toUpperCase();
             String lastName = txtLastName.getText().toUpperCase();
             String career = cmbCareer.getSelectedItem().toString();
@@ -250,7 +250,7 @@ public class FrmAddTutor extends javax.swing.JFrame {
                 Document tutor = new Document();
                 tutor.append("id", id).append("names", name).append("last names", lastName).append("phone", phone).append("email", email).append("career", career).append("career code", careerCode);
 
-                mongoCollection.insertOne(tutor);
+                mongoCollectionTutors.insertOne(tutor);
 
                 MongoManagerMaven.closeConnectionToMongo();
 
