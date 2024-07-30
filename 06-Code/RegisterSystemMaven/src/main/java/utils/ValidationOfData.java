@@ -3,7 +3,7 @@ package utils;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Validation {
+public class ValidationOfData {
 
     public static int validationOfInt(int number, Scanner scanner) {
         try {

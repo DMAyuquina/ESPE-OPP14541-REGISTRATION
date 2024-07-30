@@ -1,6 +1,7 @@
 package ec.edu.espe.registersystemmaven.view;
 
 import Utils.MongoManagerMaven;
+import Utils.ValidationOfAccounts;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import java.awt.Color;
@@ -272,7 +273,7 @@ public class FrmAddTutorAccount extends javax.swing.JFrame {
 
         String id = txtId.getText();
 // Obtención de datos de los txtFields
-        if (utils.Validation.validationDni(id.length(), id)) {
+        if (utils.ValidationOfData.validationDni(id.length(), id)&& !ValidationOfAccounts.searchForDuplicateId(mongoCollection, "id", id)) {
             String names = txtNames.getText();
             String lastNames = txtLastNames.getText();
             String user = txtUser.getText();
@@ -282,7 +283,7 @@ public class FrmAddTutorAccount extends javax.swing.JFrame {
             boolean isValid = true;
 
             // Validación de nombres
-            if (!utils.Validation.validationOfCharacter(names)) {
+            if (!utils.ValidationOfData.validationOfCharacter(names)) {
                 txtNames.setBackground(Color.RED);
                 JOptionPane.showMessageDialog(this, "Nombre inválido.", "Error", JOptionPane.ERROR_MESSAGE);
                 isValid = false;
@@ -291,7 +292,7 @@ public class FrmAddTutorAccount extends javax.swing.JFrame {
             }
 
             // Validación de apellidos
-            if (!utils.Validation.validationOfCharacter(lastNames)) {
+            if (!utils.ValidationOfData.validationOfCharacter(lastNames)) {
                 txtLastNames.setBackground(Color.RED);
                 JOptionPane.showMessageDialog(this, "Apellido inválido.", "Error", JOptionPane.ERROR_MESSAGE);
                 isValid = false;
@@ -300,7 +301,7 @@ public class FrmAddTutorAccount extends javax.swing.JFrame {
             }
 
             // Validación de usuario
-            if (!utils.Validation.validationOfCharacter(user)) {
+            if (!utils.ValidationOfData.validationOfCharacter(user)) {
                 txtUser.setBackground(Color.RED);
                 JOptionPane.showMessageDialog(this, "Usuario inválido.", "Error", JOptionPane.ERROR_MESSAGE);
                 isValid = false;

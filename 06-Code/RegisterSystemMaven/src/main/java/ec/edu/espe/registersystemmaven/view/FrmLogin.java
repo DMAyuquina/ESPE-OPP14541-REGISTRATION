@@ -1,6 +1,7 @@
 package ec.edu.espe.registersystemmaven.view;
 
 import Utils.MongoManagerMaven;
+import Utils.ValidationOfAccounts;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import ec.edu.espe.registersystemmaven.model.AdminAccount;
@@ -12,6 +13,8 @@ import org.bson.Document;
  * @author LogicLegion, DCCO-ESPE
  */
 public class FrmLogin extends javax.swing.JFrame {
+
+    private final MongoDatabase dataBase = MongoManagerMaven.openConnectionToMongo();
 
     /**
      * Creates new form Login
@@ -178,17 +181,19 @@ public class FrmLogin extends javax.swing.JFrame {
         AdminAccount admin = new AdminAccount();
         String user = txtUser.getText();
         String password = txtPassword.getText();
-        boolean validation  = false;
-        MongoManagerMaven mongoManager = new MongoManagerMaven();
-            MongoDatabase dataBase = mongoManager.openConnectionToMongo();
-            String collection = "TutorsAccounts";
-            MongoCollection<Document> mongoCollection = mongoManager.accessToCollections(dataBase, collection);
-        
-        if (user.equals("LogicLegion") && password.equals("14541")) {
+
+        String adminCollection = "AdminAccount";
+        String tutorCollection = "TutorsAccounts";
+        String stundentsCollection = "StudentsAccounts";
+
+        MongoCollection<Document> mongoAdminCollection = MongoManagerMaven.accessToCollections(dataBase, adminCollection);
+        MongoCollection<Document> mongoTutorCollection = MongoManagerMaven.accessToCollections(dataBase, tutorCollection);
+
+        if (ValidationOfAccounts.searchAccountForLogin(mongoAdminCollection, "user", user) && ValidationOfAccounts.searchAccountForLogin(mongoAdminCollection, "password", password)) {
             FrmAdminMenu frmAdmin = new FrmAdminMenu();
             this.setVisible(false);
             frmAdmin.setVisible(true);
-        } else if (mongoManager.searchAccount(mongoCollection, "user", user)&& mongoManager.searchAccount(mongoCollection, "password", password)) {
+        } else if (ValidationOfAccounts.searchAccountForLogin(mongoTutorCollection, "user", user) && ValidationOfAccounts.searchAccountForLogin(mongoTutorCollection, "password", password)) {
             FrmTutorMenu frmTutorMenu = new FrmTutorMenu();
             this.setVisible(false);
             frmTutorMenu.setVisible(true);

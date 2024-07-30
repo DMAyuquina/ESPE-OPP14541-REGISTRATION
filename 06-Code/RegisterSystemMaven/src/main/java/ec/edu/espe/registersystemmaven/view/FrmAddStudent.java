@@ -1,12 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ec.edu.espe.registersystemmaven.view;
 
 import Utils.MongoManagerMaven;
+import Utils.ValidationOfAccounts;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import ec.edu.espe.registersystemmaven.controller.CareerFuncionalitities;
+import ec.edu.espe.registersystemmaven.model.Career;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import org.bson.Document;
@@ -16,6 +15,8 @@ import org.bson.Document;
  * @author Danny Ayuquina, LogicLegion, DCCO-ESPE
  */
 public class FrmAddStudent extends javax.swing.JFrame {
+
+    private final MongoDatabase dataBase = MongoManagerMaven.openConnectionToMongo();
 
     /**
      * Creates new form FrmStudentReport
@@ -48,7 +49,6 @@ public class FrmAddStudent extends javax.swing.JFrame {
         txtId = new javax.swing.JTextField();
         txtName = new javax.swing.JTextField();
         txtLastName = new javax.swing.JTextField();
-        txtCarrearCode = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         txtPhone = new javax.swing.JTextField();
         txtGradeU1 = new javax.swing.JTextField();
@@ -60,40 +60,55 @@ public class FrmAddStudent extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         btnAddStudents = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        cmbCareer = new javax.swing.JComboBox<>();
+        txtCareerCode = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setForeground(new java.awt.Color(153, 0, 51));
         jLabel1.setText("Cédula:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 124, -1, -1));
 
         jLabel2.setForeground(new java.awt.Color(153, 0, 51));
         jLabel2.setText("Nombres:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 158, 53, -1));
 
         jLabel3.setForeground(new java.awt.Color(153, 0, 51));
         jLabel3.setText("Apellidos:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 192, -1, -1));
 
         jLabel4.setForeground(new java.awt.Color(153, 0, 51));
         jLabel4.setText("Código de carrera:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 396, -1, -1));
 
         jLabel5.setForeground(new java.awt.Color(153, 0, 51));
         jLabel5.setText("Email:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(217, 232, -1, -1));
 
         jLabel6.setForeground(new java.awt.Color(153, 0, 51));
         jLabel6.setText("Celular:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 275, -1, -1));
 
         jLabel7.setForeground(new java.awt.Color(153, 0, 51));
         jLabel7.setText("Tipo de matrícula:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 436, -1, -1));
 
         jLabel8.setForeground(new java.awt.Color(153, 0, 51));
         jLabel8.setText("Parcial 1:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 521, -1, -1));
 
         jLabel9.setForeground(new java.awt.Color(153, 0, 51));
         jLabel9.setText("Parcial 2:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 555, -1, -1));
 
         jLabel10.setForeground(new java.awt.Color(153, 0, 51));
         jLabel10.setText("Supletorio:");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 585, -1, -1));
 
         btnBack.setBackground(new java.awt.Color(153, 0, 51));
         btnBack.setForeground(new java.awt.Color(255, 255, 255));
@@ -103,30 +118,53 @@ public class FrmAddStudent extends javax.swing.JFrame {
                 btnBackActionPerformed(evt);
             }
         });
+        jPanel1.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 692, -1, -1));
 
         txtId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdActionPerformed(evt);
             }
         });
+        jPanel1.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(273, 121, 195, -1));
+
+        txtName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNameActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(273, 155, 195, -1));
+        jPanel1.add(txtLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(273, 189, 195, -1));
+
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmailActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(273, 229, 195, -1));
+        jPanel1.add(txtPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(273, 272, 195, -1));
+        jPanel1.add(txtGradeU1, new org.netbeans.lib.awtextra.AbsoluteConstraints(308, 518, 121, -1));
 
         txtGradeU2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtGradeU2ActionPerformed(evt);
             }
         });
+        jPanel1.add(txtGradeU2, new org.netbeans.lib.awtextra.AbsoluteConstraints(308, 552, 121, -1));
 
-        cmbRegistrationType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Segunda", "Tercera" }));
+        cmbRegistrationType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR", "SEGUNDA", "TERCERA" }));
+        jPanel1.add(cmbRegistrationType, new org.netbeans.lib.awtextra.AbsoluteConstraints(221, 433, 333, -1));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(153, 0, 51));
         jLabel12.setText("Calificaciones");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 461, 92, 25));
 
         txtLastChance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtLastChanceActionPerformed(evt);
             }
         });
+        jPanel1.add(txtLastChance, new org.netbeans.lib.awtextra.AbsoluteConstraints(308, 582, 121, -1));
 
         jPanel2.setBackground(new java.awt.Color(153, 0, 51));
 
@@ -140,8 +178,8 @@ public class FrmAddStudent extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(84, 84, 84))
+                .addComponent(jLabel13)
+                .addGap(231, 231, 231))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,9 +189,12 @@ public class FrmAddStudent extends javax.swing.JFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 657, -1));
+
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(153, 0, 51));
-        jLabel11.setText("Datos Generales");
+        jLabel11.setText("Datos Personales");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(273, 74, 110, 16));
 
         btnAddStudents.setBackground(new java.awt.Color(153, 0, 51));
         btnAddStudents.setForeground(new java.awt.Color(255, 255, 255));
@@ -163,112 +204,33 @@ public class FrmAddStudent extends javax.swing.JFrame {
                 btnAddStudentsActionPerformed(evt);
             }
         });
+        jPanel1.add(btnAddStudents, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 692, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(117, 117, 117)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtId))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel8))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtName)
-                            .addComponent(txtLastName)
-                            .addComponent(txtCarrearCode)
-                            .addComponent(txtEmail)
-                            .addComponent(txtPhone)
-                            .addComponent(txtGradeU1)
-                            .addComponent(txtGradeU2)
-                            .addComponent(cmbRegistrationType, 0, 121, Short.MAX_VALUE)
-                            .addComponent(txtLastChance))))
-                .addContainerGap(116, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(151, 151, 151))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(157, 157, 157)
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(btnAddStudents)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnBack)
-                .addGap(35, 35, 35))
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtCarrearCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(cmbRegistrationType, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtGradeU1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(txtGradeU2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(txtLastChance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBack)
-                    .addComponent(btnAddStudents))
-                .addGap(18, 18, 18))
-        );
+        jLabel14.setForeground(new java.awt.Color(153, 0, 51));
+        jLabel14.setText("Carrera:");
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(162, 356, 43, -1));
+
+        cmbCareer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CONTABILIDAD", "MARKETING", "TECNOLOGIA SUPERIOR EN ADMINISTRACION FINANCIERA", "TECNOLOGIA SUPERIOR EN MARKETING", "TECNOLOGIA SUPERIOR EN REDES Y TELECOMUNICACIONES", "TECNOLOGIA SUPERIOR EN DESARROLLO DE SOFTWARE", "SELECCIONAR" }));
+        cmbCareer.setSelectedIndex(6);
+        cmbCareer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCareerActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmbCareer, new org.netbeans.lib.awtextra.AbsoluteConstraints(223, 353, 331, -1));
+
+        txtCareerCode.setEditable(false);
+        txtCareerCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCareerCodeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtCareerCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(223, 393, 331, -1));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(153, 0, 51));
+        jLabel15.setText("Datos Académicos");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 306, 128, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -292,7 +254,6 @@ public class FrmAddStudent extends javax.swing.JFrame {
 
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
         this.txtId.getText();
-
     }//GEN-LAST:event_txtIdActionPerformed
 
     private void txtLastChanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLastChanceActionPerformed
@@ -304,56 +265,54 @@ public class FrmAddStudent extends javax.swing.JFrame {
     }//GEN-LAST:event_txtGradeU2ActionPerformed
 
     private void btnAddStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStudentsActionPerformed
-        String id = this.txtId.getText();
+        String collectionStudents = "Students";
+        MongoCollection<Document> mongoCollectionStudents = MongoManagerMaven.accessToCollections(dataBase, collectionStudents);
 
-        if (utils.Validation.validationDni(id.length(), id)) {
-            String name = txtName.getText();
-            String lastName = txtLastName.getText();
-            String codigoCarrera = txtCarrearCode.getText();
+        String id = this.txtId.getText();
+        if (utils.ValidationOfData.validationDni(id.length(), id) && !ValidationOfAccounts.searchForDuplicateId(mongoCollectionStudents, "id", id)) {
+            String name = txtName.getText().toUpperCase();
+            String lastName = txtLastName.getText().toUpperCase();
+            String career = cmbCareer.getSelectedItem().toString();
+            String careerCode = txtCareerCode.getText();
             String email = txtEmail.getText();
             String celular = txtPhone.getText();
-            String tipoMatricula = cmbRegistrationType.getSelectedItem().toString();
+            String tipoMatricula = cmbRegistrationType.getSelectedItem().toString().toUpperCase();
             String unidad1 = txtGradeU1.getText();
             String unidad2 = txtGradeU2.getText();
             String supletorio = txtLastChance.getText();
 
             boolean isValid = true;
 
-            if (!utils.Validation.validationOfCharacter(name)) {
+            if (!utils.ValidationOfData.validationOfCharacter(name)) {
                 txtName.setBackground(Color.RED);
-                JOptionPane.showMessageDialog(this, "Nombre inválido.", "Error", JOptionPane.ERROR_MESSAGE);
                 isValid = false;
             } else {
                 txtName.setBackground(Color.WHITE);
             }
 
-            if (!utils.Validation.validationOfCharacter(lastName)) {
+            if (!utils.ValidationOfData.validationOfCharacter(lastName)) {
                 txtLastName.setBackground(Color.RED);
-                JOptionPane.showMessageDialog(this, "Apellido inválido.", "Error", JOptionPane.ERROR_MESSAGE);
                 isValid = false;
             } else {
                 txtLastName.setBackground(Color.WHITE);
             }
 
-            if (codigoCarrera.isEmpty() || !codigoCarrera.matches("\\d+")) {
-                txtCarrearCode.setBackground(Color.RED);
-                JOptionPane.showMessageDialog(this, "Código de carrera inválido.", "Error", JOptionPane.ERROR_MESSAGE);
+            if (careerCode.isEmpty()) {
+                cmbCareer.setBackground(Color.RED);
                 isValid = false;
             } else {
-                txtCarrearCode.setBackground(Color.WHITE);
+                cmbCareer.setBackground(Color.WHITE);
             }
 
-            if (!utils.Validation.validationEmail(email)) {
+            if (!utils.ValidationOfData.validationEmail(email)) {
                 txtEmail.setBackground(Color.RED);
-                JOptionPane.showMessageDialog(this, "Correo electrónico inválido.", "Error", JOptionPane.ERROR_MESSAGE);
                 isValid = false;
             } else {
                 txtEmail.setBackground(Color.WHITE);
             }
 
-            if (!utils.Validation.validationPhoneNumber(celular)) {
+            if (!utils.ValidationOfData.validationPhoneNumber(celular)) {
                 txtPhone.setBackground(Color.RED);
-                JOptionPane.showMessageDialog(this, "Número de celular inválido. Debe ser un número de 10 dígitos que comience con 0.", "Error", JOptionPane.ERROR_MESSAGE);
                 isValid = false;
             } else {
                 txtPhone.setBackground(Color.WHITE);
@@ -361,7 +320,6 @@ public class FrmAddStudent extends javax.swing.JFrame {
 
             if (tipoMatricula.isEmpty()) {
                 cmbRegistrationType.setBackground(Color.RED);
-                JOptionPane.showMessageDialog(this, "Tipo de matrícula inválido.", "Error", JOptionPane.ERROR_MESSAGE);
                 isValid = false;
             } else {
                 cmbRegistrationType.setBackground(Color.WHITE);
@@ -370,18 +328,16 @@ public class FrmAddStudent extends javax.swing.JFrame {
             float gradeU1 = 0;
             float gradeU2 = 0;
 
-            if (!utils.Validation.validationGrade(unidad1)) {
+            if (!utils.ValidationOfData.validationGrade(unidad1)) {
                 txtGradeU1.setBackground(Color.RED);
-                JOptionPane.showMessageDialog(this, "Calificación de Unidad 1 inválida. Debe estar entre 0 y 10.", "Error", JOptionPane.ERROR_MESSAGE);
                 isValid = false;
             } else {
                 txtGradeU1.setBackground(Color.WHITE);
                 gradeU1 = Float.parseFloat(unidad1);
             }
 
-            if (!utils.Validation.validationGrade(unidad2)) {
+            if (!utils.ValidationOfData.validationGrade(unidad2)) {
                 txtGradeU2.setBackground(Color.RED);
-                JOptionPane.showMessageDialog(this, "Calificación de Unidad 2 inválida. Debe estar entre 0 y 10.", "Error", JOptionPane.ERROR_MESSAGE);
                 isValid = false;
             } else {
                 txtGradeU2.setBackground(Color.WHITE);
@@ -391,9 +347,8 @@ public class FrmAddStudent extends javax.swing.JFrame {
             float average = (gradeU1 + gradeU2) / 2;
 
             if (average < 7) {
-                if (!utils.Validation.validationGrade(supletorio)) {
+                if (!utils.ValidationOfData.validationGrade(supletorio)) {
                     txtLastChance.setBackground(Color.RED);
-                    JOptionPane.showMessageDialog(this, "Calificación de Supletorio inválida. Debe estar entre 0 y 10.", "Error", JOptionPane.ERROR_MESSAGE);
                     isValid = false;
                 } else {
                     txtLastChance.setBackground(Color.WHITE);
@@ -404,20 +359,15 @@ public class FrmAddStudent extends javax.swing.JFrame {
 
             if (isValid) {
                 // Aquí puedes agregar el código para guardar estos datos en la base de datos o en la nube
-                MongoManagerMaven mongoManager = new MongoManagerMaven();
-       
-                MongoDatabase dataBase = mongoManager.openConnectionToMongo();
-                String collection = "Students";
-                MongoCollection<Document> mongoCollection = mongoManager.accessToCollections(dataBase, collection);
-
                 Document student = new Document();
-                student.append("id", id).append("names", name).append("last names", lastName).append("career code", codigoCarrera)
-                        .append("email", email).append("phone", celular).append("type of registration", tipoMatricula).append("Grade Unit 1", unidad1)
-                        .append("Grade Unit 2", unidad2).append("Last Chance", supletorio);
+                student.append("id", id).append("names", name).append("lastNames", lastName).append("email", email).append("phone", celular)
+                        .append("career", career).append("careerCode", careerCode)
+                        .append("typeOfregistration", tipoMatricula).append("gradeUnitOne", unidad1)
+                        .append("gradeUnitTwo", unidad2).append("lastChance", supletorio);
 
-                mongoCollection.insertOne(student);
-                
-                mongoManager.closeConnectionToMongo();
+                mongoCollectionStudents.insertOne(student);
+
+                MongoManagerMaven.closeConnectionToMongo();
 
                 JOptionPane.showMessageDialog(this, "Estudiante agregado exitosamente.");
                 txtId.setBackground(Color.WHITE);
@@ -428,6 +378,26 @@ public class FrmAddStudent extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_btnAddStudentsActionPerformed
+
+    private void cmbCareerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCareerActionPerformed
+        String career = cmbCareer.getSelectedItem().toString();
+        String collectionCareer = "Careers";
+        MongoCollection<Document> mongoCollectionCareers = MongoManagerMaven.accessToCollections(dataBase, collectionCareer);
+        Career careerSearch = CareerFuncionalitities.getCareer(mongoCollectionCareers, "careerName", career);
+        txtCareerCode.setText(careerSearch.getCareerCode());
+    }//GEN-LAST:event_cmbCareerActionPerformed
+
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmailActionPerformed
+
+    private void txtCareerCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCareerCodeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCareerCodeActionPerformed
+
+    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -468,12 +438,15 @@ public class FrmAddStudent extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddStudents;
     private javax.swing.JButton btnBack;
+    private javax.swing.JComboBox<String> cmbCareer;
     private javax.swing.JComboBox<String> cmbRegistrationType;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -484,7 +457,7 @@ public class FrmAddStudent extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField txtCarrearCode;
+    private javax.swing.JTextField txtCareerCode;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtGradeU1;
     private javax.swing.JTextField txtGradeU2;

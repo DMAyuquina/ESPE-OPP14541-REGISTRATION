@@ -33,16 +33,9 @@ public class FrmAdminMenu extends javax.swing.JFrame {
         mnuiProfile = new javax.swing.JMenuItem();
         mnuiLogout = new javax.swing.JMenuItem();
         mnuiExit = new javax.swing.JMenuItem();
-        mnuCurses = new javax.swing.JMenu();
-        jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
-        jCheckBoxMenuItem5 = new javax.swing.JCheckBoxMenuItem();
-        jCheckBoxMenuItem3 = new javax.swing.JCheckBoxMenuItem();
-        jCheckBoxMenuItem4 = new javax.swing.JCheckBoxMenuItem();
         mnuStudent = new javax.swing.JMenu();
         mnuiAddStudent = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         mnuTutor = new javax.swing.JMenu();
@@ -50,9 +43,8 @@ public class FrmAdminMenu extends javax.swing.JFrame {
         mnuiManageAccounts = new javax.swing.JMenuItem();
         mnuiManageTutors = new javax.swing.JMenuItem();
         mnuReport = new javax.swing.JMenu();
-        mnuiComputeGrades = new javax.swing.JMenuItem();
-        mnuiComputeGratuity = new javax.swing.JMenuItem();
-        mnuiViewReport = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         jMenu2.setText("File");
         jMenuBar2.add(jMenu2);
@@ -114,29 +106,9 @@ public class FrmAdminMenu extends javax.swing.JFrame {
 
         jMenuBar1.add(mnuUser);
 
-        mnuCurses.setText("Materia");
-
-        jCheckBoxMenuItem2.setSelected(true);
-        jCheckBoxMenuItem2.setText("Algebra");
-        mnuCurses.add(jCheckBoxMenuItem2);
-
-        jCheckBoxMenuItem5.setSelected(true);
-        jCheckBoxMenuItem5.setText("Contabilidad");
-        mnuCurses.add(jCheckBoxMenuItem5);
-
-        jCheckBoxMenuItem3.setSelected(true);
-        jCheckBoxMenuItem3.setText("Quimica");
-        mnuCurses.add(jCheckBoxMenuItem3);
-
-        jCheckBoxMenuItem4.setSelected(true);
-        jCheckBoxMenuItem4.setText("Marketing");
-        mnuCurses.add(jCheckBoxMenuItem4);
-
-        jMenuBar1.add(mnuCurses);
-
         mnuStudent.setText("Estudiante");
 
-        mnuiAddStudent.setText("Agregar Estudiante al Curso");
+        mnuiAddStudent.setText("Agregar Estudiante al Carrera");
         mnuiAddStudent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuiAddStudentActionPerformed(evt);
@@ -144,17 +116,20 @@ public class FrmAdminMenu extends javax.swing.JFrame {
         });
         mnuStudent.add(mnuiAddStudent);
 
-        jMenu1.setText("Buscar Estudiante");
-
-        jMenuItem1.setText("Por Cedula");
-        jMenu1.add(jMenuItem1);
-
-        jMenuItem2.setText("Por Nombre");
-        jMenu1.add(jMenuItem2);
-
-        mnuStudent.add(jMenu1);
+        jMenuItem1.setText("Buscar Estudiantes");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        mnuStudent.add(jMenuItem1);
 
         jMenuItem3.setText("Eliminar Estudiante");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         mnuStudent.add(jMenuItem3);
 
         jMenuItem4.setText("Editar información del estudiante");
@@ -192,14 +167,11 @@ public class FrmAdminMenu extends javax.swing.JFrame {
 
         mnuReport.setText("Reporte");
 
-        mnuiComputeGrades.setText("Calcular notas");
-        mnuReport.add(mnuiComputeGrades);
+        jMenuItem6.setText("Reporte General Profesores");
+        mnuReport.add(jMenuItem6);
 
-        mnuiComputeGratuity.setText("Calcular Gratuidad");
-        mnuReport.add(mnuiComputeGratuity);
-
-        mnuiViewReport.setText("Ver Reporte General");
-        mnuReport.add(mnuiViewReport);
+        jMenuItem5.setText("Reporte General Estudiantes");
+        mnuReport.add(jMenuItem5);
 
         jMenuBar1.add(mnuReport);
 
@@ -255,6 +227,16 @@ public class FrmAdminMenu extends javax.swing.JFrame {
         frmtutorAccountAdministrator.setVisible(true);
     }//GEN-LAST:event_mnuiManageAccountsActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        FrmStudentReport frmReport = new FrmStudentReport();
+        this.setVisible(false);
+        frmReport.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -293,35 +275,27 @@ public class FrmAdminMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem4;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem5;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JMenu mnuCurses;
     private javax.swing.JMenu mnuReport;
     private javax.swing.JMenu mnuStudent;
     private javax.swing.JMenu mnuTutor;
     private javax.swing.JMenu mnuUser;
     private javax.swing.JMenuItem mnuiAddStudent;
     private javax.swing.JMenuItem mnuiAddTutors;
-    private javax.swing.JMenuItem mnuiComputeGrades;
-    private javax.swing.JMenuItem mnuiComputeGratuity;
     private javax.swing.JMenuItem mnuiExit;
     private javax.swing.JMenuItem mnuiLogout;
     private javax.swing.JMenuItem mnuiManageAccounts;
     private javax.swing.JMenuItem mnuiManageTutors;
     private javax.swing.JMenuItem mnuiProfile;
-    private javax.swing.JMenuItem mnuiViewReport;
     // End of variables declaration//GEN-END:variables
 }

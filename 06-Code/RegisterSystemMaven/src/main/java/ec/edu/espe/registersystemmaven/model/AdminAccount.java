@@ -9,8 +9,8 @@ package ec.edu.espe.registersystemmaven.model;
  * @author Danny Ayuquina, LogicLegion, DCCO-ESPE
  */
 public class AdminAccount {
-    private String user = "LogicLegion";
-    private String password = "14541";
+    private String user;
+    private String password;
 
     public String getUser() {
         return user;
