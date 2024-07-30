@@ -241,7 +241,9 @@ public class FrmAdminMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
+        FrmGeneralReportStudents frm = new FrmGeneralReportStudents();
+        this.setVisible(false);
+        frm.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**

@@ -220,7 +220,7 @@ public class FrmGeneralReportStudents extends javax.swing.JFrame {
             // Agregar imagen
             String imagePath = getClass().getResource("/images/Logo_ITSB_03.png").getPath();
             com.itextpdf.text.Image image = com.itextpdf.text.Image.getInstance(imagePath);
-            image.scaleToFit(300,300);
+            image.scaleToFit(300, 300);
             image.setAlignment(Element.ALIGN_CENTER);
             document.add(image);
 
@@ -235,15 +235,22 @@ public class FrmGeneralReportStudents extends javax.swing.JFrame {
             document.add(date);
 
             // Información del estudiante
+            int i = 0;
             for (Document student : students) {
-                Paragraph studentInfo = new Paragraph(
-                        "\n\nCarrera: " + student.getString("career") + "\n"
-                        + "Código de carrera: " + student.getString("careerCode")+"\n\n\n",
-                        com.itextpdf.text.FontFactory.getFont(com.itextpdf.text.FontFactory.HELVETICA, 12)
-                );
-                studentInfo.setAlignment(Element.ALIGN_LEFT);
-                studentInfo.setIndentationLeft(36); // 2 tabulaciones (18 * 2 = 36)
-                document.add(studentInfo);
+                if (i != 0) {
+                    break;
+                } else {
+                    Paragraph studentInfo = new Paragraph(
+                            "\n\nCarrera: " + student.getString("career") + "\n"
+                            + "Código de carrera: " + student.getString("careerCode") + "\n\n\n",
+                            com.itextpdf.text.FontFactory.getFont(com.itextpdf.text.FontFactory.HELVETICA, 12)
+                    );
+                    studentInfo.setAlignment(Element.ALIGN_LEFT);
+                    studentInfo.setIndentationLeft(36); // 2 tabulaciones (18 * 2 = 36)
+                    document.add(studentInfo);
+                }
+                i++;
+
             }
 
             // Tabla
@@ -270,7 +277,7 @@ public class FrmGeneralReportStudents extends javax.swing.JFrame {
 
             document.add(table);
             document.close();
-            
+
             mt.setRowCount(0);
             JOptionPane.showMessageDialog(this, "PDF generado correctamente en " + filePath, "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
