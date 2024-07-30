@@ -229,15 +229,15 @@ public class FrmAdminMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuiManageAccountsActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        FrmStudentReport frmReport = new FrmStudentReport();
+        FrmStudentReport fmrStudentReportToAdmin = new FrmStudentReport();
         this.setVisible(false);
-        frmReport.setVisible(true);
+        fmrStudentReportToAdmin.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        FrmStudentReport frmStudentReport = new FrmStudentReport();
-        this.setVisible(false);
-        frmStudentReport.setVisible(true);
+        FrmSearchingByDni frmSearchingByDni = new FrmSearchingByDni();
+        this.setVisible(true);
+        frmSearchingByDni.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed

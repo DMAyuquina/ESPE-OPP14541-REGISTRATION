@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Danny Ayuquina, LogicLegion, DCCO-ESPE
  */
-public class FrmStudentReport extends javax.swing.JFrame {
+public class FrmStudentReportToAdmin extends javax.swing.JFrame {
 
     private final MongoDatabase dataBase = MongoManagerMaven.openConnectionToMongo();
     DefaultTableModel mt = new DefaultTableModel();
@@ -33,7 +33,7 @@ public class FrmStudentReport extends javax.swing.JFrame {
     /**
      * Creates new form FrmReport
      */
-    public FrmStudentReport() {
+    public FrmStudentReportToAdmin() {
         initComponents();
         String ids[] = {"MATRICULA", "CARRERA", "CODIGO DE \nCARRERA", "EMAIL", "CELULAR"};
         mt.setColumnIdentifiers(ids);
@@ -209,17 +209,17 @@ public class FrmStudentReport extends javax.swing.JFrame {
 // Recuperar datos del estudiante
         String collection = "Students";
         MongoCollection<org.bson.Document> mongoCollection = MongoManagerMaven.accessToCollections(dataBase, collection);
-        Student student = StudentFuncionalities.getStudent(mongoCollection, "id", txtId.getText());
+        Student student = StudentFuncionalities.getStudent(mongoCollection, "id", txtId.getText()); 
 
         Document document = new Document();
         try {
-            PdfWriter.getInstance(document, new FileOutputStream(student.getDni() + ".pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream(student.getDni()+".pdf"));
             document.open();
 
             // Agregar imagen
-            String imagePath = "src/main/resources/images/Logo_ITSB_03.png";
+            String imagePath = "src/main/resources/images/Logo_ITSB_03.png"; 
             com.itextpdf.text.Image image = com.itextpdf.text.Image.getInstance(imagePath);
-            image.scaleToFit(300, 300);
+            image.scaleToFit(300, 300); 
             image.setAlignment(Element.ALIGN_CENTER);
             document.add(image);
 
@@ -264,7 +264,7 @@ public class FrmStudentReport extends javax.swing.JFrame {
             }
 
             document.add(table);
-
+            
             mt.setRowCount(0);
         } catch (DocumentException | IOException ex) {
             ex.printStackTrace();
@@ -334,14 +334,26 @@ public class FrmStudentReport extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmStudentReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmStudentReportToAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmStudentReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmStudentReportToAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmStudentReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmStudentReportToAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmStudentReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmStudentReportToAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -350,9 +362,8 @@ public class FrmStudentReport extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmStudentReport().setVisible(true);
+                new FrmStudentReportToAdmin().setVisible(true);
             }
-            
         });
     }
 
