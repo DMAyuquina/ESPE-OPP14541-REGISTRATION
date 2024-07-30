@@ -200,7 +200,7 @@ public class FrmGeneralReportStudents extends javax.swing.JFrame {
             List<Document> students = MongoManagerMaven.getAllCollection(mongoCollectionStudents);
 
             for (Document std : students) {
-                mt.addRow(new Object[]{std.get("names"), std.get("lastNames"), std.get("typeOfRegistration"), std.get("email"), std.get("phone")});
+                mt.addRow(new Object[]{std.get("id"),std.get("names"), std.get("lastNames"), std.get("typeOfRegistration"), std.get("email"), std.get("phone")});
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
