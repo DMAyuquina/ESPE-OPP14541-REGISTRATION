@@ -80,7 +80,7 @@ public class FrmTutorsAdministrator extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Cuentas");
+        jMenu2.setText("Profesores");
 
         menuItemAddAccount.setText("Añadir cuenta");
         menuItemAddAccount.addActionListener(new java.awt.event.ActionListener() {
