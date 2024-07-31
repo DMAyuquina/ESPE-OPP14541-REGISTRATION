@@ -57,14 +57,12 @@ public class FrmStudentReportToAdmin extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblStudent = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtNames = new javax.swing.JTextField();
         txtLastNames = new javax.swing.JTextField();
         btnSearchByDni = new javax.swing.JButton();
-        btnSearchByNames = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -96,7 +94,7 @@ public class FrmStudentReportToAdmin extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Reporte");
+        jLabel1.setText("Buscar Estudiante");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -104,8 +102,8 @@ public class FrmStudentReportToAdmin extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(357, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(345, 345, 345))
+                .addComponent(jLabel1)
+                .addGap(288, 288, 288))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,9 +132,6 @@ public class FrmStudentReportToAdmin extends javax.swing.JFrame {
 
         jLabel2.setText("Búsqueda por cédula:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, -1, -1));
-
-        jLabel3.setText("Búsqueda por nombre:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, 130, 20));
 
         txtId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,16 +169,6 @@ public class FrmStudentReportToAdmin extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnSearchByDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, -1, -1));
-
-        btnSearchByNames.setBackground(new java.awt.Color(153, 0, 51));
-        btnSearchByNames.setForeground(new java.awt.Color(255, 255, 255));
-        btnSearchByNames.setText("Buscar");
-        btnSearchByNames.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchByNamesActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnSearchByNames, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 160, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -301,22 +286,6 @@ public class FrmStudentReportToAdmin extends javax.swing.JFrame {
         this.txtLastNames.getText();
     }//GEN-LAST:event_txtLastNamesActionPerformed
 
-    private void btnSearchByNamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchByNamesActionPerformed
-        String collectionStudents = "Students";
-        MongoCollection<org.bson.Document> mongoCollectionStudents = MongoManagerMaven.accessToCollections(dataBase, collectionStudents);
-        String names = txtNames.getText().toUpperCase();
-        String lastNames = txtLastNames.getText().toUpperCase();
-        if (names.isEmpty() || lastNames.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Debe llenar ambos campos de nombres", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (ValidationOfAccounts.searchAccountForLogin(mongoCollectionStudents, "names", names) && ValidationOfAccounts.searchAccountForLogin(mongoCollectionStudents, "lastNames", lastNames)) {
-            Student student = StudentFuncionalities.getStudent(mongoCollectionStudents, "names", names);
-            txtId.setText(student.getDni());
-            txtNames.setText(names);
-            txtLastNames.setText(lastNames);
-            mt.addRow(new Object[]{student.getTypeOfRegistration(), student.getCareer(), student.getCareerCode(), student.getEmail(), student.getPhone()});
-        }
-    }//GEN-LAST:event_btnSearchByNamesActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -371,10 +340,8 @@ public class FrmStudentReportToAdmin extends javax.swing.JFrame {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnGeneratePDF;
     private javax.swing.JButton btnSearchByDni;
-    private javax.swing.JButton btnSearchByNames;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
