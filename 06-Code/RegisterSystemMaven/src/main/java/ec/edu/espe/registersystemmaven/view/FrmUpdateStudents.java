@@ -218,7 +218,7 @@ public class FrmUpdateStudents extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-      String dataBaseName = "StudentsDB";
+    String dataBaseName = "StudentsDB";
     MongoDatabase database = MongoManagerMaven.accessToDatabase(dataBaseName);
 
     String id = this.txtId.getText();
@@ -246,29 +246,32 @@ public class FrmUpdateStudents extends javax.swing.JFrame {
         // Si se encuentra el estudiante
         if (found && collectionToUpdate != null) {
             // Obtener los datos actualizados del estudiante o mantener los datos actuales si no se ingresan nuevos valores
-            String newNombres = JOptionPane.showInputDialog("Ingrese los nuevos nombres:", existingStudent.getString("NOMBRES"));
-            if (newNombres == null) newNombres = existingStudent.getString("NOMBRES"); // Mantener el dato actual si se cancela
+            String newNombres = JOptionPane.showInputDialog("Ingrese los nuevos nombres:", existingStudent.getString("names"));
+            if (newNombres == null) newNombres = existingStudent.getString("names"); // Mantener el dato actual si se cancela
 
-            String newApellidos = JOptionPane.showInputDialog("Ingrese los nuevos apellidos:", existingStudent.getString("APELLIDOS"));
-            if (newApellidos == null) newApellidos = existingStudent.getString("APELLIDOS"); // Mantener el dato actual si se cancela
+            String newApellidos = JOptionPane.showInputDialog("Ingrese los nuevos apellidos:", existingStudent.getString("lastNames"));
+            if (newApellidos == null) newApellidos = existingStudent.getString("lastNames"); // Mantener el dato actual si se cancela
 
-            String newMatricula = JOptionPane.showInputDialog("Ingrese la nueva matrícula:", existingStudent.getString("MATRICULA"));
-            if (newMatricula == null) newMatricula = existingStudent.getString("MATRICULA"); // Mantener el dato actual si se cancela
+            String newMatricula = JOptionPane.showInputDialog("Ingrese la nueva matrícula:", existingStudent.getString("typeOfRegistration"));
+            if (newMatricula == null) newMatricula = existingStudent.getString("typeOfRegistration"); // Mantener el dato actual si se cancela
 
-            String newEmail = JOptionPane.showInputDialog("Ingrese el nuevo email:", existingStudent.getString("EMAIL"));
-            if (newEmail == null) newEmail = existingStudent.getString("EMAIL"); // Mantener el dato actual si se cancela
+            String newEmail = JOptionPane.showInputDialog("Ingrese el nuevo email:", existingStudent.getString("email"));
+            if (newEmail == null) newEmail = existingStudent.getString("email"); // Mantener el dato actual si se cancela
 
-            String newCelular = JOptionPane.showInputDialog("Ingrese el nuevo celular:", existingStudent.getString("CELULAR"));
-            if (newCelular == null) newCelular = existingStudent.getString("CELULAR"); // Mantener el dato actual si se cancela
+            String newCelular = JOptionPane.showInputDialog("Ingrese el nuevo celular:", existingStudent.getString("phone"));
+            if (newCelular == null) newCelular = existingStudent.getString("phone"); // Mantener el dato actual si se cancela
 
             // Filtra por el campo correcto ("id")
             Bson updateFilter = eq("id", id);
             Bson update = Updates.combine(
-                    Updates.set("NOMBRES", newNombres),
-                    Updates.set("APELLIDOS", newApellidos),
-                    Updates.set("MATRICULA", newMatricula),
-                    Updates.set("EMAIL", newEmail),
-                    Updates.set("CELULAR", newCelular)
+                    Updates.set("names", newNombres),
+                    Updates.set("lastNames", newApellidos),
+                   Updates.set("email", newEmail),
+                    Updates.set("phone", newCelular),
+                    
+                    Updates.set("typeOfRegistration", newMatricula)
+                    
+                   
             );
 
             // Actualiza el documento en la base de datos
