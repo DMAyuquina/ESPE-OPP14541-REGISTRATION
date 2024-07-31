@@ -31,10 +31,6 @@ public class FrmTutorMenu extends javax.swing.JFrame {
         itmProfile = new javax.swing.JMenuItem();
         itmLogout = new javax.swing.JMenuItem();
         itmExit = new javax.swing.JMenuItem();
-        mnuCourse = new javax.swing.JMenu();
-        itmAlgebra = new javax.swing.JMenuItem();
-        itmChemistry = new javax.swing.JMenuItem();
-        itmFinancialAdministration = new javax.swing.JMenuItem();
         itmGrade = new javax.swing.JMenu();
         itmIntroduceGrade = new javax.swing.JMenuItem();
         itmUploadGrade = new javax.swing.JMenuItem();
@@ -97,34 +93,6 @@ public class FrmTutorMenu extends javax.swing.JFrame {
 
         jMenuBar1.add(mnuTutor);
 
-        mnuCourse.setText("Curso");
-
-        itmAlgebra.setText("Algebra");
-        itmAlgebra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itmAlgebraActionPerformed(evt);
-            }
-        });
-        mnuCourse.add(itmAlgebra);
-
-        itmChemistry.setText("Quimica");
-        itmChemistry.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itmChemistryActionPerformed(evt);
-            }
-        });
-        mnuCourse.add(itmChemistry);
-
-        itmFinancialAdministration.setText("Administracion Financiera");
-        itmFinancialAdministration.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itmFinancialAdministrationActionPerformed(evt);
-            }
-        });
-        mnuCourse.add(itmFinancialAdministration);
-
-        jMenuBar1.add(mnuCourse);
-
         itmGrade.setText("Nota");
 
         itmIntroduceGrade.setText("Introducir Nota");
@@ -173,10 +141,6 @@ public class FrmTutorMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void itmChemistryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmChemistryActionPerformed
-
-    }//GEN-LAST:event_itmChemistryActionPerformed
-
     private void itmProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmProfileActionPerformed
 
         
@@ -188,17 +152,9 @@ public class FrmTutorMenu extends javax.swing.JFrame {
         frmLogin.setVisible(true);
     }//GEN-LAST:event_itmLogoutActionPerformed
 
-    private void itmAlgebraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmAlgebraActionPerformed
-
-    }//GEN-LAST:event_itmAlgebraActionPerformed
-
     private void itmExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmExitActionPerformed
         System.exit(0);
     }//GEN-LAST:event_itmExitActionPerformed
-
-    private void itmFinancialAdministrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmFinancialAdministrationActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_itmFinancialAdministrationActionPerformed
 
     private void itmIntroduceGradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmIntroduceGradeActionPerformed
         // TODO add your handling code here:
@@ -209,7 +165,9 @@ public class FrmTutorMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_itmUploadGradeActionPerformed
 
     private void itmGenerateReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmGenerateReportActionPerformed
-        // TODO add your handling code here:
+        FrmGeneralReportStudents frm = new FrmGeneralReportStudents();
+        this.setVisible(false);
+        frm.setVisible(true);
     }//GEN-LAST:event_itmGenerateReportActionPerformed
 
     /**
@@ -251,10 +209,7 @@ public class FrmTutorMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem itmAlgebra;
-    private javax.swing.JMenuItem itmChemistry;
     private javax.swing.JMenuItem itmExit;
-    private javax.swing.JMenuItem itmFinancialAdministration;
     private javax.swing.JMenuItem itmGenerateReport;
     private javax.swing.JMenu itmGrade;
     private javax.swing.JMenuItem itmIntroduceGrade;
@@ -265,7 +220,6 @@ public class FrmTutorMenu extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JMenu mnuCourse;
     private javax.swing.JMenu mnuReport;
     private javax.swing.JMenu mnuTutor;
     // End of variables declaration//GEN-END:variables

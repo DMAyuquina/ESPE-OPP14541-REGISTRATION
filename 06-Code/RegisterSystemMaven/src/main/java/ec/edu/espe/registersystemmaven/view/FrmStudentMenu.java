@@ -6,7 +6,7 @@ package ec.edu.espe.registersystemmaven.view;
 
 /**
  *
- * @author Danny Ayuquina, LogicLegion, DCCO-ESPE
+ * @author LogicLegion, DCCO-ESPE
  */
 public class FrmStudentMenu extends javax.swing.JFrame {
 

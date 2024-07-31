@@ -5,12 +5,12 @@ package ec.edu.espe.registersystemmaven.view;
  *
  * @author LogicLegion, DCCO-ESPE
  */
-public class FrmTutorAccountsAdministrator extends javax.swing.JFrame {
+public class FrmTutorsAdministrator extends javax.swing.JFrame {
 
     /**
      * Creates new form FrmTutorAccountsAdministrator
      */
-    public FrmTutorAccountsAdministrator() {
+    public FrmTutorsAdministrator() {
         initComponents();
     }
 
@@ -24,12 +24,14 @@ public class FrmTutorAccountsAdministrator extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         menuItemAddAccount = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         menuItemModifyAccount = new javax.swing.JMenuItem();
         menuItemDeleteAccount = new javax.swing.JMenuItem();
 
@@ -39,15 +41,23 @@ public class FrmTutorAccountsAdministrator extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Logo_ITSB_03.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 584, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(jLabel1)
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 424, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(116, 116, 116)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(151, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Opciones");
@@ -80,7 +90,20 @@ public class FrmTutorAccountsAdministrator extends javax.swing.JFrame {
         });
         jMenu2.add(menuItemAddAccount);
 
-        menuItemModifyAccount.setText("Modificar cuenta");
+        jMenuItem2.setText("Mostrar cuentas");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
+        menuItemModifyAccount.setText("Modificar cuentas");
+        menuItemModifyAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemModifyAccountActionPerformed(evt);
+            }
+        });
         jMenu2.add(menuItemModifyAccount);
 
         menuItemDeleteAccount.setText("Eliminar cuenta");
@@ -114,9 +137,9 @@ public class FrmTutorAccountsAdministrator extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemDeleteAccountActionPerformed
 
     private void menuItemAddAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAddAccountActionPerformed
-       FrmAddTutorAccount frmaddTutorAccount = new FrmAddTutorAccount();
-        this.setVisible(false);
-        frmaddTutorAccount.setVisible(true);
+       FrmAddTutor frmtutor = new FrmAddTutor();
+        this. setVisible(false);
+        frmtutor.setVisible(true);
     }//GEN-LAST:event_menuItemAddAccountActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -129,6 +152,16 @@ public class FrmTutorAccountsAdministrator extends javax.swing.JFrame {
         this.setVisible(false);
         frmadmin.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        FrmGeneralTableAccounts frmgta = new FrmGeneralTableAccounts();
+        this.setVisible(false);
+        frmgta.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void menuItemModifyAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemModifyAccountActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuItemModifyAccountActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,29 +180,32 @@ public class FrmTutorAccountsAdministrator extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmTutorAccountsAdministrator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmTutorsAdministrator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmTutorAccountsAdministrator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmTutorsAdministrator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmTutorAccountsAdministrator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmTutorsAdministrator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmTutorAccountsAdministrator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmTutorsAdministrator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmTutorAccountsAdministrator().setVisible(true);
+                new FrmTutorsAdministrator().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem menuItemAddAccount;

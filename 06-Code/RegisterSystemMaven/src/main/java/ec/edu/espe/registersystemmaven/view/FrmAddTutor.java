@@ -99,13 +99,13 @@ public class FrmAddTutor extends javax.swing.JFrame {
                 txtIdActionPerformed(evt);
             }
         });
-        jPanel1.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 123, -1));
-        jPanel1.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 121, -1));
-        jPanel1.add(txtLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 121, -1));
+        jPanel1.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 130, -1));
+        jPanel1.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 240, -1));
+        jPanel1.add(txtLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 240, -1));
 
         txtCareerCode.setEditable(false);
         jPanel1.add(txtCareerCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 280, 121, -1));
-        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 360, 121, -1));
+        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 360, 190, -1));
         jPanel1.add(txtPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, 121, -1));
 
         jPanel2.setBackground(new java.awt.Color(153, 0, 51));
@@ -146,7 +146,7 @@ public class FrmAddTutor extends javax.swing.JFrame {
                 btnAddTutorsActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAddTutors, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, -1, -1));
+        jPanel1.add(btnAddTutors, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, -1, -1));
 
         jLabel7.setForeground(new java.awt.Color(153, 0, 51));
         jLabel7.setText("Carrera:");
@@ -180,9 +180,9 @@ public class FrmAddTutor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        FrmAdminMenu frmadmin = new FrmAdminMenu();
+        FrmTutorsAdministrator frmtutorsAdm = new FrmTutorsAdministrator();
         this.setVisible(false);
-        frmadmin.setVisible(true);
+        frmtutorsAdm.setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed

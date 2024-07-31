@@ -35,13 +35,12 @@ public class FrmAdminMenu extends javax.swing.JFrame {
         mnuiExit = new javax.swing.JMenuItem();
         mnuStudent = new javax.swing.JMenu();
         mnuiAddStudent = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         mnuiDeleteStudent = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
         mnuTutor = new javax.swing.JMenu();
-        mnuiAddTutors = new javax.swing.JMenuItem();
-        mnuiManageAccounts = new javax.swing.JMenuItem();
         mnuiManageTutors = new javax.swing.JMenuItem();
+        mnuiManageAccounts = new javax.swing.JMenuItem();
         mnuReport = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
 
@@ -107,13 +106,21 @@ public class FrmAdminMenu extends javax.swing.JFrame {
 
         mnuStudent.setText("Estudiante");
 
-        mnuiAddStudent.setText("Agregar Estudiante al Carrera");
+        mnuiAddStudent.setText("Agregar Estudiante");
         mnuiAddStudent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuiAddStudentActionPerformed(evt);
             }
         });
         mnuStudent.add(mnuiAddStudent);
+
+        jMenuItem4.setText("Editar información del estudiante");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        mnuStudent.add(jMenuItem4);
 
         jMenuItem1.setText("Buscar Estudiantes");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -131,25 +138,17 @@ public class FrmAdminMenu extends javax.swing.JFrame {
         });
         mnuStudent.add(mnuiDeleteStudent);
 
-        jMenuItem4.setText("Editar información del estudiante");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-        mnuStudent.add(jMenuItem4);
-
         jMenuBar1.add(mnuStudent);
 
         mnuTutor.setText("Profesores");
 
-        mnuiAddTutors.setText("Agregar Profesores");
-        mnuiAddTutors.addActionListener(new java.awt.event.ActionListener() {
+        mnuiManageTutors.setText("Administrar Profesores");
+        mnuiManageTutors.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuiAddTutorsActionPerformed(evt);
+                mnuiManageTutorsActionPerformed(evt);
             }
         });
-        mnuTutor.add(mnuiAddTutors);
+        mnuTutor.add(mnuiManageTutors);
 
         mnuiManageAccounts.setText("Administrar Cuentas");
         mnuiManageAccounts.addActionListener(new java.awt.event.ActionListener() {
@@ -158,9 +157,6 @@ public class FrmAdminMenu extends javax.swing.JFrame {
             }
         });
         mnuTutor.add(mnuiManageAccounts);
-
-        mnuiManageTutors.setText("Administrar Profesores");
-        mnuTutor.add(mnuiManageTutors);
 
         jMenuBar1.add(mnuTutor);
 
@@ -207,7 +203,9 @@ public class FrmAdminMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuiAddStudentActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
+        FrmUpdateStudents frmupdateStudents = new FrmUpdateStudents();
+        this.setVisible(false);
+        frmupdateStudents.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void mnuiLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuiLogoutActionPerformed
@@ -215,12 +213,6 @@ public class FrmAdminMenu extends javax.swing.JFrame {
         this.setVisible(false);
         frmlogin.setVisible(true);
     }//GEN-LAST:event_mnuiLogoutActionPerformed
-
-    private void mnuiAddTutorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuiAddTutorsActionPerformed
-        FrmAddTutor frmtutor = new FrmAddTutor();
-        this. setVisible(false);
-        frmtutor.setVisible(true);
-    }//GEN-LAST:event_mnuiAddTutorsActionPerformed
 
     private void mnuiManageAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuiManageAccountsActionPerformed
         FrmTutorAccountsAdministrator frmtutorAccountAdministrator = new FrmTutorAccountsAdministrator();
@@ -245,6 +237,10 @@ public class FrmAdminMenu extends javax.swing.JFrame {
         this.setVisible(false);
         frm.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void mnuiManageTutorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuiManageTutorsActionPerformed
+        
+    }//GEN-LAST:event_mnuiManageTutorsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -298,7 +294,6 @@ public class FrmAdminMenu extends javax.swing.JFrame {
     private javax.swing.JMenu mnuTutor;
     private javax.swing.JMenu mnuUser;
     private javax.swing.JMenuItem mnuiAddStudent;
-    private javax.swing.JMenuItem mnuiAddTutors;
     private javax.swing.JMenuItem mnuiDeleteStudent;
     private javax.swing.JMenuItem mnuiExit;
     private javax.swing.JMenuItem mnuiLogout;

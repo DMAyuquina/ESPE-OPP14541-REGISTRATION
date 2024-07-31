@@ -119,7 +119,7 @@ public class FrmAddTutorAccount extends javax.swing.JFrame {
             }
         });
 
-        btnCancel.setText("Cancelar");
+        btnCancel.setText("Volver");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
@@ -267,15 +267,17 @@ public class FrmAddTutorAccount extends javax.swing.JFrame {
         //Conexión con Mongo
         MongoManagerMaven mongoManager = new MongoManagerMaven();
         MongoDatabase dataBase = mongoManager.openConnectionToMongo();
-        //Conexión colección de cuentas de tutores
+
+// Conexión colección de cuentas de tutores
         String collection = "TutorsAccounts";
         MongoCollection<Document> mongoCollection = mongoManager.accessToCollections(dataBase, collection);
 
         String id = txtId.getText();
 // Obtención de datos de los txtFields
-        if (utils.ValidationOfData.validationDni(id.length(), id)&& !ValidationOfAccounts.searchForDuplicateId(mongoCollection, "id", id)) {
+        if (utils.ValidationOfData.validationDni(id.length(), id) && !ValidationOfAccounts.searchForDuplicateId(mongoCollection, "id", id)) {
             String names = txtNames.getText();
             String lastNames = txtLastNames.getText();
+            
             String user = txtUser.getText();
             String password = txtPassword.getText();
             String confirmPassword = txtConfirmPassword.getText();
@@ -322,15 +324,15 @@ public class FrmAddTutorAccount extends javax.swing.JFrame {
 
             // Si todas las validaciones son correctas
             if (isValid) {
-
-                collection = "TutorsAccounts";
-                mongoCollection = mongoManager.accessToCollections(dataBase, collection);
-
                 Document tutor = new Document();
-                tutor.append("names", names).append("last names", lastNames).append("user", user)
+                tutor.append("names", names)
+                        .append("last names", lastNames)
+                        .append("dni", id)
+                        .append("user", user)
                         .append("password", password);
 
                 mongoCollection.insertOne(tutor);
+                JOptionPane.showMessageDialog(this, "La cuenta del profesor ha sido agregada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
                 mongoManager.closeConnectionToMongo();
             }
@@ -340,11 +342,9 @@ public class FrmAddTutorAccount extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Cédula inválida.", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-        //Para añadir al final al tutor
-        Document tutor = new Document();
-
-        //Para cerrar conección con la base de datos
+// Para cerrar la conexión con la base de datos
         mongoManager.closeConnectionToMongo();
+
     }//GEN-LAST:event_btnAcceptActionPerformed
 
     /**

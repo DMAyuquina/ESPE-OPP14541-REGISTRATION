@@ -118,7 +118,7 @@ public class FrmAddStudent extends javax.swing.JFrame {
                 btnBackActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 692, -1, -1));
+        jPanel1.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 630, -1, -1));
 
         txtId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,11 +204,11 @@ public class FrmAddStudent extends javax.swing.JFrame {
                 btnAddStudentsActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAddStudents, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 692, -1, -1));
+        jPanel1.add(btnAddStudents, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 630, -1, -1));
 
         jLabel14.setForeground(new java.awt.Color(153, 0, 51));
         jLabel14.setText("Carrera:");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(162, 356, 43, -1));
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, 43, -1));
 
         cmbCareer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CONTABILIDAD", "MARKETING", "TECNOLOGIA SUPERIOR EN ADMINISTRACION FINANCIERA", "TECNOLOGIA SUPERIOR EN MARKETING", "TECNOLOGIA SUPERIOR EN REDES Y TELECOMUNICACIONES", "TECNOLOGIA SUPERIOR EN DESARROLLO DE SOFTWARE", "SELECCIONAR" }));
         cmbCareer.setSelectedIndex(6);
@@ -240,7 +240,7 @@ public class FrmAddStudent extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
         );
 
         pack();

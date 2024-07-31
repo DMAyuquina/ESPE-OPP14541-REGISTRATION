@@ -26,9 +26,9 @@ import org.bson.Document;
 
 /**
  *
- * @author Danny Ayuquina, LogicLegion, DCCO-ESPE
+ * @author LogicLegion, DCCO-ESPE
  */
-public class FrmDeletingByDniTable extends javax.swing.JFrame {
+public class FrmDeletingByDniTutors extends javax.swing.JFrame {
 
     private final MongoDatabase dataBase = MongoManagerMaven.openConnectionToMongo();
     DefaultTableModel mt = new DefaultTableModel();
@@ -36,9 +36,9 @@ public class FrmDeletingByDniTable extends javax.swing.JFrame {
     /**
      * Creates new form FrmGeneralReportStudents
      */
-    public FrmDeletingByDniTable() {
+    public FrmDeletingByDniTutors() {
         initComponents();
-        String ids[] = {"CEDULA", "NOMBRES", "APELLIDOS", "MATRICULA", "EMAIL", "CELULAR"};
+        String ids[] = {"CEDULA", "NOMBRES", "APELLIDOS", "CELULAR","CORREO", "CARRERA","CODIGO DE CARRERA"};
         mt.setColumnIdentifiers(ids);
         tblStudents.setModel(mt);
     }
@@ -58,15 +58,11 @@ public class FrmDeletingByDniTable extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblStudents = new javax.swing.JTable();
         btnBack = new javax.swing.JButton();
-        cmbCareer = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        txtCareerCode = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        btnDownloadPdf = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
         btnDelete = new javax.swing.JButton();
+        btnReload = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,14 +74,14 @@ public class FrmDeletingByDniTable extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Borrar Estudiante");
+        jLabel1.setText("Borrar Profesores");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(348, Short.MAX_VALUE)
+                .addContainerGap(349, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(372, 372, 372))
         );
@@ -94,7 +90,7 @@ public class FrmDeletingByDniTable extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 80));
@@ -120,7 +116,7 @@ public class FrmDeletingByDniTable extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblStudents);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 830, 310));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 830, 310));
 
         btnBack.setBackground(new java.awt.Color(153, 0, 51));
         btnBack.setForeground(new java.awt.Color(255, 255, 255));
@@ -130,14 +126,7 @@ public class FrmDeletingByDniTable extends javax.swing.JFrame {
                 btnBackActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 550, -1, -1));
-
-        cmbCareer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CONTABILIDAD", "MARKETING", "TECNOLOGIA SUPERIOR EN ADMINISTRACION FINANCIERA", "TECNOLOGIA SUPERIOR EN MARKETING", "TECNOLOGIA SUPERIOR EN REDES Y TELECOMUNICACIONES", "TECNOLOGIA SUPERIOR EN DESARROLLO DE SOFTWARE", "SELECCIONAR" }));
-        cmbCareer.setSelectedIndex(6);
-        jPanel1.add(cmbCareer, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 430, -1));
-
-        jLabel2.setText("Seleccione una carrera:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, -1, -1));
+        jPanel1.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 450, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(153, 0, 51));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -147,27 +136,11 @@ public class FrmDeletingByDniTable extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 110, -1, -1));
-
-        txtCareerCode.setEditable(false);
-        jPanel1.add(txtCareerCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 430, -1));
-
-        jLabel3.setText("Código de carrera:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, -1, -1));
-
-        btnDownloadPdf.setBackground(new java.awt.Color(153, 0, 51));
-        btnDownloadPdf.setForeground(new java.awt.Color(255, 255, 255));
-        btnDownloadPdf.setText("Descargar PDF");
-        btnDownloadPdf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDownloadPdfActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnDownloadPdf, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 550, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, -1, -1));
 
         jLabel4.setText("Cedula:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, -1, -1));
-        jPanel1.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 430, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, -1, -1));
+        jPanel1.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 430, -1));
 
         btnDelete.setBackground(new java.awt.Color(153, 0, 51));
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
@@ -177,7 +150,17 @@ public class FrmDeletingByDniTable extends javax.swing.JFrame {
                 btnDeleteActionPerformed(evt);
             }
         });
-        jPanel1.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 200, -1, -1));
+        jPanel1.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 90, -1, 30));
+
+        btnReload.setBackground(new java.awt.Color(153, 0, 51));
+        btnReload.setForeground(new java.awt.Color(255, 255, 255));
+        btnReload.setText("Recargar");
+        btnReload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReloadActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnReload, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 450, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -187,7 +170,9 @@ public class FrmDeletingByDniTable extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -200,145 +185,89 @@ public class FrmDeletingByDniTable extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String career = cmbCareer.getSelectedItem().toString();
+        String collectionTutors = "Tutors";
+        MongoCollection<Document> mongoCollectionTutors = MongoManagerMaven.accessToCollections(dataBase, collectionTutors);
 
-        if (career.isEmpty()) {
+        // Fetch all documents in the collection
+        List<Document> tutors = MongoManagerMaven.getAllCollection(mongoCollectionTutors);
 
-            JOptionPane.showMessageDialog(this, "Debe seleccionar una carrera.", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            txtCareerCode.setText(career);
-            String collectionStudents = career;
-            String collectionCareers = "Careers";
-            MongoCollection<org.bson.Document> mongoCollectionStudents = MongoManagerMaven.accessToCollections(dataBase, collectionStudents);
-            MongoCollection<org.bson.Document> mongoCollectionCareers = MongoManagerMaven.accessToCollections(dataBase, collectionCareers);
-
-            Career car = CareerFuncionalitities.getCareer(mongoCollectionCareers, "careerName", career);
-            txtCareerCode.setText(car.getCareerCode());
-            List<Document> students = MongoManagerMaven.getAllCollection(mongoCollectionStudents);
-
-            for (Document std : students) {
-                mt.addRow(new Object[]{std.get("id"), std.get("names"), std.get("lastNames"), std.get("typeOfRegistration"), std.get("email"), std.get("phone")});
-            }
+        // Add each document's fields to the table model
+        for (Document tutor : tutors) {
+            mt.addRow(new Object[]{
+                tutor.getString("id"), 
+                tutor.getString("names"), 
+                tutor.getString("last names"), 
+                tutor.getString("phone"), 
+                tutor.getString("email"),
+                tutor.getString("career"),
+                tutor.getString("career code")    
+                    
+            });
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void btnDownloadPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDownloadPdfActionPerformed
-
-        String collection = cmbCareer.getSelectedItem().toString();
-        MongoCollection<org.bson.Document> mongoCollection = MongoManagerMaven.accessToCollections(dataBase, collection);
-        List<Document> students = MongoManagerMaven.getAllCollection(mongoCollection);
-
-        try {
-            String filePath = "general_report.pdf";
-            com.itextpdf.text.Document document = new com.itextpdf.text.Document();
-            PdfWriter.getInstance(document, new FileOutputStream(filePath));
-            document.open();
-
-            // Agregar imagen
-            String imagePath = getClass().getResource("/images/Logo_ITSB_03.png").getPath();
-            com.itextpdf.text.Image image = com.itextpdf.text.Image.getInstance(imagePath);
-            image.scaleToFit(300, 300);
-            image.setAlignment(Element.ALIGN_CENTER);
-            document.add(image);
-
-            // Título
-            Paragraph title = new Paragraph("\n\nINSTITUTO SUPERIOR SIMÓN BOLÍVAR", com.itextpdf.text.FontFactory.getFont(com.itextpdf.text.FontFactory.HELVETICA_BOLD, 18));
-            title.setAlignment(Element.ALIGN_CENTER);
-            document.add(title);
-
-            // Fecha
-            Paragraph date = new Paragraph("\n\nFecha: " + java.time.LocalDate.now(), com.itextpdf.text.FontFactory.getFont(com.itextpdf.text.FontFactory.HELVETICA, 12));
-            date.setAlignment(Element.ALIGN_CENTER);
-            document.add(date);
-
-            // Información del estudiante
-            int i = 0;
-            for (Document student : students) {
-                if (i != 0) {
-                    break;
-                } else {
-                    Paragraph studentInfo = new Paragraph(
-                            "\n\nCarrera: " + student.getString("career") + "\n"
-                            + "Código de carrera: " + student.getString("careerCode") + "\n\n\n",
-                            com.itextpdf.text.FontFactory.getFont(com.itextpdf.text.FontFactory.HELVETICA, 12)
-                    );
-                    studentInfo.setAlignment(Element.ALIGN_LEFT);
-                    studentInfo.setIndentationLeft(36); // 2 tabulaciones (18 * 2 = 36)
-                    document.add(studentInfo);
-                }
-                i++;
-
-            }
-
-            // Tabla
-            PdfPTable table = new PdfPTable(6); // Número de columnas
-            table.setWidthPercentage(100);
-
-            // Encabezados de la tabla
-            String[] headers = {"CEDULA", "NOMBRES", "APELLIDOS", "MATRICULA", "EMAIL", "CELULAR"};
-            for (String header : headers) {
-                PdfPCell headerCell = new PdfPCell(new Paragraph(header, com.itextpdf.text.FontFactory.getFont(com.itextpdf.text.FontFactory.HELVETICA_BOLD, 12)));
-                headerCell.setBackgroundColor(new com.itextpdf.text.BaseColor(255, 0, 0)); // Color rojo
-                table.addCell(headerCell);
-            }
-
-            // Datos de la tabla
-            for (Document student : students) {
-                table.addCell(student.getString("id"));
-                table.addCell(student.getString("names"));
-                table.addCell(student.getString("lastNames"));
-                table.addCell(student.getString("typeOfRegistration"));
-                table.addCell(student.getString("email"));
-                table.addCell(student.getString("phone"));
-            }
-
-            document.add(table);
-            document.close();
-
-            mt.setRowCount(0);
-            JOptionPane.showMessageDialog(this, "PDF generado correctamente en " + filePath, "Éxito", JOptionPane.INFORMATION_MESSAGE);
-
-        } catch (IOException | DocumentException e) {
-            JOptionPane.showMessageDialog(this, "Error al generar el PDF: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_btnDownloadPdfActionPerformed
-
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
 
-        String dataBase = "StudentsDB"; // Nombre de tu base de datos
-        MongoDatabase database = MongoManagerMaven.accessToDatabase(dataBase);
+        String dataBase = "Tutors"; // Nombre de tu base de datos
+    MongoDatabase database = MongoManagerMaven.accessToDatabase(dataBase);
 
-        String id = this.txtId.getText();
-        if (utils.ValidationOfData.validationDni(id.length(), id)) {
-            boolean found = false;
+    String id = this.txtId.getText();
+    if (utils.ValidationOfData.validationDni(id.length(), id)) {
+        boolean found = false;
+        
+        for (String collectionName : database.listCollectionNames()) {
+            MongoCollection<Document> collection = database.getCollection(collectionName);
+            Document filter = new Document("id", id);
             
-            for (String collectionName : database.listCollectionNames()) {
-                MongoCollection<Document> collection = database.getCollection(collectionName);
-                Document filter = new Document("id", id);
-                
-                DeleteResult result = collection.deleteOne(filter);
-                if (result.getDeletedCount() > 0) {
-                    found = true;
-                }
+            DeleteResult result = collection.deleteOne(filter);
+            if (result.getDeletedCount() > 0) {
+                found = true;
             }
-
-            MongoManagerMaven.closeConnectionToMongo();
-
-            if (found) {
-                JOptionPane.showMessageDialog(this, "Estudiante eliminado exitosamente.");
-            } else {
-                JOptionPane.showMessageDialog(this, "Cédula no encontrada.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            
-            txtId.setBackground(Color.WHITE);
-            txtId.setText("");
-        } else {
-            txtId.setBackground(Color.RED);
-            JOptionPane.showMessageDialog(this, "Cédula inválida.", "Error", JOptionPane.ERROR_MESSAGE);
-            txtId.setText("");
         }
 
+        MongoManagerMaven.closeConnectionToMongo();
+
+        if (found) {
+            JOptionPane.showMessageDialog(this, "Estudiante eliminado exitosamente.");
+            btnReloadActionPerformed(null); // Recargar la tabla después de eliminar
+        } else {
+            JOptionPane.showMessageDialog(this, "Cédula no encontrada.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        txtId.setBackground(Color.WHITE);
+        txtId.setText("");
+    } else {
+        txtId.setBackground(Color.RED);
+        JOptionPane.showMessageDialog(this, "Cédula inválida.", "Error", JOptionPane.ERROR_MESSAGE);
+        txtId.setText("");
+    }
+
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadActionPerformed
+             mt.setRowCount(0);
+
+    // Acceder a la colección de tutores
+    String collectionTutors = "Tutors";
+    MongoCollection<org.bson.Document> mongoCollectionTutors = MongoManagerMaven.accessToCollections(dataBase, collectionTutors);
+
+    // Obtener todos los documentos de la colección
+    List<Document> tutors = MongoManagerMaven.getAllCollection(mongoCollectionTutors);
+
+    // Añadir cada documento como una fila en la tabla
+    for (Document tutor : tutors) {
+        mt.addRow(new Object[]{
+                tutor.getString("id"), 
+                tutor.getString("names"), 
+                tutor.getString("last names"), 
+                tutor.getString("phone"), 
+                tutor.getString("email"),
+                tutor.getString("career"),
+                tutor.getString("career code") 
+        });
+    }
+
+    }//GEN-LAST:event_btnReloadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -357,21 +286,23 @@ public class FrmDeletingByDniTable extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmDeletingByDniTable.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmDeletingByDniTutors.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmDeletingByDniTable.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmDeletingByDniTutors.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmDeletingByDniTable.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmDeletingByDniTutors.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmDeletingByDniTable.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmDeletingByDniTutors.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmDeletingByDniTable().setVisible(true);
+                new FrmDeletingByDniTutors().setVisible(true);
             }
         });
     }
@@ -379,18 +310,14 @@ public class FrmDeletingByDniTable extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnDownloadPdf;
-    private javax.swing.JComboBox<String> cmbCareer;
+    private javax.swing.JButton btnReload;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblStudents;
-    private javax.swing.JTextField txtCareerCode;
     private javax.swing.JTextField txtId;
     // End of variables declaration//GEN-END:variables
 }

@@ -48,37 +48,6 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mnuCourse">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Curso"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="itmAlgebra">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Algebra"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itmAlgebraActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="itmChemistry">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Quimica"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itmChemistryActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="itmFinancialAdministration">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Administracion Financiera"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itmFinancialAdministrationActionPerformed"/>
-              </Events>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
         <Menu class="javax.swing.JMenu" name="itmGrade">
           <Properties>
             <Property name="text" type="java.lang.String" value="Nota"/>

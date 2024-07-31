@@ -14,11 +14,10 @@ import com.itextpdf.text.pdf.PdfWriter;
 import ec.edu.espe.registersystemmaven.controller.CareerFuncionalitities;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import ec.edu.espe.registersystemmaven.controller.StudentFuncionalities;
 import ec.edu.espe.registersystemmaven.model.Career;
-import ec.edu.espe.registersystemmaven.model.Student;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -26,7 +25,7 @@ import org.bson.Document;
 
 /**
  *
- * @author Danny Ayuquina, LogicLegion, DCCO-ESPE
+ * @author LogicLegion, DCCO-ESPE
  */
 public class FrmGeneralReportStudents extends javax.swing.JFrame {
 
@@ -200,90 +199,102 @@ public class FrmGeneralReportStudents extends javax.swing.JFrame {
             List<Document> students = MongoManagerMaven.getAllCollection(mongoCollectionStudents);
 
             for (Document std : students) {
-                mt.addRow(new Object[]{std.get("id"),std.get("names"), std.get("lastNames"), std.get("typeOfRegistration"), std.get("email"), std.get("phone")});
+                mt.addRow(new Object[]{std.get("id"), std.get("names"), std.get("lastNames"), std.get("typeOfRegistration"), std.get("email"), std.get("phone")});
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnDownloadPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDownloadPdfActionPerformed
 
-        String collection = cmbCareer.getSelectedItem().toString();
-        MongoCollection<org.bson.Document> mongoCollection = MongoManagerMaven.accessToCollections(dataBase, collection);
-        List<Document> students = MongoManagerMaven.getAllCollection(mongoCollection);
-
         try {
-            String filePath = "general_report.pdf";
-            com.itextpdf.text.Document document = new com.itextpdf.text.Document();
-            PdfWriter.getInstance(document, new FileOutputStream(filePath));
-            document.open();
+    String collection = cmbCareer.getSelectedItem().toString();
+    MongoCollection<org.bson.Document> mongoCollection = MongoManagerMaven.accessToCollections(dataBase, collection);
+    List<Document> students = MongoManagerMaven.getAllCollection(mongoCollection);
 
-            // Agregar imagen
-            String imagePath = getClass().getResource("/images/Logo_ITSB_03.png").getPath();
-            com.itextpdf.text.Image image = com.itextpdf.text.Image.getInstance(imagePath);
-            image.scaleToFit(300, 300);
-            image.setAlignment(Element.ALIGN_CENTER);
-            document.add(image);
+    // Generar nombre de archivo según la carrera
+    String careerName = collection.replace(" ", "_"); // Reemplaza espacios con guiones bajos para evitar problemas con el nombre del archivo
+    String filePath = careerName + "_report.pdf";
 
-            // Título
-            Paragraph title = new Paragraph("\n\nINSTITUTO SUPERIOR SIMÓN BOLÍVAR", com.itextpdf.text.FontFactory.getFont(com.itextpdf.text.FontFactory.HELVETICA_BOLD, 18));
-            title.setAlignment(Element.ALIGN_CENTER);
-            document.add(title);
+    com.itextpdf.text.Document document = new com.itextpdf.text.Document();
+    PdfWriter.getInstance(document, new FileOutputStream(filePath));
+    document.open();
 
-            // Fecha
-            Paragraph date = new Paragraph("\n\nFecha: " + java.time.LocalDate.now(), com.itextpdf.text.FontFactory.getFont(com.itextpdf.text.FontFactory.HELVETICA, 12));
-            date.setAlignment(Element.ALIGN_CENTER);
-            document.add(date);
-
-            // Información del estudiante
-            int i = 0;
-            for (Document student : students) {
-                if (i != 0) {
-                    break;
-                } else {
-                    Paragraph studentInfo = new Paragraph(
-                            "\n\nCarrera: " + student.getString("career") + "\n"
-                            + "Código de carrera: " + student.getString("careerCode") + "\n\n\n",
-                            com.itextpdf.text.FontFactory.getFont(com.itextpdf.text.FontFactory.HELVETICA, 12)
-                    );
-                    studentInfo.setAlignment(Element.ALIGN_LEFT);
-                    studentInfo.setIndentationLeft(36); // 2 tabulaciones (18 * 2 = 36)
-                    document.add(studentInfo);
-                }
-                i++;
-
-            }
-
-            // Tabla
-            PdfPTable table = new PdfPTable(6); // Número de columnas
-            table.setWidthPercentage(100);
-
-            // Encabezados de la tabla
-            String[] headers = {"CEDULA", "NOMBRES", "APELLIDOS", "MATRICULA", "EMAIL", "CELULAR"};
-            for (String header : headers) {
-                PdfPCell headerCell = new PdfPCell(new Paragraph(header, com.itextpdf.text.FontFactory.getFont(com.itextpdf.text.FontFactory.HELVETICA_BOLD, 12)));
-                headerCell.setBackgroundColor(new com.itextpdf.text.BaseColor(255, 0, 0)); // Color rojo
-                table.addCell(headerCell);
-            }
-
-            // Datos de la tabla
-            for (Document student : students) {
-                table.addCell(student.getString("id"));
-                table.addCell(student.getString("names"));
-                table.addCell(student.getString("lastNames"));
-                table.addCell(student.getString("typeOfRegistration"));
-                table.addCell(student.getString("email"));
-                table.addCell(student.getString("phone"));
-            }
-
-            document.add(table);
-            document.close();
-
-            mt.setRowCount(0);
-            JOptionPane.showMessageDialog(this, "PDF generado correctamente en " + filePath, "Éxito", JOptionPane.INFORMATION_MESSAGE);
-
-        } catch (IOException | DocumentException e) {
-            JOptionPane.showMessageDialog(this, "Error al generar el PDF: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    // Agregar imagen
+    try {
+        InputStream imageStream = getClass().getResourceAsStream("/images/Logo_ITSB_03.png");
+        if (imageStream == null) {
+            throw new IOException("Imagen no encontrada");
         }
+        byte[] imageBytes = imageStream.readAllBytes();
+        com.itextpdf.text.Image image = com.itextpdf.text.Image.getInstance(imageBytes);
+        image.scaleToFit(300, 300);
+        image.setAlignment(Element.ALIGN_CENTER);
+        document.add(image);
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error al cargar la imagen: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    // Título
+    Paragraph title = new Paragraph("\n\nINSTITUTO SUPERIOR SIMÓN BOLÍVAR", com.itextpdf.text.FontFactory.getFont(com.itextpdf.text.FontFactory.HELVETICA_BOLD, 18));
+    title.setAlignment(Element.ALIGN_CENTER);
+    document.add(title);
+
+    // Fecha
+    Paragraph date = new Paragraph("\n\nFecha: " + java.time.LocalDate.now(), com.itextpdf.text.FontFactory.getFont(com.itextpdf.text.FontFactory.HELVETICA, 12));
+    date.setAlignment(Element.ALIGN_CENTER);
+    document.add(date);
+
+    // Información del estudiante
+    int i = 0;
+    for (Document student : students) {
+        if (i != 0) {
+            break;
+        } else {
+            Paragraph studentInfo = new Paragraph(
+                    "\n\nCarrera: " + student.getString("career") + "\n"
+                    + "Código de carrera: " + student.getString("careerCode") + "\n\n\n",
+                    com.itextpdf.text.FontFactory.getFont(com.itextpdf.text.FontFactory.HELVETICA, 12)
+            );
+            studentInfo.setAlignment(Element.ALIGN_LEFT);
+            studentInfo.setIndentationLeft(36); // 2 tabulaciones (18 * 2 = 36)
+            document.add(studentInfo);
+        }
+        i++;
+    }
+
+    // Tabla
+    PdfPTable table = new PdfPTable(6); // Número de columnas
+    table.setWidthPercentage(100);
+
+    // Encabezados de la tabla
+    String[] headers = {"CEDULA", "NOMBRES", "APELLIDOS", "MATRICULA", "EMAIL", "CELULAR"};
+    for (String header : headers) {
+        PdfPCell headerCell = new PdfPCell(new Paragraph(header, com.itextpdf.text.FontFactory.getFont(com.itextpdf.text.FontFactory.HELVETICA_BOLD, 12)));
+        headerCell.setBackgroundColor(new com.itextpdf.text.BaseColor(255, 0, 0)); // Color rojo
+        table.addCell(headerCell);
+    }
+
+    // Datos de la tabla
+    for (Document student : students) {
+        table.addCell(student.getString("id"));
+        table.addCell(student.getString("names"));
+        table.addCell(student.getString("lastNames"));
+        table.addCell(student.getString("typeOfRegistration"));
+        table.addCell(student.getString("email"));
+        table.addCell(student.getString("phone"));
+    }
+
+    document.add(table);
+    document.close();
+
+    mt.setRowCount(0);
+    JOptionPane.showMessageDialog(this, "PDF generado correctamente en " + filePath, "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+} catch (IOException | DocumentException e) {
+    JOptionPane.showMessageDialog(this, "Error al generar el PDF: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+}
+
     }//GEN-LAST:event_btnDownloadPdfActionPerformed
 
     /**
