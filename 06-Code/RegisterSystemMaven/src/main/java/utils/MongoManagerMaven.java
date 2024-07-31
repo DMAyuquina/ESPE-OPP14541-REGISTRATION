@@ -53,6 +53,21 @@ public class MongoManagerMaven {
 
         return documents;
     }
+    
+    private static MongoClient mongoClient;
+    // Método para acceder a una colección específica
+    public static MongoCollection<Document> accessToCollections(String databaseName, String collectionName) {
+        MongoDatabase database = accessToDatabase(databaseName);
+        return database.getCollection(collectionName);
+    }
+    public static MongoDatabase accessToDatabase(String databaseName) {
+        if (mongoClient == null) {
+            // Usa tu propia URI de MongoDB
+            String connectionString = "mongodb+srv://logiclegion:logiclegion123@cluster0.pkfbgix.mongodb.net/";
+            mongoClient = MongoClients.create(connectionString);
+        }
+        return mongoClient.getDatabase(databaseName);
+    }
 
 
     //Actualización de documentos

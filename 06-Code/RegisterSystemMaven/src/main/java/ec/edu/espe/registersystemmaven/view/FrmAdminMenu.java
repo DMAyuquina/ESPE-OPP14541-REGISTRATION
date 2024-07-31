@@ -36,7 +36,7 @@ public class FrmAdminMenu extends javax.swing.JFrame {
         mnuStudent = new javax.swing.JMenu();
         mnuiAddStudent = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        mnuiDeleteStudent = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         mnuTutor = new javax.swing.JMenu();
         mnuiAddTutors = new javax.swing.JMenuItem();
@@ -123,13 +123,13 @@ public class FrmAdminMenu extends javax.swing.JFrame {
         });
         mnuStudent.add(jMenuItem1);
 
-        jMenuItem3.setText("Eliminar Estudiante");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        mnuiDeleteStudent.setText("Eliminar Estudiante");
+        mnuiDeleteStudent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                mnuiDeleteStudentActionPerformed(evt);
             }
         });
-        mnuStudent.add(jMenuItem3);
+        mnuStudent.add(mnuiDeleteStudent);
 
         jMenuItem4.setText("Editar información del estudiante");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -234,11 +234,11 @@ public class FrmAdminMenu extends javax.swing.JFrame {
         fmrStudentReportToAdmin.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        FrmSearchingByDni frmSearchingByDni = new FrmSearchingByDni();
-        this.setVisible(true);
-        frmSearchingByDni.setVisible(true);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    private void mnuiDeleteStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuiDeleteStudentActionPerformed
+        FrmDeletingByDniTable frmSearchingByDniTable = new FrmDeletingByDniTable();
+        this.setVisible(false);
+        frmSearchingByDniTable.setVisible(true);
+    }//GEN-LAST:event_mnuiDeleteStudentActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         FrmGeneralReportStudents frm = new FrmGeneralReportStudents();
@@ -290,7 +290,6 @@ public class FrmAdminMenu extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
@@ -300,6 +299,7 @@ public class FrmAdminMenu extends javax.swing.JFrame {
     private javax.swing.JMenu mnuUser;
     private javax.swing.JMenuItem mnuiAddStudent;
     private javax.swing.JMenuItem mnuiAddTutors;
+    private javax.swing.JMenuItem mnuiDeleteStudent;
     private javax.swing.JMenuItem mnuiExit;
     private javax.swing.JMenuItem mnuiLogout;
     private javax.swing.JMenuItem mnuiManageAccounts;

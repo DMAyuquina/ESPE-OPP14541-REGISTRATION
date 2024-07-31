@@ -16,14 +16,14 @@ import org.bson.Document;
  *
  * @author Danny Ayuquina, LogicLegion, DCCO-ESPE
  */
-public class FrmSearchingByDni extends javax.swing.JFrame {
+public class FrmDeletingByDni extends javax.swing.JFrame {
 
     private final MongoDatabase dataBase = MongoManagerMaven.openConnectionToMongo();
 
     /**
      * Creates new form SearchingByDni
      */
-    public FrmSearchingByDni() {
+    public FrmDeletingByDni() {
         initComponents();
     }
 
@@ -153,36 +153,11 @@ public class FrmSearchingByDni extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        String collectionStudents = "Students";
-        MongoCollection<Document> mongoCollectionStudents = MongoManagerMaven.accessToCollections(dataBase, collectionStudents);
-
-        String id = this.txtId.getText();
-        if (utils.ValidationOfData.validationDni(id.length(), id)) {
-            // Eliminar Estudiante
-            Document filter = new Document("id", id);
-
-            DeleteResult result = mongoCollectionStudents.deleteOne(filter);
-
-            MongoManagerMaven.closeConnectionToMongo();
-            if (result.getDeletedCount() > 0) {
-                JOptionPane.showMessageDialog(this, "Estudiante eliminado exitosamente.");
-                txtId.setBackground(Color.WHITE);
-            } else {  
-                JOptionPane.showMessageDialog(this, "Cédula no encontrada.", "Error", JOptionPane.ERROR_MESSAGE);
-            } 
-            txtId.setText("");
-            
-            } else {
-                txtId.setBackground(Color.RED);
-                JOptionPane.showMessageDialog(this, "Cédula inválida.", "Error", JOptionPane.ERROR_MESSAGE);
-                txtId.setText("");
-            }
+       
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        FrmAdminMenu frmAdminMenu = new FrmAdminMenu();
         this.setVisible(false);
-        frmAdminMenu.setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
@@ -206,21 +181,23 @@ public class FrmSearchingByDni extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmSearchingByDni.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmDeletingByDni.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmSearchingByDni.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmDeletingByDni.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmSearchingByDni.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmDeletingByDni.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmSearchingByDni.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmDeletingByDni.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmSearchingByDni().setVisible(true);
+                new FrmDeletingByDni().setVisible(true);
             }
         });
     }

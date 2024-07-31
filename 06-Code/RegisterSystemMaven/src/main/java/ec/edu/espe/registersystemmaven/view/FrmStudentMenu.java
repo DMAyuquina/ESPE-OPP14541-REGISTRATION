@@ -159,9 +159,7 @@ public class FrmStudentMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuiBackActionPerformed
 
     private void menuByDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuByDniActionPerformed
-        FrmSearchingByDni frmSearchingByDni = new FrmSearchingByDni();
-        this.setVisible(false);
-        frmSearchingByDni.setVisible(true);
+   
     }//GEN-LAST:event_menuByDniActionPerformed
 
     private void menuByNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuByNameActionPerformed
