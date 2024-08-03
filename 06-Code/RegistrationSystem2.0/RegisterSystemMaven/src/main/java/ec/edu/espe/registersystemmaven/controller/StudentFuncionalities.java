@@ -5,14 +5,14 @@ import ec.edu.espe.registersystemmaven.model.Career;
 import ec.edu.espe.registersystemmaven.model.Grade;
 import ec.edu.espe.registersystemmaven.model.Registration;
 import ec.edu.espe.registersystemmaven.model.Student;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Scanner;
 import org.bson.Document;
 import utils.ValidationOfData;
 
 /**
  *
- * @author Danny Ayuquina, LogicLegion, DCCO-ESPE
+ * @author  LogicLegion, DCCO-ESPE
  */
 public class StudentFuncionalities {
 
@@ -55,7 +55,8 @@ public class StudentFuncionalities {
             }
             student.setGrade(grade);
             
-            student.setBornOnDate((Date)doc.get("bornOnDate"));
+            student.setBornOnDate((LocalDate)doc.get("bornOnDate"));
+            student.setAge(doc.getInteger("age"));
             
             careerDoc = (Document)doc.get("career");
             if(careerDoc!=null){
@@ -63,7 +64,7 @@ public class StudentFuncionalities {
                 career.setCareerName(careerDoc.getString("careerName"));
             }
             
-            student.setAssistence((float)doc.get("assistence"));
+            student.setAsistence((float)doc.get("assistence"));
             
         }
         return student;

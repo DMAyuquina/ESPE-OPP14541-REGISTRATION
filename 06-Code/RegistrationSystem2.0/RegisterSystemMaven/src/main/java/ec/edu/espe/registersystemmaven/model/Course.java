@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Danny Ayuquina, LogicLegion, DCCO-ESPE
+ * @author LogicLegion, DCCO-ESPE
  */
 public class Course {
     
