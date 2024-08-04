@@ -14,7 +14,7 @@ import org.bson.Document;
 
 /**
  *
- * @author Danny Ayuquina, LogicLegion, DCCO-ESPE
+ * @author LogicLegion, DCCO-ESPE
  */
 public class FrmDeletingByDni extends javax.swing.JFrame {
 

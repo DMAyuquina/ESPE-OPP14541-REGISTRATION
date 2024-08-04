@@ -11,7 +11,7 @@ import org.bson.Document;
 public class ValidationOfAccounts {
 
     public static boolean searchAccountForLogin(MongoCollection<Document> mongoCollection, String key, String variable) {
-        // Puede servir para validar cuentas duplicadas
+        
         Document findDocument = new Document(key, variable);
 
         MongoCursor<Document> resultDocument = mongoCollection.find(findDocument).iterator();
@@ -23,7 +23,7 @@ public class ValidationOfAccounts {
         return false;
     }
 
-    // Método para cuentas duplicadas y id
+   
     public static boolean searchForDuplicateId(MongoCollection<Document> mongoCollection, String key, String variable) {
         Document findDocument = new Document(key, variable);
 
@@ -36,7 +36,7 @@ public class ValidationOfAccounts {
         return false;
     }
     
-    // Buscar una cuenta por nombre de usuario en la colección
+    
     public static Document searchAccountByUser(MongoCollection<Document> collection, String key, String user) {
         return collection.find(new Document(key, user)).first();
     }
