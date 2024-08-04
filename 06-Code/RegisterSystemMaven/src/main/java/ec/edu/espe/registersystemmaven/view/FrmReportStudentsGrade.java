@@ -5,6 +5,12 @@
 package ec.edu.espe.registersystemmaven.view;
 
 import Utils.MongoManagerMaven;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import ec.edu.espe.registersystemmaven.controller.CareerFuncionalitities;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -14,6 +20,9 @@ import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
 import ec.edu.espe.registersystemmaven.controller.TutorFuncionalities;
 import ec.edu.espe.registersystemmaven.model.Career;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -24,7 +33,7 @@ import org.bson.conversions.Bson;
  *
  * @author LogicLegion, DCCO-ESPE
  */
-public class FrmUpdateStudentsGrade extends javax.swing.JFrame {
+public class FrmReportStudentsGrade extends javax.swing.JFrame {
 
     private final MongoDatabase dataBase = MongoManagerMaven.openConnectionToMongo();
     DefaultTableModel mt = new DefaultTableModel();
@@ -32,7 +41,7 @@ public class FrmUpdateStudentsGrade extends javax.swing.JFrame {
     /**
      * Creates new form FrmGeneralReportStudents
      */
-    public FrmUpdateStudentsGrade() {
+    public FrmReportStudentsGrade() {
         initComponents();
         String ids[] = {"CEDULA", "NOMBRES", "APELLIDOS", "NOTA UNIDAD 1", "NOTA UNIDA 2","PROMEDIO","SUPLETORIO"};
         mt.setColumnIdentifiers(ids);
@@ -54,10 +63,8 @@ public class FrmUpdateStudentsGrade extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         txtCareerCode = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        txtId = new javax.swing.JTextField();
-        btnUpdate = new javax.swing.JButton();
         btnReload = new javax.swing.JButton();
+        btnDownloadPdf = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,23 +76,23 @@ public class FrmUpdateStudentsGrade extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Modificar Calificacion del Estudiante");
+        jLabel1.setText("Generar Reporte de Calificacion del Estudiante");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(278, Short.MAX_VALUE)
+                .addContainerGap(243, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(273, 273, 273))
+                .addGap(223, 223, 223))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 80));
@@ -146,20 +153,6 @@ public class FrmUpdateStudentsGrade extends javax.swing.JFrame {
         jLabel3.setText("Código de carrera:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, -1, -1));
 
-        jLabel4.setText("Cedula:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, -1, -1));
-        jPanel1.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 430, -1));
-
-        btnUpdate.setBackground(new java.awt.Color(153, 0, 51));
-        btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
-        btnUpdate.setText("Modificar");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 197, -1, 30));
-
         btnReload.setBackground(new java.awt.Color(153, 0, 51));
         btnReload.setForeground(new java.awt.Color(255, 255, 255));
         btnReload.setText("Recargar");
@@ -169,6 +162,16 @@ public class FrmUpdateStudentsGrade extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnReload, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 550, -1, -1));
+
+        btnDownloadPdf.setBackground(new java.awt.Color(153, 0, 51));
+        btnDownloadPdf.setForeground(new java.awt.Color(255, 255, 255));
+        btnDownloadPdf.setText("Descargar PDF");
+        btnDownloadPdf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDownloadPdfActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnDownloadPdf, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 550, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -213,16 +216,6 @@ public class FrmUpdateStudentsGrade extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-    String dataBaseName = "StudentsDB";
-    MongoDatabase database = MongoManagerMaven.accessToDatabase(dataBaseName);
-
-    String id = this.txtId.getText();
-
-     TutorFuncionalities.updateStudentGrades(id, database, cmbCareer);
-
-    }//GEN-LAST:event_btnUpdateActionPerformed
-
     private void btnReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadActionPerformed
         mt.setRowCount(0);
 
@@ -242,6 +235,100 @@ public class FrmUpdateStudentsGrade extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnReloadActionPerformed
 
+    private void btnDownloadPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDownloadPdfActionPerformed
+
+        try {
+            String collection = cmbCareer.getSelectedItem().toString();
+            MongoCollection<org.bson.Document> mongoCollection = MongoManagerMaven.accessToCollections(dataBase, collection);
+            List<Document> students = MongoManagerMaven.getAllCollection(mongoCollection);
+
+           
+            String careerName = collection.replace(" ", "_"); // Reemplaza espacios con guiones bajos para evitar problemas con el nombre del archivo
+            String filePath = careerName + "_Reporte_Notas.pdf";
+
+            com.itextpdf.text.Document document = new com.itextpdf.text.Document();
+            PdfWriter.getInstance(document, new FileOutputStream(filePath));
+            document.open();
+
+            
+            try {
+                InputStream imageStream = getClass().getResourceAsStream("/images/Logo_ITSB_03.png");
+                if (imageStream == null) {
+                    throw new IOException("Imagen no encontrada");
+                }
+                byte[] imageBytes = imageStream.readAllBytes();
+                com.itextpdf.text.Image image = com.itextpdf.text.Image.getInstance(imageBytes);
+                image.scaleToFit(300, 300);
+                image.setAlignment(Element.ALIGN_CENTER);
+                document.add(image);
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error al cargar la imagen: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+            
+            Paragraph title = new Paragraph("\n\nINSTITUTO SUPERIOR SIMÓN BOLÍVAR", com.itextpdf.text.FontFactory.getFont(com.itextpdf.text.FontFactory.HELVETICA_BOLD, 18));
+            title.setAlignment(Element.ALIGN_CENTER);
+            document.add(title);
+
+            
+            Paragraph date = new Paragraph("\n\nFecha: " + java.time.LocalDate.now(), com.itextpdf.text.FontFactory.getFont(com.itextpdf.text.FontFactory.HELVETICA, 12));
+            date.setAlignment(Element.ALIGN_CENTER);
+            document.add(date);
+
+           
+            int i = 0;
+            for (Document student : students) {
+                if (i != 0) {
+                    break;
+                } else {
+                    Paragraph studentInfo = new Paragraph(
+                        "\n\nCarrera: " + student.getString("career") + "\n"
+                        + "Código de carrera: " + student.getString("careerCode") + "\n\n\n",
+                        com.itextpdf.text.FontFactory.getFont(com.itextpdf.text.FontFactory.HELVETICA, 12)
+                    );
+                    studentInfo.setAlignment(Element.ALIGN_LEFT);
+                    studentInfo.setIndentationLeft(36); // 2 tabulaciones (18 * 2 = 36)
+                    document.add(studentInfo);
+                }
+                i++;
+            }
+
+            
+            PdfPTable table = new PdfPTable(7); 
+            table.setWidthPercentage(100);
+
+            
+            String[] headers = {"CEDULA", "NOMBRES", "APELLIDOS", "NOTA UNIDAD 1", "NOTA UNIDA 2","PROMEDIO","SUPLETORIO"};
+            for (String header : headers) {
+                PdfPCell headerCell = new PdfPCell(new Paragraph(header, com.itextpdf.text.FontFactory.getFont(com.itextpdf.text.FontFactory.HELVETICA_BOLD, 12)));
+                headerCell.setBackgroundColor(new com.itextpdf.text.BaseColor(255, 0, 0)); // Color rojo
+                table.addCell(headerCell);
+            }
+
+            // Datos de la tabla
+            for (Document student : students) {
+                table.addCell(student.getString("id"));
+                table.addCell(student.getString("names"));
+                table.addCell(student.getString("lastNames"));
+                table.addCell(student.getString("gradeUnitOne"));
+                table.addCell(student.getString("gradeUnitTwo"));
+                table.addCell(student.getString("gradeUnitTwo"));
+                table.addCell(student.getString(""));
+                table.addCell(student.getString("lastChance"));
+            }
+
+            document.add(table);
+            document.close();
+
+            mt.setRowCount(0);
+            JOptionPane.showMessageDialog(this, "PDF generado correctamente en " + filePath, "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (IOException | DocumentException e) {
+            JOptionPane.showMessageDialog(this, "Error al generar el PDF: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnDownloadPdfActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -259,14 +346,18 @@ public class FrmUpdateStudentsGrade extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmUpdateStudentsGrade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmReportStudentsGrade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmUpdateStudentsGrade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmReportStudentsGrade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmUpdateStudentsGrade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmReportStudentsGrade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmUpdateStudentsGrade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmReportStudentsGrade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -275,7 +366,7 @@ public class FrmUpdateStudentsGrade extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmUpdateStudentsGrade().setVisible(true);
+                new FrmReportStudentsGrade().setVisible(true);
             }
         });
     }
@@ -301,19 +392,17 @@ public class FrmUpdateStudentsGrade extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnDownloadPdf;
     private javax.swing.JButton btnReload;
-    private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cmbCareer;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblStudents;
     private javax.swing.JTextField txtCareerCode;
-    private javax.swing.JTextField txtId;
     // End of variables declaration//GEN-END:variables
 }
