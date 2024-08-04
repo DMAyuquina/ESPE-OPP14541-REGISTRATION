@@ -12,7 +12,7 @@ import org.bson.Document;
 
 /**
  *
- * @author Danny Ayuquina, LogicLegion, DCCO-ESPE
+ * @author LogicLegion, DCCO-ESPE
  */
 public class FrmAddStudent extends javax.swing.JFrame {
 
@@ -359,11 +359,11 @@ public class FrmAddStudent extends javax.swing.JFrame {
                     txtLastChance.setBackground(Color.WHITE);
                 }
             } else {
-                supletorio = "N/A"; // Not required if average is 7 or above
+                supletorio = "N/A"; 
             }
 
             if (isValid) {
-                // Aquí puedes agregar el código para guardar estos datos en la base de datos o en la nube
+                
                 String collectionStudentsPerCareer = career;
                 MongoCollection<Document> mongoCollectionStudentsPerCareer = MongoManagerMaven.accessToCollections(dataBase, collectionStudentsPerCareer);
                 

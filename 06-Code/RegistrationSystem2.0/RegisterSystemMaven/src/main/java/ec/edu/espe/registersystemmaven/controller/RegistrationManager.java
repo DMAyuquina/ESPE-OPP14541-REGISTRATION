@@ -1,13 +1,24 @@
 package ec.edu.espe.registersystemmaven.controller;
 
+import javax.swing.JOptionPane;
+
 /**
  *
- * @author Danny Ayuquina, LogicLegion, DCCO-ESPE
+ * @author LogicLegion, DCCO-ESPE
  */
 public class RegistrationManager {
-    public boolean determinateGratuity(){
+    public static String determinateGratuity(String typeOfRegistration){
         
-        return false;
+        String typeInUpperCase = typeOfRegistration.toUpperCase();
+
+        if (typeInUpperCase.equals("PRIMERA")) {
+            return "CON GRATUIDAD";
+        } else if (typeInUpperCase.equals("SEGUNDA") || typeInUpperCase.equals("TERCERA")) {
+            return "SIN GRATUIDAD";
+        } else {
+            JOptionPane.showMessageDialog(null, "Tipo de matrícula no válido", "Error", JOptionPane.ERROR_MESSAGE);
+            return "TIPO NO VALIDO";
+        }
     }
     
     public boolean determinatePromoteByAssistence(float assistence){

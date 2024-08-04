@@ -1,8 +1,10 @@
 package ec.edu.espe.registersystemmaven.model;
 
+import ec.edu.espe.registersystemmaven.controller.RegistrationManager;
+
 /**
  *
- * @author Danny Ayuquina, LogicLegion, DCCO-ESPE
+ * @author LogicLegion, DCCO-ESPE
  */
 public class Registration {
     
@@ -10,10 +12,10 @@ public class Registration {
     private String typeOfRegistration;
     private String gratuity;
 
-    public Registration(String period, String typeOfRegistration, String gratuity) {
+    public Registration(String period, String typeOfRegistration) {
         this.period = period;
         this.typeOfRegistration = typeOfRegistration;
-        this.gratuity = gratuity;
+        this.gratuity = RegistrationManager.determinateGratuity(typeOfRegistration);
     }
 
     public Registration() {
@@ -51,7 +53,7 @@ public class Registration {
      * @return the gratuity
      */
     public String getGratuity() {
-        return gratuity;
+        return RegistrationManager.determinateGratuity(typeOfRegistration);
     }
 
     /**

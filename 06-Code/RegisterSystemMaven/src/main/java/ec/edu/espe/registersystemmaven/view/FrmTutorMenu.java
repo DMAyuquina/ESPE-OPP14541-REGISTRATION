@@ -32,7 +32,6 @@ public class FrmTutorMenu extends javax.swing.JFrame {
         itmLogout = new javax.swing.JMenuItem();
         itmExit = new javax.swing.JMenuItem();
         itmGrade = new javax.swing.JMenu();
-        itmIntroduceGrade = new javax.swing.JMenuItem();
         itmUploadGrade = new javax.swing.JMenuItem();
         mnuReport = new javax.swing.JMenu();
         itmGenerateReport = new javax.swing.JMenuItem();
@@ -95,14 +94,6 @@ public class FrmTutorMenu extends javax.swing.JFrame {
 
         itmGrade.setText("Nota");
 
-        itmIntroduceGrade.setText("Introducir Nota");
-        itmIntroduceGrade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itmIntroduceGradeActionPerformed(evt);
-            }
-        });
-        itmGrade.add(itmIntroduceGrade);
-
         itmUploadGrade.setText("Modificar Nota");
         itmUploadGrade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,12 +147,10 @@ public class FrmTutorMenu extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_itmExitActionPerformed
 
-    private void itmIntroduceGradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmIntroduceGradeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_itmIntroduceGradeActionPerformed
-
     private void itmUploadGradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmUploadGradeActionPerformed
-        // TODO add your handling code here:
+        FrmUpdateStudentsGrade frmUpdateStudentsGrade = new FrmUpdateStudentsGrade();
+        this.setVisible(false);
+        frmUpdateStudentsGrade.setVisible(true);
     }//GEN-LAST:event_itmUploadGradeActionPerformed
 
     private void itmGenerateReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmGenerateReportActionPerformed
@@ -212,7 +201,6 @@ public class FrmTutorMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem itmExit;
     private javax.swing.JMenuItem itmGenerateReport;
     private javax.swing.JMenu itmGrade;
-    private javax.swing.JMenuItem itmIntroduceGrade;
     private javax.swing.JMenuItem itmLogout;
     private javax.swing.JMenuItem itmProfile;
     private javax.swing.JMenuItem itmUploadGrade;

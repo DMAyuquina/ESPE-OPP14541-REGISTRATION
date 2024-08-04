@@ -1,5 +1,7 @@
 package ec.edu.espe.registersystemmaven.model;
 
+import ec.edu.espe.registersystemmaven.controller.Computes;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -16,14 +18,16 @@ public class Student {
     private String phone;
     private Registration registration;
     private Grade grade;
-    private Date bornOnDate;
+    private LocalDate bornOnDate;
+    private int age;
     private Career career;
-    private float Assistence;
+    private float asistence;
 
     public Student() {
     }
-    
-    public Student(String dni, String names, String lastNames, String genre, String email, String phone, Registration registration, Grade grade, Date bornOnDate, Career career, float Assistence) {
+
+    public Student(String dni, String names, String lastNames, String genre, String email, String phone, Registration registration, Grade grade, LocalDate bornOnDate, Career career, float Assistence) {
+        
         this.dni = dni;
         this.names = names;
         this.lastNames = lastNames;
@@ -33,9 +37,12 @@ public class Student {
         this.registration = registration;
         this.grade = grade;
         this.bornOnDate = bornOnDate;
+        this.age = Computes.computeAgeInYears(bornOnDate);
         this.career = career;
-        this.Assistence = Assistence;
+        this.asistence = Assistence;
     }
+    
+    
 
     /**
      * @return the dni
@@ -152,14 +159,14 @@ public class Student {
     /**
      * @return the bornOnDate
      */
-    public Date getBornOnDate() {
+    public LocalDate getBornOnDate() {
         return bornOnDate;
     }
 
     /**
      * @param bornOnDate the bornOnDate to set
      */
-    public void setBornOnDate(Date bornOnDate) {
+    public void setBornOnDate(LocalDate bornOnDate) {
         this.bornOnDate = bornOnDate;
     }
 
@@ -178,18 +185,30 @@ public class Student {
     }
 
     /**
-     * @return the Assistence
+     * @return the asistence
      */
-    public float getAssistence() {
-        return Assistence;
+    public float getAsistence() {
+        return asistence;
     }
 
     /**
-     * @param Assistence the Assistence to set
+     * @param asistence the asistence to set
      */
-    public void setAssistence(float Assistence) {
-        this.Assistence = Assistence;
+    public void setAsistence(float asistence) {
+        this.asistence = asistence;
     }
 
+    /**
+     * @return the age
+     */
+    public int getAge() {
+        return Computes.computeAgeInYears(bornOnDate);
+    }
 
+    /**
+     * @param age the age to set
+     */
+    public void setAge(int age) {
+        this.age = age;
+    }
 }

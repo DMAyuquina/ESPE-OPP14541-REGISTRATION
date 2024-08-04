@@ -8,7 +8,7 @@ import org.bson.Document;
 
 /**
  *
- * @author Danny Ayuquina, LogicLegion, DCCO-ESPE
+ * @author LogicLegion, DCCO-ESPE
  */
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;

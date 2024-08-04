@@ -53,14 +53,6 @@
             <Property name="text" type="java.lang.String" value="Nota"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="itmIntroduceGrade">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Introducir Nota"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itmIntroduceGradeActionPerformed"/>
-              </Events>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itmUploadGrade">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Modificar Nota"/>
