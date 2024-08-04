@@ -7,6 +7,7 @@ import com.mongodb.client.MongoDatabase;
 import ec.edu.espe.registersystemmaven.model.AdminAccount;
 import javax.swing.JOptionPane;
 import org.bson.Document;
+import utils.PasswordEncryption;
 
 /**
  *
@@ -139,19 +140,29 @@ public class FrmLogin extends javax.swing.JFrame {
         MongoCollection<Document> mongoAdminCollection = MongoManagerMaven.accessToCollections(dataBase, adminCollection);
         MongoCollection<Document> mongoTutorCollection = MongoManagerMaven.accessToCollections(dataBase, tutorCollection);
 
-        if (ValidationOfAccounts.searchAccountForLogin(mongoAdminCollection, "user", user) && ValidationOfAccounts.searchAccountForLogin(mongoAdminCollection, "password", password)) {
-            FrmAdminMenu frmAdmin = new FrmAdminMenu();
-            this.setVisible(false);
-            frmAdmin.setVisible(true);
-        } else if (ValidationOfAccounts.searchAccountForLogin(mongoTutorCollection, "user", user) && ValidationOfAccounts.searchAccountForLogin(mongoTutorCollection, "password", password)) {
+        if (ValidationOfAccounts.searchAccountForLogin(mongoAdminCollection, "user", user) && 
+    ValidationOfAccounts.searchAccountForLogin(mongoAdminCollection, "password", password)) {
+    FrmAdminMenu frmAdmin = new FrmAdminMenu();
+    this.setVisible(false);
+    frmAdmin.setVisible(true);
+} else {
+    // Buscar y desencriptar la contraseña del usuario en la colección de tutores
+    Document tutorAccount = ValidationOfAccounts.searchAccountByUser(mongoTutorCollection, "user", user);
+    if (tutorAccount != null) {
+        String decryptedPassword = PasswordEncryption.decrypt(tutorAccount.getString("password"));
+        if (password.equals(decryptedPassword)) {
             FrmTutorMenu frmTutorMenu = new FrmTutorMenu();
             this.setVisible(false);
             frmTutorMenu.setVisible(true);
-
         } else {
+            // Si ninguna cuenta coincide, mostrar un mensaje de error
             JOptionPane.showMessageDialog(this, "Cuenta inválida.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
+    } else {
+        // Si ninguna cuenta coincide, mostrar un mensaje de error
+        JOptionPane.showMessageDialog(this, "Cuenta inválida.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+        }
     }//GEN-LAST:event_btnLogInActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed

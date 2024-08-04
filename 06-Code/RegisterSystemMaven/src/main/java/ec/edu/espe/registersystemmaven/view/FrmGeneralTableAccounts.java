@@ -22,6 +22,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.bson.Document;
+import utils.PasswordEncryption;
 
 /**
  *
@@ -176,12 +177,13 @@ public class FrmGeneralTableAccounts extends javax.swing.JFrame {
 
         // Add each document's fields to the table model
         for (Document tutor : tutors) {
+            String decryptedPassword = PasswordEncryption.decrypt(tutor.getString("password"));
             mt.addRow(new Object[]{
-                tutor.getString("dni"), 
-                tutor.getString("names"), 
-                tutor.getString("last names"), 
-                tutor.getString("user"), 
-                tutor.getString("password")
+                tutor.getString("dni"),
+                tutor.getString("names"),
+                tutor.getString("last names"),
+                tutor.getString("user"),
+                decryptedPassword
             });
         }
     
@@ -200,13 +202,14 @@ public class FrmGeneralTableAccounts extends javax.swing.JFrame {
 
     // Añadir cada documento como una fila en la tabla
     for (Document tutor : tutors) {
-        mt.addRow(new Object[]{
-            tutor.getString("dni"), 
-                tutor.getString("names"), 
-                tutor.getString("last names"), 
-                tutor.getString("user"), 
-                tutor.getString("password")
-        });
+            String decryptedPassword = PasswordEncryption.decrypt(tutor.getString("password"));
+            mt.addRow(new Object[]{
+                tutor.getString("dni"),
+                tutor.getString("names"),
+                tutor.getString("last names"),
+                tutor.getString("user"),
+                decryptedPassword
+            });
     }
 
     }//GEN-LAST:event_jButton2ActionPerformed
