@@ -1,8 +1,10 @@
 package ec.edu.espe.registersystemmaven.controller;
 
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
+import ec.edu.espe.registersystemmaven.model.Career;
+import ec.edu.espe.registersystemmaven.model.Course;
 import ec.edu.espe.registersystemmaven.model.Tutor;
+import java.util.ArrayList;
 import org.bson.Document;
 
 /**
@@ -15,25 +17,31 @@ public class TutorFuncionalities {
         //TODO-Modificar para nuevos atributos, tomando como referencia a la estructura del método getStudent de StudentFucnionalities
         Tutor tutor = new Tutor();
         Document findDocument = new Document("id", student);
-
-        String id = "";
-        String names = "";
-        String lastNames = "";
-        String phone = "";
-        String email = "";
-        String careerCode = "";
-        String career = "";
+       
+        ArrayList<Course> courses;
+        Career career = new Career();
+        
+        Document careerDoc = new Document();
 
         for (Document doc : mongoCollection.find(findDocument)) {
-            id = doc.getString("id");
-            names = doc.getString("names");
-            lastNames = doc.getString("last names");
-            phone = doc.getString("phone");
-            email = doc.getString("email");
-            careerCode = doc.getString("career code");
-            career = doc.getString("career");
+            tutor.setId(doc.getString("id"));
+            tutor.setNames(doc.getString("names"));
+            tutor.setLastNames(doc.getString("last names"));
+            tutor.setUser(doc.getString("user"));
+            tutor.setPassword(doc.getString("password"));
+            tutor.setPhone(doc.getString("phone"));
+            tutor.setEmail(doc.getString("email"));
+            tutor.setCourses((ArrayList<Course>)doc.get("courses"));
+            
+            careerDoc = (Document)doc.get("career");
+            if(careerDoc!=null){
+                career.setCareerCode(careerDoc.getString("careerCode"));
+                career.setCareerName(careerDoc.getString("careerName"));
+            }
+            tutor.setCareer(career);
+            
         }
-        return tutor ;
+        return tutor;
     }
 
 }

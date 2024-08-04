@@ -6,9 +6,7 @@ import ec.edu.espe.registersystemmaven.model.Grade;
 import ec.edu.espe.registersystemmaven.model.Registration;
 import ec.edu.espe.registersystemmaven.model.Student;
 import java.util.Date;
-import java.util.Scanner;
 import org.bson.Document;
-import utils.ValidationOfData;
 
 /**
  *
@@ -62,43 +60,11 @@ public class StudentFuncionalities {
                 career.setCareerCode(careerDoc.getString("careerCode"));
                 career.setCareerName(careerDoc.getString("careerName"));
             }
+            student.setCareer(career);
             
             student.setAssistence((float)doc.get("assistence"));
             
         }
         return student;
-    }
-
-    public void calculateFinalGrade(double unit1Grade, double unit2Grade, double supplementaryGrade) {
-
-        double finalGrade = (unit1Grade + unit2Grade + supplementaryGrade) / 3;
-
-        System.out.println("La calificación final del estudiante es: " + finalGrade);
-
-    }
-
-    public String calculateGrade() {
-
-        Scanner scanner = new Scanner(System.in);
-        String stringFinalGrade;
-
-        System.out.println("Ingrese notas del alumno:");
-        float unitOne = 0.0F;
-        do {
-            System.out.print("Unidad 1: ");
-            unitOne = ValidationOfData.validationOfFloat(unitOne, scanner);
-        } while (unitOne == -1.0F);
-
-        float unitTwo = 0.0F;
-        do {
-            System.out.print("Unidad 2: ");
-            unitTwo = ValidationOfData.validationOfFloat(unitTwo, scanner);
-        } while (unitTwo == -1.0F);
-        float finalGrade = (unitOne + unitTwo) / 2;
-
-        stringFinalGrade = String.valueOf(finalGrade);
-
-        return stringFinalGrade;
-
     }
 }
