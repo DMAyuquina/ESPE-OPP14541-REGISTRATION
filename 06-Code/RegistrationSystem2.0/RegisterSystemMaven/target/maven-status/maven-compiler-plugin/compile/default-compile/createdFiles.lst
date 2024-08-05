@@ -42,6 +42,7 @@ ec\edu\espe\registersystemmaven\view\FrmDeletingByDni$3.class
 ec\edu\espe\registersystemmaven\view\FrmGeneralTableAccounts$5.class
 ec\edu\espe\registersystemmaven\view\FrmStudentMenu$4.class
 ec\edu\espe\registersystemmaven\view\FrmTutorMenu$6.class
+ec\edu\espe\registersystemmaven\controller\CareerFuncionalities.class
 ec\edu\espe\registersystemmaven\view\FrmAddTutor$2.class
 ec\edu\espe\registersystemmaven\view\FrmStudentReportToAdmin$3.class
 ec\edu\espe\registersystemmaven\view\FrmDeletingByDniTable$5.class
@@ -50,6 +51,7 @@ ec\edu\espe\registersystemmaven\model\AdminAccount.class
 ec\edu\espe\registersystemmaven\view\FrmGeneralTableTutors$1.class
 ec\edu\espe\registersystemmaven\view\FrmAddTutor.class
 ec\edu\espe\registersystemmaven\controller\AccountManager.class
+ec\edu\espe\registersystemmaven\controller\GradeManager.class
 ec\edu\espe\registersystemmaven\view\FrmLogin$6.class
 ec\edu\espe\registersystemmaven\view\FrmAdminMenu$4.class
 ec\edu\espe\registersystemmaven\view\FrmUpdateStudents$5.class
@@ -62,7 +64,6 @@ ec\edu\espe\registersystemmaven\controller\GenerateReport.class
 ec\edu\espe\registersystemmaven\view\FrmAddStudent$7.class
 ec\edu\espe\registersystemmaven\view\FrmDeletingByDniTutors$5.class
 ec\edu\espe\registersystemmaven\view\FrmGeneralTableTutors$2.class
-ec\edu\espe\registersystemmaven\controller\CareerFuncionalitities.class
 ec\edu\espe\registersystemmaven\view\FrmAddTutor$3.class
 ec\edu\espe\registersystemmaven\model\Student.class
 ec\edu\espe\registersystemmaven\view\FrmDeletingByDni.class

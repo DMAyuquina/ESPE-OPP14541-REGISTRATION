@@ -11,10 +11,19 @@ import org.bson.Document;
  * @author LogicLegion, DCCO-ESPE
  */
 import com.mongodb.client.MongoCollection;
+import ec.edu.espe.registersystemmaven.model.Grade;
 import org.bson.Document;
 
-public class CareerFuncionalitities {
+public class CareerFuncionalities {
 
+        public static Document careerToDocument(Career career){
+       Document careerDoc = new Document();
+       careerDoc.append("unitOne", career.getCareerName())
+               .append("unitTwo", career.getCareerCode());
+       
+       return careerDoc;
+    }
+    
     public static Career getCareer(MongoCollection<Document> mongoCollection, String key, String data) {
         Document findDocument = new Document(key, data);
 
@@ -26,12 +35,9 @@ public class CareerFuncionalitities {
             careerName = doc.getString("career");
             careerCode = doc.getString("careerCode");
         }
-
-
-        System.out.println(careerCode);
-        System.out.println(careerName);
         
         Career car = new Career(careerName, careerCode);
         return car;
     }
+    
 }

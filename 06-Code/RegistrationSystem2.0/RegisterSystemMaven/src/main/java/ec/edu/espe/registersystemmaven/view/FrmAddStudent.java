@@ -4,11 +4,18 @@ import Utils.MongoManagerMaven;
 import Utils.ValidationOfAccounts;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import ec.edu.espe.registersystemmaven.controller.CareerFuncionalitities;
+import ec.edu.espe.registersystemmaven.controller.CareerFuncionalities;
+import ec.edu.espe.registersystemmaven.controller.StudentFuncionalities;
 import ec.edu.espe.registersystemmaven.model.Career;
+import ec.edu.espe.registersystemmaven.model.Grade;
+import ec.edu.espe.registersystemmaven.model.Registration;
+import ec.edu.espe.registersystemmaven.model.Student;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
 import org.bson.Document;
 import utils.ValidationOfData;
 
@@ -374,25 +381,22 @@ public class FrmAddStudent extends javax.swing.JFrame {
     }//GEN-LAST:event_txtIdActionPerformed
 
     private void btnAddStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStudentsActionPerformed
+
         MongoCollection<Document> mongoCollectionStudents = MongoManagerMaven.accessToCollections(dataBase, "Students");
 
         String id = txtId.getText();
         String names = txtName.getText().toUpperCase();
         String lastNames = txtLastName.getText().toUpperCase();
         String genre = cmbGenre.getSelectedItem().toString();
-        String career = cmbCareer.getSelectedItem().toString();
+        String careerName = cmbCareer.getSelectedItem().toString();
         String careerCode = txtCareerCode.getText();
         String email = txtEmail.getText();
-        String celular = txtPhone.getText();
-        String tipoMatricula = cmbTypeOfRegistration.getSelectedItem().toString().toUpperCase();
+        String phone = txtPhone.getText();
+        String typeOfRegistration = cmbTypeOfRegistration.getSelectedItem().toString().toUpperCase();
         String bornOnDate = txtBornOnDate.getText();
-        
-        String assistenceStr = txtAssistence.getText();
-        float assistence;
 
-        String unidad1 = "";
-        String unidad2 = "";
-        String supletorio = "";
+        String assistenceStr = txtAssistence.getText();
+        float assistence = 0.0F;
 
         if (utils.ValidationOfData.validationDni(id.length(), id) && !ValidationOfAccounts.searchForDuplicateId(mongoCollectionStudents, "id", id)) {
 
@@ -413,59 +417,43 @@ public class FrmAddStudent extends javax.swing.JFrame {
                 isValid = false;
             }
 
-            if (!utils.ValidationOfData.validationPhoneNumber(celular)) {
+            if (!utils.ValidationOfData.validationPhoneNumber(phone)) {
                 isValid = false;
             }
 
             if (!utils.ValidationOfData.validateAndParseDate(bornOnDate)) {
                 isValid = false;
             }
-            
-            if (career.equals("SELECCIONAR")) {
+
+            if (careerName.equals("SELECCIONAR")) {
                 isValid = false;
             }
 
-            if (tipoMatricula.isEmpty()) {
+            if (typeOfRegistration.isEmpty()) {
                 isValid = false;
             }
 
             if (!ValidationOfData.validationOfFloat(txtAssistence.getText())) {
                 isValid = false;
-            } else{
+            } else {
                 assistence = Float.parseFloat(assistenceStr);
             }
 
-            float gradeU1 = 0;
-            float gradeU2 = 0;
-
-            float average = (gradeU1 + gradeU2) / 2;
-
             if (isValid) {
-                // Aquí puedes agregar el código para guardar estos datos en la base de datos o en la nube
-                String collectionStudentsPerCareer = career;
-                MongoCollection<Document> mongoCollectionStudentsPerCareer = MongoManagerMaven.accessToCollections(dataBase, collectionStudentsPerCareer);
+                Registration registration = new Registration("", typeOfRegistration);
+                Grade grade = new Grade(0.0F, 0.0F, 0.0F, 0.0F);
+                Career career = new Career(careerName, careerCode);
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-dd-MM");
+                LocalDate boD = LocalDate.parse(bornOnDate, dateFormatter);
 
-                Document student = new Document();
-                student.append("id", id).append("names", names).append("lastNames", lastNames)
-                        .append("genre", genre).append("email", email).append("phone", celular)
-                        .append("career", career).append("careerCode", careerCode)
-                        .append("typeOfRegistration", tipoMatricula).append("gradeUnitOne", unidad1)
-                        .append("gradeUnitTwo", unidad2).append("lastChance", supletorio);
-
-                mongoCollectionStudentsPerCareer.insertOne(student);
-                mongoCollectionStudents.insertOne(student);
-
-                MongoManagerMaven.closeConnectionToMongo();
-
+                Student student = new Student(id, names, lastNames, genre, email, phone, registration, grade, boD, career, assistence);
+                
+                StudentFuncionalities.setStudentToMongo(dataBase, student);
+                
                 JOptionPane.showMessageDialog(this, "Estudiante agregado exitosamente.");
                 txtId.setBackground(Color.WHITE);
             }
-        } else {
-            txtId.setBackground(Color.RED);
-            JOptionPane.showMessageDialog(this, "Cédula inválida.", "Error", JOptionPane.ERROR_MESSAGE);
-
-        }
-
+        } 
 
     }//GEN-LAST:event_btnAddStudentsActionPerformed
 
@@ -478,7 +466,7 @@ public class FrmAddStudent extends javax.swing.JFrame {
             lblCareerNameError.setVisible(false);
             String collectionCareer = "Careers";
             MongoCollection<Document> mongoCollectionCareers = MongoManagerMaven.accessToCollections(dataBase, collectionCareer);
-            Career careerSearch = CareerFuncionalitities.getCareer(mongoCollectionCareers, "careerName", career);
+            Career careerSearch = CareerFuncionalities.getCareer(mongoCollectionCareers, "careerName", career);
             txtCareerCode.setText(careerSearch.getCareerCode());
         }
 

@@ -209,7 +209,7 @@ public class FrmStudentReport extends javax.swing.JFrame {
 // Recuperar datos del estudiante
         String collection = "Students";
         MongoCollection<org.bson.Document> mongoCollection = MongoManagerMaven.accessToCollections(dataBase, collection);
-        Student student = StudentFuncionalities.getStudent(mongoCollection, "id", txtId.getText());
+        Student student = StudentFuncionalities.getStudentFromMongo(mongoCollection, "id", txtId.getText());
 
         Document document = new Document();
         try {
@@ -284,7 +284,7 @@ public class FrmStudentReport extends javax.swing.JFrame {
         if (id.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe llenar el campo con una cédula válida", "Error", JOptionPane.ERROR_MESSAGE);
         } else if (ValidationOfAccounts.searchForDuplicateId(mongoCollectionStudents, "id", id)) {
-            Student student = StudentFuncionalities.getStudent(mongoCollectionStudents, "id", id);
+            Student student = StudentFuncionalities.getStudentFromMongo(mongoCollectionStudents, "id", id);
             txtLastNames.setText(student.getLastNames());
             txtNames.setText(student.getNames());
             //No borrar línea de abajo, solo modificarla con los nuevos atributos de Student
@@ -309,7 +309,7 @@ public class FrmStudentReport extends javax.swing.JFrame {
         if (names.isEmpty() || lastNames.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe llenar ambos campos de nombres", "Error", JOptionPane.ERROR_MESSAGE);
         } else if (ValidationOfAccounts.searchAccountForLogin(mongoCollectionStudents, "names", names) && ValidationOfAccounts.searchAccountForLogin(mongoCollectionStudents, "lastNames", lastNames)) {
-            Student student = StudentFuncionalities.getStudent(mongoCollectionStudents, "names", names);
+            Student student = StudentFuncionalities.getStudentFromMongo(mongoCollectionStudents, "names", names);
             txtId.setText(student.getDni());
             txtNames.setText(names);
             txtLastNames.setText(lastNames);

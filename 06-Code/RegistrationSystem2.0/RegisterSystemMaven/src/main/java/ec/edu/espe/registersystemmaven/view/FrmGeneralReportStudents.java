@@ -11,7 +11,7 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import ec.edu.espe.registersystemmaven.controller.CareerFuncionalitities;
+import ec.edu.espe.registersystemmaven.controller.CareerFuncionalities;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import ec.edu.espe.registersystemmaven.model.Career;
@@ -194,7 +194,7 @@ public class FrmGeneralReportStudents extends javax.swing.JFrame {
             MongoCollection<org.bson.Document> mongoCollectionStudents = MongoManagerMaven.accessToCollections(dataBase, collectionStudents);
             MongoCollection<org.bson.Document> mongoCollectionCareers = MongoManagerMaven.accessToCollections(dataBase, collectionCareers);
 
-            Career car = CareerFuncionalitities.getCareer(mongoCollectionCareers, "careerName", career);
+            Career car = CareerFuncionalities.getCareer(mongoCollectionCareers, "careerName", career);
             txtCareerCode.setText(car.getCareerCode());
             List<Document> students = MongoManagerMaven.getAllCollection(mongoCollectionStudents);
 

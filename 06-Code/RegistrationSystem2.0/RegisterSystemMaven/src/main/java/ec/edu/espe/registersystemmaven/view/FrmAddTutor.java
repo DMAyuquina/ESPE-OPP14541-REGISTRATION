@@ -4,7 +4,7 @@ import Utils.MongoManagerMaven;
 import Utils.ValidationOfAccounts;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import ec.edu.espe.registersystemmaven.controller.CareerFuncionalitities;
+import ec.edu.espe.registersystemmaven.controller.CareerFuncionalities;
 import ec.edu.espe.registersystemmaven.model.Career;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -268,7 +268,7 @@ public class FrmAddTutor extends javax.swing.JFrame {
         String career = cmbCareer.getSelectedItem().toString();
         String collectionCareer = "Careers";
         MongoCollection<Document> mongoCollectionCareers = MongoManagerMaven.accessToCollections(dataBase, collectionCareer);
-        Career careerSearch = CareerFuncionalitities.getCareer(mongoCollectionCareers, "careerName", career);
+        Career careerSearch = CareerFuncionalities.getCareer(mongoCollectionCareers, "careerName", career);
         txtCareerCode.setText(careerSearch.getCareerCode());
     }//GEN-LAST:event_cmbCareerActionPerformed
 
