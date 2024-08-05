@@ -1,10 +1,27 @@
 package utils;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 public class ValidationOfData {
 
+    public static boolean validateAndParseDate(String dateStr) {
+        // Define el formato esperado para la fecha (YYYY-DD-MM)
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-dd-MM");
+
+        try {
+            // Intenta parsear la fecha
+            LocalDate.parse(dateStr, dateFormatter);
+            return true; // La fecha es válida
+        } catch (DateTimeParseException e) {
+            return false; // La fecha no es válida
+        }
+    }
+    
     public static int validationOfInt(int number, Scanner scanner) {
         try {
             number = scanner.nextInt();
@@ -22,9 +39,9 @@ public class ValidationOfData {
             Float.parseFloat(number);
             return true;
         } catch (Exception e) {
-            return false;
+            return false;   
         }
-       
+
     }
 
     public static boolean validationOfCharacter(String phrase) {

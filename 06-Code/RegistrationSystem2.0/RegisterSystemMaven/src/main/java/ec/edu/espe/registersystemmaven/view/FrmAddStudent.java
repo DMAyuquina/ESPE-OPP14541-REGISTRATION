@@ -385,6 +385,7 @@ public class FrmAddStudent extends javax.swing.JFrame {
         String email = txtEmail.getText();
         String celular = txtPhone.getText();
         String tipoMatricula = cmbTypeOfRegistration.getSelectedItem().toString().toUpperCase();
+        String bornOnDate = txtBornOnDate.getText();
         
         String assistenceStr = txtAssistence.getText();
         float assistence;
@@ -416,7 +417,9 @@ public class FrmAddStudent extends javax.swing.JFrame {
                 isValid = false;
             }
 
-            //TODO Fecha de nacimiento
+            if (!utils.ValidationOfData.validateAndParseDate(bornOnDate)) {
+                isValid = false;
+            }
             
             if (career.equals("SELECCIONAR")) {
                 isValid = false;
@@ -509,7 +512,12 @@ public class FrmAddStudent extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbCareerMouseReleased
 
     private void txtBornOnDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBornOnDateActionPerformed
-        // TODO add your handling code here:
+        String bornOnDate = txtBornOnDate.getText();
+        if (!utils.ValidationOfData.validateAndParseDate(bornOnDate)) {
+            lblBornOnDateError.setVisible(true);
+        } else {
+            lblBornOnDateError.setVisible(false);
+        }
     }//GEN-LAST:event_txtBornOnDateActionPerformed
 
     private void cmbGenreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGenreActionPerformed
