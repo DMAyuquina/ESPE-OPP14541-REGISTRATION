@@ -2,7 +2,6 @@ package ec.edu.espe.registersystemmaven.model;
 
 import ec.edu.espe.registersystemmaven.controller.Computes;
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  *

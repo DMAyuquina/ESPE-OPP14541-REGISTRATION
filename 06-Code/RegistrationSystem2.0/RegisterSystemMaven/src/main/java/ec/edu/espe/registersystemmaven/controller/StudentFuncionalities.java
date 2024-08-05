@@ -5,12 +5,7 @@ import ec.edu.espe.registersystemmaven.model.Career;
 import ec.edu.espe.registersystemmaven.model.Grade;
 import ec.edu.espe.registersystemmaven.model.Registration;
 import ec.edu.espe.registersystemmaven.model.Student;
-<<<<<<< HEAD
-import java.util.Date;
-=======
 import java.time.LocalDate;
-import java.util.Scanner;
->>>>>>> 56ce4f971f25b7ce07ac61599680b7960bd64027
 import org.bson.Document;
 
 /**
@@ -29,9 +24,9 @@ public class StudentFuncionalities {
         Grade grade = new Grade();
         Career career = new Career();
         
-        Document registrationDoc = new Document();
-        Document gradeDoc = new Document();
-        Document careerDoc = new Document();
+        Document registrationDoc;
+        Document gradeDoc;
+        Document careerDoc;
 
         for (Document doc : mongoCollection.find(findDocument)) {
             student.setDni(doc.getString("id"));

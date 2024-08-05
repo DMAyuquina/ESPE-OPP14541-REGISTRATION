@@ -7,8 +7,10 @@ import com.mongodb.client.MongoDatabase;
 import ec.edu.espe.registersystemmaven.controller.CareerFuncionalitities;
 import ec.edu.espe.registersystemmaven.model.Career;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import org.bson.Document;
+import utils.ValidationOfData;
 
 /**
  *
@@ -23,6 +25,18 @@ public class FrmAddStudent extends javax.swing.JFrame {
      */
     public FrmAddStudent() {
         initComponents();
+        setLocationRelativeTo(null);
+        btnAddStudents.setEnabled(true);
+        lblIdError.setVisible(false);
+        lblNamesError.setVisible(false);
+        lblLastNamesError.setVisible(false);
+        lblGenreError.setVisible(false);
+        lblEmailError.setVisible(false);
+        lblPhoneError.setVisible(false);
+        lblBornOnDateError.setVisible(false);
+        lblCareerNameError.setVisible(false);
+        lblTypeOfRegistrationError.setVisible(false);
+        lblAssistenceError.setVisible(false);
     }
 
     /**
@@ -42,20 +56,13 @@ public class FrmAddStudent extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         txtId = new javax.swing.JTextField();
         txtName = new javax.swing.JTextField();
         txtLastName = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         txtPhone = new javax.swing.JTextField();
-        txtGradeU1 = new javax.swing.JTextField();
-        txtGradeU2 = new javax.swing.JTextField();
-        cmbRegistrationType = new javax.swing.JComboBox<>();
-        jLabel12 = new javax.swing.JLabel();
-        txtLastChance = new javax.swing.JTextField();
+        cmbTypeOfRegistration = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -64,6 +71,23 @@ public class FrmAddStudent extends javax.swing.JFrame {
         cmbCareer = new javax.swing.JComboBox<>();
         txtCareerCode = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        cmbGenre = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        txtBornOnDate = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        lblIdError = new javax.swing.JLabel();
+        lblNamesError = new javax.swing.JLabel();
+        lblLastNamesError = new javax.swing.JLabel();
+        lblGenreError = new javax.swing.JLabel();
+        lblEmailError = new javax.swing.JLabel();
+        lblPhoneError = new javax.swing.JLabel();
+        lblBornOnDateError = new javax.swing.JLabel();
+        lblCareerNameError = new javax.swing.JLabel();
+        lblTypeOfRegistrationError = new javax.swing.JLabel();
+        txtAssistence = new javax.swing.JTextField();
+        lblAssistenceError = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,43 +96,31 @@ public class FrmAddStudent extends javax.swing.JFrame {
 
         jLabel1.setForeground(new java.awt.Color(153, 0, 51));
         jLabel1.setText("Cédula:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 124, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, -1, -1));
 
         jLabel2.setForeground(new java.awt.Color(153, 0, 51));
         jLabel2.setText("Nombres:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 158, 53, -1));
 
         jLabel3.setForeground(new java.awt.Color(153, 0, 51));
-        jLabel3.setText("Apellidos:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 192, -1, -1));
+        jLabel3.setText("Género:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, -1, -1));
 
         jLabel4.setForeground(new java.awt.Color(153, 0, 51));
         jLabel4.setText("Código de carrera:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 396, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 470, -1, -1));
 
         jLabel5.setForeground(new java.awt.Color(153, 0, 51));
         jLabel5.setText("Email:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(217, 232, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, -1, -1));
 
         jLabel6.setForeground(new java.awt.Color(153, 0, 51));
-        jLabel6.setText("Celular:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 275, -1, -1));
+        jLabel6.setText("Fecha de nacimiento:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, -1, -1));
 
         jLabel7.setForeground(new java.awt.Color(153, 0, 51));
-        jLabel7.setText("Tipo de matrícula:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 436, -1, -1));
-
-        jLabel8.setForeground(new java.awt.Color(153, 0, 51));
-        jLabel8.setText("Parcial 1:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 521, -1, -1));
-
-        jLabel9.setForeground(new java.awt.Color(153, 0, 51));
-        jLabel9.setText("Parcial 2:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 555, -1, -1));
-
-        jLabel10.setForeground(new java.awt.Color(153, 0, 51));
-        jLabel10.setText("Supletorio:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 585, -1, -1));
+        jLabel7.setText("Asistencia:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 560, -1, -1));
 
         btnBack.setBackground(new java.awt.Color(153, 0, 51));
         btnBack.setForeground(new java.awt.Color(255, 255, 255));
@@ -118,53 +130,50 @@ public class FrmAddStudent extends javax.swing.JFrame {
                 btnBackActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 630, -1, -1));
+        jPanel1.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 640, -1, -1));
 
         txtId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdActionPerformed(evt);
             }
         });
-        jPanel1.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(273, 121, 195, -1));
+        jPanel1.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, 195, -1));
 
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNameActionPerformed(evt);
             }
         });
-        jPanel1.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(273, 155, 195, -1));
-        jPanel1.add(txtLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(273, 189, 195, -1));
+        jPanel1.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 195, -1));
+
+        txtLastName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLastNameActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, 195, -1));
 
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailActionPerformed(evt);
             }
         });
-        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(273, 229, 195, -1));
-        jPanel1.add(txtPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(273, 272, 195, -1));
-        jPanel1.add(txtGradeU1, new org.netbeans.lib.awtextra.AbsoluteConstraints(308, 518, 121, -1));
+        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, 195, -1));
 
-        txtGradeU2.addActionListener(new java.awt.event.ActionListener() {
+        txtPhone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtGradeU2ActionPerformed(evt);
+                txtPhoneActionPerformed(evt);
             }
         });
-        jPanel1.add(txtGradeU2, new org.netbeans.lib.awtextra.AbsoluteConstraints(308, 552, 121, -1));
+        jPanel1.add(txtPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 195, -1));
 
-        cmbRegistrationType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR", "SEGUNDA", "TERCERA" }));
-        jPanel1.add(cmbRegistrationType, new org.netbeans.lib.awtextra.AbsoluteConstraints(221, 433, 333, -1));
-
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(153, 0, 51));
-        jLabel12.setText("Calificaciones");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 461, 92, 25));
-
-        txtLastChance.addActionListener(new java.awt.event.ActionListener() {
+        cmbTypeOfRegistration.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR", "SEGUNDA", "TERCERA" }));
+        cmbTypeOfRegistration.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtLastChanceActionPerformed(evt);
+                cmbTypeOfRegistrationActionPerformed(evt);
             }
         });
-        jPanel1.add(txtLastChance, new org.netbeans.lib.awtextra.AbsoluteConstraints(308, 582, 121, -1));
+        jPanel1.add(cmbTypeOfRegistration, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 510, 333, -1));
 
         jPanel2.setBackground(new java.awt.Color(153, 0, 51));
 
@@ -177,9 +186,9 @@ public class FrmAddStudent extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(287, Short.MAX_VALUE)
                 .addComponent(jLabel13)
-                .addGap(231, 231, 231))
+                .addGap(249, 249, 249))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,12 +198,12 @@ public class FrmAddStudent extends javax.swing.JFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 657, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, -1));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(153, 0, 51));
         jLabel11.setText("Datos Personales");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(273, 74, 110, 16));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, 110, 16));
 
         btnAddStudents.setBackground(new java.awt.Color(153, 0, 51));
         btnAddStudents.setForeground(new java.awt.Color(255, 255, 255));
@@ -208,7 +217,7 @@ public class FrmAddStudent extends javax.swing.JFrame {
 
         jLabel14.setForeground(new java.awt.Color(153, 0, 51));
         jLabel14.setText("Carrera:");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, 43, -1));
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 430, 43, -1));
 
         cmbCareer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CONTABILIDAD", "MARKETING", "TECNOLOGIA SUPERIOR EN ADMINISTRACION FINANCIERA", "TECNOLOGIA SUPERIOR EN MARKETING", "TECNOLOGIA SUPERIOR EN REDES Y TELECOMUNICACIONES", "TECNOLOGIA SUPERIOR EN DESARROLLO DE SOFTWARE", "SELECCIONAR" }));
         cmbCareer.setSelectedIndex(6);
@@ -222,7 +231,7 @@ public class FrmAddStudent extends javax.swing.JFrame {
                 cmbCareerActionPerformed(evt);
             }
         });
-        jPanel1.add(cmbCareer, new org.netbeans.lib.awtextra.AbsoluteConstraints(223, 353, 331, -1));
+        jPanel1.add(cmbCareer, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 430, 331, -1));
 
         txtCareerCode.setEditable(false);
         txtCareerCode.addActionListener(new java.awt.event.ActionListener() {
@@ -230,18 +239,112 @@ public class FrmAddStudent extends javax.swing.JFrame {
                 txtCareerCodeActionPerformed(evt);
             }
         });
-        jPanel1.add(txtCareerCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(223, 393, 331, -1));
+        jPanel1.add(txtCareerCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 470, 331, -1));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(153, 0, 51));
         jLabel15.setText("Datos Académicos");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 306, 128, -1));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 390, 128, -1));
+
+        jLabel16.setForeground(new java.awt.Color(153, 0, 51));
+        jLabel16.setText("Apellidos:");
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 192, -1, -1));
+
+        cmbGenre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MASCULINO", "FEMENINO", "SELECCIONAR" }));
+        cmbGenre.setSelectedIndex(2);
+        cmbGenre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbGenreActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmbGenre, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 140, -1));
+
+        jLabel8.setForeground(new java.awt.Color(153, 0, 51));
+        jLabel8.setText("Celular:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 310, -1, -1));
+
+        txtBornOnDate.setText("YYYY-DD-MM");
+        txtBornOnDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBornOnDateActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtBornOnDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 350, 190, -1));
+
+        jLabel9.setForeground(new java.awt.Color(153, 0, 51));
+        jLabel9.setText("Tipo de matrícula:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 510, -1, -1));
+
+        lblIdError.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        lblIdError.setForeground(new java.awt.Color(255, 0, 51));
+        lblIdError.setText("Cédula inválida");
+        jPanel1.add(lblIdError, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 150, 20));
+
+        lblNamesError.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        lblNamesError.setForeground(new java.awt.Color(255, 0, 51));
+        lblNamesError.setText("Nombres inválidos");
+        jPanel1.add(lblNamesError, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, 150, 20));
+
+        lblLastNamesError.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        lblLastNamesError.setForeground(new java.awt.Color(255, 0, 51));
+        lblLastNamesError.setText("Apellidos inválidos");
+        jPanel1.add(lblLastNamesError, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 150, 20));
+
+        lblGenreError.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        lblGenreError.setForeground(new java.awt.Color(255, 0, 51));
+        lblGenreError.setText("Debe seleccionar una opción válida");
+        jPanel1.add(lblGenreError, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 230, 200, 20));
+
+        lblEmailError.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        lblEmailError.setForeground(new java.awt.Color(255, 0, 51));
+        lblEmailError.setText("Email inválido");
+        jPanel1.add(lblEmailError, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 270, 140, 20));
+
+        lblPhoneError.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        lblPhoneError.setForeground(new java.awt.Color(255, 0, 51));
+        lblPhoneError.setText("Número de teléfono inválido");
+        jPanel1.add(lblPhoneError, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 310, 160, 20));
+
+        lblBornOnDateError.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        lblBornOnDateError.setForeground(new java.awt.Color(255, 0, 51));
+        lblBornOnDateError.setText("Fecha inválida (YYYY-DD-MM)");
+        jPanel1.add(lblBornOnDateError, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 350, 160, 20));
+
+        lblCareerNameError.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        lblCareerNameError.setForeground(new java.awt.Color(255, 0, 51));
+        lblCareerNameError.setText("Seleccione una opción válida");
+        jPanel1.add(lblCareerNameError, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 430, 160, 20));
+
+        lblTypeOfRegistrationError.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        lblTypeOfRegistrationError.setForeground(new java.awt.Color(255, 0, 51));
+        lblTypeOfRegistrationError.setText("Seleccione una opción válida");
+        jPanel1.add(lblTypeOfRegistrationError, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 510, 160, 20));
+
+        txtAssistence.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAssistenceActionPerformed(evt);
+            }
+        });
+        txtAssistence.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAssistenceKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtAssistence, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 560, 50, -1));
+
+        lblAssistenceError.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        lblAssistenceError.setForeground(new java.awt.Color(255, 0, 51));
+        lblAssistenceError.setText("Número inválido");
+        jPanel1.add(lblAssistenceError, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 560, 90, 20));
+
+        jLabel10.setText("%");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 560, -1, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 887, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,124 +358,97 @@ public class FrmAddStudent extends javax.swing.JFrame {
         FrmAdminMenu frmadmin = new FrmAdminMenu();
         this.setVisible(false);
         frmadmin.setVisible(true);
+
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
         this.txtId.getText();
+        String id = txtId.getText();
+        MongoCollection<Document> mongoCollectionStudents = MongoManagerMaven.accessToCollections(dataBase, "Students");
+        if (utils.ValidationOfData.validationDni(id.length(), id) && !ValidationOfAccounts.searchForDuplicateId(mongoCollectionStudents, "id", id)) {
+            lblIdError.setVisible(false);
+        } else {
+            lblIdError.setVisible(true);
+        }
+
     }//GEN-LAST:event_txtIdActionPerformed
 
-    private void txtLastChanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLastChanceActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtLastChanceActionPerformed
-
-    private void txtGradeU2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGradeU2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtGradeU2ActionPerformed
-
     private void btnAddStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStudentsActionPerformed
-        String collectionStudents = "Students";
-        MongoCollection<Document> mongoCollectionStudents = MongoManagerMaven.accessToCollections(dataBase, collectionStudents);
+        MongoCollection<Document> mongoCollectionStudents = MongoManagerMaven.accessToCollections(dataBase, "Students");
 
-        String id = this.txtId.getText();
+        String id = txtId.getText();
+        String names = txtName.getText().toUpperCase();
+        String lastNames = txtLastName.getText().toUpperCase();
+        String genre = cmbGenre.getSelectedItem().toString();
+        String career = cmbCareer.getSelectedItem().toString();
+        String careerCode = txtCareerCode.getText();
+        String email = txtEmail.getText();
+        String celular = txtPhone.getText();
+        String tipoMatricula = cmbTypeOfRegistration.getSelectedItem().toString().toUpperCase();
+        
+        String assistenceStr = txtAssistence.getText();
+        float assistence;
+
+        String unidad1 = "";
+        String unidad2 = "";
+        String supletorio = "";
+
         if (utils.ValidationOfData.validationDni(id.length(), id) && !ValidationOfAccounts.searchForDuplicateId(mongoCollectionStudents, "id", id)) {
-            String name = txtName.getText().toUpperCase();
-            String lastName = txtLastName.getText().toUpperCase();
-            String career = cmbCareer.getSelectedItem().toString();
-            String careerCode = txtCareerCode.getText();
-            String email = txtEmail.getText();
-            String celular = txtPhone.getText();
-            String tipoMatricula = cmbRegistrationType.getSelectedItem().toString().toUpperCase();
-            String unidad1 = txtGradeU1.getText();
-            String unidad2 = txtGradeU2.getText();
-            String supletorio = txtLastChance.getText();
 
             boolean isValid = true;
 
-            if (!utils.ValidationOfData.validationOfCharacter(name)) {
-                txtName.setBackground(Color.RED);
+            if (!utils.ValidationOfData.validationOfCharacter(names)) {
                 isValid = false;
-            } else {
-                txtName.setBackground(Color.WHITE);
             }
 
-            if (!utils.ValidationOfData.validationOfCharacter(lastName)) {
-                txtLastName.setBackground(Color.RED);
+            if (!utils.ValidationOfData.validationOfCharacter(lastNames)) {
                 isValid = false;
-            } else {
-                txtLastName.setBackground(Color.WHITE);
             }
 
-            if (careerCode.isEmpty()) {
-                cmbCareer.setBackground(Color.RED);
+            if (genre.equals("SELECCIONAR")) {
                 isValid = false;
-            } else {
-                cmbCareer.setBackground(Color.WHITE);
             }
-
             if (!utils.ValidationOfData.validationEmail(email)) {
-                txtEmail.setBackground(Color.RED);
                 isValid = false;
-            } else {
-                txtEmail.setBackground(Color.WHITE);
             }
 
             if (!utils.ValidationOfData.validationPhoneNumber(celular)) {
-                txtPhone.setBackground(Color.RED);
                 isValid = false;
-            } else {
-                txtPhone.setBackground(Color.WHITE);
+            }
+
+            //TODO Fecha de nacimiento
+            
+            if (career.equals("SELECCIONAR")) {
+                isValid = false;
             }
 
             if (tipoMatricula.isEmpty()) {
-                cmbRegistrationType.setBackground(Color.RED);
                 isValid = false;
-            } else {
-                cmbRegistrationType.setBackground(Color.WHITE);
+            }
+
+            if (!ValidationOfData.validationOfFloat(txtAssistence.getText())) {
+                isValid = false;
+            } else{
+                assistence = Float.parseFloat(assistenceStr);
             }
 
             float gradeU1 = 0;
             float gradeU2 = 0;
 
-            if (!utils.ValidationOfData.validationGrade(unidad1)) {
-                txtGradeU1.setBackground(Color.RED);
-                isValid = false;
-            } else {
-                txtGradeU1.setBackground(Color.WHITE);
-                gradeU1 = Float.parseFloat(unidad1);
-            }
-
-            if (!utils.ValidationOfData.validationGrade(unidad2)) {
-                txtGradeU2.setBackground(Color.RED);
-                isValid = false;
-            } else {
-                txtGradeU2.setBackground(Color.WHITE);
-                gradeU2 = Float.parseFloat(unidad2);
-            }
-
             float average = (gradeU1 + gradeU2) / 2;
-
-            if (average < 7) {
-                if (!utils.ValidationOfData.validationGrade(supletorio)) {
-                    txtLastChance.setBackground(Color.RED);
-                    isValid = false;
-                } else {
-                    txtLastChance.setBackground(Color.WHITE);
-                }
-            } else {
-                supletorio = "N/A"; // Not required if average is 7 or above
-            }
 
             if (isValid) {
                 // Aquí puedes agregar el código para guardar estos datos en la base de datos o en la nube
                 String collectionStudentsPerCareer = career;
                 MongoCollection<Document> mongoCollectionStudentsPerCareer = MongoManagerMaven.accessToCollections(dataBase, collectionStudentsPerCareer);
-                
+
                 Document student = new Document();
-                student.append("id", id).append("names", name).append("lastNames", lastName).append("email", email).append("phone", celular)
+                student.append("id", id).append("names", names).append("lastNames", lastNames)
+                        .append("genre", genre).append("email", email).append("phone", celular)
                         .append("career", career).append("careerCode", careerCode)
                         .append("typeOfRegistration", tipoMatricula).append("gradeUnitOne", unidad1)
                         .append("gradeUnitTwo", unidad2).append("lastChance", supletorio);
-                
+
                 mongoCollectionStudentsPerCareer.insertOne(student);
                 mongoCollectionStudents.insertOne(student);
 
@@ -386,31 +462,113 @@ public class FrmAddStudent extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Cédula inválida.", "Error", JOptionPane.ERROR_MESSAGE);
 
         }
+
+
     }//GEN-LAST:event_btnAddStudentsActionPerformed
 
     private void cmbCareerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCareerActionPerformed
         String career = cmbCareer.getSelectedItem().toString();
-        String collectionCareer = "Careers";
-        MongoCollection<Document> mongoCollectionCareers = MongoManagerMaven.accessToCollections(dataBase, collectionCareer);
-        Career careerSearch = CareerFuncionalitities.getCareer(mongoCollectionCareers, "careerName", career);
-        txtCareerCode.setText(careerSearch.getCareerCode());
+        //Career
+        if (career.equals("SELECCIONAR")) {
+            lblCareerNameError.setVisible(true);
+        } else {
+            lblCareerNameError.setVisible(false);
+            String collectionCareer = "Careers";
+            MongoCollection<Document> mongoCollectionCareers = MongoManagerMaven.accessToCollections(dataBase, collectionCareer);
+            Career careerSearch = CareerFuncionalitities.getCareer(mongoCollectionCareers, "careerName", career);
+            txtCareerCode.setText(careerSearch.getCareerCode());
+        }
+
     }//GEN-LAST:event_cmbCareerActionPerformed
 
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
-        // TODO add your handling code here:
+        String email = txtEmail.getText();
+        //email
+        if (!utils.ValidationOfData.validationEmail(email)) {
+            lblEmailError.setVisible(true);
+        } else {
+            lblEmailError.setVisible(false);
+        }
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void txtCareerCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCareerCodeActionPerformed
-        // TODO add your handling code here:
+        //TODO
     }//GEN-LAST:event_txtCareerCodeActionPerformed
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
-        // TODO add your handling code here:
+        String names = txtName.getText();
+        if (!utils.ValidationOfData.validationOfCharacter(names)) {
+            lblNamesError.setVisible(true);
+        } else {
+            lblNamesError.setVisible(false);
+        }
     }//GEN-LAST:event_txtNameActionPerformed
 
     private void cmbCareerMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbCareerMouseReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbCareerMouseReleased
+
+    private void txtBornOnDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBornOnDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBornOnDateActionPerformed
+
+    private void cmbGenreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGenreActionPerformed
+        //Genre
+        String genre = cmbGenre.getSelectedItem().toString();
+        if (genre.equals("SELECCIONAR")) {
+            lblGenreError.setVisible(true);
+        } else {
+            lblGenreError.setVisible(false);
+        }
+    }//GEN-LAST:event_cmbGenreActionPerformed
+
+    private void txtLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLastNameActionPerformed
+        String lastNames = txtLastName.getText();
+        if (!utils.ValidationOfData.validationOfCharacter(lastNames)) {
+            lblLastNamesError.setVisible(true);
+        } else {
+            lblLastNamesError.setVisible(false);
+        }
+    }//GEN-LAST:event_txtLastNameActionPerformed
+
+    private void txtPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPhoneActionPerformed
+        //phone
+        String phone = txtPhone.getText();
+        if (!utils.ValidationOfData.validationPhoneNumber(phone)) {
+            lblPhoneError.setVisible(true);
+        } else {
+            lblPhoneError.setVisible(false);
+        }
+    }//GEN-LAST:event_txtPhoneActionPerformed
+
+    private void cmbTypeOfRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTypeOfRegistrationActionPerformed
+        //typeOfRegistration
+        String typeOfRegistration = cmbTypeOfRegistration.getSelectedItem().toString();
+        if (typeOfRegistration.equals("SELECCIONAR")) {
+            lblTypeOfRegistrationError.setVisible(true);
+        } else {
+            lblTypeOfRegistrationError.setVisible(false);
+
+        }
+    }//GEN-LAST:event_cmbTypeOfRegistrationActionPerformed
+
+    private void txtAssistenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAssistenceActionPerformed
+        if (!ValidationOfData.validationOfFloat(txtAssistence.getText())) {
+            lblAssistenceError.setVisible(true);
+        } else {
+            lblAssistenceError.setVisible(false);
+        }
+
+    }//GEN-LAST:event_txtAssistenceActionPerformed
+
+    private void txtAssistenceKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAssistenceKeyTyped
+        char character = evt.getKeyChar();
+        if ((character < '0' || character > '9')
+                && (character != KeyEvent.VK_BACK_SPACE)
+                && (character != '.' || txtAssistence.getText().contains("."))) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtAssistenceKeyTyped
 
     /**
      * @param args the command line arguments
@@ -452,14 +610,15 @@ public class FrmAddStudent extends javax.swing.JFrame {
     private javax.swing.JButton btnAddStudents;
     private javax.swing.JButton btnBack;
     private javax.swing.JComboBox<String> cmbCareer;
-    private javax.swing.JComboBox<String> cmbRegistrationType;
+    private javax.swing.JComboBox<String> cmbGenre;
+    private javax.swing.JComboBox<String> cmbTypeOfRegistration;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -470,12 +629,21 @@ public class FrmAddStudent extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblAssistenceError;
+    private javax.swing.JLabel lblBornOnDateError;
+    private javax.swing.JLabel lblCareerNameError;
+    private javax.swing.JLabel lblEmailError;
+    private javax.swing.JLabel lblGenreError;
+    private javax.swing.JLabel lblIdError;
+    private javax.swing.JLabel lblLastNamesError;
+    private javax.swing.JLabel lblNamesError;
+    private javax.swing.JLabel lblPhoneError;
+    private javax.swing.JLabel lblTypeOfRegistrationError;
+    private javax.swing.JTextField txtAssistence;
+    private javax.swing.JTextField txtBornOnDate;
     private javax.swing.JTextField txtCareerCode;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtGradeU1;
-    private javax.swing.JTextField txtGradeU2;
     private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtLastChance;
     private javax.swing.JTextField txtLastName;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPhone;

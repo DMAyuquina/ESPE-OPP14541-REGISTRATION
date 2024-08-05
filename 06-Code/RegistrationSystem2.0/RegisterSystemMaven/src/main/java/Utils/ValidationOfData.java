@@ -17,15 +17,14 @@ public class ValidationOfData {
         return number;
     }
 
-    public static float validationOfFloat(float grade, Scanner scanner) {
+    public static boolean validationOfFloat(String number) {
         try {
-            grade = scanner.nextFloat();
-        } catch (InputMismatchException e) {
-            grade = -1.0F;
-            System.out.println("Se ha ingresado un valor no valido.");
+            Float.parseFloat(number);
+            return true;
+        } catch (Exception e) {
+            return false;
         }
-        scanner.nextLine();
-        return grade;
+       
     }
 
     public static boolean validationOfCharacter(String phrase) {
@@ -83,4 +82,5 @@ public class ValidationOfData {
             return false;
         }
     }
+
 }
