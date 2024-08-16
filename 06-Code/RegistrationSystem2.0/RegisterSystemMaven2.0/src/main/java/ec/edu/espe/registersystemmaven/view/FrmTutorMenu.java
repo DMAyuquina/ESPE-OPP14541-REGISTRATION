@@ -36,6 +36,7 @@ public class FrmTutorMenu extends javax.swing.JFrame {
         itmUploadGrade = new javax.swing.JMenuItem();
         mnuReport = new javax.swing.JMenu();
         itmGenerateReport = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -115,13 +116,21 @@ public class FrmTutorMenu extends javax.swing.JFrame {
 
         mnuReport.setText("Reporte");
 
-        itmGenerateReport.setText("Generar Reporte");
+        itmGenerateReport.setText("Generar Reporte de Notas");
         itmGenerateReport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itmGenerateReportActionPerformed(evt);
             }
         });
         mnuReport.add(itmGenerateReport);
+
+        jMenuItem2.setText("Generar Reporte de Estudiantes");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        mnuReport.add(jMenuItem2);
 
         jMenuBar1.add(mnuReport);
 
@@ -169,6 +178,12 @@ public class FrmTutorMenu extends javax.swing.JFrame {
         this.setVisible(false);
         frm.setVisible(true);
     }//GEN-LAST:event_itmGenerateReportActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        FrmGeneralReportStudents frm = new FrmGeneralReportStudents();
+        this.setVisible(false);
+        frm.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,6 +234,7 @@ public class FrmTutorMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenu mnuReport;
     private javax.swing.JMenu mnuTutor;

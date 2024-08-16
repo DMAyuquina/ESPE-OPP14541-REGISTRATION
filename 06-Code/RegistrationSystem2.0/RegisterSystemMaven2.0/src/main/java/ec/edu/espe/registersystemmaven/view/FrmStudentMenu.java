@@ -34,10 +34,6 @@ public class FrmStudentMenu extends javax.swing.JFrame {
         menuUser = new javax.swing.JMenu();
         mnuiBack = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        menuCourse = new javax.swing.JMenu();
-        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
-        jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
-        jCheckBoxMenuItem3 = new javax.swing.JCheckBoxMenuItem();
         menuTypeOfSearch = new javax.swing.JMenu();
         menuByDni = new javax.swing.JMenuItem();
         menuByName = new javax.swing.JMenuItem();
@@ -90,19 +86,6 @@ public class FrmStudentMenu extends javax.swing.JFrame {
         menuUser.add(jMenuItem3);
 
         jMenuBar1.add(menuUser);
-
-        menuCourse.setText("Cursos");
-
-        jCheckBoxMenuItem1.setText("Álgebra");
-        menuCourse.add(jCheckBoxMenuItem1);
-
-        jCheckBoxMenuItem2.setText("Química");
-        menuCourse.add(jCheckBoxMenuItem2);
-
-        jCheckBoxMenuItem3.setText("Administración financiera");
-        menuCourse.add(jCheckBoxMenuItem3);
-
-        jMenuBar1.add(menuCourse);
 
         menuTypeOfSearch.setText("Tipo de búsqueda");
 
@@ -215,9 +198,6 @@ public class FrmStudentMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -227,7 +207,6 @@ public class FrmStudentMenu extends javax.swing.JFrame {
     private javax.swing.JMenu mReport;
     private javax.swing.JMenuItem menuByDni;
     private javax.swing.JMenuItem menuByName;
-    private javax.swing.JMenu menuCourse;
     private javax.swing.JMenuItem menuReport;
     private javax.swing.JMenu menuTypeOfSearch;
     private javax.swing.JMenu menuUser;

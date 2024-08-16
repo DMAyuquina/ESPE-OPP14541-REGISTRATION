@@ -7,6 +7,8 @@ import com.mongodb.client.MongoDatabase;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import org.bson.Document;
+import Utils.PasswordEncryption;
+
 
 /**
  *
@@ -324,17 +326,24 @@ public class FrmAddTutorAccount extends javax.swing.JFrame {
 
             // Si todas las validaciones son correctas
             if (isValid) {
-                Document tutor = new Document();
-                tutor.append("names", names)
-                        .append("last names", lastNames)
-                        .append("dni", id)
-                        .append("user", user)
-                        .append("password", password);
+                try {
+                    String encryptedPassword = PasswordEncryption.encrypt(password);
 
-                mongoCollection.insertOne(tutor);
-                JOptionPane.showMessageDialog(this, "La cuenta del profesor ha sido agregada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    Document tutor = new Document();
+                    tutor.append("names", names)
+                            .append("last names", lastNames)
+                            .append("dni", id)
+                            .append("user", user)
+                            .append("password", encryptedPassword);
 
-                mongoManager.closeConnectionToMongo();
+                    mongoCollection.insertOne(tutor);
+                    JOptionPane.showMessageDialog(this, "La cuenta del profesor ha sido agregada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+                    mongoManager.closeConnectionToMongo();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(this, "Error al encriptar la contraseña.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
             txtUser.setBackground(Color.WHITE);
         } else {
@@ -342,7 +351,7 @@ public class FrmAddTutorAccount extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Cédula inválida.", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-// Para cerrar la conexión con la base de datos
+        // Para cerrar la conexión con la base de datos
         mongoManager.closeConnectionToMongo();
 
     }//GEN-LAST:event_btnAcceptActionPerformed

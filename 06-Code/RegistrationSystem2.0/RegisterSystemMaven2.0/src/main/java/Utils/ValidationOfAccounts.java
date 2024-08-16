@@ -35,4 +35,8 @@ public class ValidationOfAccounts {
         }
         return false;
     }
+    
+    public static Document searchAccountByUser(MongoCollection<Document> collection, String key, String user) {
+        return collection.find(new Document(key, user)).first();
+    }
 }

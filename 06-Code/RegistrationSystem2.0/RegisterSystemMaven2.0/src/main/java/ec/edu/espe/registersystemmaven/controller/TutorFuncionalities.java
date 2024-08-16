@@ -1,26 +1,57 @@
 package ec.edu.espe.registersystemmaven.controller;
 
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.UpdateResult;
+import ec.edu.espe.registersystemmaven.model.Career;
+import ec.edu.espe.registersystemmaven.model.Course;
 import ec.edu.espe.registersystemmaven.model.Tutor;
+import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import org.bson.Document;
 import org.bson.conversions.Bson;
-import static com.mongodb.client.model.Filters.eq;
-import com.mongodb.client.model.Updates;
-import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
 
 /**
- * Autor: LogicLegion, DCCO-ESPE
+ *
+ * @author LogicLegion, DCCO-ESPE
  */
 public class TutorFuncionalities {
-    
-    public static void updateStudentGrades(String id, MongoDatabase database, JComboBox<String> cmbCareer) {
+
+    public static Tutor getTutor(MongoCollection<Document> mongoCollection, String student) {
+        //TODO-Modificar para nuevos atributos, tomando como referencia a la estructura del método getStudent de StudentFucnionalities
+        Tutor tutor = new Tutor();
+        Document findDocument = new Document("id", student);
+       
+        ArrayList<Course> courses;
+        Career career = new Career();
+        
+        Document careerDoc = new Document();
+
+        for (Document doc : mongoCollection.find(findDocument)) {
+            tutor.setId(doc.getString("id"));
+            tutor.setNames(doc.getString("names"));
+            tutor.setLastNames(doc.getString("last names"));
+            tutor.setUser(doc.getString("user"));
+            tutor.setPassword(doc.getString("password"));
+            tutor.setPhone(doc.getString("phone"));
+            tutor.setEmail(doc.getString("email"));
+            tutor.setCourses((ArrayList<Course>)doc.get("courses"));
+            
+            careerDoc = (Document)doc.get("career");
+            if(careerDoc!=null){
+                career.setCareerCode(careerDoc.getString("careerCode"));
+                career.setCareerName(careerDoc.getString("careerName"));
+            }
+            tutor.setCareer(career);
+            
+        }
+        return tutor;
+    }
+public static void updateStudentGrades(String id, MongoDatabase database, JComboBox<String> cmbCareer) {
         if (utils.ValidationOfData.validationDni(id.length(), id)) {
             boolean found = false;
             MongoCollection<Document> collectionToUpdate = null;
