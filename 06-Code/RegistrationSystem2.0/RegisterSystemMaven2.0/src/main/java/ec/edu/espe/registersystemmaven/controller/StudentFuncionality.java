@@ -14,7 +14,7 @@ import org.bson.Document;
  *
  * @author LogicLegion, DCCO-ESPE
  */
-public class StudentFuncionalities {
+public class StudentFuncionality {
 
     public static Student getStudentFromMongo(MongoCollection<Document> mongoCollection, String key, String studentId) {
 
@@ -72,9 +72,8 @@ public class StudentFuncionalities {
     }
 
     public static void setStudentToMongo(MongoDatabase dataBase, Student student) {
-        // Aquí puedes agregar el código para guardar estos datos en la base de datos o en la nube
         MongoCollection<Document> mongoCollectionStudents = MongoManagerMaven.accessToCollections(dataBase, "Students");
-        
+
         Document studentDoc = new Document();
         studentDoc.append("id", student.getDni())
                 .append("names", student.getNames())
@@ -82,11 +81,11 @@ public class StudentFuncionalities {
                 .append("genre", student.getGenre())
                 .append("email", student.getEmail())
                 .append("phone", student.getPhone())
-                .append("registration", RegistrationManager.registrationToDocument(student.getRegistration()))
-                .append("grade", GradeManager.gradeToDocument(student.getGrade()))
+                .append("registration", RegistrationManager.registrationToMongoDocument(student.getRegistration()))
+                .append("grade", GradeManager.gradeToMongoDocument(student.getGrade()))
                 .append("bornOnDate", (student.getBornOnDate()))
                 .append("age", student.getAge())
-                .append("career", CareerFuncionalities.careerToDocument(student.getCareer()))
+                .append("career", CareerFuncionality.careerToDocument(student.getCareer()))
                 .append("assistence", student.getAsistence());
 
         mongoCollectionStudents.insertOne(studentDoc);

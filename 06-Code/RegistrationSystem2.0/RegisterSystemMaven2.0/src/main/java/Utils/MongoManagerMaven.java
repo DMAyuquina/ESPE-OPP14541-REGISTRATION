@@ -48,18 +48,19 @@ public class MongoManagerMaven {
     public static List<Document> getAllCollection(MongoCollection<Document> mongoCollection) {
 
         //Si quiero todo el documento:
-
         List<Document> documents = mongoCollection.find().into(new ArrayList<>());
 
         return documents;
     }
-    
+
     private static MongoClient mongoClient;
+
     // Método para acceder a una colección específica
     public static MongoCollection<Document> accessToCollections(String databaseName, String collectionName) {
         MongoDatabase database = accessToDatabase(databaseName);
         return database.getCollection(collectionName);
     }
+
     public static MongoDatabase accessToDatabase(String databaseName) {
         if (mongoClient == null) {
             // Usa tu propia URI de MongoDB
@@ -68,7 +69,6 @@ public class MongoManagerMaven {
         }
         return mongoClient.getDatabase(databaseName);
     }
-
 
     //Actualización de documentos
     public static void editDocuments(String key, String data, String newData, MongoCollection<Document> mongoCollection) {

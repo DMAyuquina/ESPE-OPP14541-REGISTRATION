@@ -21,14 +21,12 @@ import org.bson.conversions.Bson;
  */
 public class TutorFuncionalities {
 
-    public static Tutor getTutor(MongoCollection<Document> mongoCollection, String student) {
-        //TODO-Modificar para nuevos atributos, tomando como referencia a la estructura del método getStudent de StudentFucnionalities
+    public static Tutor getTutorFromMongo(MongoCollection<Document> mongoCollection, String student) {
         Tutor tutor = new Tutor();
         Document findDocument = new Document("id", student);
-       
-        ArrayList<Course> courses;
+
         Career career = new Career();
-        
+
         Document careerDoc = new Document();
 
         for (Document doc : mongoCollection.find(findDocument)) {
@@ -39,19 +37,20 @@ public class TutorFuncionalities {
             tutor.setPassword(doc.getString("password"));
             tutor.setPhone(doc.getString("phone"));
             tutor.setEmail(doc.getString("email"));
-            tutor.setCourses((ArrayList<Course>)doc.get("courses"));
-            
-            careerDoc = (Document)doc.get("career");
-            if(careerDoc!=null){
+            tutor.setCourses((ArrayList<Course>) doc.get("courses"));
+
+            careerDoc = (Document) doc.get("career");
+            if (careerDoc != null) {
                 career.setCareerCode(careerDoc.getString("careerCode"));
                 career.setCareerName(careerDoc.getString("careerName"));
             }
             tutor.setCareer(career);
-            
+
         }
         return tutor;
     }
-public static void updateStudentGrades(String id, MongoDatabase database, JComboBox<String> cmbCareer) {
+
+    public static void updateStudentGrades(String id, MongoDatabase database, JComboBox<String> cmbCareer) {
         if (utils.ValidationOfData.validationDni(id.length(), id)) {
             boolean found = false;
             MongoCollection<Document> collectionToUpdate = null;
@@ -71,10 +70,14 @@ public static void updateStudentGrades(String id, MongoDatabase database, JCombo
 
             if (found && collectionToUpdate != null) {
                 String newGradeUnitOne = JOptionPane.showInputDialog("Ingrese la Nota del Primer Parcial:", existingStudent.getString("gradeUnitOne"));
-                if (newGradeUnitOne == null) newGradeUnitOne = existingStudent.getString("gradeUnitOne");
+                if (newGradeUnitOne == null) {
+                    newGradeUnitOne = existingStudent.getString("gradeUnitOne");
+                }
 
                 String newGradeUnitTwo = JOptionPane.showInputDialog("Ingrese la Nota del Segundo Parcial:", existingStudent.getString("gradeUnitTwo"));
-                if (newGradeUnitTwo == null) newGradeUnitTwo = existingStudent.getString("gradeUnitTwo");
+                if (newGradeUnitTwo == null) {
+                    newGradeUnitTwo = existingStudent.getString("gradeUnitTwo");
+                }
 
                 float gradeUnitOne;
                 float gradeUnitTwo;
@@ -91,7 +94,9 @@ public static void updateStudentGrades(String id, MongoDatabase database, JCombo
                 String newLastChance = null;
                 if (average < 7) {
                     newLastChance = JOptionPane.showInputDialog("Ingrese la Nota del Supletorio", existingStudent.getString("lastChance"));
-                    if (newLastChance == null) newLastChance = existingStudent.getString("lastChance");
+                    if (newLastChance == null) {
+                        newLastChance = existingStudent.getString("lastChance");
+                    }
                 }
 
                 Bson updateFilter = Filters.eq("id", id);
@@ -122,7 +127,7 @@ public static void updateStudentGrades(String id, MongoDatabase database, JCombo
         DefaultTableModel mt = new DefaultTableModel();
         String ids[] = {"CEDULA", "NOMBRES", "APELLIDOS", "NOTA UNIDAD 1", "NOTA UNIDA 2", "PROMEDIO", "SUPLETORIO"};
         mt.setColumnIdentifiers(ids);
-        
+
         MongoCollection<Document> collection = database.getCollection(career);
         var students = collection.find().into(new ArrayList<>());
 

@@ -4,8 +4,8 @@ import Utils.MongoManagerMaven;
 import Utils.ValidationOfAccounts;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import ec.edu.espe.registersystemmaven.controller.CareerFuncionalities;
-import ec.edu.espe.registersystemmaven.controller.StudentFuncionalities;
+import ec.edu.espe.registersystemmaven.controller.CareerFuncionality;
+import ec.edu.espe.registersystemmaven.controller.StudentFuncionality;
 import ec.edu.espe.registersystemmaven.model.Career;
 import ec.edu.espe.registersystemmaven.model.Grade;
 import ec.edu.espe.registersystemmaven.model.Registration;
@@ -448,7 +448,7 @@ public class FrmAddStudent extends javax.swing.JFrame {
 
                 Student student = new Student(id, names, lastNames, genre, email, phone, registration, grade, boD, career, assistence);
                 
-                StudentFuncionalities.setStudentToMongo(dataBase, student);
+                StudentFuncionality.setStudentToMongo(dataBase, student);
                 
                 JOptionPane.showMessageDialog(this, "Estudiante agregado exitosamente.");
                 txtId.setBackground(Color.WHITE);
@@ -466,7 +466,7 @@ public class FrmAddStudent extends javax.swing.JFrame {
             lblCareerNameError.setVisible(false);
             String collectionCareer = "Careers";
             MongoCollection<Document> mongoCollectionCareers = MongoManagerMaven.accessToCollections(dataBase, collectionCareer);
-            Career careerSearch = CareerFuncionalities.getCareer(mongoCollectionCareers, "careerName", career);
+            Career careerSearch = CareerFuncionality.getCareer(mongoCollectionCareers, "careerName", career);
             txtCareerCode.setText(careerSearch.getCareerCode());
         }
 

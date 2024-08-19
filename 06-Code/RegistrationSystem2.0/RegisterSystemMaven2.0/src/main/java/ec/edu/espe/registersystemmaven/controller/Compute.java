@@ -7,7 +7,7 @@ import java.time.Period;
  *
  * @author  LogicLegion, DCCO-ESPE
  */
-public class Computes {
+public class Compute {
 
     public static int computeAgeInYears(LocalDate bornOnDate) {  // "YYYY-DD-MM"
         LocalDate today = LocalDate.now();

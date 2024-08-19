@@ -1,6 +1,6 @@
 package ec.edu.espe.registersystemmaven.model;
 
-import ec.edu.espe.registersystemmaven.controller.Computes;
+import ec.edu.espe.registersystemmaven.controller.Compute;
 import java.time.LocalDate;
 
 /**
@@ -36,7 +36,7 @@ public class Student {
         this.registration = registration;
         this.grade = grade;
         this.bornOnDate = bornOnDate;
-        this.age = Computes.computeAgeInYears(bornOnDate);
+        this.age = Compute.computeAgeInYears(bornOnDate);
         this.career = career;
         this.asistence = Assistence;
     }
@@ -201,7 +201,7 @@ public class Student {
      * @return the age
      */
     public int getAge() {
-        return Computes.computeAgeInYears(bornOnDate);
+        return Compute.computeAgeInYears(bornOnDate);
     }
 
     /**

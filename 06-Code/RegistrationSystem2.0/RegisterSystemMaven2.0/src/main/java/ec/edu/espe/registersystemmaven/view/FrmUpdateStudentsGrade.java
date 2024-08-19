@@ -11,7 +11,7 @@ import static com.mongodb.client.model.Filters.eq;
 import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
-import ec.edu.espe.registersystemmaven.controller.CareerFuncionalities;
+import ec.edu.espe.registersystemmaven.controller.CareerFuncionality;
 import ec.edu.espe.registersystemmaven.controller.TutorFuncionalities;
 import ec.edu.espe.registersystemmaven.model.Career;
 import java.util.List;
@@ -203,7 +203,7 @@ public class FrmUpdateStudentsGrade extends javax.swing.JFrame {
             MongoCollection<org.bson.Document> mongoCollectionStudents = MongoManagerMaven.accessToCollections(dataBase, collectionStudents);
             MongoCollection<org.bson.Document> mongoCollectionCareers = MongoManagerMaven.accessToCollections(dataBase, collectionCareers);
 
-            Career car = CareerFuncionalities.getCareer(mongoCollectionCareers, "careerName", career);
+            Career car = CareerFuncionality.getCareer(mongoCollectionCareers, "careerName", career);
             txtCareerCode.setText(car.getCareerCode());
             List<Document> students = MongoManagerMaven.getAllCollection(mongoCollectionStudents);
 

@@ -10,7 +10,7 @@ import org.bson.Document;
  */
 public class RegistrationManager {
 
-    public static Document registrationToDocument(Registration registration) {
+    public static Document registrationToMongoDocument(Registration registration) {
         Document registrationDoc = new Document();
         registrationDoc.append("period", registration.getPeriod())
                 .append("typeOfRegistration", registration.getTypeOfRegistration())
@@ -23,13 +23,18 @@ public class RegistrationManager {
 
         String typeInUpperCase = typeOfRegistration.toUpperCase();
 
-        if (typeInUpperCase.equals("PRIMERA")) {
-            return "CON GRATUIDAD";
-        } else if (typeInUpperCase.equals("SEGUNDA") || typeInUpperCase.equals("TERCERA")) {
-            return "SIN GRATUIDAD";
-        } else {
-            JOptionPane.showMessageDialog(null, "Tipo de matrícula no válido", "Error", JOptionPane.ERROR_MESSAGE);
-            return "TIPO NO VALIDO";
+        switch (typeOfRegistration) {
+            case "PRIMERA":
+                return "CON GRATUIDAD";
+
+            case "SEGUNDA":
+                return "SIN GRATUIDAD";
+
+            case "TERCERA":
+                return "SIN GRATUIDAD";
+            default:
+                return "TIPO NO VALIDO";
+
         }
     }
 

@@ -5,10 +5,10 @@ import org.bson.Document;
 
 /**
  *
- * @author Danny Ayuquina, LogicLegion, DCCO-ESPE
+ * @author LogicLegion, DCCO-ESPE
  */
 public class GradeManager {
-    public static Document gradeToDocument(Grade grade){
+    public static Document gradeToMongoDocument(Grade grade){
        Document gradeDoc = new Document();
        gradeDoc.append("unitOne", grade.getUnitOne())
                .append("unitTwo", grade.getUnitTwo())

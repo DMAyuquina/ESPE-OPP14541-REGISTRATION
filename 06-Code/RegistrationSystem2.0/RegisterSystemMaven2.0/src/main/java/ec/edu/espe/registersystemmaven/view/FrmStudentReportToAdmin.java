@@ -11,7 +11,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import ec.edu.espe.registersystemmaven.controller.StudentFuncionalities;
+import ec.edu.espe.registersystemmaven.controller.StudentFuncionality;
 import ec.edu.espe.registersystemmaven.model.Student;
 import java.awt.Desktop;
 import java.io.File;
@@ -194,7 +194,7 @@ public class FrmStudentReportToAdmin extends javax.swing.JFrame {
 // Recuperar datos del estudiante
         String collection = "Students";
         MongoCollection<org.bson.Document> mongoCollection = MongoManagerMaven.accessToCollections(dataBase, collection);
-        Student student = StudentFuncionalities.getStudentFromMongo(mongoCollection, "id", txtId.getText());
+        Student student = StudentFuncionality.getStudentFromMongo(mongoCollection, "id", txtId.getText());
 
         Document document = new Document();
         try {
@@ -269,7 +269,7 @@ public class FrmStudentReportToAdmin extends javax.swing.JFrame {
         if (id.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe llenar el campo con una cédula válida", "Error", JOptionPane.ERROR_MESSAGE);
         } else if (ValidationOfAccounts.searchForDuplicateId(mongoCollectionStudents, "id", id)) {
-            Student student = StudentFuncionalities.getStudentFromMongo(mongoCollectionStudents, "id", id);
+            Student student = StudentFuncionality.getStudentFromMongo(mongoCollectionStudents, "id", id);
             txtLastNames.setText(student.getLastNames());
             txtNames.setText(student.getNames());
             //No borrar línea de abajo, solo modificarla con los nuevos atributos de Student
