@@ -15,24 +15,23 @@ import org.bson.Document;
 public class MongoManagerMaven {
 
     public static MongoDatabase openConnectionToMongo() {
-        String uri = "mongodb+srv://logiclegion:logiclegion123@cluster0.pkfbgix.mongodb.net/";
-        MongoClient mongoClient = MongoClients.create(uri);
-        MongoDatabase dataBase = mongoClient.getDatabase("StudentsDB");
-
-        return dataBase;
+        if (mongoClient == null) {
+            String uri = "mongodb+srv://logiclegion:logiclegion123@cluster0.pkfbgix.mongodb.net/";
+            mongoClient = MongoClients.create(uri);
+        }
+        return mongoClient.getDatabase("StudentsDB");
     }
 
     public static void closeConnectionToMongo() {
-        String uri = "mongodb+srv://logiclegion:logiclegion123@cluster0.pkfbgix.mongodb.net/";
-        MongoClient mongoClient = MongoClients.create(uri);
-        mongoClient.close();
-
+        if (mongoClient != null) {
+            mongoClient.close();
+            mongoClient = null;  // Limpiar la referencia para evitar errores en futuras conexiones
+        }
     }
 
     //Acceso a colecciones
     public static MongoCollection<Document> accessToCollections(MongoDatabase dataBase, String collection) {
-        MongoCollection<Document> mongoCollection = dataBase.getCollection(collection);
-        return mongoCollection;
+        return dataBase.getCollection(collection);
     }
 
     //Tipo de ingreso de datos
@@ -44,14 +43,8 @@ public class MongoManagerMaven {
         mongoCollection.insertMany(listOfData);
     }
 
-    //Obtención de datos
     public static List<Document> getAllCollection(MongoCollection<Document> mongoCollection) {
-
-        //Si quiero todo el documento:
-
-        List<Document> documents = mongoCollection.find().into(new ArrayList<>());
-
-        return documents;
+        return mongoCollection.find().into(new ArrayList<>());
     }
     
     private static MongoClient mongoClient;
@@ -60,29 +53,23 @@ public class MongoManagerMaven {
         MongoDatabase database = accessToDatabase(databaseName);
         return database.getCollection(collectionName);
     }
+
     public static MongoDatabase accessToDatabase(String databaseName) {
         if (mongoClient == null) {
-            // Usa tu propia URI de MongoDB
             String connectionString = "mongodb+srv://logiclegion:logiclegion123@cluster0.pkfbgix.mongodb.net/";
             mongoClient = MongoClients.create(connectionString);
         }
         return mongoClient.getDatabase(databaseName);
     }
 
-
-    //Actualización de documentos
     public static void editDocuments(String key, String data, String newData, MongoCollection<Document> mongoCollection) {
         Document findDocument = new Document(key, data);
-
         Document updateDocument = new Document("$set", new Document(key, newData));
-
         mongoCollection.findOneAndUpdate(findDocument, updateDocument);
     }
 
-    //Eliminar documentos
     public static void deleteDocuments(String key, String data, MongoCollection<Document> mongoCollection) {
-        //TODO: Combinar con método de obtención de datos
-        Document findDocument = new Document("male", true);
+        Document findDocument = new Document(key, data);
         mongoCollection.findOneAndDelete(findDocument);
     }
 }

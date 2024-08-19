@@ -12,16 +12,16 @@ public class PasswordEncryption {
     public static String encrypt(String password) {
         StringBuilder encryptedPassword = new StringBuilder();
         for (char ch : password.toCharArray()) {
-            switch (ch) {
-                case 'z':
+            if (Character.isLetter(ch)) {
+                if (ch == 'z') {
                     encryptedPassword.append('a');
-                    break;
-                case 'Z':
+                } else if (ch == 'Z') {
                     encryptedPassword.append('A');
-                    break;
-                default:
+                } else {
                     encryptedPassword.append((char) (ch + 1));
-                    break;
+                }
+            } else {
+                encryptedPassword.append(ch); // Mantener caracteres no alfabéticos sin cambiar
             }
         }
         return encryptedPassword.toString();
@@ -31,16 +31,16 @@ public class PasswordEncryption {
     public static String decrypt(String encryptedPassword) {
         StringBuilder decryptedPassword = new StringBuilder();
         for (char ch : encryptedPassword.toCharArray()) {
-            switch (ch) {
-                case 'a':
+            if (Character.isLetter(ch)) {
+                if (ch == 'a') {
                     decryptedPassword.append('z');
-                    break;
-                case 'A':
+                } else if (ch == 'A') {
                     decryptedPassword.append('Z');
-                    break;
-                default:
+                } else {
                     decryptedPassword.append((char) (ch - 1));
-                    break;
+                }
+            } else {
+                decryptedPassword.append(ch); // Mantener caracteres no alfabéticos sin cambiar
             }
         }
         return decryptedPassword.toString();

@@ -21,16 +21,19 @@ public class ValidationOfData {
         try {
             grade = scanner.nextFloat();
         } catch (InputMismatchException e) {
-            grade = -1.0F;
-            System.out.println("Se ha ingresado un valor no valido.");
+            scanner.nextLine();  
+            System.out.println("Se ha ingresado un valor no válido. Por favor, ingrese un número decimal.");
+            return -1.0F;  
         }
-        scanner.nextLine();
+        scanner.nextLine();  
         return grade;
     }
 
     public static boolean validationOfCharacter(String phrase) {
         for (int i = 0; i < phrase.length(); i++) {
-            if (!Character.isLetter(phrase.charAt(i)) && phrase.charAt(i) != ' ') {
+            char ch = phrase.charAt(i);
+            if (!Character.isLetter(ch) && ch != ' ' && ch != '-' && ch != '\'') {
+                // Permitir también apóstrofes y guiones, comunes en nombres y frases
                 return false;
             }
         }
@@ -38,7 +41,8 @@ public class ValidationOfData {
     }
 
     public static boolean validationEmail(String email) {
-        return email.contains("@");
+        // Validación básica mejorada
+        return email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,6}$");
     }
 
     public static boolean validationDni(int length, String dni) {
@@ -72,7 +76,8 @@ public class ValidationOfData {
     }
 
     public static boolean validationPhoneNumber(String phoneNumber) {
-        return phoneNumber.matches("0\\d{9}");
+        // Validación mejorada para números de teléfono
+        return phoneNumber.matches("^0\\d{9}$");
     }
 
     public static boolean validationGrade(String grade) {
