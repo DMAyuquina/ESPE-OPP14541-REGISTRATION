@@ -43,7 +43,7 @@ public class FrmReportStudentsGrade extends javax.swing.JFrame {
      */
     public FrmReportStudentsGrade() {
         initComponents();
-        String ids[] = {"CEDULA", "NOMBRES", "APELLIDOS", "NOTA UNIDAD 1", "NOTA UNIDA 2","PROMEDIO","SUPLETORIO"};
+        String ids[] = {"CEDULA", "NOMBRES", "APELLIDOS", "NOTA UNIDAD 1", "NOTA UNIDA 2", "PROMEDIO", "SUPLETORIO"};
         mt.setColumnIdentifiers(ids);
         tblStudents.setModel(mt);
     }
@@ -206,12 +206,14 @@ public class FrmReportStudentsGrade extends javax.swing.JFrame {
             MongoCollection<org.bson.Document> mongoCollectionStudents = MongoManagerMaven.accessToCollections(dataBase, collectionStudents);
             MongoCollection<org.bson.Document> mongoCollectionCareers = MongoManagerMaven.accessToCollections(dataBase, collectionCareers);
 
-            Career car = CareerFuncionality.getCareer(mongoCollectionCareers, "careerName", career);
+            CareerFuncionality careerFuncionality = new CareerFuncionality();
+
+            Career car = (Career) careerFuncionality.get(mongoCollectionCareers, "careerName", career);
             txtCareerCode.setText(car.getCareerCode());
             List<Document> students = MongoManagerMaven.getAllCollection(mongoCollectionStudents);
 
             for (Document std : students) {
-                mt.addRow(new Object[]{std.get("id"), std.get("names"), std.get("lastNames"), std.get("gradeUnitOne"), std.get("gradeUnitTwo"),std.get("average"), std.get("lastChance")});
+                mt.addRow(new Object[]{std.get("id"), std.get("names"), std.get("lastNames"), std.get("gradeUnitOne"), std.get("gradeUnitTwo"), std.get("average"), std.get("lastChance")});
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -221,13 +223,13 @@ public class FrmReportStudentsGrade extends javax.swing.JFrame {
 
         String career = cmbCareer.getSelectedItem().toString();
 
-        if (!career.equals("SELECCIONAR")) { 
+        if (!career.equals("SELECCIONAR")) {
             String collectionStudents = career;
             MongoCollection<org.bson.Document> mongoCollectionStudents = MongoManagerMaven.accessToCollections(dataBase, collectionStudents);
             List<Document> students = MongoManagerMaven.getAllCollection(mongoCollectionStudents);
 
             for (Document std : students) {
-                mt.addRow(new Object[]{std.get("id"), std.get("names"), std.get("lastNames"), std.get("gradeUnitOne"), std.get("gradeUnitTwo"), std.get("average"),std.get("lastChance")});
+                mt.addRow(new Object[]{std.get("id"), std.get("names"), std.get("lastNames"), std.get("gradeUnitOne"), std.get("gradeUnitTwo"), std.get("average"), std.get("lastChance")});
             }
         } else {
             JOptionPane.showMessageDialog(this, "Debe seleccionar una carrera para recargar.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -242,7 +244,6 @@ public class FrmReportStudentsGrade extends javax.swing.JFrame {
             MongoCollection<org.bson.Document> mongoCollection = MongoManagerMaven.accessToCollections(dataBase, collection);
             List<Document> students = MongoManagerMaven.getAllCollection(mongoCollection);
 
-           
             String careerName = collection.replace(" ", "_"); // Reemplaza espacios con guiones bajos para evitar problemas con el nombre del archivo
             String filePath = careerName + "_Reporte_Notas.pdf";
 
@@ -250,7 +251,6 @@ public class FrmReportStudentsGrade extends javax.swing.JFrame {
             PdfWriter.getInstance(document, new FileOutputStream(filePath));
             document.open();
 
-            
             try {
                 InputStream imageStream = getClass().getResourceAsStream("/images/Logo_ITSB_03.png");
                 if (imageStream == null) {
@@ -266,26 +266,23 @@ public class FrmReportStudentsGrade extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Error al cargar la imagen: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
 
-            
             Paragraph title = new Paragraph("\n\nINSTITUTO SUPERIOR SIMÓN BOLÍVAR", com.itextpdf.text.FontFactory.getFont(com.itextpdf.text.FontFactory.HELVETICA_BOLD, 18));
             title.setAlignment(Element.ALIGN_CENTER);
             document.add(title);
 
-            
             Paragraph date = new Paragraph("\n\nFecha: " + java.time.LocalDate.now(), com.itextpdf.text.FontFactory.getFont(com.itextpdf.text.FontFactory.HELVETICA, 12));
             date.setAlignment(Element.ALIGN_CENTER);
             document.add(date);
 
-           
             int i = 0;
             for (Document student : students) {
                 if (i != 0) {
                     break;
                 } else {
                     Paragraph studentInfo = new Paragraph(
-                        "\n\nCarrera: " + student.getString("career") + "\n"
-                        + "Código de carrera: " + student.getString("careerCode") + "\n\n\n",
-                        com.itextpdf.text.FontFactory.getFont(com.itextpdf.text.FontFactory.HELVETICA, 12)
+                            "\n\nCarrera: " + student.getString("career") + "\n"
+                            + "Código de carrera: " + student.getString("careerCode") + "\n\n\n",
+                            com.itextpdf.text.FontFactory.getFont(com.itextpdf.text.FontFactory.HELVETICA, 12)
                     );
                     studentInfo.setAlignment(Element.ALIGN_LEFT);
                     studentInfo.setIndentationLeft(36); // 2 tabulaciones (18 * 2 = 36)
@@ -294,12 +291,10 @@ public class FrmReportStudentsGrade extends javax.swing.JFrame {
                 i++;
             }
 
-            
-            PdfPTable table = new PdfPTable(7); 
+            PdfPTable table = new PdfPTable(7);
             table.setWidthPercentage(100);
 
-            
-            String[] headers = {"CEDULA", "NOMBRES", "APELLIDOS", "NOTA UNIDAD 1", "NOTA UNIDA 2","PROMEDIO","SUPLETORIO"};
+            String[] headers = {"CEDULA", "NOMBRES", "APELLIDOS", "NOTA UNIDAD 1", "NOTA UNIDA 2", "PROMEDIO", "SUPLETORIO"};
             for (String header : headers) {
                 PdfPCell headerCell = new PdfPCell(new Paragraph(header, com.itextpdf.text.FontFactory.getFont(com.itextpdf.text.FontFactory.HELVETICA_BOLD, 12)));
                 headerCell.setBackgroundColor(new com.itextpdf.text.BaseColor(255, 0, 0)); // Color rojo

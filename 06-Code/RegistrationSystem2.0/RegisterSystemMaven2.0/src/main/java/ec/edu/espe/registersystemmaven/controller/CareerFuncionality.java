@@ -9,7 +9,7 @@ import ec.edu.espe.registersystemmaven.model.Career;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 
-public class CareerFuncionality {
+public class CareerFuncionality  implements GettersAndSettersForMongo{
 
     public static Document careerToDocument(Career career) {
         Document careerDoc = new Document();
@@ -19,7 +19,10 @@ public class CareerFuncionality {
         return careerDoc;
     }
 
-    public static Career getCareer(MongoCollection<Document> mongoCollection, String key, String data) {
+  
+
+    @Override
+    public Object get(MongoCollection<Document> mongoCollection, String key, String data) {
         Document findDocument = new Document(key, data);
 
         Document doc = mongoCollection.find(findDocument).first();
@@ -31,8 +34,7 @@ public class CareerFuncionality {
             careerCode = doc.getString("careerCode");
         }
 
-        Career car = new Career(careerName, careerCode);
-        return car;
-    }
+        Career career = new Career(careerName, careerCode);
+        return career;}
 
 }

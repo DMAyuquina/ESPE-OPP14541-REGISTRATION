@@ -15,7 +15,6 @@ import java.awt.event.KeyEvent;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
-import static javax.swing.JOptionPane.showMessageDialog;
 import org.bson.Document;
 import utils.ValidationOfData;
 
@@ -24,6 +23,7 @@ import utils.ValidationOfData;
  * @author LogicLegion, DCCO-ESPE
  */
 public class FrmAddStudent extends javax.swing.JFrame {
+//CAPTURAR EXCEPCIÓN CONEXIÓN A MONGO
 
     private final MongoDatabase dataBase = MongoManagerMaven.openConnectionToMongo();
 
@@ -32,18 +32,8 @@ public class FrmAddStudent extends javax.swing.JFrame {
      */
     public FrmAddStudent() {
         initComponents();
-        setLocationRelativeTo(null);
-        btnAddStudents.setEnabled(true);
-        lblIdError.setVisible(false);
-        lblNamesError.setVisible(false);
-        lblLastNamesError.setVisible(false);
-        lblGenreError.setVisible(false);
-        lblEmailError.setVisible(false);
-        lblPhoneError.setVisible(false);
-        lblBornOnDateError.setVisible(false);
-        lblCareerNameError.setVisible(false);
-        lblTypeOfRegistrationError.setVisible(false);
-        lblAssistenceError.setVisible(false);
+        initErrorMessages();
+
     }
 
     /**
@@ -351,7 +341,7 @@ public class FrmAddStudent extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 887, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -370,116 +360,24 @@ public class FrmAddStudent extends javax.swing.JFrame {
 
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
         this.txtId.getText();
-        String id = txtId.getText();
-        MongoCollection<Document> mongoCollectionStudents = MongoManagerMaven.accessToCollections(dataBase, "Students");
-        if (utils.ValidationOfData.validationDni(id.length(), id) && !ValidationOfAccounts.searchForDuplicateId(mongoCollectionStudents, "id", id)) {
-            lblIdError.setVisible(false);
-        } else {
-            lblIdError.setVisible(true);
-        }
-
     }//GEN-LAST:event_txtIdActionPerformed
 
     private void btnAddStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStudentsActionPerformed
 
-        MongoCollection<Document> mongoCollectionStudents = MongoManagerMaven.accessToCollections(dataBase, "Students");
-
-        String id = txtId.getText();
-        String names = txtName.getText().toUpperCase();
-        String lastNames = txtLastName.getText().toUpperCase();
-        String genre = cmbGenre.getSelectedItem().toString();
-        String careerName = cmbCareer.getSelectedItem().toString();
-        String careerCode = txtCareerCode.getText();
-        String email = txtEmail.getText();
-        String phone = txtPhone.getText();
-        String typeOfRegistration = cmbTypeOfRegistration.getSelectedItem().toString().toUpperCase();
-        String bornOnDate = txtBornOnDate.getText();
-
-        String assistenceStr = txtAssistence.getText();
-        float assistence = 0.0F;
-
-        if (utils.ValidationOfData.validationDni(id.length(), id) && !ValidationOfAccounts.searchForDuplicateId(mongoCollectionStudents, "id", id)) {
-
-            boolean isValid = true;
-
-            if (!utils.ValidationOfData.validationOfCharacter(names)) {
-                isValid = false;
-            }
-
-            if (!utils.ValidationOfData.validationOfCharacter(lastNames)) {
-                isValid = false;
-            }
-
-            if (genre.equals("SELECCIONAR")) {
-                isValid = false;
-            }
-            if (!utils.ValidationOfData.validationEmail(email)) {
-                isValid = false;
-            }
-
-            if (!utils.ValidationOfData.validationPhoneNumber(phone)) {
-                isValid = false;
-            }
-
-            if (!utils.ValidationOfData.validateAndParseDate(bornOnDate)) {
-                isValid = false;
-            }
-
-            if (careerName.equals("SELECCIONAR")) {
-                isValid = false;
-            }
-
-            if (typeOfRegistration.isEmpty()) {
-                isValid = false;
-            }
-
-            if (!ValidationOfData.validationOfFloat(txtAssistence.getText())) {
-                isValid = false;
-            } else {
-                assistence = Float.parseFloat(assistenceStr);
-            }
-
-            if (isValid) {
-                Registration registration = new Registration("", typeOfRegistration);
-                Grade grade = new Grade(0.0F, 0.0F, 0.0F, 0.0F);
-                Career career = new Career(careerName, careerCode);
-                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-dd-MM");
-                LocalDate boD = LocalDate.parse(bornOnDate, dateFormatter);
-
-                Student student = new Student(id, names, lastNames, genre, email, phone, registration, grade, boD, career, assistence);
-                
-                StudentFuncionality.setStudentToMongo(dataBase, student);
-                
-                JOptionPane.showMessageDialog(this, "Estudiante agregado exitosamente.");
-                txtId.setBackground(Color.WHITE);
-            }
-        } 
-
+        if (validationOfData()) {
+            setStudentToMongo();
+            initErrorMessages();
+            clearData();
+        }
     }//GEN-LAST:event_btnAddStudentsActionPerformed
 
     private void cmbCareerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCareerActionPerformed
-        String career = cmbCareer.getSelectedItem().toString();
-        //Career
-        if (career.equals("SELECCIONAR")) {
-            lblCareerNameError.setVisible(true);
-        } else {
-            lblCareerNameError.setVisible(false);
-            String collectionCareer = "Careers";
-            MongoCollection<Document> mongoCollectionCareers = MongoManagerMaven.accessToCollections(dataBase, collectionCareer);
-            Career careerSearch = CareerFuncionality.getCareer(mongoCollectionCareers, "careerName", career);
-            txtCareerCode.setText(careerSearch.getCareerCode());
-        }
-
+        this.cmbCareer.getSelectedItem();
+        searchCareerCode();
     }//GEN-LAST:event_cmbCareerActionPerformed
 
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
-        String email = txtEmail.getText();
-        //email
-        if (!utils.ValidationOfData.validationEmail(email)) {
-            lblEmailError.setVisible(true);
-        } else {
-            lblEmailError.setVisible(false);
-        }
+        this.txtEmail.getText();
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void txtCareerCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCareerCodeActionPerformed
@@ -487,12 +385,7 @@ public class FrmAddStudent extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCareerCodeActionPerformed
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
-        String names = txtName.getText();
-        if (!utils.ValidationOfData.validationOfCharacter(names)) {
-            lblNamesError.setVisible(true);
-        } else {
-            lblNamesError.setVisible(false);
-        }
+        this.txtName.getText();
     }//GEN-LAST:event_txtNameActionPerformed
 
     private void cmbCareerMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbCareerMouseReleased
@@ -500,61 +393,31 @@ public class FrmAddStudent extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbCareerMouseReleased
 
     private void txtBornOnDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBornOnDateActionPerformed
+        this.txtBornOnDate.getText();
         String bornOnDate = txtBornOnDate.getText();
-        if (!utils.ValidationOfData.validateAndParseDate(bornOnDate)) {
-            lblBornOnDateError.setVisible(true);
-        } else {
-            lblBornOnDateError.setVisible(false);
-        }
     }//GEN-LAST:event_txtBornOnDateActionPerformed
 
     private void cmbGenreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGenreActionPerformed
         //Genre
-        String genre = cmbGenre.getSelectedItem().toString();
-        if (genre.equals("SELECCIONAR")) {
-            lblGenreError.setVisible(true);
-        } else {
-            lblGenreError.setVisible(false);
-        }
+        this.cmbGenre.getSelectedItem();
     }//GEN-LAST:event_cmbGenreActionPerformed
 
     private void txtLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLastNameActionPerformed
-        String lastNames = txtLastName.getText();
-        if (!utils.ValidationOfData.validationOfCharacter(lastNames)) {
-            lblLastNamesError.setVisible(true);
-        } else {
-            lblLastNamesError.setVisible(false);
-        }
+        this.txtLastName.getText();
     }//GEN-LAST:event_txtLastNameActionPerformed
 
     private void txtPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPhoneActionPerformed
         //phone
-        String phone = txtPhone.getText();
-        if (!utils.ValidationOfData.validationPhoneNumber(phone)) {
-            lblPhoneError.setVisible(true);
-        } else {
-            lblPhoneError.setVisible(false);
-        }
+        this.txtPhone.getText();
     }//GEN-LAST:event_txtPhoneActionPerformed
 
     private void cmbTypeOfRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTypeOfRegistrationActionPerformed
         //typeOfRegistration
-        String typeOfRegistration = cmbTypeOfRegistration.getSelectedItem().toString();
-        if (typeOfRegistration.equals("SELECCIONAR")) {
-            lblTypeOfRegistrationError.setVisible(true);
-        } else {
-            lblTypeOfRegistrationError.setVisible(false);
-
-        }
+        this.cmbTypeOfRegistration.getSelectedItem();
     }//GEN-LAST:event_cmbTypeOfRegistrationActionPerformed
 
     private void txtAssistenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAssistenceActionPerformed
-        if (!ValidationOfData.validationOfFloat(txtAssistence.getText())) {
-            lblAssistenceError.setVisible(true);
-        } else {
-            lblAssistenceError.setVisible(false);
-        }
-
+        this.txtAssistence.getText();
     }//GEN-LAST:event_txtAssistenceActionPerformed
 
     private void txtAssistenceKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAssistenceKeyTyped
@@ -565,6 +428,150 @@ public class FrmAddStudent extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtAssistenceKeyTyped
+
+    private boolean validationOfData() {
+        MongoCollection<Document> mongoCollectionStudents = MongoManagerMaven.accessToCollections(dataBase, "Students");
+        boolean isValid = false;
+
+        if (utils.ValidationOfData.validationDni(txtId.getText().length(), txtId.getText())
+                && !ValidationOfAccounts.searchForDuplicateId(mongoCollectionStudents, "id", txtId.getText())) {
+
+            isValid = true;
+
+            if (!utils.ValidationOfData.validationOfCharacter(txtName.getText())) {
+                isValid = false;
+                lblNamesError.setVisible(true);
+            }
+
+            if (!utils.ValidationOfData.validationOfCharacter(txtLastName.getText())) {
+                isValid = false;
+                lblLastNamesError.setVisible(true);
+            }
+
+            if (cmbGenre.getSelectedItem().toString().equals("SELECCIONAR")) {
+                isValid = false;
+                lblGenreError.setVisible(true);
+            }
+            if (!utils.ValidationOfData.validationEmail(txtEmail.getText())) {
+                isValid = false;
+                lblEmailError.setVisible(true);
+            }
+
+            if (!utils.ValidationOfData.validationPhoneNumber(txtPhone.getText())) {
+                isValid = false;
+                lblPhoneError.setVisible(true);
+            }
+
+            if (!utils.ValidationOfData.validateAndParseDate(txtBornOnDate.getText())) {
+                isValid = false;
+                lblBornOnDateError.setVisible(true);
+            }
+
+            if (cmbCareer.getSelectedItem().toString().equals("SELECCIONAR")) {
+                isValid = false;
+                lblCareerNameError.setVisible(true);
+            }
+
+            if (cmbTypeOfRegistration.getSelectedItem().toString().toUpperCase().isEmpty()) {
+                isValid = false;
+                lblTypeOfRegistrationError.setVisible(true);
+            }
+
+            if (!ValidationOfData.validationOfFloat(txtAssistence.getText())) {
+                isValid = false;
+                lblAssistenceError.setVisible(true);
+            }
+
+            if (isValid) {
+                return isValid;
+            }
+        } else {
+            lblIdError.setVisible(true);
+            return isValid;
+        }
+        return false;
+
+    }
+
+    private void setStudentToMongo() {
+        String id = txtId.getText();
+        String names = txtName.getText().toUpperCase();
+        String lastNames = txtLastName.getText().toUpperCase();
+        String genre = cmbGenre.getSelectedItem().toString();
+        String careerName = cmbCareer.getSelectedItem().toString();
+        String careerCode = txtCareerCode.getText();
+        String email = txtEmail.getText();
+        String phone = txtPhone.getText();
+        String typeOfRegistration = cmbTypeOfRegistration.getSelectedItem().toString().toUpperCase();
+        String bornOnDate = txtBornOnDate.getText();
+        String assistenceStr = txtAssistence.getText();
+        float assistence = 0.0F;
+
+        assistence = Float.parseFloat(assistenceStr);
+
+        Registration registration = new Registration("", typeOfRegistration);
+        Grade grade = new Grade(0.0F, 0.0F, 0.0F, 0.0F);
+        Career career = new Career(careerName, careerCode);
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-dd-MM");
+        LocalDate boD = LocalDate.parse(bornOnDate, dateFormatter);
+
+        Student student = new Student(id, names, lastNames, genre, email, phone, registration, grade, boD, career, assistence);
+
+        StudentFuncionality.setStudentToMongo(dataBase, student);
+
+        confirmationMessage();
+
+    }
+
+    private void initErrorMessages() {
+        setLocationRelativeTo(null);
+        btnAddStudents.setEnabled(true);
+        lblIdError.setVisible(false);
+        lblNamesError.setVisible(false);
+        lblLastNamesError.setVisible(false);
+        lblGenreError.setVisible(false);
+        lblEmailError.setVisible(false);
+        lblPhoneError.setVisible(false);
+        lblBornOnDateError.setVisible(false);
+        lblCareerNameError.setVisible(false);
+        lblTypeOfRegistrationError.setVisible(false);
+        lblAssistenceError.setVisible(false);
+    }
+    
+    private void clearData(){
+        txtId.setText("");
+        txtName.setText("");
+        txtLastName.setText("");
+        cmbGenre.setSelectedIndex(2);
+        txtEmail.setText("");
+        txtPhone.setText("");
+        txtBornOnDate.setText("");
+        cmbCareer.setSelectedIndex(6);
+        txtCareerCode.setText("");
+        cmbTypeOfRegistration.setSelectedIndex(0);
+        txtAssistence.setText("");
+        
+    }
+
+    private void confirmationMessage() {
+        JOptionPane.showMessageDialog(this, "Estudiante agregado exitosamente.");
+        txtId.setBackground(Color.WHITE);
+    }
+
+    private void searchCareerCode() {
+        String career = cmbCareer.getSelectedItem().toString();
+        //Career
+        if (career.equals("SELECCIONAR")) {
+            lblCareerNameError.setVisible(true);
+        } else {
+            lblCareerNameError.setVisible(false);
+            String collectionCareer = "Careers";
+            MongoCollection<Document> mongoCollectionCareers = MongoManagerMaven.accessToCollections(dataBase, collectionCareer);
+            CareerFuncionality careerFuncionality = new CareerFuncionality();
+            Career careerSearch = (Career) careerFuncionality.get(mongoCollectionCareers, "careerName", career);
+            txtCareerCode.setText(careerSearch.getCareerCode());
+        }
+    }
 
     /**
      * @param args the command line arguments

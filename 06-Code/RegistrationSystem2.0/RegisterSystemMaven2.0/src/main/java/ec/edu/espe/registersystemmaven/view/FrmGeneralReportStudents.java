@@ -193,8 +193,9 @@ public class FrmGeneralReportStudents extends javax.swing.JFrame {
             String collectionCareers = "Careers";
             MongoCollection<org.bson.Document> mongoCollectionStudents = MongoManagerMaven.accessToCollections(dataBase, collectionStudents);
             MongoCollection<org.bson.Document> mongoCollectionCareers = MongoManagerMaven.accessToCollections(dataBase, collectionCareers);
-
-            Career car = CareerFuncionality.getCareer(mongoCollectionCareers, "careerName", career);
+            CareerFuncionality careerFuncionality = new CareerFuncionality();
+                    
+            Career car = (Career) careerFuncionality.get(mongoCollectionCareers, "careerName", career);
             txtCareerCode.setText(car.getCareerCode());
             List<Document> students = MongoManagerMaven.getAllCollection(mongoCollectionStudents);
 

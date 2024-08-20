@@ -268,7 +268,8 @@ public class FrmAddTutor extends javax.swing.JFrame {
         String career = cmbCareer.getSelectedItem().toString();
         String collectionCareer = "Careers";
         MongoCollection<Document> mongoCollectionCareers = MongoManagerMaven.accessToCollections(dataBase, collectionCareer);
-        Career careerSearch = CareerFuncionality.getCareer(mongoCollectionCareers, "careerName", career);
+        CareerFuncionality careerFuncionality = new CareerFuncionality();
+        Career careerSearch = (Career) careerFuncionality.get(mongoCollectionCareers, "careerName", career);
         txtCareerCode.setText(careerSearch.getCareerCode());
     }//GEN-LAST:event_cmbCareerActionPerformed
 
