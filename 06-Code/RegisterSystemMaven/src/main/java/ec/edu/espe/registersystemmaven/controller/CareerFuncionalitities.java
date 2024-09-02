@@ -34,4 +34,5 @@ public class CareerFuncionalitities {
         Career car = new Career(careerName, careerCode);
         return car;
     }
+    
 }
