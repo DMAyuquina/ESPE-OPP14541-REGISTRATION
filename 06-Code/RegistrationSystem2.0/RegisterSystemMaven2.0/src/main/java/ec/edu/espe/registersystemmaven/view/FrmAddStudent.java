@@ -437,59 +437,83 @@ public class FrmAddStudent extends javax.swing.JFrame {
                 && !ValidationOfAccounts.searchForDuplicateId(mongoCollectionStudents, "id", txtId.getText())) {
 
             isValid = true;
-
-            if (!utils.ValidationOfData.validationOfCharacter(txtName.getText())) {
-                isValid = false;
-                lblNamesError.setVisible(true);
-            }
-
-            if (!utils.ValidationOfData.validationOfCharacter(txtLastName.getText())) {
-                isValid = false;
-                lblLastNamesError.setVisible(true);
-            }
-
-            if (cmbGenre.getSelectedItem().toString().equals("SELECCIONAR")) {
-                isValid = false;
-                lblGenreError.setVisible(true);
-            }
-            if (!utils.ValidationOfData.validationEmail(txtEmail.getText())) {
-                isValid = false;
-                lblEmailError.setVisible(true);
-            }
-
-            if (!utils.ValidationOfData.validationPhoneNumber(txtPhone.getText())) {
-                isValid = false;
-                lblPhoneError.setVisible(true);
-            }
-
-            if (!utils.ValidationOfData.validateAndParseDate(txtBornOnDate.getText())) {
-                isValid = false;
-                lblBornOnDateError.setVisible(true);
-            }
-
-            if (cmbCareer.getSelectedItem().toString().equals("SELECCIONAR")) {
-                isValid = false;
-                lblCareerNameError.setVisible(true);
-            }
-
-            if (cmbTypeOfRegistration.getSelectedItem().toString().toUpperCase().isEmpty()) {
-                isValid = false;
-                lblTypeOfRegistrationError.setVisible(true);
-            }
-
-            if (!ValidationOfData.validationOfFloat(txtAssistence.getText())) {
-                isValid = false;
-                lblAssistenceError.setVisible(true);
-            }
-
-            if (isValid) {
-                return isValid;
-            }
+            lblIdError.setVisible(false);
         } else {
             lblIdError.setVisible(true);
-            return isValid;
         }
-        return false;
+
+        if (!utils.ValidationOfData.validationOfCharacter(txtName.getText()) || txtName.getText().isEmpty()) {
+            isValid = false;
+            lblNamesError.setVisible(true);
+        } else {
+            lblNamesError.setVisible(false);
+        }
+
+        if (!utils.ValidationOfData.validationOfCharacter(txtLastName.getText()) || txtLastName.getText().isEmpty()) {
+            isValid = false;
+            lblLastNamesError.setVisible(true);
+        } else {
+            lblLastNamesError.setVisible(false);
+        }
+
+        if (cmbGenre.getSelectedItem().toString().equals("SELECCIONAR")) {
+            isValid = false;
+            lblGenreError.setVisible(true);
+        } else {
+            lblGenreError.setVisible(false);
+        }
+
+        if (!utils.ValidationOfData.validationEmail(txtEmail.getText())) {
+            isValid = false;
+            lblEmailError.setVisible(true);
+        } else {
+            lblEmailError.setVisible(false);
+        }
+
+        if (!utils.ValidationOfData.validationPhoneNumber(txtPhone.getText())) {
+            isValid = false;
+            lblPhoneError.setVisible(true);
+        } else {
+            lblPhoneError.setVisible(false);
+        }
+
+        if (!utils.ValidationOfData.validateAndParseDate(txtBornOnDate.getText())) {
+            isValid = false;
+            lblBornOnDateError.setVisible(true);
+        } else {
+            lblBornOnDateError.setVisible(false);
+        }
+
+        if (cmbCareer.getSelectedItem().toString().equals("SELECCIONAR")) {
+            isValid = false;
+            lblCareerNameError.setVisible(true);
+        } else {
+            lblCareerNameError.setVisible(false);
+        }
+
+        if (cmbTypeOfRegistration.getSelectedItem().toString().equals("SELECCIONAR")) {
+            isValid = false;
+            lblTypeOfRegistrationError.setVisible(true);
+        } else {
+            lblTypeOfRegistrationError.setVisible(false);
+        }
+
+        if (!ValidationOfData.validationOfFloat(txtAssistence.getText())) {
+            isValid = false;
+            lblAssistenceError.setVisible(true);
+        } else {
+            lblAssistenceError.setVisible(false);
+        }
+//
+//        if (isValid) {
+//            return isValid;
+//        }
+
+//        else {
+//            lblIdError.setVisible(true);
+//            return isValid;
+//        }
+        return isValid;
 
     }
 
@@ -537,8 +561,8 @@ public class FrmAddStudent extends javax.swing.JFrame {
         lblTypeOfRegistrationError.setVisible(false);
         lblAssistenceError.setVisible(false);
     }
-    
-    private void clearData(){
+
+    private void clearData() {
         txtId.setText("");
         txtName.setText("");
         txtLastName.setText("");
@@ -550,7 +574,7 @@ public class FrmAddStudent extends javax.swing.JFrame {
         txtCareerCode.setText("");
         cmbTypeOfRegistration.setSelectedIndex(0);
         txtAssistence.setText("");
-        
+
     }
 
     private void confirmationMessage() {
