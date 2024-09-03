@@ -162,9 +162,9 @@ public class FrmGeneralTableTutors extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        FrmTutorAccountsAdministrator frmtutorAccountAdministrator = new FrmTutorAccountsAdministrator();
+        FrmTutorsAdministrator frmtutorAdministrator = new FrmTutorsAdministrator();
         this.setVisible(false);
-        frmtutorAccountAdministrator.setVisible(true);
+        frmtutorAdministrator.setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
