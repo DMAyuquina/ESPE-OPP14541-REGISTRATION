@@ -90,7 +90,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mnuiDeleteStudent">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Eliminar Estudiante"/>
+                <Property name="text" type="java.lang.String" value="Borrar Estudiante"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuiDeleteStudentActionPerformed"/>
