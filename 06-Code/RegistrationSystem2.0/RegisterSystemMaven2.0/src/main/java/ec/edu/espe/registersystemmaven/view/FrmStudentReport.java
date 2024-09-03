@@ -200,9 +200,9 @@ public class FrmStudentReport extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        FrmAdminMenu frmAdminMenu = new FrmAdminMenu();
+        FrmStudentMenu frmStudentMenu = new FrmStudentMenu();
         this.setVisible(false);
-        frmAdminMenu.setVisible(true);
+        frmStudentMenu.setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnGeneratePDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeneratePDFActionPerformed
@@ -288,7 +288,7 @@ public class FrmStudentReport extends javax.swing.JFrame {
             txtLastNames.setText(student.getLastNames());
             txtNames.setText(student.getNames());
             //No borrar línea de abajo, solo modificarla con los nuevos atributos de Student
-            //mt.addRow(new Object[]{student.getTypeOfRegistration(), student.getCareer(), student.getCareerCode(), student.getEmail(), student.getPhone()});
+            mt.addRow(new Object[]{student.getRegistration().getTypeOfRegistration(), student.getCareer().getCareerName(), student.getCareer().getCareerCode(), student.getEmail(), student.getPhone()});
         }
 
     }//GEN-LAST:event_btnSearchByDniActionPerformed
@@ -314,7 +314,7 @@ public class FrmStudentReport extends javax.swing.JFrame {
             txtNames.setText(names);
             txtLastNames.setText(lastNames);
             //No borrar línea de abajo, solo modificarla con los nuevos atributos de Student
-            //mt.addRow(new Object[]{student.getTypeOfRegistration(), student.getCareer(), student.getCareerCode(), student.getEmail(), student.getPhone()});
+            mt.addRow(new Object[]{student.getRegistration().getTypeOfRegistration(), student.getCareer().getCareerName(), student.getCareer().getCareerCode(), student.getEmail(), student.getPhone()});
         }
     }//GEN-LAST:event_btnSearchByNamesActionPerformed
 
@@ -353,7 +353,7 @@ public class FrmStudentReport extends javax.swing.JFrame {
             public void run() {
                 new FrmStudentReport().setVisible(true);
             }
-            
+
         });
     }
 

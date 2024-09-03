@@ -7,10 +7,6 @@ package ec.edu.espe.registersystemmaven.view;
 import Utils.MongoManagerMaven;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import static com.mongodb.client.model.Filters.eq;
-import com.mongodb.client.model.Updates;
-import com.mongodb.client.result.DeleteResult;
-import com.mongodb.client.result.UpdateResult;
 import ec.edu.espe.registersystemmaven.controller.CareerFuncionality;
 import ec.edu.espe.registersystemmaven.controller.TutorFuncionalities;
 import ec.edu.espe.registersystemmaven.model.Career;
@@ -18,7 +14,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.bson.Document;
-import org.bson.conversions.Bson;
 
 /**
  *
@@ -141,6 +136,11 @@ public class FrmUpdateStudentsGrade extends javax.swing.JFrame {
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 110, -1, -1));
 
         txtCareerCode.setEditable(false);
+        txtCareerCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCareerCodeActionPerformed(evt);
+            }
+        });
         jPanel1.add(txtCareerCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 430, -1));
 
         jLabel3.setText("Código de carrera:");
@@ -242,6 +242,10 @@ public class FrmUpdateStudentsGrade extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnReloadActionPerformed
+
+    private void txtCareerCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCareerCodeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCareerCodeActionPerformed
 
     /**
      * @param args the command line arguments

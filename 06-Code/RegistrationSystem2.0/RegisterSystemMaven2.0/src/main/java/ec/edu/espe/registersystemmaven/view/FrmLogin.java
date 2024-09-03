@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
 import org.bson.Document;
 import Utils.PasswordEncryption;
 
-
 /**
  *
  * @author LogicLegion, DCCO-ESPE
@@ -141,28 +140,28 @@ public class FrmLogin extends javax.swing.JFrame {
         MongoCollection<Document> mongoAdminCollection = MongoManagerMaven.accessToCollections(dataBase, adminCollection);
         MongoCollection<Document> mongoTutorCollection = MongoManagerMaven.accessToCollections(dataBase, tutorCollection);
 
-        if (ValidationOfAccounts.searchAccountForLogin(mongoAdminCollection, "user", user) && 
-    ValidationOfAccounts.searchAccountForLogin(mongoAdminCollection, "password", password)) {
-    FrmAdminMenu frmAdmin = new FrmAdminMenu();
-    this.setVisible(false);
-    frmAdmin.setVisible(true);
-} else {
-   
-    Document tutorAccount = ValidationOfAccounts.searchAccountByUser(mongoTutorCollection, "user", user);
-    if (tutorAccount != null) {
-        String decryptedPassword = PasswordEncryption.decrypt(tutorAccount.getString("password"));
-        if (password.equals(decryptedPassword)) {
-            FrmTutorMenu frmTutorMenu = new FrmTutorMenu();
+        if (ValidationOfAccounts.searchAccountForLogin(mongoAdminCollection, "user", user)
+                && ValidationOfAccounts.searchAccountForLogin(mongoAdminCollection, "password", password)) {
+            FrmAdminMenu frmAdmin = new FrmAdminMenu();
             this.setVisible(false);
-            frmTutorMenu.setVisible(true);
+            frmAdmin.setVisible(true);
         } else {
-      
-            JOptionPane.showMessageDialog(this, "Cuenta inválida.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    } else {
-  
-        JOptionPane.showMessageDialog(this, "Cuenta inválida.", "Error", JOptionPane.ERROR_MESSAGE);
-    }
+
+            Document tutorAccount = ValidationOfAccounts.searchAccountByUser(mongoTutorCollection, "user", user);
+            if (tutorAccount != null) {
+                String decryptedPassword = PasswordEncryption.decrypt(tutorAccount.getString("password"));
+                if (password.equals(decryptedPassword)) {
+                    FrmTutorMenu frmTutorMenu = new FrmTutorMenu();
+                    this.setVisible(false);
+                    frmTutorMenu.setVisible(true);
+                } else {
+
+                    JOptionPane.showMessageDialog(this, "Cuenta inválida.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+
+                JOptionPane.showMessageDialog(this, "Cuenta inválida.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_btnLogInActionPerformed
 

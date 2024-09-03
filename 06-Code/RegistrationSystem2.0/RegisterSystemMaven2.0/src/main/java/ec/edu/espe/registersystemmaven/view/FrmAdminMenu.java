@@ -239,7 +239,9 @@ public class FrmAdminMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void mnuiManageTutorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuiManageTutorsActionPerformed
-        
+        FrmTutorsAdministrator frm = new FrmTutorsAdministrator();
+        this.setVisible(false);
+        frm.setVisible(true);
     }//GEN-LAST:event_mnuiManageTutorsActionPerformed
 
     /**

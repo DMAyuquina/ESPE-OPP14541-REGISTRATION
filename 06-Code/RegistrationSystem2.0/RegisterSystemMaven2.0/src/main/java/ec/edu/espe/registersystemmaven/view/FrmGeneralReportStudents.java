@@ -176,9 +176,9 @@ public class FrmGeneralReportStudents extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        FrmAdminMenu frmAdminMenu = new FrmAdminMenu();
+        FrmTutorMenu frmTutorMenu = new FrmTutorMenu();
         this.setVisible(false);
-        frmAdminMenu.setVisible(true);
+        frmTutorMenu.setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

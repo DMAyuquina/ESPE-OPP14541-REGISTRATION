@@ -8,6 +8,8 @@ import ec.edu.espe.registersystemmaven.model.Grade;
 import ec.edu.espe.registersystemmaven.model.Registration;
 import ec.edu.espe.registersystemmaven.model.Student;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import org.bson.Document;
 
 /**
@@ -48,14 +50,29 @@ public class StudentFuncionality {
 
             gradeDoc = (Document) doc.get("grade");
             if (gradeDoc != null) {
-                grade.setUnitOne((float) gradeDoc.get("unitOne"));
-                grade.setUnitTwo((float) gradeDoc.get("unitTwo"));
-                grade.setFinalGrade((float) gradeDoc.get("finalGrade"));
-                grade.setLastChance((float) gradeDoc.get("lastChance"));
+
+                Double unitOne = gradeDoc.getDouble("unitOne");
+                grade.setUnitOne(unitOne.floatValue());
+
+                Double unitTwo = gradeDoc.getDouble("unitTwo");
+                grade.setUnitTwo(unitTwo.floatValue());
+
+                Double finalGrade = gradeDoc.getDouble("finalGrade");
+                grade.setFinalGrade(finalGrade.floatValue());
+
+                Double lastChance = gradeDoc.getDouble("lastChance");
+                grade.setLastChance(lastChance.floatValue());
             }
             student.setGrade(grade);
 
-            student.setBornOnDate((LocalDate) doc.get("bornOnDate"));
+            Date bornOnDate = doc.getDate("bornOnDate"); 
+            if (bornOnDate != null) {
+                LocalDate localBornOnDate = bornOnDate.toInstant()
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate();
+                student.setBornOnDate(localBornOnDate); 
+            }
+            
             student.setAge(doc.getInteger("age"));
 
             careerDoc = (Document) doc.get("career");
@@ -65,7 +82,8 @@ public class StudentFuncionality {
             }
             student.setCareer(career);
 
-            student.setAsistence((float) doc.get("assistence"));
+            Double assistence = doc.getDouble("assistence");
+            student.setAsistence(assistence.floatValue());
 
         }
         return student;
