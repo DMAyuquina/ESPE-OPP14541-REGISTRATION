@@ -130,7 +130,7 @@ public class FrmAdminMenu extends javax.swing.JFrame {
         });
         mnuStudent.add(jMenuItem1);
 
-        mnuiDeleteStudent.setText("Eliminar Estudiante");
+        mnuiDeleteStudent.setText("Borrar Estudiante");
         mnuiDeleteStudent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuiDeleteStudentActionPerformed(evt);
@@ -239,9 +239,15 @@ public class FrmAdminMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void mnuiManageTutorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuiManageTutorsActionPerformed
+<<<<<<< HEAD
         FrmTutorsAdministrator frm = new FrmTutorsAdministrator();
         this.setVisible(false);
         frm.setVisible(true);
+=======
+        FrmTutorsAdministrator frmtutorAdminstrator = new FrmTutorsAdministrator();
+        this.setVisible(false);
+        frmtutorAdminstrator.setVisible(true);
+>>>>>>> 16620209c5edd7743c4578761650af5b5fa273ab
     }//GEN-LAST:event_mnuiManageTutorsActionPerformed
 
     /**

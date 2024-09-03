@@ -85,6 +85,7 @@ public class Student {
         return careerCode;
     }
 
+    
     /**
      * @param careerCode the careerCode to set
      */
@@ -99,6 +100,7 @@ public class Student {
         return email;
     }
 
+    
     /**
      * @param email the email to set
      */
@@ -106,6 +108,7 @@ public class Student {
         this.email = email;
     }
 
+    
     /**
      * @return the phone
      */
@@ -113,6 +116,7 @@ public class Student {
         return phone;
     }
 
+    
     /**
      * @param phone the phone to set
      */

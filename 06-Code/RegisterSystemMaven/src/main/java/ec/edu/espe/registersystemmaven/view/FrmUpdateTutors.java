@@ -11,7 +11,7 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import ec.edu.espe.registersystemmaven.controller.CareerFuncionality;
+import ec.edu.espe.registersystemmaven.controller.CareerFuncionalitities;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import ec.edu.espe.registersystemmaven.model.Career;
@@ -27,7 +27,7 @@ import org.bson.Document;
  *
  * @author LogicLegion, DCCO-ESPE
  */
-public class FrmGeneralTableTutors extends javax.swing.JFrame {
+public class FrmUpdateTutors extends javax.swing.JFrame {
 
     private final MongoDatabase dataBase = MongoManagerMaven.openConnectionToMongo();
     DefaultTableModel mt = new DefaultTableModel();
@@ -35,7 +35,7 @@ public class FrmGeneralTableTutors extends javax.swing.JFrame {
     /**
      * Creates new form FrmGeneralReportStudents
      */
-    public FrmGeneralTableTutors() {
+    public FrmUpdateTutors() {
         initComponents();
         String ids[] = {"CEDULA", "NOMBRES", "APELLIDOS", "CELULAR","CORREO", "CARRERA","CODIGO DE CARRERA"};
         mt.setColumnIdentifiers(ids);
@@ -59,6 +59,9 @@ public class FrmGeneralTableTutors extends javax.swing.JFrame {
         btnBack = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        txtId = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,7 +73,7 @@ public class FrmGeneralTableTutors extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("PROFESORES");
+        jLabel1.setText("MODIFICAR PROFESORES");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -79,7 +82,7 @@ public class FrmGeneralTableTutors extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(380, 380, 380)
                 .addComponent(jLabel1)
-                .addContainerGap(386, Short.MAX_VALUE))
+                .addContainerGap(277, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,7 +115,7 @@ public class FrmGeneralTableTutors extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblTutorsAcc);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 830, 310));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 830, 310));
 
         btnBack.setBackground(new java.awt.Color(153, 0, 51));
         btnBack.setForeground(new java.awt.Color(255, 255, 255));
@@ -144,6 +147,20 @@ public class FrmGeneralTableTutors extends javax.swing.JFrame {
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 440, 120, 40));
 
+        btnUpdate.setBackground(new java.awt.Color(153, 0, 51));
+        btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
+        btnUpdate.setText("Modificar");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 90, -1, 30));
+        jPanel1.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 430, 30));
+
+        jLabel4.setText("Cedula:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, -1, 20));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -162,9 +179,9 @@ public class FrmGeneralTableTutors extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        FrmTutorsAdministrator frmtutorAdministrator = new FrmTutorsAdministrator();
+        FrmTutorAccountsAdministrator frmtutorAccountAdministrator = new FrmTutorAccountsAdministrator();
         this.setVisible(false);
-        frmtutorAdministrator.setVisible(true);
+        frmtutorAccountAdministrator.setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -216,52 +233,51 @@ public class FrmGeneralTableTutors extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        String id = this.txtId.getText();
+
+        if (utils.ValidationOfData.validationDni(id.length(), id)) {
+            MongoCollection<Document> collectionToUpdate = null;
+            Document existingTutor = null;
+
+            for (String collectionName : dataBase.listCollectionNames()) {
+                MongoCollection<Document> collection = dataBase.getCollection(collectionName);
+                Document filter = new Document("id", id);
+
+                existingTutor = collection.find(filter).first();
+                if (existingTutor != null) {
+                    collectionToUpdate = collection;
+                    break;
+                }
+            }
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "Cédula inválida.");
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmGeneralTableTutors.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmGeneralTableTutors.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmGeneralTableTutors.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmGeneralTableTutors.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmGeneralTableTutors().setVisible(true);
+                new FrmUpdateTutors().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblTutorsAcc;
+    private javax.swing.JTextField txtId;
     // End of variables declaration//GEN-END:variables
 }

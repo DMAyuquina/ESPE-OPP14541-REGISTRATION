@@ -82,7 +82,7 @@ public class FrmTutorsAdministrator extends javax.swing.JFrame {
 
         jMenu2.setText("Profesores");
 
-        menuItemAddAccount.setText("Añadir cuenta");
+        menuItemAddAccount.setText("Añadir Profesor");
         menuItemAddAccount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuItemAddAccountActionPerformed(evt);
@@ -90,7 +90,7 @@ public class FrmTutorsAdministrator extends javax.swing.JFrame {
         });
         jMenu2.add(menuItemAddAccount);
 
-        jMenuItem2.setText("Mostrar cuentas");
+        jMenuItem2.setText("Mostrar Profesores");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -154,9 +154,9 @@ public class FrmTutorsAdministrator extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        FrmGeneralTableAccounts frmgta = new FrmGeneralTableAccounts();
+        FrmGeneralTableTutors frmgtt = new FrmGeneralTableTutors();
         this.setVisible(false);
-        frmgta.setVisible(true);
+        frmgtt.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void menuItemModifyAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemModifyAccountActionPerformed
